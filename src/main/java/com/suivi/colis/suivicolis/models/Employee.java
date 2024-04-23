@@ -32,10 +32,9 @@ import java.util.List;
 @DiscriminatorValue(Role.EMPLOYEE_STR)
 public class Employee extends User {
 
-    private String registrationNumber;
 
     @Column(unique = true)
-    private String adminId;
+    private String employeeNumber;
 
     @ElementCollection(targetClass = Privilege.class)
     @Enumerated(EnumType.STRING)
