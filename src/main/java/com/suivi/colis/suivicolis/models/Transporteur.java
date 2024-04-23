@@ -35,6 +35,8 @@ public class Transporteur extends User{
     
     private String registrationNumber;
 
+    private String licenseNumber;
+
     private String vihiculeMtricule;
 
     @Enumerated(EnumType.STRING)
