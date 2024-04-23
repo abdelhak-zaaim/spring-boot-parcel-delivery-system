@@ -22,25 +22,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@DiscriminatorValue(Role.AGENCY_STR)
-public class Agency extends User{
+@DiscriminatorValue(Role.AGENCY_OWNER_STR)
+public class AgencyOwner extends Employee{
 
-
-    @Column(nullable = false , unique = true)
-    private String RegistrationNumber;
-
-
-
-
-
-
+    private String agencyName;
+    private String agencyAddress;
+    private String agencyContactNumber;
 
 
 }
