@@ -16,10 +16,19 @@
 
 package com.suivi.colis.suivicolis.models;
 
+import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.VehicleType;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@DiscriminatorValue(Role.DELIVERY_MAN_STR)
 public class DeliveryMan extends Employee{
     private String licenseNumber;
     private String vihiculeMtricule;
@@ -28,8 +37,7 @@ public class DeliveryMan extends Employee{
     private VehicleType vehicleType;
 
 
-
-
-    private String deliveryArea;
+    @ManyToOne
+    private DeliveryArea deliveryArea;
 
 }
