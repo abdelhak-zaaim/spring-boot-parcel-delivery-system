@@ -36,9 +36,8 @@ public class Employee extends User {
     @Column(unique = true)
     private String employeeNumber;
 
-    @ElementCollection(targetClass = Privilege.class)
-    @Enumerated(EnumType.STRING)
-    private List<Privilege> privileges;
+    @ManyToOne
+    private PrivilegesGroup privilegesGroup;
 
 
     @ManyToOne

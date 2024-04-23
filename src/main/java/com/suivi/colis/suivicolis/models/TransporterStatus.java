@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 23/04/2024, 18:34
- *  * @modified : 23/04/2024, 18:34
+ *  * @created : 23/04/2024, 20:27
+ *  * @modified : 23/04/2024, 20:27
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -18,27 +18,26 @@ package com.suivi.colis.suivicolis.models;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-public class Order {
+public class TransporterStatus {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private String currentLocation;
 
     private String status;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Parcel> parcels;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedTime;
 
-    @ManyToOne
-    @JoinColumn(name = "idCustomer", referencedColumnName = "id")
-    private Customer idCustomer;
 
-    private double totalPrice;
+    private double latitude;
+    private double longitude;
 
+    @OneToOne
+    private Transporteur transporteur;
 
 }

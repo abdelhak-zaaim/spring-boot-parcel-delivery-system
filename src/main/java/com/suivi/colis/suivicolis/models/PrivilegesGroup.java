@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 23/04/2024, 18:34
- *  * @modified : 23/04/2024, 18:34
+ *  * @created : 23/04/2024, 20:41
+ *  * @modified : 23/04/2024, 20:41
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -16,29 +16,26 @@
 
 package com.suivi.colis.suivicolis.models;
 
+
+import com.suivi.colis.suivicolis.models.enums.Privilege;
+import com.suivi.colis.suivicolis.models.enums.Role;
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Order {
+public class PrivilegesGroup {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private String name;
 
-    private String status;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Parcel> parcels;
-
-    @ManyToOne
-    @JoinColumn(name = "idCustomer", referencedColumnName = "id")
-    private Customer idCustomer;
-
-    private double totalPrice;
+    @ElementCollection(targetClass = Privilege.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "privilege_group_privileges")
+    @Column(name = "privilege")
+    private Set<Privilege> privilege;
 
 
 }
