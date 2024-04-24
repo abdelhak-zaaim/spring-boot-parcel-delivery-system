@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 24/04/2024, 16:34
- *  * @modified : 24/04/2024, 16:34
+ *  * @created : 24/04/2024, 18:01
+ *  * @modified : 24/04/2024, 18:01
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -14,13 +14,4 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.repository;
-
-import com.suivi.colis.suivicolis.models.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
-}
+INSERT INTO user (id, email, password, role,user,customer_number) VALUES (1, 'test@test.com', '$2a$10$WjLQwMw.tZbh33vPzhX3iOvr8W9UWJZ3r8SJqTIs3eg1Iwm4hj8HC', 'USER','abdelhak',123456);

@@ -18,6 +18,7 @@ package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
+import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,19 +30,19 @@ import java.util.List;
 
 @Data
 @Entity
-@DiscriminatorColumn(name = Role.USER_STR, discriminatorType = DiscriminatorType.STRING)
+
+@DiscriminatorColumn(name = Constants.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
-    private String username;
+
+
     private String name;
     private String email;
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(name = Constants.USER_ROLE_NAME, insertable = false, updatable = false)
+    private String role;
 
     private String phone;
     @ManyToOne
@@ -65,7 +66,6 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
     }
-
 
 
     @Override
@@ -98,4 +98,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return status == UserStatus.ACTIVE;
     }
+
+
 }

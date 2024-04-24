@@ -17,6 +17,7 @@
 package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
+import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,11 +30,11 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@DiscriminatorValue(Role.CUSTOMER_STR)
+@DiscriminatorValue(Constants.CUSTOMER_ROLE)
 
 public class Customer extends User{
 
-    @Column(nullable = false , unique = true)
+    @Column( unique = true)
     private String customerNumber;
 
 

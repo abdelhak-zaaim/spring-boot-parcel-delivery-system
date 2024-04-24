@@ -17,7 +17,7 @@
 package com.suivi.colis.suivicolis.service;
 
 import com.suivi.colis.suivicolis.models.Parcel;
-import com.suivi.colis.suivicolis.repository.ParcelRepository;
+import com.suivi.colis.suivicolis.repository.ParcelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 public class ParcelService {
 
     @Autowired
-    private ParcelRepository parcelRepository;
+    private ParcelRepo parcelRepository;
 
     public Parcel addParcel(Parcel parcel) {
         return parcelRepository.save(parcel);

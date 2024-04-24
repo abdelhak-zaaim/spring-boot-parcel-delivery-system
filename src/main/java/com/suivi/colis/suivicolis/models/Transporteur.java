@@ -18,6 +18,7 @@ package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.VehicleType;
+import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +31,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@DiscriminatorValue(Role.TRANSPORTER_STR)
+@DiscriminatorValue(Constants.TRANSPORTER_ROLE)
 public class Transporteur extends User{
     
     private String registrationNumber;

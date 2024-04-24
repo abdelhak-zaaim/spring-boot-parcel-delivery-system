@@ -16,17 +16,28 @@
 
 package com.suivi.colis.suivicolis.models.enums;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 public enum Role {
-    USER,
-    EMPLOYEE,
-    CUSTOMER,
-    DELIVERY_MAN,
-    TRANSPORTER,
-    AGENCY;
-    public static final String EMPLOYEE_STR = "EMPLOYEE";
-    public static final String USER_STR = "USER";
-    public static final String DELIVERY_MAN_STR = "DELIVERY";
-    public static final String AGENCY_OWNER_STR = "AGENCY";
-    public static final String CUSTOMER_STR = "CUSTOMER";
-    public static final String TRANSPORTER_STR = "TRANSPORTER";
+    USER(new SimpleGrantedAuthority("USER")),
+    EMPLOYEE (new SimpleGrantedAuthority("EMPLOYEE")),
+    CUSTOMER(new SimpleGrantedAuthority("CUSTOMER")),
+    DELIVERY_MAN(new SimpleGrantedAuthority("DELIVERY")),
+    TRANSPORTER(new SimpleGrantedAuthority("TRANSPORTER")),
+    AGENCY(new SimpleGrantedAuthority("AGENCY")),
+    ADMIN(new SimpleGrantedAuthority("ADMIN"));
+
+
+
+
+    private final GrantedAuthority grantedAuthority;
+
+    Role(GrantedAuthority grantedAuthority) {
+        this.grantedAuthority = grantedAuthority;
+    }
+
+    public GrantedAuthority getGrantedAuthority() {
+        return grantedAuthority;
+    }
 }

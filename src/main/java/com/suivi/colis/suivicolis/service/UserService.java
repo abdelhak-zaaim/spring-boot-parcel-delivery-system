@@ -17,30 +17,43 @@
 package com.suivi.colis.suivicolis.service;
 
 import com.suivi.colis.suivicolis.models.User;
-import com.suivi.colis.suivicolis.repository.UserRepository;
+import com.suivi.colis.suivicolis.repository.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserService implements UserDetailsService {
+    @Autowired
+    private  UserRepo userRepository;
 
-    private final UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            var userObj = user.get();
+            return org.springframework.security.core.userdetails.User.builder()
+                    .username(userObj.getUsername())
+                    .password(userObj.getPassword())
+                    .roles(getRoles(userObj))
+                    .build();
+        } else {
+            throw new UsernameNotFoundException(email);
         }
-        return user;
     }
-
-
+    private String[] getRoles(User user) {
+        if (user.getRole() == null) {
+            return new String[]{"USER"};
+        }
+        return user.getRole().split(",");
+    }
 
 }

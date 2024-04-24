@@ -18,6 +18,7 @@ package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.VehicleType;
+import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@DiscriminatorValue(Role.DELIVERY_MAN_STR)
+@DiscriminatorValue(Constants.DELIVERY_ROLE)
 public class DeliveryMan extends Employee{
 
     private String licenseNumber;

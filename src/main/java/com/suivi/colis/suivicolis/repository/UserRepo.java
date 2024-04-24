@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 23/04/2024, 18:34
- *  * @modified : 23/04/2024, 18:34
+ *  * @created : 24/04/2024, 16:34
+ *  * @modified : 24/04/2024, 16:34
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -14,31 +14,16 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.repository;
 
-import jakarta.persistence.*;
-import java.util.Date;
-import java.util.List;
+import com.suivi.colis.suivicolis.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Entity
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import java.util.Optional;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
-
-    private String status;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Parcel> parcels;
-
-    @ManyToOne
-    @JoinColumn(name = "idCustomer", referencedColumnName = "id")
-    private Customer idCustomer;
-
-    private double totalPrice;
-
+@Repository
+public interface UserRepo extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 
 }

@@ -17,14 +17,14 @@
 package com.suivi.colis.suivicolis.service;
 
 import com.suivi.colis.suivicolis.models.Employee;
-import com.suivi.colis.suivicolis.repository.EmployeeRepository;
+import com.suivi.colis.suivicolis.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
     @Autowired
-    private EmployeeRepository employeeRepository ;
+    private EmployeeRepo employeeRepository ;
 
     public void deleteEmployee(Long id) {
 

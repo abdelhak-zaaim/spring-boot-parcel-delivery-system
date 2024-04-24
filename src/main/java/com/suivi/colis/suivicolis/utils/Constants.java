@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 23/04/2024, 18:37
- *  * @modified : 23/04/2024, 18:37
+ *  * @created : 24/04/2024, 20:37
+ *  * @modified : 24/04/2024, 20:37
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -14,34 +14,15 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.utils;
 
-import com.suivi.colis.suivicolis.models.enums.Privilege;
-import com.suivi.colis.suivicolis.models.enums.Role;
-import com.suivi.colis.suivicolis.utils.Constants;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Entity
-@DiscriminatorValue(Constants.EMPLOYEE_ROLE)
-public class Employee extends User {
-
-
-    @Column(unique = true)
-    private String employeeNumber;
-
-    @ManyToOne
-    private PrivilegesGroup privilegesGroup;
-
-
-    @ManyToOne
-    @JoinColumn(name = "assigned_by")
-    private Employee assignedBy;
+public class Constants {
+ public static final String USER_ROLE = "USER";
+   public static final String CUSTOMER_ROLE = "CUSTOMER";
+    public static final String EMPLOYEE_ROLE = "EMPLOYEE";
+    public static final String DELIVERY_ROLE = "DELIVERY";
+    public static final String TRANSPORTER_ROLE = "TRANSPORTER";
+    public static final String AGENCY_ROLE = "AGENCY";
+    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String USER_ROLE_NAME = "ROLE";
 }

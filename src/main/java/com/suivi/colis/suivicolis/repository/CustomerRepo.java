@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 23/04/2024, 18:37
- *  * @modified : 23/04/2024, 18:37
+ *  * @created : 24/04/2024, 19:05
+ *  * @modified : 24/04/2024, 19:05
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -14,34 +14,18 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.repository;
 
-import com.suivi.colis.suivicolis.models.enums.Privilege;
-import com.suivi.colis.suivicolis.models.enums.Role;
-import com.suivi.colis.suivicolis.utils.Constants;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.suivi.colis.suivicolis.models.Customer;
+import com.suivi.colis.suivicolis.models.User;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Entity
-@DiscriminatorValue(Constants.EMPLOYEE_ROLE)
-public class Employee extends User {
+@Repository
+public interface CustomerRepo extends JpaRepository<Customer, Long>{
+    Optional<Customer> findByEmail(String email);
 
 
-    @Column(unique = true)
-    private String employeeNumber;
-
-    @ManyToOne
-    private PrivilegesGroup privilegesGroup;
-
-
-    @ManyToOne
-    @JoinColumn(name = "assigned_by")
-    private Employee assignedBy;
 }

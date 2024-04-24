@@ -27,7 +27,7 @@ import java.util.Date;
 @Entity
 @Data
 
-public class trackParcel {
+public class TrackParcel {
 
     @Id
     private Long id;
@@ -42,10 +42,6 @@ public class trackParcel {
     private Date date;
 
 
-    // the curent user who the parcel located with (for the delivery, or the user who the parcel is with) ....
-    @ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "id")
-    private User idUser;
 
 
 }
