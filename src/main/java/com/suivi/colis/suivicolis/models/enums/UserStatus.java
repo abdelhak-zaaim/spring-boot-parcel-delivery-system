@@ -16,9 +16,26 @@
 
 package com.suivi.colis.suivicolis.models.enums;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 public enum UserStatus {
-    ACTIVE,
-    INACTIVE,
-    SUSPENDED,
-    DELETED
+    ACTIVE(new SimpleGrantedAuthority("ACTIVE")),
+    INACTIVE(new SimpleGrantedAuthority("INACTIVE")),
+    SUSPENDED(new SimpleGrantedAuthority("SUSPENDED")),
+    DELETED(new SimpleGrantedAuthority("DELETED")),
+    EXPIRED(new SimpleGrantedAuthority("EXPIRED")),
+
+    LOCKED(new SimpleGrantedAuthority("LOCKED"));
+
+
+    private final GrantedAuthority grantedAuthority;
+
+    UserStatus(GrantedAuthority grantedAuthority) {
+        this.grantedAuthority = grantedAuthority;
+    }
+
+    public GrantedAuthority getGrantedAuthority() {
+        return grantedAuthority;
+    }
 }

@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 23/04/2024, 19:12
- *  * @modified : 23/04/2024, 19:12
+ *  * @created : 24/04/2024, 16:34
+ *  * @modified : 24/04/2024, 16:34
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -16,37 +16,31 @@
 
 package com.suivi.colis.suivicolis.service;
 
-import com.suivi.colis.suivicolis.models.Employee;
-import com.suivi.colis.suivicolis.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.suivi.colis.suivicolis.models.User;
+import com.suivi.colis.suivicolis.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmployeeService {
-    @Autowired
-    private EmployeeRepository employeeRepository ;
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-    public void deleteEmployee(Long id) {
+    private final UserRepository userRepository;
 
-
-        employeeRepository.deleteById(id);
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public void addEmployee(Employee employee) {
-        employeeRepository.save(employee);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
-    public Employee getEmployee(Long id) {
-        return employeeRepository.findById(id).orElse(null);
-    }
-
-    public Employee updateEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
-
-    public Iterable<Employee> getEmployees() {
-        return employeeRepository.findAll();
-    }
 
 
 }

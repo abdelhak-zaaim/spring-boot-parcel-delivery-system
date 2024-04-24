@@ -30,8 +30,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @DiscriminatorValue(Role.DELIVERY_MAN_STR)
 public class DeliveryMan extends Employee{
+
     private String licenseNumber;
     private String vihiculeMtricule;
+
 
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;

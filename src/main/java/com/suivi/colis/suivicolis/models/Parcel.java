@@ -51,5 +51,11 @@ public class Parcel {
     @ManyToOne
     @JoinColumn(name = "destinationUser", referencedColumnName = "id")
     private User destinationUser;
+
+    @ManyToOne
+    private AgencyOwner departedAgency;
+    @ManyToOne
+    private AgencyOwner destinationAgency;
+
     
 }

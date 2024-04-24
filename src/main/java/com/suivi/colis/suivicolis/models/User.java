@@ -20,16 +20,22 @@ import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
 @DiscriminatorColumn(name = Role.USER_STR, discriminatorType = DiscriminatorType.STRING)
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
+    private String username;
     private String name;
     private String email;
     private String password;
@@ -47,13 +53,49 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-
+    @Column(unique = true)
     private String token;
+    @Column(unique = true)
     private String refreshToken;
+
     private String cin;
     private Date dateOfBirth;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
 
 
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return status != UserStatus.EXPIRED;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return status != UserStatus.LOCKED;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return status != UserStatus.EXPIRED;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return status == UserStatus.ACTIVE;
+    }
 }
