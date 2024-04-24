@@ -45,17 +45,17 @@ public class Parcel {
     private Date deleveryDate;
 
     @ManyToOne
-    @JoinColumn(name = "departedUser", referencedColumnName = "id")
-    private User departedUser;
+    @JoinColumn(name = "departedCustomer", referencedColumnName = "id")
+    private Customer departedCustomer;
 
     @ManyToOne
-    @JoinColumn(name = "destinationUser", referencedColumnName = "id")
-    private User destinationUser;
+    @JoinColumn(name = "destinationCustomer", referencedColumnName = "id")
+    private Customer destinationCustomer;
 
     @ManyToOne
-    private AgencyOwner departedAgency;
+    private Agency departedAgency;
     @ManyToOne
-    private AgencyOwner destinationAgency;
+    private Agency destinationAgency;
 
     
 }

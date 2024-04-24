@@ -16,23 +16,40 @@
 
 package com.suivi.colis.suivicolis.models;
 
-import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @DiscriminatorValue(Constants.AGENCY_ROLE)
-public class AgencyOwner extends Employee{
-
+public class Agency {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
+    private String agencyCode;
     private String agencyName;
-    private String agencyAddress;
+    @OneToOne
+    private Address agencyAddress;
+
+    private Date agencyEstablishedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+
+    @ManyToOne
+    private Admin createdBy;
+
     private String agencyContactNumber;
+    private String agencyEmail;
+    private String agencyManager;
+    private String agencyManagerContact;
 
 
 }

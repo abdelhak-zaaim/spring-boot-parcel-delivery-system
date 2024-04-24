@@ -43,4 +43,7 @@ public class DeliveryMan extends Employee{
     @ManyToOne
     private DeliveryArea deliveryArea;
 
+    @ManyToOne
+    private Agency associatedAgency;
+
 }

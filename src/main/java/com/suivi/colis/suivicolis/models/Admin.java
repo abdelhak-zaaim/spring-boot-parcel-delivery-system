@@ -3,8 +3,8 @@
  *  * @project : SuiviColis
  *  * @author : Abdelhak Zaaim
  *  * @email : abdelhakzammii@gmail.com
- *  * @created : 24/04/2024, 20:37
- *  * @modified : 24/04/2024, 20:37
+ *  * @created : 24/04/2024, 21:20
+ *  * @modified : 24/04/2024, 21:20
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  *  *
@@ -14,18 +14,28 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.utils;
+package com.suivi.colis.suivicolis.models;
 
-public class Constants {
-    public static final String USER_ROLE_NAME = "ROLE";
+import com.suivi.colis.suivicolis.utils.Constants;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public static final String USER_ROLE = "USER";
-    public static final String CUSTOMER_ROLE = "CUSTOMER";
-    public static final String EMPLOYEE_ROLE = "EMPLOYEE";
-    public static final String DELIVERY_ROLE = "DELIVERY";
-    public static final String TRANSPORTER_ROLE = "TRANSPORTER";
-    public static final String AGENCY_ROLE = "AGENCY";
-    public static final String AGENCY_MANAGER_ROLE = "AGENCY_MANAGER";
-    public static final String ADMIN_ROLE = "ADMIN";
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@DiscriminatorValue(Constants.ADMIN_ROLE)
+public class Admin extends Employee{
+
+   @ManyToOne
+
+   private PrivilegesGroup privilegesGroup;
+
+   private Integer adminLevel;
+
 
 }

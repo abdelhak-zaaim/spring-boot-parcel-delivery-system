@@ -37,8 +37,7 @@ public class Employee extends User {
     @Column(unique = true)
     private String employeeNumber;
 
-    @ManyToOne
-    private PrivilegesGroup privilegesGroup;
+
 
 
     @ManyToOne
