@@ -62,31 +62,16 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home/**").permitAll()
-                        .requestMatchers("/errorr").permitAll()
-                        .requestMatchers("/customer/**").hasRole(Constants.CUSTOMER_ROLE)
-                        .requestMatchers("/delivery/**").hasRole(Constants.DELIVERY_ROLE)
-                        .requestMatchers("/agency/**").hasRole(Constants.AGENCY_ROLE)
-                        .requestMatchers("/admin/**").hasRole(Constants.ADMIN_ROLE)
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/", "/home/**").permitAll().requestMatchers("/errorr").permitAll().requestMatchers("/customer/**").hasRole(Constants.CUSTOMER_ROLE).requestMatchers("/delivery/**").hasRole(Constants.DELIVERY_ROLE).requestMatchers("/agency/**").hasRole(Constants.AGENCY_ROLE).requestMatchers("/admin/**").hasRole(Constants.ADMIN_ROLE)
 
 
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
+                .anyRequest().authenticated()).formLogin((form) -> form.loginPage("/login").usernameParameter("username").passwordParameter("password")
 
-                        .failureForwardUrl("/login?error=true")
-                        .failureUrl("/login?error=true")
-                        // for the test we will use the default success url
-                        .defaultSuccessUrl("/loginSuccess", true)
+                .failureForwardUrl("/login?error=true").failureUrl("/login?error=true")
+                // for the test we will use the default success url
+                .defaultSuccessUrl("/loginSuccess", true)
 
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll);
+                .permitAll()).logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
@@ -98,24 +83,17 @@ public class WebSecurityConfig {
     }
 
 
-
-
-
-
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
 
-
-
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -123,6 +101,7 @@ public class WebSecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
     @Bean
     public UserService userDetailsService() {
         return userService;
