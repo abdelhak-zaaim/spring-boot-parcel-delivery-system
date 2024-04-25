@@ -22,22 +22,20 @@ import java.sql.Date;
 public class Parcel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+
     private Long id;
 
     private String codeBar;
-    
+
     private float height;
     private float width;
-    
-    private float whight;
+    private float weight;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ParcelStatus status;
 
     @Enumerated(EnumType.STRING)
-
     private ParcelType Type;
 
     private Date creationDate;
@@ -45,17 +43,21 @@ public class Parcel {
     private Date deleveryDate;
 
     @ManyToOne
-    @JoinColumn(name = "departedCustomer", referencedColumnName = "id")
-    private Customer departedCustomer;
+    private Customer senderCustomer;
+
 
     @ManyToOne
-    @JoinColumn(name = "destinationCustomer", referencedColumnName = "id")
-    private Customer destinationCustomer;
+    @JoinColumn(name = "departedAddress", referencedColumnName = "id")
+    private DeliveryAddress departedAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "destinationAddress", referencedColumnName = "id")
+    private DeliveryAddress destinationAddress;
 
     @ManyToOne
     private Agency departedAgency;
     @ManyToOne
     private Agency destinationAgency;
 
-    
+
 }
