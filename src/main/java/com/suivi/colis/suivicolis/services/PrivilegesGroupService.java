@@ -34,23 +34,28 @@ import com.suivi.colis.suivicolis.models.PrivilegesGroup;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
 import com.suivi.colis.suivicolis.repositorys.PrivilegesGroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.*;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Set;
 
 @Service
+@Validated
 public class PrivilegesGroupService {
    @Autowired
    private PrivilegesGroupRepo privilegesGroupRepo;
 
+    //@Autowired
+   // private Validator validator;
     @Autowired
-    private Validator validator;
-
+    private ApplicationContext applicationContext;
     public void addPrivilegesGroup(PrivilegesGroup privilegesGroup) throws IllegalArgumentException {
 
+        Validator validator = applicationContext.getBean(Validator.class);
 
         BindingResult errors = new BeanPropertyBindingResult(privilegesGroup, "PrivilegesGroup");
         validator.validate(privilegesGroup, errors);
