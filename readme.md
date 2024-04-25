@@ -3,7 +3,7 @@
 This is a final year project, currently under development by a team of 4 students. The project is supervised by Pr. Fazazy, a research professor at the Faculty of Science Dhar El Mahraz.
 ## Introduction
 
-SuiviColis is a comprehensive package tracking system, developed using a robust technology stack that includes Java, SQL, Spring Boot, and Maven. It leverages the power of JPA (Java Persistence API) for seamless database operations and Spring Security for robust authentication and authorization mechanisms. The system allows users to track their packages in real-time, providing timely updates on package location, delivery status, and estimated delivery time. With its intuitive interface and reliable performance, SuiviColis aims to streamline the package tracking process .
+SuiviColis is a comprehensive package tracking system, developed using a robust technology stack that includes Java, SQL, Spring Boot, and Maven. It leverages the power of JPA (Java Persistence API) for seamless database operations and Spring Security for robust authentication and authorization mechanisms. The system allows users to track their packages in real-time, providing timely updates on package location, delivery status, and estimated delivery time. With its intuitive interface and reliable performance.
 
 ## Future Enhancements
 
@@ -24,7 +24,7 @@ In the future, this project aims to incorporate an intelligent transport optimiz
    ```bash
    cd SuiviColis
    ```
-   
+
 3. Database Configuration
 
 The application uses MySQL as its database. You need to configure the database connection details in the `application.properties` file located in `src/main/resources/`.
@@ -34,7 +34,7 @@ Here are the properties you need to set:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/<yourDatabaseNaame>?createDatabaseIfNotExist=true
 spring.datasource.username=root # your database username
-spring.datasource.password=<yourDatabassePassword>
+spring.datasource.password=<yourDatabassePassword> # keep it empty if you dont use password of the database
 ```
 
 4. **Run the project**
