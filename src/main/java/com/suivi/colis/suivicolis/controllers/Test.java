@@ -39,6 +39,7 @@ public class Test {
         List<Privilege> privileges = new ArrayList<>();
         privileges.add(Privilege.ADD_EMPLOYEE);
         privileges.add(Privilege.ADD_USER);
+        privileges.add(Privilege.ADD_USER);
         privileges.add(Privilege.AGENCY_MANAGEMENT);
         try {
             privilegesGroupService.addPrivilegesGroup(new PrivilegesGroup("ADMIN", privileges));
