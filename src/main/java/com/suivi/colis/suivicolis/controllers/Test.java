@@ -31,9 +31,33 @@ import java.util.List;
 @Controller
 public class Test {
 
-
     @Autowired
     private PrivilegesGroupService privilegesGroupService;
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+
+    @GetMapping("/loginSuccess")
+    public ResponseEntity<String> loginSuccess() {
+        return ResponseEntity.ok("You are logged in");
+    }
+
+    @GetMapping("/errorr")
+    public ResponseEntity<String> error() {
+        return new ResponseEntity<>("have a error", HttpStatus.OK);
+    }
+
+
     @GetMapping("/test/addPriviligeGroup")
     public ResponseEntity<String> addPriviligeGroup() {
         List<Privilege> privileges = new ArrayList<>();

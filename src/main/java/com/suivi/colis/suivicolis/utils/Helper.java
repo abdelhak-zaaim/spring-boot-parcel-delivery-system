@@ -21,6 +21,10 @@ public class Helper {
         return pat.matcher(email).matches();
     }
 
+    public static boolean isAcceptedPassword(String password) {
+        return isValidPassword(password) && !isEasyPassword(password);
+    }
+
     public static boolean isValidPassword(String password) {
         return password != null && password.length() >= 8 && !(password.length() > 50);
     }

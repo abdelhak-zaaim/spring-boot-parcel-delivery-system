@@ -11,14 +11,18 @@
 package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
+import com.suivi.colis.suivicolis.repositorys.AgencyRepo;
 import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -30,7 +34,7 @@ public class Agency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true ,nullable = false )
     private String agencyCode;
     private String agencyName;
     @OneToOne
@@ -51,6 +55,8 @@ public class Agency {
 
 
     private String agencyManagerContact;
+
+
 
 
 }

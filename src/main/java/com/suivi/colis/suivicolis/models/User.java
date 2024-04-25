@@ -13,6 +13,7 @@ package com.suivi.colis.suivicolis.models;
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.validations.uservalidate.UserValidate;
+import com.suivi.colis.suivicolis.validations.uservalidate.age.AgeLimit;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -56,6 +57,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String cin;
 
+    @AgeLimit(minimumAge = 16)
     private Date dateOfBirth;
 
     @Override

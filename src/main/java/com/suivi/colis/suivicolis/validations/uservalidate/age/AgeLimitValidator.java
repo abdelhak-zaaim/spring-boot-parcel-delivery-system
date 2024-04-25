@@ -13,9 +13,13 @@ package com.suivi.colis.suivicolis.validations.uservalidate.age;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
-public class AgeLimitValidator implements ConstraintValidator<AgeLimit, LocalDate> {
+public class AgeLimitValidator implements ConstraintValidator<AgeLimit, Date> {
    int minimumAge;
 
    @Override
@@ -24,12 +28,17 @@ public class AgeLimitValidator implements ConstraintValidator<AgeLimit, LocalDat
    }
 
    @Override
-   public boolean isValid(LocalDate birthDate, ConstraintValidatorContext constraintValidatorContext) {
+   public boolean isValid(Date birthDate, ConstraintValidatorContext constraintValidatorContext) {
       if(birthDate == null){
          return false;
       }
       LocalDate today = LocalDate.now();
       LocalDate minimumAgeYearsAgo = today.minusYears(this.minimumAge);
-      return !minimumAgeYearsAgo.isBefore(birthDate);
+
+      Instant instant = birthDate.toInstant();
+      ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
+      LocalDate birthDateLocal = zdt.toLocalDate();
+
+      return !minimumAgeYearsAgo.isBefore(birthDateLocal);
    }
 }
