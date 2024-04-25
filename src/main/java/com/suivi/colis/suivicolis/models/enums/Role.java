@@ -1,33 +1,40 @@
 /*
  * **
  *  * @project : SuiviColis
- *  * @author : Abdelhak Zaaim
- *  * @email : abdelhakzammii@gmail.com
  *  * @created : 23/04/2024, 18:18
  *  * @modified : 23/04/2024, 18:05
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *  **
  */
 
 package com.suivi.colis.suivicolis.models.enums;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+
+@Getter
 public enum Role {
-    USER(new SimpleGrantedAuthority("USER")),
-    EMPLOYEE (new SimpleGrantedAuthority("EMPLOYEE")),
+
     CUSTOMER(new SimpleGrantedAuthority("CUSTOMER")),
+    EMPLOYEE(new SimpleGrantedAuthority("EMPLOYEE")),
+
     DELIVERY_MAN(new SimpleGrantedAuthority("DELIVERY")),
     TRANSPORTER(new SimpleGrantedAuthority("TRANSPORTER")),
-    AGENCY(new SimpleGrantedAuthority("AGENCY")),
+    AGENCY_EMPLOYEE(new SimpleGrantedAuthority("AGENCY_EMPLOYEE")),
     ADMIN(new SimpleGrantedAuthority("ADMIN"));
 
+    public static final String USER_ROLE_NAME = "ROLE";
+
+
+    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String CUSTOMER_ROLE = "CUSTOMER";
+    public static final String DELIVERY_MAN_ROLE = "DELIVERY";
+    public static final String AGENCY_EMPLOYEE_ROLE = "AGENCY_EMPLOYEE";
+    public static final String TRANSPORTER_ROLE = "TRANSPORTER";
+    public static final String EMPLOYEE_ROLE = "EMPLOYEE";
 
 
 
@@ -37,7 +44,4 @@ public enum Role {
         this.grantedAuthority = grantedAuthority;
     }
 
-    public GrantedAuthority getGrantedAuthority() {
-        return grantedAuthority;
-    }
 }
