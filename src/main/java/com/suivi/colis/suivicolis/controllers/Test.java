@@ -92,7 +92,7 @@ public class Test {
 
         parcel.setHeight(10.0f);
         parcel.setWidth(20.0f);
-        parcel.setWhight(30.0f);
+        parcel.setWeight(30.0f);
         parcel.setStatus(ParcelStatus.IN_TRANSIT); // Assuming ParcelStatus is an enum with a value of NEW
         parcel.setType(ParcelType.DOCUMENT); // Assuming ParcelType is an enum with a value of TYPE1
 
