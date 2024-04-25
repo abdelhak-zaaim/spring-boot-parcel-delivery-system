@@ -27,6 +27,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public RedirectView dash() {
+        // this is for testing only , todo : remove this
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()) {
             return new RedirectView("http://www.google.com");

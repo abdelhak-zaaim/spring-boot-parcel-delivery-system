@@ -33,9 +33,11 @@ public class Parcel {
     private float whight;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ParcelStatus status;
 
     @Enumerated(EnumType.STRING)
+
     private ParcelType Type;
 
     private Date creationDate;

@@ -10,8 +10,14 @@
 
 package com.suivi.colis.suivicolis.controllers;
 
+import com.suivi.colis.suivicolis.models.Agency;
+import com.suivi.colis.suivicolis.models.Customer;
+import com.suivi.colis.suivicolis.models.Parcel;
 import com.suivi.colis.suivicolis.models.PrivilegesGroup;
+import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
+import com.suivi.colis.suivicolis.models.enums.ParcelType;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
+import com.suivi.colis.suivicolis.services.ParcelService;
 import com.suivi.colis.suivicolis.services.PrivilegesGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -33,6 +40,8 @@ public class Test {
 
     @Autowired
     private PrivilegesGroupService privilegesGroupService;
+    @Autowired
+    private ParcelService paarcelService;
 
 
     @GetMapping("/login")
@@ -72,5 +81,32 @@ public class Test {
         }
 
         return new ResponseEntity<>("priviliges was added", HttpStatus.OK);
+    }
+
+    @GetMapping("/test/addParcel")
+    public ResponseEntity<String> addParcel() {
+        // Create new Parcel object
+        Parcel parcel = new Parcel();
+
+// Set properties
+
+        parcel.setHeight(10.0f);
+        parcel.setWidth(20.0f);
+        parcel.setWhight(30.0f);
+        parcel.setStatus(ParcelStatus.IN_TRANSIT); // Assuming ParcelStatus is an enum with a value of NEW
+        parcel.setType(ParcelType.DOCUMENT); // Assuming ParcelType is an enum with a value of TYPE1
+
+
+
+
+
+
+        try {
+            paarcelService.addParcel( parcel);
+        } catch (Exception e) {
+            return new ResponseEntity<>("parcel not added added"+e.toString(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("parcel was added", HttpStatus.OK);
     }
 }
