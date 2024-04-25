@@ -20,7 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class TransporterStatus {
+public class TransporterTracking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
