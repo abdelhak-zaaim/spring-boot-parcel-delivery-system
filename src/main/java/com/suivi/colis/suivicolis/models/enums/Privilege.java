@@ -10,6 +10,9 @@
 
 package com.suivi.colis.suivicolis.models.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Privilege {
     FULL,
     READ_PARCELS_INFO,
@@ -25,9 +28,16 @@ public enum Privilege {
     ADD_EMPLOYEE,
     USER_MANAGEMENT, // including add, update, suspend, delete, read, and search
     TRANSPORT_MANAGEMENT,
-    AGENCY_MANAGEMENT,
+    AGENCY_MANAGEMENT;
 
+    public static boolean contains(Privilege privilege) {
+        for (Privilege p : Privilege.values()) {
+            if (p.equals(privilege)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    // we will add the  other privileges later
 
 }

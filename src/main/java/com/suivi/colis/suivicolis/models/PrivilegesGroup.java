@@ -13,15 +13,19 @@ package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.converters.PrivilegeListConverter;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
+import com.suivi.colis.suivicolis.validations.privilegesgroupvalidate.PrivilegeValidation;
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
+@PrivilegeValidation
 public class PrivilegesGroup {
 public PrivilegesGroup(String name, List<Privilege> privileges) {
         this.name = name;

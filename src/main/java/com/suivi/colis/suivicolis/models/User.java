@@ -12,6 +12,7 @@ package com.suivi.colis.suivicolis.models;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
+import com.suivi.colis.suivicolis.validations.uservalidate.UserValidate;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,24 +26,23 @@ import java.util.List;
 @Entity
 
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
+@UserValidate
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
     private String email;
     private String password;
-    @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false)
+    @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
     private String role;
 
     private String phone;
     @ManyToOne
-    @JoinColumn(name = "idAddress", referencedColumnName = "id")
-    private Address idAddress;
+    private Address address;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date registeredAt;
@@ -53,8 +53,9 @@ public class User implements UserDetails {
     private String token;
     @Column(unique = true)
     private String refreshToken;
-
+    @Column(unique = true)
     private String cin;
+
     private Date dateOfBirth;
 
     @Override
@@ -67,7 +68,6 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
-
 
     @Override
     public String getUsername() {
