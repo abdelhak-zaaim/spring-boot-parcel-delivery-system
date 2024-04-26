@@ -22,8 +22,7 @@ package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.LocationPoint;
 import com.suivi.colis.suivicolis.models.converters.LocationPointListConverter;
-import com.suivi.colis.suivicolis.models.converters.PrivilegeListConverter;
-import com.suivi.colis.suivicolis.utils.Helper;
+import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,14 +56,14 @@ public class DeliveryArea {
 
     @PrePersist
     protected void onCreated() {
-        java.util.Date date = Helper.getCurrentDateWithSpecifiedTimeZone();
+        java.util.Date date = DateUtils.getCurrentDateWithSpecifiedTimeZone();
         this.creationDate = date;
         this.lastUpdateDate = date;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = Helper.getCurrentDateWithSpecifiedTimeZone();
+        this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
     }
 
 }

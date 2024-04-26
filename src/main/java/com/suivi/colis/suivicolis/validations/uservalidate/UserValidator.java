@@ -11,7 +11,7 @@
 package com.suivi.colis.suivicolis.validations.uservalidate;
 
 import com.suivi.colis.suivicolis.models.entities.User;
-import com.suivi.colis.suivicolis.utils.Helper;
+import com.suivi.colis.suivicolis.utils.helpers.ValidationUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -29,6 +29,6 @@ public class UserValidator implements ConstraintValidator<UserValidate, User> {
 
 
       return user.getName() != null && !user.getName().isEmpty() &&
-              user.getEmail() != null && !user.getEmail().isEmpty() && Helper.isValidEmail(user.getEmail());
+              user.getEmail() != null && !user.getEmail().isEmpty() && ValidationUtils.isValidEmail(user.getEmail());
    }
 }

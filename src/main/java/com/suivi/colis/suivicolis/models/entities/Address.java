@@ -20,7 +20,7 @@
 
 package com.suivi.colis.suivicolis.models.entities;
 
-import com.suivi.colis.suivicolis.utils.Helper;
+import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -62,13 +62,13 @@ public class Address {
 
     @PrePersist
     protected void onCreated() {
-        Date date = Helper.getCurrentDateWithSpecifiedTimeZone();
+        Date date = DateUtils.getCurrentDateWithSpecifiedTimeZone();
         this.creationDate = date;
         this.lastUpdateDate = date;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = Helper.getCurrentDateWithSpecifiedTimeZone();
+        this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
     }
 }

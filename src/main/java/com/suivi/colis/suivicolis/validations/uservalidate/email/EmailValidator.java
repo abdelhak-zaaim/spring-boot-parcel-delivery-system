@@ -11,7 +11,7 @@
 package com.suivi.colis.suivicolis.validations.uservalidate.email;
 
 import com.suivi.colis.suivicolis.exceptions.customexptions.IllegalUserAttributesException;
-import com.suivi.colis.suivicolis.utils.Helper;
+import com.suivi.colis.suivicolis.utils.helpers.ValidationUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -26,7 +26,7 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
             throw new IllegalUserAttributesException("Email cannot be null");
         }
 
-        if (Helper.isValidEmail(email)) {
+        if (ValidationUtils.isValidEmail(email)) {
             throw new IllegalUserAttributesException("Invalid email format");
         }
 

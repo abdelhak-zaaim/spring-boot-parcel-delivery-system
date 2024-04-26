@@ -1,21 +1,18 @@
 /*
  * **
  *  * @project : SuiviColis
- *  * @created : 25/04/2024, 17:24
- *  * @modified : 25/04/2024, 17:24
+ *  * @created : 26/04/2024, 17:10
+ *  * @modified : 26/04/2024, 17:10
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  * **
  */
 
-package com.suivi.colis.suivicolis.utils;
+package com.suivi.colis.suivicolis.utils.helpers;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.regex.Pattern;
 
-public class Helper {
+public class ValidationUtils {
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pat = Pattern.compile(emailRegex);
@@ -41,12 +38,4 @@ public class Helper {
             return false;
         return !pat.matcher(password).matches();
     }
-
-
-    public static Date getCurrentDateWithSpecifiedTimeZone() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of(Constants.TIME_ZONE));
-        return Date.from(zonedDateTime.toInstant());
-    }
-
-
 }

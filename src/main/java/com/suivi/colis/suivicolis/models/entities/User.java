@@ -13,7 +13,7 @@ package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
-import com.suivi.colis.suivicolis.utils.Helper;
+import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import com.suivi.colis.suivicolis.validations.uservalidate.UserValidate;
 import com.suivi.colis.suivicolis.validations.uservalidate.age.AgeLimit;
 import jakarta.persistence.*;
@@ -68,14 +68,14 @@ public class User implements UserDetails {
     @PrePersist
     protected void onCreated() {
         this.password = passwordEncoder.encode(this.password);
-        Date date = Helper.getCurrentDateWithSpecifiedTimeZone();
+        Date date = DateUtils.getCurrentDateWithSpecifiedTimeZone();
         this.registeredAt = date;
         this.lastUpdateDate = date;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = Helper.getCurrentDateWithSpecifiedTimeZone();
+        this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

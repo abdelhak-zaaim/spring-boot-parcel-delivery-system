@@ -22,7 +22,7 @@ package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.ParcelLocation;
 import com.suivi.colis.suivicolis.models.converters.ParcelLocationConverter;
-import com.suivi.colis.suivicolis.utils.Helper;
+import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -55,7 +55,7 @@ public class ParcelTracking {
 
     @PrePersist
     protected void onCreated() {
-        this.ParcelTracking = Helper.getCurrentDateWithSpecifiedTimeZone();
+        this.ParcelTracking = DateUtils.getCurrentDateWithSpecifiedTimeZone();
 
     }
 
