@@ -30,11 +30,11 @@ public class AdminTest {
            Admin admin = new Admin();
               admin.setId(1L);
                 admin.setName("Admin");
-                admin.setEmail("gsvcvjs@eg.egr");
+                admin.setEmail("fhefgh@ghr.rg");
                 admin.setPassword("admin");
                 admin.setRole("Admin");
                 admin.setPhone("1234567890");
-                admin.setDateOfBirth(new Date("12/12/2020"));
+                admin.setDateOfBirth(new Date("12/12/2000"));
 
 
 

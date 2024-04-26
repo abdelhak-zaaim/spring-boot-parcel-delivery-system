@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 18:25
+ *  * @modified : 26/04/2024, 18:11
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 25/04/2024, 19:15
  *  * @modified : 25/04/2024, 19:15
  *  * @description : This file is part of the SuiviColis project.
@@ -8,7 +18,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.validations.uservalidate.age;
+package com.suivi.colis.suivicolis.models.entities.validations.user.age;
 
 import com.suivi.colis.suivicolis.exceptions.customexptions.IllegalUserAttributesException;
 import jakarta.validation.ConstraintValidator;

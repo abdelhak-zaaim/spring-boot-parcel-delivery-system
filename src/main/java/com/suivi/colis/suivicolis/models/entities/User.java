@@ -14,15 +14,15 @@ package com.suivi.colis.suivicolis.models.entities;
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
-import com.suivi.colis.suivicolis.validations.uservalidate.UserValidate;
-import com.suivi.colis.suivicolis.validations.uservalidate.age.AgeLimit;
+import com.suivi.colis.suivicolis.models.entities.validations.user.UserValidate;
+import com.suivi.colis.suivicolis.models.entities.validations.user.age.AgeLimit;
+import com.suivi.colis.suivicolis.models.entities.validations.user.email.ValidEmail;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -40,10 +40,9 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String name;
-    @Email(message = "Email should be valid" )
-    @Column(unique = true)
-    private String email;
 
+    @ValidEmail
+    private String email;
     private String password;
     @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
     private String role;
@@ -112,8 +111,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return status == UserStatus.ACTIVE;
     }
-
-
-
 
 }

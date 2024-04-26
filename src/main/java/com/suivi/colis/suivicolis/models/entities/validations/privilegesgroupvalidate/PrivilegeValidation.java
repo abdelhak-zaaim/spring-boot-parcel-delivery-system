@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 18:24
+ *  * @modified : 25/04/2024, 19:10
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 25/04/2024, 17:42
  *  * @modified : 25/04/2024, 17:42
  *  * @description : This file is part of the SuiviColis project.
@@ -8,7 +18,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.validations.privilegesgroupvalidate;
+package com.suivi.colis.suivicolis.models.entities.validations.privilegesgroupvalidate;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

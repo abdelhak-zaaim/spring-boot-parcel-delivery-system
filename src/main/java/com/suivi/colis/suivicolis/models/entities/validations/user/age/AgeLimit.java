@@ -1,14 +1,15 @@
 /*
  * **
  *  * @project : SuiviColis
- *  * @created : 25/04/2024, 19:14
- *  * @modified : 25/04/2024, 19:14
+ *  * @created : 26/04/2024, 18:25
+ *  * @modified : 26/04/2024, 18:11
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  * **
  */
 
-package com.suivi.colis.suivicolis.validations.uservalidate.age;
+
+package com.suivi.colis.suivicolis.models.entities.validations.user.age;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
