@@ -10,10 +10,8 @@
 
 package com.suivi.colis.suivicolis.controllers;
 
-import com.suivi.colis.suivicolis.models.Agency;
-import com.suivi.colis.suivicolis.models.Customer;
-import com.suivi.colis.suivicolis.models.Parcel;
-import com.suivi.colis.suivicolis.models.PrivilegesGroup;
+import com.suivi.colis.suivicolis.models.entities.Parcel;
+import com.suivi.colis.suivicolis.models.entities.PrivilegesGroup;
 import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.models.enums.ParcelType;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
@@ -26,7 +24,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /*
@@ -95,11 +92,6 @@ public class Test {
         parcel.setWeight(30.0f);
         parcel.setStatus(ParcelStatus.IN_TRANSIT); // Assuming ParcelStatus is an enum with a value of NEW
         parcel.setType(ParcelType.DOCUMENT); // Assuming ParcelType is an enum with a value of TYPE1
-
-
-
-
-
 
         try {
             paarcelService.addParcel( parcel);

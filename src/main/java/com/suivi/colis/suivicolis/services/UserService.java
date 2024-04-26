@@ -30,7 +30,7 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.User;
+import com.suivi.colis.suivicolis.models.entities.User;
 import com.suivi.colis.suivicolis.repositorys.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,7 +41,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;

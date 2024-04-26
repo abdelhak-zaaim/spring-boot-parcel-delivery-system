@@ -30,7 +30,7 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.Employee;
+import com.suivi.colis.suivicolis.models.entities.Employee;
 import com.suivi.colis.suivicolis.repositorys.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

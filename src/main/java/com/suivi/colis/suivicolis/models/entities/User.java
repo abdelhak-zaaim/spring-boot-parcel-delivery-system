@@ -1,4 +1,14 @@
 /*
+ * **
+ *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 01:53
+ *  * @modified : 26/04/2024, 00:58
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
  * *
  *  * @project : SuiviColis
  *  * @created : 23/04/2024, 17:51
@@ -8,10 +18,11 @@
  *  *
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
+import com.suivi.colis.suivicolis.utils.Helper;
 import com.suivi.colis.suivicolis.validations.uservalidate.UserValidate;
 import com.suivi.colis.suivicolis.validations.uservalidate.age.AgeLimit;
 import jakarta.persistence.*;
@@ -35,19 +46,17 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String name;
-
     private String email;
     private String password;
     @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
     private String role;
-
     private String phone;
     @ManyToOne
     private Address address;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date registeredAt;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateDate;
     @Enumerated(EnumType.STRING)
     private UserStatus status;
     @Column(unique = true)
@@ -56,10 +65,20 @@ public class User implements UserDetails {
     private String refreshToken;
     @Column(unique = true)
     private String cin;
-
     @AgeLimit(minimumAge = 16)
     private Date dateOfBirth;
 
+    @PrePersist
+    protected void onCreated() {
+        Date date = Helper.getCurrentDateWithSpecifiedTimeZone();
+        this.registeredAt = date;
+        this.lastUpdateDate = date;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.lastUpdateDate = Helper.getCurrentDateWithSpecifiedTimeZone();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

@@ -31,7 +31,7 @@
 package com.suivi.colis.suivicolis.services;
 
 import com.suivi.colis.suivicolis.exceptions.CustomerNotFoundException;
-import com.suivi.colis.suivicolis.models.Customer;
+import com.suivi.colis.suivicolis.models.entities.Customer;
 import com.suivi.colis.suivicolis.repositorys.CustomerRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +45,12 @@ public class CustomerService {
 
     public void deleteCustomer(Long id) {
         try {
+
             customerRepository.deleteById(id);
+
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete customer", e);
-
         }
-
     }
 
     public void addCustomer(Customer customer) {

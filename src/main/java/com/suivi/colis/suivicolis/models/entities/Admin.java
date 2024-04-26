@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 01:50
+ *  * @modified : 25/04/2024, 14:57
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 24/04/2024, 21:20
  *  * @modified : 24/04/2024, 21:20
  *  * @description : This file is part of the SuiviColis project.
@@ -8,7 +18,7 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import jakarta.persistence.DiscriminatorValue;
@@ -23,7 +33,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @DiscriminatorValue(Role.ADMIN_ROLE)
-public class Admin extends Employee{
+public class Admin extends Employee {
 
    @ManyToOne
    private PrivilegesGroup privilegesGroup;

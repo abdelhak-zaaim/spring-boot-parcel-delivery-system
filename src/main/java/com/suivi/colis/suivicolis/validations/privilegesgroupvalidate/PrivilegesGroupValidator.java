@@ -10,19 +10,12 @@
 
 package com.suivi.colis.suivicolis.validations.privilegesgroupvalidate;
 
-import com.suivi.colis.suivicolis.models.PrivilegesGroup;
+import com.suivi.colis.suivicolis.models.entities.PrivilegesGroup;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class PrivilegesGroupValidator implements ConstraintValidator<PrivilegeValidation, PrivilegesGroup> {
@@ -35,7 +28,6 @@ public class PrivilegesGroupValidator implements ConstraintValidator<PrivilegeVa
     @Override
     public boolean isValid(PrivilegesGroup privilegesGroup, ConstraintValidatorContext context) {
         System.out.println("Validating PrivilegesGroup: " + privilegesGroup);
-
 
         if (privilegesGroup.getName() == null || privilegesGroup.getName().isEmpty()) {
             return false;

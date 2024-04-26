@@ -10,7 +10,10 @@
 
 package com.suivi.colis.suivicolis.utils;
 
+import java.time.ZoneId;
+
 public class Constants {
 
+   public final static ZoneId TIME_ZONE = ZoneId.of("Africa/Casablanca");
 
 }

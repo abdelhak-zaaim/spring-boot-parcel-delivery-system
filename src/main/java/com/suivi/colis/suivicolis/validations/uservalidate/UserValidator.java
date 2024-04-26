@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.validations.uservalidate;
 
-import com.suivi.colis.suivicolis.models.User;
+import com.suivi.colis.suivicolis.models.entities.User;
 import com.suivi.colis.suivicolis.utils.Helper;
 
 import javax.validation.ConstraintValidator;

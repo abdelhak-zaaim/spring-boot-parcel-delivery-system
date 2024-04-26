@@ -30,7 +30,7 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.Admin;
+import com.suivi.colis.suivicolis.models.entities.Admin;
 import com.suivi.colis.suivicolis.repositorys.AdminRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;

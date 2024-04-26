@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 01:50
+ *  * @modified : 25/04/2024, 15:41
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 23/04/2024, 19:17
  *  * @modified : 23/04/2024, 19:17
  *  * @description : This file is part of the SuiviColis project.
@@ -8,10 +18,9 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.enums.VehicleType;
-import com.suivi.colis.suivicolis.utils.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +33,7 @@ import com.suivi.colis.suivicolis.models.enums.Role;
 @Data
 @Entity
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)
-public class DeliveryMan extends Employee{
+public class DeliveryMan extends Employee {
 
     private String licenseNumber;
     private String vihiculeMtricule;

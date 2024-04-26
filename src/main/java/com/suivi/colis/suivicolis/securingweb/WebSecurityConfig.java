@@ -49,7 +49,6 @@ public class WebSecurityConfig {
                 .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
                 .requestMatchers("/admin/**").hasRole(Role.ADMIN_ROLE)
 
-
                 .anyRequest().authenticated()).formLogin((form) -> form.loginPage("/login").usernameParameter("username").passwordParameter("password")
 
                 .failureForwardUrl("/login?error=true").failureUrl("/login?error=true")

@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.repositorys;
 
-import com.suivi.colis.suivicolis.models.Employee;
+import com.suivi.colis.suivicolis.models.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

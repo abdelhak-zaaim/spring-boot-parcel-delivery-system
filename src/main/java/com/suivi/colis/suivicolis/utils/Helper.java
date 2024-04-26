@@ -10,6 +10,9 @@
 
 package com.suivi.colis.suivicolis.utils;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Helper {
@@ -30,12 +33,18 @@ public class Helper {
     }
 
     public static boolean isEasyPassword(String password) {
-        // we use sseparate validation for easy password ,because we may need to change it later
+        // we use sseparate  validation for easy password ,because we may need to change it later
 
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
         Pattern pat = Pattern.compile(passwordRegex);
         if (password == null)
             return false;
         return !pat.matcher(password).matches();
+    }
+
+
+    public static Date getCurrentDateWithSpecifiedTimeZone() {
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(Constants.TIME_ZONE);
+        return Date.from(zonedDateTime.toInstant());
     }
 }

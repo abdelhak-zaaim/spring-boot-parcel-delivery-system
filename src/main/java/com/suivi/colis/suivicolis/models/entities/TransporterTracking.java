@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 01:52
+ *  * @modified : 25/04/2024, 19:23
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 23/04/2024, 20:27
  *  * @modified : 23/04/2024, 20:27
  *  * @description : This file is part of the SuiviColis project.
@@ -8,7 +18,7 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.models;
+package com.suivi.colis.suivicolis.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
