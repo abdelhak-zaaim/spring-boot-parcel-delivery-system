@@ -34,6 +34,7 @@ import com.suivi.colis.suivicolis.models.enums.Role;
 @AllArgsConstructor
 @Data
 @Entity
+
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)
 public class DeliveryMan extends Employee {
 

@@ -12,9 +12,6 @@
 
 package com.suivi.colis.suivicolis.exceptions;
 
-import com.suivi.colis.suivicolis.exceptions.customexptions.IllegalUserAttributesException;
-import com.suivi.colis.suivicolis.exceptions.models.Error;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +19,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

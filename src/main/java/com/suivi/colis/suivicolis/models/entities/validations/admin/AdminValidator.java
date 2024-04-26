@@ -12,7 +12,7 @@
 package com.suivi.colis.suivicolis.models.entities.validations.admin;
 
 
-import com.suivi.colis.suivicolis.exceptions.customexptions.IllegalUserAttributesException;
+import com.suivi.colis.suivicolis.exceptions.personalizedexceptions.IllegalUserAttributesException;
 import com.suivi.colis.suivicolis.models.entities.Admin;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

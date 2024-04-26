@@ -11,7 +11,7 @@
 package com.suivi.colis.suivicolis.exceptions;
 
 
-import com.suivi.colis.suivicolis.exceptions.customexptions.IllegalUserAttributesException;
+import com.suivi.colis.suivicolis.exceptions.personalizedexceptions.IllegalUserAttributesException;
 import com.suivi.colis.suivicolis.exceptions.models.Error;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;

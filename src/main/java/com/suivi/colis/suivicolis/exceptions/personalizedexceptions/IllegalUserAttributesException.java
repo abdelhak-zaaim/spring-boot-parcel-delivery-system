@@ -18,7 +18,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.exceptions.customexptions;
+package com.suivi.colis.suivicolis.exceptions.personalizedexceptions;
 
 public class IllegalUserAttributesException extends RuntimeException {
    public IllegalUserAttributesException(String message) {
