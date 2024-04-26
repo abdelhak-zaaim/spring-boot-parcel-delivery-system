@@ -20,8 +20,8 @@
 
 package com.suivi.colis.suivicolis.models.entities;
 
-import com.suivi.colis.suivicolis.models.LocationPoint;
-import com.suivi.colis.suivicolis.models.converters.LocationPointListConverter;
+import com.suivi.colis.suivicolis.models.MapsLocationPoint;
+import com.suivi.colis.suivicolis.models.converters.ListLocationPointListConverter;
 import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -43,8 +43,8 @@ public class DeliveryArea {
     @Column(nullable = false, unique = true)
     private String areaCode;
 
-    @Convert(converter = LocationPointListConverter.class)
-    private List<LocationPoint> areaVertices;
+    @Convert(converter = ListLocationPointListConverter.class)
+    private List<MapsLocationPoint> areaVertices;
 
     @ManyToOne
     private Admin createdBy;

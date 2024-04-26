@@ -20,6 +20,8 @@
 
 package com.suivi.colis.suivicolis.models.entities;
 
+import com.suivi.colis.suivicolis.models.MapsLocationPoint;
+import com.suivi.colis.suivicolis.models.entities.validations.location.ValidMapsLocationPoint;
 import com.suivi.colis.suivicolis.models.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,12 +38,15 @@ import com.suivi.colis.suivicolis.models.enums.Role;
 public class DeliveryMan extends Employee {
 
     private String licenseNumber;
+
     private String vihiculeMtricule;
 
 
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
+    @ValidMapsLocationPoint
+    private MapsLocationPoint locationPoint;
 
     @ManyToOne
     private DeliveryArea deliveryArea;

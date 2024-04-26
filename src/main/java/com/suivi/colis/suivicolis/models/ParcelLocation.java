@@ -21,6 +21,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParcelLocation {
-   private HandlerType handlerType;
-   private Long handlerId;
+   private HandlerType currentUserType;
+   private Long userId;
 }

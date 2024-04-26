@@ -20,6 +20,9 @@
 
 package com.suivi.colis.suivicolis.models.entities;
 
+import com.suivi.colis.suivicolis.models.MapsLocationPoint;
+import com.suivi.colis.suivicolis.models.converters.LocationPointListConverter;
+import com.suivi.colis.suivicolis.models.entities.validations.location.ValidMapsLocationPoint;
 import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -56,6 +59,9 @@ public class Agency {
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
+
+    @ValidMapsLocationPoint
+    private MapsLocationPoint locationPoint;
 
     public Agency(String agencyCode, String agencyName, Address agencyAddress, Admin createdBy) {
         this.agencyCode = agencyCode;

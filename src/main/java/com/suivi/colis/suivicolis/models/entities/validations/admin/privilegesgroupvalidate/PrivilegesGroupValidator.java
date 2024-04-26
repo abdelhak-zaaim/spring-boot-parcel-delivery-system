@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 26/04/2024, 19:09
+ *  * @modified : 26/04/2024, 18:26
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 26/04/2024, 18:24
  *  * @modified : 26/04/2024, 01:53
  *  * @description : This file is part of the SuiviColis project.
@@ -18,7 +28,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.models.entities.validations.privilegesgroupvalidate;
+package com.suivi.colis.suivicolis.models.entities.validations.admin.privilegesgroupvalidate;
 
 import com.suivi.colis.suivicolis.models.entities.PrivilegesGroup;
 import com.suivi.colis.suivicolis.models.enums.Privilege;

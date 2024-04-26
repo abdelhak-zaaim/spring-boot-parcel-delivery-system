@@ -55,6 +55,7 @@ public class Parcel {
     private Date lastUpdateDate;
     private Date estimatedDeliveryDate;
     private Date deleveryDate;
+
     @ManyToOne
     private Customer senderCustomer;
 

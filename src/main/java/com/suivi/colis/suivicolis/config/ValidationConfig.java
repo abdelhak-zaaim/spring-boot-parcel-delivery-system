@@ -17,13 +17,11 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.InternalResourceView;
 
-
-
 @Configuration
 public class ValidationConfig extends LocalValidatorFactoryBean{
     @Bean
     public View error() {
-        // Replace with the actual view you want to use
+
         return new InternalResourceView("/error.html");
     }
     @Bean

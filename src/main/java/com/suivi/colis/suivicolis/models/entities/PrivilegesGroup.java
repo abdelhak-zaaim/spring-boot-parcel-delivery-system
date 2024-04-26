@@ -23,7 +23,7 @@ package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.converters.PrivilegeListConverter;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
-import com.suivi.colis.suivicolis.models.entities.validations.privilegesgroupvalidate.PrivilegeValidation;
+import com.suivi.colis.suivicolis.models.entities.validations.admin.privilegesgroupvalidate.PrivilegeValidation;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;

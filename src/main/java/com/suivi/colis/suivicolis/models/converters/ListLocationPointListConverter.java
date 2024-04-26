@@ -1,34 +1,31 @@
 /*
  * **
  *  * @project : SuiviColis
- *  * @created : 26/04/2024, 18:42
- *  * @modified : 26/04/2024, 18:42
+ *  * @created : 26/04/2024, 01:42
+ *  * @modified : 26/04/2024, 01:42
  *  * @description : This file is part of the SuiviColis project.
  *  * @license : MIT License
  * **
  */
 
 package com.suivi.colis.suivicolis.models.converters;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.suivi.colis.suivicolis.models.MapsLocationPoint;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.suivi.colis.suivicolis.models.MapsLocationPoint;
 
 import java.io.IOException;
-// curently we are not using this class, becoouse we changed how LocationPointListConverter stored , but we can use it in the future
+import java.util.List;
 
-// FIXME: we dont need this converter, we can remove it
 @Converter(autoApply = true)
-public class LocationPointListConverter implements AttributeConverter<MapsLocationPoint, String> {
+public class ListLocationPointListConverter implements AttributeConverter<List<MapsLocationPoint>, String> {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-
     @Override
-    public String convertToDatabaseColumn(MapsLocationPoint attribute) {
+    public String convertToDatabaseColumn(List<MapsLocationPoint> attribute) {
         try {
             return objectMapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
@@ -37,10 +34,9 @@ public class LocationPointListConverter implements AttributeConverter<MapsLocati
     }
 
     @Override
-    public MapsLocationPoint convertToEntityAttribute(String dbData) {
+    public List<MapsLocationPoint> convertToEntityAttribute(String dbData) {
         try {
-            return objectMapper.readValue(dbData, new TypeReference<MapsLocationPoint>() {
-            });
+            return objectMapper.readValue(dbData, new TypeReference<List<MapsLocationPoint>>() {});
         } catch (IOException e) {
             throw new RuntimeException("Failed to convert JSON to list of location points", e);
         }
