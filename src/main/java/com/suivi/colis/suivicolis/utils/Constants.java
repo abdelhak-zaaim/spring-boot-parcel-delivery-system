@@ -10,10 +10,12 @@
 
 package com.suivi.colis.suivicolis.utils;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.time.ZoneId;
 
 public class Constants {
 
-   public final static ZoneId TIME_ZONE = ZoneId.of("Africa/Casablanca");
+   public final static String TIME_ZONE = "Africa/Casablanca";
 
 }

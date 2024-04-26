@@ -40,4 +40,9 @@ public class AdminTest {
 
             return ResponseEntity.ok(adminService.saveAdmin(admin).toString());
         }
+
+    @GetMapping("/test/error")
+    public String errorPage() {
+        return "error";
+    }
 }

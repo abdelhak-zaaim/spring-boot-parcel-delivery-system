@@ -44,7 +44,9 @@ public class Helper {
 
 
     public static Date getCurrentDateWithSpecifiedTimeZone() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.now(Constants.TIME_ZONE);
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of(Constants.TIME_ZONE));
         return Date.from(zonedDateTime.toInstant());
     }
+
+
 }

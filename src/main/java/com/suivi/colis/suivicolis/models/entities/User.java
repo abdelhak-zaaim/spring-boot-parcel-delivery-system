@@ -8,20 +8,9 @@
  * **
  */
 
-/*
- * *
- *  * @project : SuiviColis
- *  * @created : 23/04/2024, 17:51
- *  * @modified : 23/04/2024, 17:51
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- *  *
- */
 
 package com.suivi.colis.suivicolis.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.utils.Helper;
@@ -31,7 +20,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -41,13 +32,18 @@ import java.util.List;
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
 public class User implements UserDetails {
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String name;
+    @Email(message = "Email should be valid" )
+    @Column(unique = true)
     private String email;
+
     private String password;
     @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
     private String role;
@@ -71,6 +67,7 @@ public class User implements UserDetails {
 
     @PrePersist
     protected void onCreated() {
+        this.password = passwordEncoder.encode(this.password);
         Date date = Helper.getCurrentDateWithSpecifiedTimeZone();
         this.registeredAt = date;
         this.lastUpdateDate = date;

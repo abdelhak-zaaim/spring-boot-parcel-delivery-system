@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.validations.uservalidate.age;
 
-import com.suivi.colis.suivicolis.exceptions.IllegalUserAttributesException;
+import com.suivi.colis.suivicolis.exceptions.customexptions.IllegalUserAttributesException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
