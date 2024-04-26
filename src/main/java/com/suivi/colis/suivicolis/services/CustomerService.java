@@ -30,7 +30,6 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.exceptions.CustomerNotFoundException;
 import com.suivi.colis.suivicolis.models.entities.Customer;
 import com.suivi.colis.suivicolis.repositorys.CustomerRepo;
 
@@ -63,7 +62,7 @@ public class CustomerService {
 
     public Customer getCustomer(Long id) {
         return customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer with id " + id + " not found"));
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 
 }

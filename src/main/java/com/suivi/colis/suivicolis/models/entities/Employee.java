@@ -33,12 +33,11 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue(Role.EMPLOYEE_ROLE)
 public class Employee extends User {
 
-
     @Column(unique = true)
     private String employeeNumber;
-
-
+    private double salary;
     @ManyToOne
     @JoinColumn(name = "assigned_by")
     private Admin assignedBy;
+
 }

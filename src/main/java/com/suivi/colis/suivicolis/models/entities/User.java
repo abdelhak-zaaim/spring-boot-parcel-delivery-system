@@ -20,6 +20,8 @@
 
 package com.suivi.colis.suivicolis.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.utils.Helper;
@@ -36,7 +38,6 @@ import java.util.List;
 
 @Data
 @Entity
-
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
 public class User implements UserDetails {
@@ -114,6 +115,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return status == UserStatus.ACTIVE;
     }
+
+
 
 
 }

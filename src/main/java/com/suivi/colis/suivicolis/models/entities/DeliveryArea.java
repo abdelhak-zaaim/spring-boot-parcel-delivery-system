@@ -21,6 +21,8 @@
 package com.suivi.colis.suivicolis.models.entities;
 
 import com.suivi.colis.suivicolis.models.LocationPoint;
+import com.suivi.colis.suivicolis.models.converters.LocationPointListConverter;
+import com.suivi.colis.suivicolis.models.converters.PrivilegeListConverter;
 import com.suivi.colis.suivicolis.utils.Helper;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -42,7 +44,7 @@ public class DeliveryArea {
     @Column(nullable = false, unique = true)
     private String areaCode;
 
-    @ElementCollection
+    @Convert(converter = LocationPointListConverter.class)
     private List<LocationPoint> areaVertices;
 
     @ManyToOne

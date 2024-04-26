@@ -12,7 +12,7 @@ class SuiviColisApplicationTests {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String rawPassword = "password";
         String encodedPassword = encoder.encode(rawPassword);
-System.out.println("the encripted password is :");
+        System.out.println("the encripted password is :");
         System.out.println(encodedPassword);
     }
 

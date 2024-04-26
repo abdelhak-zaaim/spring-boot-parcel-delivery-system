@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = AgeLimitValidator.class)
 public @interface AgeLimit{
    int minimumAge() default 18;
-   String message() default "User must be at least 18 years old";
+   String message() default "User age not valid for registration";
    Class<?>[] groups() default {};
    Class<? extends Payload>[] payload() default {};
 }

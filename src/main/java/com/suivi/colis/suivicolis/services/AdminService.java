@@ -39,13 +39,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
-    @Autowired
+
     private AdminRepo adminRepo;
+
+    public AdminService(AdminRepo adminRepo) {
+        this.adminRepo = adminRepo;
+    }
 
     public void setAdminRepo(AdminRepo adminRepo) {
         this.adminRepo = adminRepo;
     }
+
     public Admin getAdmin(Long id) {
         return adminRepo.findById(id).orElse(null);
+    }
+    public Admin saveAdmin(Admin admin) {
+        return adminRepo.save(admin);
     }
 }

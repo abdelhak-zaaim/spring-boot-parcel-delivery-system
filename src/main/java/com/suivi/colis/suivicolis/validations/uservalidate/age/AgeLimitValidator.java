@@ -10,6 +10,7 @@
 
 package com.suivi.colis.suivicolis.validations.uservalidate.age;
 
+import com.suivi.colis.suivicolis.exceptions.IllegalUserAttributesException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -30,7 +31,7 @@ public class AgeLimitValidator implements ConstraintValidator<AgeLimit, Date> {
    @Override
    public boolean isValid(Date birthDate, ConstraintValidatorContext constraintValidatorContext) {
       if(birthDate == null){
-         return false;
+         throw new IllegalUserAttributesException("Date of birth cannot be null");
       }
       LocalDate today = LocalDate.now();
       LocalDate minimumAgeYearsAgo = today.minusYears(this.minimumAge);
@@ -38,7 +39,9 @@ public class AgeLimitValidator implements ConstraintValidator<AgeLimit, Date> {
       Instant instant = birthDate.toInstant();
       ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
       LocalDate birthDateLocal = zdt.toLocalDate();
-
-      return !minimumAgeYearsAgo.isBefore(birthDateLocal);
+      if(minimumAgeYearsAgo.isBefore(birthDateLocal)) {
+         throw new IllegalUserAttributesException("User must be at least " + this.minimumAge + " years old");
+      }
+      return true;
    }
 }
