@@ -39,8 +39,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
-    @Autowired
+
     private CustomerRepo customerRepository;
+    public CustomerService(CustomerRepo customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public void deleteCustomer(Long id) {
         try {

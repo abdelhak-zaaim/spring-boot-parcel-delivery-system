@@ -20,8 +20,11 @@ import java.util.Random;
 @Service
 public class AgencyService {
 
-    @Autowired
+
     private AgencyRepo agencyRepository;
+    public AgencyService(AgencyRepo agencyRepository) {
+        this.agencyRepository = agencyRepository;
+    }
 
     public void deleteAgency(Long id) {
         agencyRepository.deleteById(id);

@@ -41,13 +41,16 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 public class PrivilegesGroupService {
-   @Autowired
-   private PrivilegesGroupRepo privilegesGroupRepo;
 
-    //@Autowired
-   // private Validator validator;
-    @Autowired
+    private PrivilegesGroupRepo privilegesGroupRepo;
     private ApplicationContext applicationContext;
+
+
+    public PrivilegesGroupService(PrivilegesGroupRepo privilegesGroupRepo, ApplicationContext applicationContext) {
+        this.privilegesGroupRepo = privilegesGroupRepo;
+        this.applicationContext = applicationContext;
+    }
+
     public void addPrivilegesGroup(PrivilegesGroup privilegesGroup) throws IllegalArgumentException {
 
         Validator validator = applicationContext.getBean(Validator.class);

@@ -37,8 +37,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
-    @Autowired
+
     private EmployeeRepo employeeRepository ;
+    public EmployeeService(EmployeeRepo employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     public void deleteEmployee(Long id) {
 

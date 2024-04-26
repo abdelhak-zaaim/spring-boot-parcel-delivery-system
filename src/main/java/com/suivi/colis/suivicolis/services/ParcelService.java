@@ -40,8 +40,11 @@ import java.util.Random;
 @Service
 public class ParcelService {
 
-    @Autowired
+
     private ParcelRepo parcelRepository;
+    public ParcelService(ParcelRepo parcelRepository) {
+        this.parcelRepository = parcelRepository;
+    }
 
     public Parcel addParcel(Parcel parcel) {
         parcel.setCodeBar(generateParcelBarcode());
