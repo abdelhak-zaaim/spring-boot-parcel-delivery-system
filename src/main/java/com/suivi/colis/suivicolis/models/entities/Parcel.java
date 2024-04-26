@@ -37,8 +37,8 @@ import java.util.Date;
 public class Parcel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     @Column(nullable = false)
     private String codeBar;
     private float height;
@@ -57,6 +57,9 @@ public class Parcel {
     private Date deleveryDate;
     @ManyToOne
     private Customer senderCustomer;
+
+    @OneToOne
+    private Payment payment;
 
     @ManyToOne
     @JoinColumn(name = "departedAddress", referencedColumnName = "id")
