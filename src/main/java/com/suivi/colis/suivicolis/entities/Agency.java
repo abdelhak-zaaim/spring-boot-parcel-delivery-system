@@ -40,7 +40,7 @@ public class Agency {
     private Address agencyAddress;
     private Date agencyEstablishedDate;
     @ManyToOne
-    private Admin createdBy;
+    private AdminEmployee createdBy;
     private String agencyContactNumber;
     private String agencyEmail;
     @OneToMany(mappedBy = "associatedAgency")
@@ -53,7 +53,7 @@ public class Agency {
     @ValidMapsLocationPoint
     private MapsLocationPoint locationPoint;
 
-    public Agency(String agencyCode, String agencyName, Address agencyAddress, Admin createdBy) {
+    public Agency(String agencyCode, String agencyName, Address agencyAddress, AdminEmployee createdBy) {
         this.agencyCode = agencyCode;
         this.agencyName = agencyName;
         this.agencyAddress = agencyAddress;

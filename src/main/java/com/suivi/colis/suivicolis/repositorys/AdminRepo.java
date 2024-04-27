@@ -10,11 +10,11 @@
 
 package com.suivi.colis.suivicolis.repositorys;
 
-import com.suivi.colis.suivicolis.entities.Admin;
+import com.suivi.colis.suivicolis.entities.AdminEmployee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepo extends JpaRepository<Admin, Long> {
+public interface AdminRepo extends JpaRepository<AdminEmployee, Long> {
 
 }

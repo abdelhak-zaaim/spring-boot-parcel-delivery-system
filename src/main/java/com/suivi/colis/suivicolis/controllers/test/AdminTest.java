@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.controllers.test;
 
-import com.suivi.colis.suivicolis.entities.Admin;
+import com.suivi.colis.suivicolis.entities.AdminEmployee;
 import com.suivi.colis.suivicolis.services.AdminService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,12 +28,12 @@ public class AdminTest {
 
     @GetMapping("/test/admin")
     public ResponseEntity<String> testAdmin() {
-        Admin admin = new Admin();
+        AdminEmployee admin = new AdminEmployee();
         admin.setId(1L);
-        admin.setName("Admin");
+        admin.setName("AdminEmployee");
         admin.setEmail("fhefgh@ghr.rg");
         admin.setPassword("admin");
-        admin.setRole("Admin");
+        admin.setRole("AdminEmployee");
         admin.setPhoneNumber("1234567890");
         admin.setDateOfBirth(new Date("12/12/2000"));
         return ResponseEntity.ok(adminService.saveAdmin(admin).toString());

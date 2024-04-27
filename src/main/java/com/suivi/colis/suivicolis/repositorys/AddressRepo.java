@@ -11,7 +11,6 @@
 package com.suivi.colis.suivicolis.repositorys;
 
 import com.suivi.colis.suivicolis.entities.Address;
-import com.suivi.colis.suivicolis.entities.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 @Repository

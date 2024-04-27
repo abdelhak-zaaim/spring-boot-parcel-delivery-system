@@ -30,7 +30,7 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.Admin;
+import com.suivi.colis.suivicolis.entities.AdminEmployee;
 import com.suivi.colis.suivicolis.repositorys.AdminRepo;
 
 import org.springframework.stereotype.Service;
@@ -45,11 +45,11 @@ public class AdminService {
         this.adminRepo = adminRepo;
     }
 
-    public Admin getAdmin(Long id) {
+    public AdminEmployee getAdmin(Long id) {
         return adminRepo.findById(id).orElse(null);
     }
 
-    public Admin saveAdmin(Admin admin) {
+    public AdminEmployee saveAdmin(AdminEmployee admin) {
         return adminRepo.save(admin);
     }
 }

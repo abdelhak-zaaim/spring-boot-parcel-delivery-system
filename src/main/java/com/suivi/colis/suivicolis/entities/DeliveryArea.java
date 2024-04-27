@@ -38,7 +38,7 @@ public class DeliveryArea {
     private List<MapsLocationPoint> areaVertices;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Admin createdBy;
+    private AdminEmployee createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date creationDate;

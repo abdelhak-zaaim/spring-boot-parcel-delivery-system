@@ -1,16 +1,6 @@
 /*
  * **
  *  * @project : SuiviColis
- *  * @created : 27/04/2024, 18:31
- *  * @modified : 27/04/2024, 17:53
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : SuiviColis
  *  * @created : 27/04/2024, 17:50
  *  * @modified : 27/04/2024, 17:50
  *  * @description : This file is part of the SuiviColis project.
@@ -32,7 +22,7 @@ import java.util.List;
 
 public class MyUserDetails implements UserDetails {
    private final User user;
-
+    private final static String ROLE_PREFIX = "ROLE_";
     public MyUserDetails(User user) {
         this.user = user;
     }
@@ -40,7 +30,7 @@ public class MyUserDetails implements UserDetails {
     @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
      List<GrantedAuthority> authorities = new ArrayList<>();
-     authorities.add(new SimpleGrantedAuthority(this.user.getRole()));
+     authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX+this.user.getRole()));
       return List.of();
    }
 

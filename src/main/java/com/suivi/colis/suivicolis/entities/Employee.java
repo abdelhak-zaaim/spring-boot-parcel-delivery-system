@@ -32,6 +32,6 @@ public class Employee extends User {
     private double salary;
     @ManyToOne
     @JoinColumn(name = "assigned_by")
-    private Admin assignedBy;
+    private AdminEmployee assignedBy;
 
 }

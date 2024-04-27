@@ -53,7 +53,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/customer/**").hasRole(Role.CUSTOMER_ROLE)
                         .requestMatchers("/delivery/**").hasRole(Role.DELIVERY_MAN_ROLE)
                         .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
-                        .requestMatchers("/admin/**").hasRole(Role.ADMIN_ROLE)
+                        .requestMatchers("/management/**").hasAnyRole(Role.SUPER_ADMIN_RULE, Role.ADMIN_EMPLOYEE_ROLE)
                         .anyRequest().authenticated()).formLogin(Customizer.withDefaults())
 
                 .logout(LogoutConfigurer::permitAll);

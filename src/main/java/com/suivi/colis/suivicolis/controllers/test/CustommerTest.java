@@ -11,8 +11,10 @@
 package com.suivi.colis.suivicolis.controllers.test;
 
 import com.suivi.colis.suivicolis.entities.Customer;
+import com.suivi.colis.suivicolis.exceptions.personalizedexceptions.DataValidationException;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.services.CustomerService;
+import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class CustommerTest {
     public ResponseEntity<Customer> addCustommer() {
         //addding a custommer fro testing purposes
         Customer customer = new Customer();
-        customer.setEmail("test2@test.com");
+        customer.setEmail("test@test.com");
         customer.setName("test");
         customer.setPassword("12345678");
         customer.setPhoneNumber("123456789");
@@ -42,7 +44,7 @@ public class CustommerTest {
             return ResponseEntity.ok(customerService.addCustomer(customer));
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed to add customer", e);
+            throw new DataValidationException("Failed to add customer");
         }
 
     }
