@@ -31,6 +31,8 @@
 package com.suivi.colis.suivicolis.services;
 
 import com.suivi.colis.suivicolis.entities.User;
+import com.suivi.colis.suivicolis.models.enums.Privilege;
+import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.repositorys.UserRepo;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -40,61 +42,35 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepo userRepository;
+
     public UserService(UserRepo userRepository) {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User appUser = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(email));
-        String username = appUser.getUsername();
-        String password = appUser.getPassword();
-        Collection<String> authorities = appUser.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        Set<GrantedAuthority> guthauthoritys = new HashSet<>();
-
-
-
-//        authorities.forEach(role -> {
-//            GrantedAuthority ahth = new SimpleGrantedAuthority(role);
-//            guthauthoritys.add(ahth);
-//        });
-//
-        guthauthoritys= authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
-
-
-        return new org.springframework.security.core.userdetails.User(username, password, guthauthoritys);
-
-//        Optional<User> user = userRepository.findByEmail(email);
-//        if (user.isPresent()) {
-//            var userObj = user.get();
-//            return org.springframework.security.core.userdetails.User.builder()
-//                    .username(userObj.getUsername())
-//                    .password(userObj.getPassword())
-//                    .roles(getRoles(userObj))
-//                    .build();
-//        } else {
-//            throw new UsernameNotFoundException(email);
-//        }
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
-    private String[] getRoles(User user) {
-        if (user.getRole() == null) {
-            return new String[]{"USER"};
-        }
-        return user.getRole().split(",");
+
+    public Optional<User> getUserByEmail(String email) {
+        System.out.println("email: " + email);
+        Optional<User> user = userRepository.findByEmail(email);
+
+        return user;
     }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
 
 }
+
+

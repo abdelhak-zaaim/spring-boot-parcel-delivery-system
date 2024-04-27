@@ -50,7 +50,6 @@ public class Parcel {
 
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
-    @Column(updatable = false)
     private Customer senderCustomer;
 
     @OneToOne

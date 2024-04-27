@@ -23,6 +23,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @DiscriminatorValue(Role.EMPLOYEE_ROLE)
 public class Employee extends User {
+    /**
+     * mains any employee works for the company , could be a delivery or a manager or .....
+     */
 
     @Column(unique = true)
     private String employeeNumber;

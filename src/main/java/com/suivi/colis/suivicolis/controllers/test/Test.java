@@ -22,11 +22,13 @@ package com.suivi.colis.suivicolis.controllers.test;
 
 import com.suivi.colis.suivicolis.entities.Parcel;
 import com.suivi.colis.suivicolis.entities.PrivilegesGroup;
+import com.suivi.colis.suivicolis.entities.User;
 import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.models.enums.ParcelType;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
 import com.suivi.colis.suivicolis.services.ParcelService;
 import com.suivi.colis.suivicolis.services.PrivilegesGroupService;
+import com.suivi.colis.suivicolis.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,23 +39,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-* actualy this is a test class
-* we used it for testing pruposes
-*
-* todo : delete this class after testing
-* */
+ * actualy this is a test class
+ * we used it for testing pruposes
+ *
+ * todo : delete this class after testing
+ * */
 @Controller
 public class Test {
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private PrivilegesGroupService privilegesGroupService;
     @Autowired
     private ParcelService paarcelService;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @GetMapping("/test/get/user")
+    public ResponseEntity<User> getUser() {
+        User user = userService.getUserById(1L);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+
+
 
     @GetMapping("/register")
     public String register() {
@@ -82,7 +89,7 @@ public class Test {
         try {
             privilegesGroupService.addPrivilegesGroup(new PrivilegesGroup("ADMIN", privileges));
         } catch (Exception e) {
-            return new ResponseEntity<>("priviliges not added added"+e.toString(), HttpStatus.OK);
+            return new ResponseEntity<>("priviliges not added added" + e.toString(), HttpStatus.OK);
         }
 
         return new ResponseEntity<>("priviliges was added", HttpStatus.OK);
@@ -102,9 +109,9 @@ public class Test {
         parcel.setType(ParcelType.DOCUMENT); // Assuming ParcelType is an enum with a value of TYPE1
 
         try {
-            paarcelService.addParcel( parcel);
+            paarcelService.addParcel(parcel);
         } catch (Exception e) {
-            return new ResponseEntity<>("parcel not added added"+e.toString(), HttpStatus.OK);
+            return new ResponseEntity<>("parcel not added added" + e.toString(), HttpStatus.OK);
         }
 
         return new ResponseEntity<>("parcel was added", HttpStatus.OK);

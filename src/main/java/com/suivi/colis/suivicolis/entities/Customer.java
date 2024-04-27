@@ -50,7 +50,5 @@ public class Customer extends User {
     private String customerNumber;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Parcel> parcels;
 
 }

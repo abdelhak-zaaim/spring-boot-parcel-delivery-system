@@ -14,9 +14,11 @@ import com.suivi.colis.suivicolis.entities.Parcel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ParcelRepo extends JpaRepository<Parcel, Long> {
     boolean existsByCodeBar(String agencyCode);
-
+    List<Parcel> findAllBySenderCustomerId(Long customerId);
 
 }

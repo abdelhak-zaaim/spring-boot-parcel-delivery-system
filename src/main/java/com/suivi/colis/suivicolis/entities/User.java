@@ -29,7 +29,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
+@Table(name = "users")
 @Data
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
@@ -47,8 +47,10 @@ public class User implements UserDetails {
     @ValidEmail
     private String email;
     private String password;
+
     @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
     private String role;
+
     @Column(nullable = false )
     private String phoneNumber;
     @ManyToOne

@@ -35,6 +35,7 @@ import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.repositorys.ParcelRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -77,6 +78,11 @@ public class ParcelService {
 
         return barcode;
     }
+
+    public List<Parcel> getParcelsForCustomer(Long customerId) {
+        return parcelRepository.findAllBySenderCustomerId(customerId);
+    }
+
 }
 
 
