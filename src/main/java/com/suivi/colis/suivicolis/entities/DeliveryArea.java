@@ -37,7 +37,7 @@ public class DeliveryArea {
     @Convert(converter = ListLocationPointListConverter.class)
     private List<MapsLocationPoint> areaVertices;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Admin createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)

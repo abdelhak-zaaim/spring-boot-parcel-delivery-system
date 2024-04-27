@@ -37,13 +37,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeService {
 
-    private EmployeeRepo employeeRepository ;
+    private final EmployeeRepo employeeRepository ;
     public EmployeeService(EmployeeRepo employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
     public void deleteEmployee(Long id) {
-
 
         employeeRepository.deleteById(id);
     }

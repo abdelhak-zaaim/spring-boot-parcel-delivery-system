@@ -20,7 +20,7 @@ import java.util.Random;
 public class AgencyService {
 
 
-    private AgencyRepo agencyRepository;
+    private final AgencyRepo agencyRepository;
     public AgencyService(AgencyRepo agencyRepository) {
         this.agencyRepository = agencyRepository;
     }

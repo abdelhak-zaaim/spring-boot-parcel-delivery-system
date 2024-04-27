@@ -41,7 +41,7 @@ import java.util.Random;
 public class ParcelService {
 
 
-    private ParcelRepo parcelRepository;
+    private final ParcelRepo parcelRepository;
     public ParcelService(ParcelRepo parcelRepository) {
         this.parcelRepository = parcelRepository;
     }

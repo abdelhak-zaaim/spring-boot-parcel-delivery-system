@@ -48,7 +48,9 @@ public class Customer extends User {
 
     @Column( unique = true )
     private String customerNumber;
-    @OneToMany
+
+
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Parcel> parcels;
 
 }

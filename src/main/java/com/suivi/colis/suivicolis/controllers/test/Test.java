@@ -1,6 +1,16 @@
 /*
  * **
  *  * @project : SuiviColis
+ *  * @created : 27/04/2024, 14:59
+ *  * @modified : 27/04/2024, 13:48
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+/*
+ * **
+ *  * @project : SuiviColis
  *  * @created : 25/04/2024, 16:11
  *  * @modified : 25/04/2024, 16:11
  *  * @description : This file is part of the SuiviColis project.
@@ -8,7 +18,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.controllers;
+package com.suivi.colis.suivicolis.controllers.test;
 
 import com.suivi.colis.suivicolis.entities.Parcel;
 import com.suivi.colis.suivicolis.entities.PrivilegesGroup;

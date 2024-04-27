@@ -38,7 +38,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
 
-    private CustomerRepo customerRepository;
+    private final CustomerRepo customerRepository;
     public CustomerService(CustomerRepo customerRepository) {
         this.customerRepository = customerRepository;
     }

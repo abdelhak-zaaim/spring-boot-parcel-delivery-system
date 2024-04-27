@@ -16,7 +16,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -29,7 +31,7 @@ public class Parcel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false , unique = true,updatable = false)
+    @Column(nullable = false, unique = true, updatable = false)
     private String codeBar;
     private float height;
     private float width;
@@ -48,6 +50,7 @@ public class Parcel {
 
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
+    @Column(updatable = false)
     private Customer senderCustomer;
 
     @OneToOne
@@ -63,7 +66,6 @@ public class Parcel {
     private DeliveryAddress receiverAddress;
 
     @ManyToOne
-
     private Agency departedAgency;
     @ManyToOne
     private Agency destinationAgency;
@@ -74,6 +76,7 @@ public class Parcel {
         this.creationDate = date;
         this.lastUpdateDate = date;
     }
+
     @PreUpdate
     protected void onUpdate() {
         this.lastUpdateDate = new Date();

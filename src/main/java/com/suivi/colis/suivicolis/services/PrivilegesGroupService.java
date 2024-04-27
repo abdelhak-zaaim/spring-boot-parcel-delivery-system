@@ -41,8 +41,8 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class PrivilegesGroupService {
 
-    private PrivilegesGroupRepo privilegesGroupRepo;
-    private ApplicationContext applicationContext;
+    private final PrivilegesGroupRepo privilegesGroupRepo;
+    private final ApplicationContext applicationContext;
 
 
     public PrivilegesGroupService(PrivilegesGroupRepo privilegesGroupRepo, ApplicationContext applicationContext) {
