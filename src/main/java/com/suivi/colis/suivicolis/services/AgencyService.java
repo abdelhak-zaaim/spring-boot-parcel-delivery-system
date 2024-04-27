@@ -10,9 +10,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.entities.Agency;
+import com.suivi.colis.suivicolis.entities.Agency;
 import com.suivi.colis.suivicolis.repositorys.AgencyRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

@@ -30,9 +30,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.entities.PrivilegesGroup;
+import com.suivi.colis.suivicolis.entities.PrivilegesGroup;
 import com.suivi.colis.suivicolis.repositorys.PrivilegesGroupRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.*;

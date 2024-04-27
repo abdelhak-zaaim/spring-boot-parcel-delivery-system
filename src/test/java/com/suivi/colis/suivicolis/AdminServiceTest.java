@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis;
 
-import com.suivi.colis.suivicolis.models.entities.Admin;
+import com.suivi.colis.suivicolis.entities.Admin;
 import com.suivi.colis.suivicolis.repositorys.AdminRepo;
 import com.suivi.colis.suivicolis.services.AdminService;
 import jakarta.persistence.Convert;

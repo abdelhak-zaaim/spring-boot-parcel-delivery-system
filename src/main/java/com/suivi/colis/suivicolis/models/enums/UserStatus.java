@@ -21,7 +21,6 @@ public enum UserStatus {
     SUSPENDED(new SimpleGrantedAuthority("SUSPENDED")),
     DELETED(new SimpleGrantedAuthority("DELETED")),
     EXPIRED(new SimpleGrantedAuthority("EXPIRED")),
-
     LOCKED(new SimpleGrantedAuthority("LOCKED"));
 
 

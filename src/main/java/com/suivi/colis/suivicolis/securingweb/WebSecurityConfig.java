@@ -43,12 +43,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/", "/home/**","/test/**").permitAll() // the /test/** paths for testing todo: delete it after testing
+                requests.requestMatchers("/", "/home/**","/test/**","/test/custommer/add").permitAll() // the /test/** paths for testing todo: delete it after testing
                 .requestMatchers("/customer/**").hasRole(Role.CUSTOMER_ROLE)
                 .requestMatchers("/delivery/**").hasRole(Role.DELIVERY_MAN_ROLE)
                 .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
                 .requestMatchers("/admin/**").hasRole(Role.ADMIN_ROLE)
-
                 .anyRequest().authenticated()).formLogin((form) -> form.loginPage("/login").usernameParameter("username").passwordParameter("password")
 
                 .failureForwardUrl("/login?error=true").failureUrl("/login?error=true")

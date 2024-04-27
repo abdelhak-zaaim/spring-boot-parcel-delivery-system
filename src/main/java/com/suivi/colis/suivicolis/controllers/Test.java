@@ -10,8 +10,8 @@
 
 package com.suivi.colis.suivicolis.controllers;
 
-import com.suivi.colis.suivicolis.models.entities.Parcel;
-import com.suivi.colis.suivicolis.models.entities.PrivilegesGroup;
+import com.suivi.colis.suivicolis.entities.Parcel;
+import com.suivi.colis.suivicolis.entities.PrivilegesGroup;
 import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.models.enums.ParcelType;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
@@ -40,12 +40,10 @@ public class Test {
     @Autowired
     private ParcelService paarcelService;
 
-
     @GetMapping("/login")
     public String login() {
         return "login";
     }
-
 
     @GetMapping("/register")
     public String register() {

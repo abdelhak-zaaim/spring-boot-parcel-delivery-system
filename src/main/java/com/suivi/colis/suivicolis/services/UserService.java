@@ -30,9 +30,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.entities.User;
+import com.suivi.colis.suivicolis.entities.User;
 import com.suivi.colis.suivicolis.repositorys.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -15,7 +15,5 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.time.ZoneId;
 
 public class Constants {
-
    public final static String TIME_ZONE = "Africa/Casablanca";
-
 }

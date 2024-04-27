@@ -30,9 +30,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.entities.Parcel;
+import com.suivi.colis.suivicolis.entities.Parcel;
 import com.suivi.colis.suivicolis.repositorys.ParcelRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -67,7 +66,7 @@ public class ParcelService {
         Random random = new Random();
         String barcode;
         do {
-            int randomNumber = 10000000 + random.nextInt(90000000); // generates a random number between 1000000 and 9999999
+            int randomNumber = 1000000 + random.nextInt(9000000); // generates a random number between 1000000 and 9999999
             barcode = "PR" + randomNumber + "M";
         } while (parcelRepository.existsByCodeBar(barcode));
 

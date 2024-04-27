@@ -19,6 +19,8 @@ import java.util.Date;
 public class DateUtils {
 
    public static Date getCurrentDateWithSpecifiedTimeZone() {
+
+
       ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of(Constants.TIME_ZONE));
       return Date.from(zonedDateTime.toInstant());
    }

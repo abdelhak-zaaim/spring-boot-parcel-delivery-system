@@ -30,10 +30,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.models.entities.Customer;
+import com.suivi.colis.suivicolis.entities.Customer;
 import com.suivi.colis.suivicolis.repositorys.CustomerRepo;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
@@ -55,9 +53,9 @@ public class CustomerService {
         }
     }
 
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         try {
-            customerRepository.save(customer);
+           return customerRepository.save(customer);
         } catch (Exception e) {
             throw new RuntimeException("Failed to add customer", e);
         }
