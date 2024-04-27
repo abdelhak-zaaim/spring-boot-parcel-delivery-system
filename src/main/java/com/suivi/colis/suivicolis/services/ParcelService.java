@@ -31,6 +31,7 @@
 package com.suivi.colis.suivicolis.services;
 
 import com.suivi.colis.suivicolis.entities.Parcel;
+import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.repositorys.ParcelRepo;
 import org.springframework.stereotype.Service;
 
@@ -58,8 +59,12 @@ public class ParcelService {
         return parcelRepository.save(parcel);
     }
 
-    public void deleteParcelById(Long id) {
-        parcelRepository.deleteById(id);
+    public void markAsDeleted(Long id) {
+        Parcel parcel = parcelRepository.findById(id).orElse(null);
+        if (parcel != null) {
+            parcel.setStatus(ParcelStatus.DELETED);
+            parcelRepository.save(parcel);
+        }
     }
 
     public String generateParcelBarcode() {

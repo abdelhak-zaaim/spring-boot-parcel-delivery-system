@@ -20,6 +20,7 @@ import com.suivi.colis.suivicolis.validations.user.UserValidate;
 import com.suivi.colis.suivicolis.validations.user.age.AgeLimit;
 import com.suivi.colis.suivicolis.validations.user.email.ValidEmail;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,6 +49,7 @@ public class User implements UserDetails {
     private String password;
     @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
     private String role;
+    @Column(nullable = false )
     private String phoneNumber;
     @ManyToOne
     private Address address;

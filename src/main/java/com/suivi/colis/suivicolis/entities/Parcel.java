@@ -29,7 +29,7 @@ public class Parcel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false , unique = true)
+    @Column(nullable = false , unique = true,updatable = false)
     private String codeBar;
     private float height;
     private float width;
@@ -74,7 +74,6 @@ public class Parcel {
         this.creationDate = date;
         this.lastUpdateDate = date;
     }
-
     @PreUpdate
     protected void onUpdate() {
         this.lastUpdateDate = new Date();
