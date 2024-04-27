@@ -1,6 +1,6 @@
 # SuiviColis
 
-This is a final year project, currently under development by a team of 4 students. The project is supervised by Pr. Fazazy, a research professor at the Faculty of Science Dhar El Mahraz.
+This is a final year project, currently under development by a team of 4 students. The project is supervised by Pr. Fazazy, a professor at the Faculty of Science Dhar El Mahraz.
 ## Introduction
 
 SuiviColis is a comprehensive package tracking system, developed using a robust technology stack that includes Java, SQL, Spring Boot, and Maven. It leverages the power of JPA (Java Persistence API) for seamless database operations and Spring Security for robust authentication and authorization mechanisms. The system allows users to track their packages in real-time, providing timely updates on package location, delivery status, and estimated delivery time. With its intuitive interface and reliable performance.
