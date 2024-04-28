@@ -14,6 +14,7 @@ package com.suivi.colis.suivicolis.models;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Synchronized;
 import lombok.NoArgsConstructor;
 
 @Embeddable
