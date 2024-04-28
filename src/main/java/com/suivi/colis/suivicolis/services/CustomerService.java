@@ -67,4 +67,12 @@ public class CustomerService {
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 
+    public Customer updateCustomer(Customer customer) {
+        try {
+            return customerRepository.save(customer);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update customer", e);
+        }
+    }
+
 }
