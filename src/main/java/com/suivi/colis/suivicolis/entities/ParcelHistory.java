@@ -25,12 +25,11 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParcelTracking {
+public class ParcelHistory {
 
     @Id
     private Long id;
 
-    // the parcel that this track belongs to
     @ManyToOne
     @JoinColumn(name = "idParcel", referencedColumnName = "id")
     private Parcel idParcel;

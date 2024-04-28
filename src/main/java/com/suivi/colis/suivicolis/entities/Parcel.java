@@ -20,6 +20,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -47,6 +48,9 @@ public class Parcel {
     private Date lastUpdateDate;
     private Date estimatedDeliveryDate;
     private Date deleveryDate;
+
+    @OneToMany
+    private List<ParcelHistory> parcelHistories;
 
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
