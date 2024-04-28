@@ -31,7 +31,7 @@ public class CustommerTest {
 
     @GetMapping("/test/custommer/add")
     public ResponseEntity<Customer> addCustommer() {
-        //addding a custommer fro testing purposes
+        //addding a custommer for testing purposes
         Customer customer = new Customer();
         customer.setEmail("test@test.com");
         customer.setName("test");
@@ -44,9 +44,19 @@ public class CustommerTest {
             return ResponseEntity.ok(customerService.addCustomer(customer));
 
         } catch (Exception e) {
-            throw new DataValidationException("Failed to add customer");
+            throw new IllegalIdentifierException("Failed to add customer");
         }
 
     }
 
+    @GetMapping("/test/custommer/update")
+    public ResponseEntity<Customer> updateCustommer() {
+        //updating a custommer for testing purposes
+        Customer customer = customerService.getCustomer(1L);
+        customer.setEmail("abdelhak@tset.com");
+        return ResponseEntity.ok(customerService.updateCustomer(customer));
+
+    }
 }
+
+
