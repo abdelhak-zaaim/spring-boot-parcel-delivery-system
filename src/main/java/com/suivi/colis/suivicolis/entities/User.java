@@ -70,6 +70,8 @@ public class User implements UserDetails {
     @AgeLimit(minimumAge = 16)
     private Date dateOfBirth;
 
+    private double balance;
+
     @PrePersist
     protected void onCreated() {
         this.password = passwordEncoder.encode(this.password);
