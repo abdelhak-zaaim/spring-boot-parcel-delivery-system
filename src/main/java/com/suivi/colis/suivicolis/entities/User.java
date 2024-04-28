@@ -1,5 +1,3 @@
-
-
 /*
  * **
  *  * @project : SuiviColis
@@ -29,12 +27,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
 @Table(name = "users")
 @Data
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
-public class User implements UserDetails {
+public class User {
     private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Id
@@ -48,10 +47,10 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false , nullable = false)
+    @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false, nullable = false)
     private String role;
 
-    @Column(nullable = false )
+    @Column(nullable = false)
     private String phoneNumber;
     @ManyToOne
     private Address address;
@@ -70,7 +69,7 @@ public class User implements UserDetails {
     @AgeLimit(minimumAge = 16)
     private Date dateOfBirth;
 
-    private double balance;
+    private double balance = 0;
 
     @PrePersist
     protected void onCreated() {
@@ -83,41 +82,6 @@ public class User implements UserDetails {
     @PreUpdate
     protected void onUpdate() {
         this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return status != UserStatus.EXPIRED;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return status != UserStatus.LOCKED;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return status != UserStatus.EXPIRED;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return status == UserStatus.ACTIVE;
     }
 
 }
