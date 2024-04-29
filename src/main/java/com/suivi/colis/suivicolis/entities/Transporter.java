@@ -17,13 +17,17 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.TRANSPORTER_ROLE)
 public class Transporter extends Employee {
@@ -37,5 +41,5 @@ public class Transporter extends Employee {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    
+
 }

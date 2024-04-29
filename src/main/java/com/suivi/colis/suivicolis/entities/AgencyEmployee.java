@@ -30,16 +30,20 @@
 
 package com.suivi.colis.suivicolis.entities;
 
-import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.AgencyEmployeeRole;
+import com.suivi.colis.suivicolis.models.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.AGENCY_EMPLOYEE_ROLE)
 public class AgencyEmployee extends Employee {
@@ -50,6 +54,5 @@ public class AgencyEmployee extends Employee {
 
     @Enumerated(EnumType.STRING)
     private AgencyEmployeeRole agencyEmployeeRole;
-
 
 }

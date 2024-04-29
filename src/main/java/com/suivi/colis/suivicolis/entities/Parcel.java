@@ -13,18 +13,19 @@ package com.suivi.colis.suivicolis.entities;
 import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.models.enums.ParcelType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 public class Parcel {
@@ -50,6 +51,7 @@ public class Parcel {
     private Date deleveryDate;
 
     @OneToMany
+    @ToString.Exclude
     private List<ParcelHistory> parcelHistories;
 
     @ManyToOne

@@ -12,19 +12,22 @@
 package com.suivi.colis.suivicolis.entities;
 
 import com.suivi.colis.suivicolis.models.MapsLocationPoint;
-import com.suivi.colis.suivicolis.validations.location.ValidMapsLocationPoint;
 import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
+import com.suivi.colis.suivicolis.validations.location.ValidMapsLocationPoint;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 
 public class Agency {
@@ -44,6 +47,7 @@ public class Agency {
     private String agencyContactNumber;
     private String agencyEmail;
     @OneToMany(mappedBy = "associatedAgency")
+    @ToString.Exclude
     private Set<AgencyEmployee> agencyEmployees;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
@@ -71,5 +75,6 @@ public class Agency {
     protected void onUpdate() {
         this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
     }
+
 
 }

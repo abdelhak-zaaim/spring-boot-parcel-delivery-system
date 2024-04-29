@@ -31,16 +31,20 @@
 package com.suivi.colis.suivicolis.entities;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
-import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.CUSTOMER_ROLE)
 

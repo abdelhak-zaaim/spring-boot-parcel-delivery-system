@@ -15,21 +15,21 @@ import com.suivi.colis.suivicolis.models.enums.Role;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import com.suivi.colis.suivicolis.validations.user.UserValidate;
-import com.suivi.colis.suivicolis.validations.user.age.AgeLimit;
 import com.suivi.colis.suivicolis.validations.user.email.ValidEmail;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "users")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
@@ -68,11 +68,11 @@ public class User {
     private String cin;
 
     private Date dateOfBirth;
-
     private double balance = 0;
     private String image;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<LoginLog> loginLogs;
 
     @PrePersist
@@ -88,4 +88,19 @@ public class User {
         this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        User user = (User) o;
+        return getId() != null && Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
 }

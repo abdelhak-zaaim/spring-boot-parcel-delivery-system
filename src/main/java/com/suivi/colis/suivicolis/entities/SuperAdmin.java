@@ -11,21 +11,25 @@
 package com.suivi.colis.suivicolis.entities;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
-
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.SUPER_ADMIN_RULE)
 
 public class SuperAdmin extends AdminEmployee {
 
    private String superAdminNumber;
+
+
 }

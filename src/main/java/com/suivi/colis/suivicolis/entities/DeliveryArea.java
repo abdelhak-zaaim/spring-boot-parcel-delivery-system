@@ -11,18 +11,22 @@
 
 package com.suivi.colis.suivicolis.entities;
 
-import com.suivi.colis.suivicolis.models.MapsLocationPoint;
 import com.suivi.colis.suivicolis.entities.converters.ListLocationPointListConverter;
+import com.suivi.colis.suivicolis.models.MapsLocationPoint;
 import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 public class DeliveryArea {
 
@@ -38,6 +42,7 @@ public class DeliveryArea {
     private List<MapsLocationPoint> areaVertices;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private AdminEmployee createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -56,5 +61,6 @@ public class DeliveryArea {
     protected void onUpdate() {
         this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
     }
+
 
 }

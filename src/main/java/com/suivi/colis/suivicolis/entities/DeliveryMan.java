@@ -12,18 +12,22 @@
 package com.suivi.colis.suivicolis.entities;
 
 import com.suivi.colis.suivicolis.models.MapsLocationPoint;
-import com.suivi.colis.suivicolis.validations.location.ValidMapsLocationPoint;
-import com.suivi.colis.suivicolis.models.enums.VehicleType;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.suivi.colis.suivicolis.models.enums.Role;
+import com.suivi.colis.suivicolis.models.enums.VehicleType;
+import com.suivi.colis.suivicolis.validations.location.ValidMapsLocationPoint;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)

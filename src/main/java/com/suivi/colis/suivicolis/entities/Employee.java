@@ -13,13 +13,17 @@ package com.suivi.colis.suivicolis.entities;
 
 import com.suivi.colis.suivicolis.models.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.EMPLOYEE_ROLE)
 public class Employee extends User {
@@ -33,5 +37,6 @@ public class Employee extends User {
     @ManyToOne
     @JoinColumn(name = "assigned_by")
     private AdminEmployee assignedBy;
+
 
 }
