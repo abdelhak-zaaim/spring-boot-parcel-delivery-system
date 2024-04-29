@@ -66,11 +66,14 @@ public class User {
     private String refreshToken;
     @Column(unique = true)
     private String cin;
-    @AgeLimit(minimumAge = 16)
+
     private Date dateOfBirth;
 
     private double balance = 0;
     private String image;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<LoginLog> loginLogs;
 
     @PrePersist
     protected void onCreated() {
