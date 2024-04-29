@@ -70,6 +70,7 @@ public class User {
     private Date dateOfBirth;
 
     private double balance = 0;
+    private String image;
 
     @PrePersist
     protected void onCreated() {
