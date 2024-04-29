@@ -35,6 +35,7 @@ import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.repository.ParcelRepo;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -69,7 +70,7 @@ public class ParcelService {
     }
 
     public String generateParcelBarcode() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         String barcode;
         do {
             int randomNumber = 1000000 + random.nextInt(9000000); // generates a random number between 1000000 and 9999999

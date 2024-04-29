@@ -14,6 +14,7 @@ import com.suivi.colis.suivicolis.entity.Agency;
 import com.suivi.colis.suivicolis.repository.AgencyRepo;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 @Service
@@ -44,7 +45,7 @@ public class AgencyService {
     }
 
     public String generateAgencyCode() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         String generatedCode;
         do {
             int randomNumber = 10000000 + random.nextInt(90000000);
