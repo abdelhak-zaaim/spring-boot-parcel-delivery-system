@@ -12,23 +12,23 @@ package com.suivi.colis.suivicolis.models.enums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum Privilege {
-    FULL,
-    READ_PARCELS_INFO,
-    READ_PARCELS_STATUS,
-    READ_PARCELS_HISTORY,
-    READ_PARCELS_LOCATION,
-    READ_PARCELS_DETAILS,
-    READ_PARCELS_OWNER,
-    WRITE_PARCELS_INFO,
-    WRITE_PARCELS_STATUS,
-    ADD_PARCELS,
-    ADD_USER,
-    ADD_EMPLOYEE,
-    USER_MANAGEMENT, // including add, update, suspend, delete, read, and search
-    TRANSPORT_MANAGEMENT,
-    AGENCY_MANAGEMENT;
+    PARCELS_ADD(PrivilegeType.PARCELS, PrivilegeAction.ADD),
+    PARCELS_EDIT(PrivilegeType.PARCELS, PrivilegeAction.EDIT),
+    PARCELS_READ(PrivilegeType.PARCELS, PrivilegeAction.READ),
+    PARCELS_DELETE(PrivilegeType.PARCELS, PrivilegeAction.DELETE);
+
+    private final PrivilegeType type;
+    private final PrivilegeAction action;
+
+
+    Privilege(PrivilegeType type, PrivilegeAction action) {
+        this.type = type;
+        this.action = action;
+    }
 
     public static boolean contains(Privilege privilege) {
         for (Privilege p : Privilege.values()) {
@@ -39,5 +39,18 @@ public enum Privilege {
         return false;
     }
 
+    public enum PrivilegeType {
+        PARCELS,
+        USER,
+        EMPLOYEE,
+        TRANSPORT,
+        AGENCY;
+    }
 
+    public enum PrivilegeAction {
+        ADD,
+        EDIT,
+        READ,
+        DELETE;
+    }
 }

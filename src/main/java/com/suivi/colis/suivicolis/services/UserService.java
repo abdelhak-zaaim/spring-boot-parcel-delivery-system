@@ -30,20 +30,12 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.User;
-import com.suivi.colis.suivicolis.models.enums.Privilege;
-import com.suivi.colis.suivicolis.models.enums.Role;
-import com.suivi.colis.suivicolis.repositorys.UserRepo;
+import com.suivi.colis.suivicolis.entity.User;
+import com.suivi.colis.suivicolis.repository.UserRepo;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service

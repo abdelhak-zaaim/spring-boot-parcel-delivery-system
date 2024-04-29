@@ -12,7 +12,7 @@
 
 package com.suivi.colis.suivicolis.validations.admin.privilegesgroupvalidate;
 
-import com.suivi.colis.suivicolis.entities.PrivilegesGroup;
+import com.suivi.colis.suivicolis.entity.PrivilegesGroup;
 import com.suivi.colis.suivicolis.models.enums.Privilege;
 
 import javax.validation.ConstraintValidator;

@@ -30,9 +30,9 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.Parcel;
+import com.suivi.colis.suivicolis.entity.Parcel;
 import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
-import com.suivi.colis.suivicolis.repositorys.ParcelRepo;
+import com.suivi.colis.suivicolis.repository.ParcelRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

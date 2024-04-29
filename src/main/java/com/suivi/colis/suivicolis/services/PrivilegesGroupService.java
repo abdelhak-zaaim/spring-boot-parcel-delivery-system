@@ -30,8 +30,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.PrivilegesGroup;
-import com.suivi.colis.suivicolis.repositorys.PrivilegesGroupRepo;
+import com.suivi.colis.suivicolis.entity.PrivilegesGroup;
+import com.suivi.colis.suivicolis.repository.PrivilegesGroupRepo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.*;
@@ -50,7 +50,7 @@ public class PrivilegesGroupService {
         this.applicationContext = applicationContext;
     }
 
-    public void addPrivilegesGroup(PrivilegesGroup privilegesGroup) throws IllegalArgumentException {
+    public PrivilegesGroup addPrivilegesGroup(PrivilegesGroup privilegesGroup) throws IllegalArgumentException {
 
         Validator validator = applicationContext.getBean(Validator.class);
 
@@ -59,6 +59,10 @@ public class PrivilegesGroupService {
         if (errors.hasErrors()) {
             throw new IllegalArgumentException("Invalid PrivilegesGroup data");
         }
-        privilegesGroupRepo.save(privilegesGroup);
+      return   privilegesGroupRepo.save(privilegesGroup);
+    }
+
+    public PrivilegesGroup getPrivilegesGroupById(Long id) {
+        return privilegesGroupRepo.findById(id).orElse(null);
     }
 }

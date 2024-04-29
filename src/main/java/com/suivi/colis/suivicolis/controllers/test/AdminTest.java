@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.controllers.test;
 
-import com.suivi.colis.suivicolis.entities.AdminEmployee;
+import com.suivi.colis.suivicolis.entity.AdminEmployee;
 import com.suivi.colis.suivicolis.services.AdminService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

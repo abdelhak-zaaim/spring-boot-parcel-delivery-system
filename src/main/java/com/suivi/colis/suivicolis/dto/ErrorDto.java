@@ -12,7 +12,6 @@
 package com.suivi.colis.suivicolis.dto;
 
 import java.util.Date;
-
 public record ErrorDto(
         String message,
         int statusCode,

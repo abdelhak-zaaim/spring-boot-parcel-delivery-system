@@ -30,10 +30,9 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.Customer;
-import com.suivi.colis.suivicolis.repositorys.CustomerRepo;
+import com.suivi.colis.suivicolis.entity.Customer;
+import com.suivi.colis.suivicolis.repository.CustomerRepo;
 
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service

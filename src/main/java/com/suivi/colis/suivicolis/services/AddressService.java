@@ -10,9 +10,9 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.Address;
+import com.suivi.colis.suivicolis.entity.Address;
 import org.springframework.stereotype.Service;
-import com.suivi.colis.suivicolis.repositorys.AddressRepo;
+import com.suivi.colis.suivicolis.repository.AddressRepo;
 @Service
 public class AddressService {
    private final AddressRepo addressRepo;

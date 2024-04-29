@@ -10,8 +10,7 @@
 
 package com.suivi.colis.suivicolis.controllers.test;
 
-import com.suivi.colis.suivicolis.entities.Customer;
-import com.suivi.colis.suivicolis.exceptions.personalizedexceptions.DataValidationException;
+import com.suivi.colis.suivicolis.entity.Customer;
 import com.suivi.colis.suivicolis.models.enums.UserStatus;
 import com.suivi.colis.suivicolis.services.CustomerService;
 import org.hibernate.boot.model.naming.IllegalIdentifierException;

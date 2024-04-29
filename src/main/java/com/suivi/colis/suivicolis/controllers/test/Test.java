@@ -20,12 +20,10 @@
 
 package com.suivi.colis.suivicolis.controllers.test;
 
-import com.suivi.colis.suivicolis.entities.Parcel;
-import com.suivi.colis.suivicolis.entities.PrivilegesGroup;
-import com.suivi.colis.suivicolis.entities.User;
+import com.suivi.colis.suivicolis.entity.Parcel;
+import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.models.enums.ParcelType;
-import com.suivi.colis.suivicolis.models.enums.Privilege;
 import com.suivi.colis.suivicolis.services.ParcelService;
 import com.suivi.colis.suivicolis.services.PrivilegesGroupService;
 import com.suivi.colis.suivicolis.services.UserService;
@@ -34,9 +32,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /*
  * actualy this is a test class
@@ -79,21 +74,7 @@ public class Test {
     }
 
 
-    @GetMapping("/test/addPriviligeGroup")
-    public ResponseEntity<String> addPriviligeGroup() {
-        List<Privilege> privileges = new ArrayList<>();
-        privileges.add(Privilege.ADD_EMPLOYEE);
-        privileges.add(Privilege.ADD_USER);
-        privileges.add(Privilege.ADD_USER);
-        privileges.add(Privilege.AGENCY_MANAGEMENT);
-        try {
-            privilegesGroupService.addPrivilegesGroup(new PrivilegesGroup("ADMIN", privileges));
-        } catch (Exception e) {
-            return new ResponseEntity<>("priviliges not added added" + e.toString(), HttpStatus.OK);
-        }
 
-        return new ResponseEntity<>("priviliges was added", HttpStatus.OK);
-    }
 
     @GetMapping("/test/addParcel")
     public ResponseEntity<String> addParcel() {

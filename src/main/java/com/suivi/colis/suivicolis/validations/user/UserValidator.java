@@ -30,7 +30,7 @@
 
 package com.suivi.colis.suivicolis.validations.user;
 
-import com.suivi.colis.suivicolis.entities.User;
+import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.utils.helpers.ValidationUtils;
 
 import javax.validation.ConstraintValidator;

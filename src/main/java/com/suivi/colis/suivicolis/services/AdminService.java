@@ -30,8 +30,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.AdminEmployee;
-import com.suivi.colis.suivicolis.repositorys.AdminRepo;
+import com.suivi.colis.suivicolis.entity.AdminEmployee;
+import com.suivi.colis.suivicolis.repository.AdminRepo;
 
 import org.springframework.stereotype.Service;
 

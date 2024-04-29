@@ -10,8 +10,8 @@
 
 package com.suivi.colis.suivicolis;
 
-import com.suivi.colis.suivicolis.entities.AdminEmployee;
-import com.suivi.colis.suivicolis.repositorys.AdminRepo;
+import com.suivi.colis.suivicolis.entity.AdminEmployee;
+import com.suivi.colis.suivicolis.repository.AdminRepo;
 import com.suivi.colis.suivicolis.services.AdminService;
 import jakarta.persistence.Convert;
 import org.junit.jupiter.api.BeforeEach;

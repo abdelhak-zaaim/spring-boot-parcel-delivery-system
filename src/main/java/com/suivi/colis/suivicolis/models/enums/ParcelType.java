@@ -15,6 +15,8 @@ import lombok.Getter;
 @Getter
 public enum ParcelType {
     DOCUMENT,
-    SMALL_PARCEL,
-    LARGE_PARCEL
+    CONTAINS_BATTER,
+    CONTAINS_LIQUID,
+    CONTAINS_FRAGILE,
+    CONTAINS_DANGEROUS,
 }

@@ -10,8 +10,8 @@
 
 package com.suivi.colis.suivicolis.services;
 
-import com.suivi.colis.suivicolis.entities.Agency;
-import com.suivi.colis.suivicolis.repositorys.AgencyRepo;
+import com.suivi.colis.suivicolis.entity.Agency;
+import com.suivi.colis.suivicolis.repository.AgencyRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
