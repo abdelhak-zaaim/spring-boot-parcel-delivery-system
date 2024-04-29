@@ -27,7 +27,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class ParcelHistory {
 
     @Id

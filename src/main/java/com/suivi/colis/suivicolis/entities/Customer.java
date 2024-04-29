@@ -39,7 +39,6 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter

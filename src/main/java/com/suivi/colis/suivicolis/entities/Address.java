@@ -43,7 +43,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 public class Address {
     @Id

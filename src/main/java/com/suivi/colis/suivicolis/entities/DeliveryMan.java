@@ -22,14 +22,13 @@ import org.hibernate.proxy.HibernateProxy;
 import java.util.Objects;
 
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @Entity
-
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)
 public class DeliveryMan extends Employee {
 

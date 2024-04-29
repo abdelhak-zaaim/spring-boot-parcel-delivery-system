@@ -44,7 +44,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 public class DeliveryAddress  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
