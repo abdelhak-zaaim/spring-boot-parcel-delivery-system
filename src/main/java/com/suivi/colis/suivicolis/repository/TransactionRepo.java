@@ -13,5 +13,5 @@ package com.suivi.colis.suivicolis.repository;
 import com.suivi.colis.suivicolis.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+public interface TransactionRepo extends JpaRepository<Transaction, Long> {
 }
