@@ -12,8 +12,8 @@
 package com.suivi.colis.suivicolis.entity;
 
 import com.suivi.colis.suivicolis.entity.converters.ListLocationPointListConverter;
-import com.suivi.colis.suivicolis.models.MapsLocationPoint;
-import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
+import com.suivi.colis.suivicolis.model.MapsLocationPoint;
+import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.*;
 

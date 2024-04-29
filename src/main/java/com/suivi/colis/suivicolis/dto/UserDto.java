@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.dto;
 
-import com.suivi.colis.suivicolis.models.enums.UserStatus;
+import com.suivi.colis.suivicolis.model.enums.UserStatus;
 import jakarta.validation.constraints.*;
 import lombok.Value;
 import org.hibernate.validator.constraints.URL;

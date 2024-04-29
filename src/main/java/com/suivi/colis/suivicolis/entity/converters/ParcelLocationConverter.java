@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.entity.converters;
 
-import com.suivi.colis.suivicolis.models.ParcelLocation;
+import com.suivi.colis.suivicolis.model.ParcelLocation;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import com.fasterxml.jackson.databind.ObjectMapper;

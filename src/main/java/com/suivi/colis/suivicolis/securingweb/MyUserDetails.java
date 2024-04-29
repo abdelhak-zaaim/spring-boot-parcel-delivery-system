@@ -11,7 +11,7 @@
 package com.suivi.colis.suivicolis.securingweb;
 
 import com.suivi.colis.suivicolis.entity.User;
-import com.suivi.colis.suivicolis.models.enums.UserStatus;
+import com.suivi.colis.suivicolis.model.enums.UserStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

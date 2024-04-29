@@ -10,8 +10,8 @@
 
 package com.suivi.colis.suivicolis.entity;
 
-import com.suivi.colis.suivicolis.models.enums.TransactionType;
-import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
+import com.suivi.colis.suivicolis.model.enums.TransactionType;
+import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.*;
 

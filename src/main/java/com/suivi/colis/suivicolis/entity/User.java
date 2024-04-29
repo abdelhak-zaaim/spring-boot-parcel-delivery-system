@@ -11,11 +11,11 @@
 
 package com.suivi.colis.suivicolis.entity;
 
-import com.suivi.colis.suivicolis.models.enums.Role;
-import com.suivi.colis.suivicolis.models.enums.UserStatus;
-import com.suivi.colis.suivicolis.utils.helpers.DateUtils;
-import com.suivi.colis.suivicolis.validations.user.UserValidate;
-import com.suivi.colis.suivicolis.validations.user.email.ValidEmail;
+import com.suivi.colis.suivicolis.model.enums.Role;
+import com.suivi.colis.suivicolis.model.enums.UserStatus;
+import com.suivi.colis.suivicolis.util.helpers.DateUtils;
+import com.suivi.colis.suivicolis.validation.user.UserValidate;
+import com.suivi.colis.suivicolis.validation.user.email.ValidEmail;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;

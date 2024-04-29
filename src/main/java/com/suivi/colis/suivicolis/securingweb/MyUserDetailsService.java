@@ -21,7 +21,7 @@
 package com.suivi.colis.suivicolis.securingweb;
 
 import com.suivi.colis.suivicolis.entity.User;
-import com.suivi.colis.suivicolis.services.UserService;
+import com.suivi.colis.suivicolis.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

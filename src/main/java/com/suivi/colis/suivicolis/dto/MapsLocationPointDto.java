@@ -15,7 +15,7 @@ import lombok.Value;
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.suivi.colis.suivicolis.models.MapsLocationPoint}
+ * DTO for {@link com.suivi.colis.suivicolis.model.MapsLocationPoint}
  */
 @Value
 public class MapsLocationPointDto implements Serializable {

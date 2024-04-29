@@ -11,7 +11,7 @@
 
 package com.suivi.colis.suivicolis.entity;
 
-import com.suivi.colis.suivicolis.models.enums.PaymentMethod;
+import com.suivi.colis.suivicolis.model.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 

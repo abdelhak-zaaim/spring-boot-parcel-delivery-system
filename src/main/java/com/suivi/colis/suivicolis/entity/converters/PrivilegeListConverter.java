@@ -11,7 +11,7 @@
 
 package com.suivi.colis.suivicolis.entity.converters;
 
-import com.suivi.colis.suivicolis.models.enums.Privilege;
+import com.suivi.colis.suivicolis.model.enums.Privilege;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import java.util.Arrays;

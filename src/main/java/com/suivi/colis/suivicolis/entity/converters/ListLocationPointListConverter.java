@@ -15,7 +15,7 @@ import jakarta.persistence.Converter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.suivi.colis.suivicolis.models.MapsLocationPoint;
+import com.suivi.colis.suivicolis.model.MapsLocationPoint;
 
 import java.io.IOException;
 import java.util.List;

@@ -14,7 +14,7 @@ package com.suivi.colis.suivicolis.entity.converters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.suivi.colis.suivicolis.models.MapsLocationPoint;
+import com.suivi.colis.suivicolis.model.MapsLocationPoint;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

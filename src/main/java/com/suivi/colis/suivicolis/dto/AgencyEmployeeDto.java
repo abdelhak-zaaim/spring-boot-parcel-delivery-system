@@ -21,8 +21,8 @@
 package com.suivi.colis.suivicolis.dto;
 
 import com.suivi.colis.suivicolis.entity.AgencyEmployee;
-import com.suivi.colis.suivicolis.models.enums.AgencyEmployeeRole;
-import com.suivi.colis.suivicolis.models.enums.UserStatus;
+import com.suivi.colis.suivicolis.model.enums.AgencyEmployeeRole;
+import com.suivi.colis.suivicolis.model.enums.UserStatus;
 import lombok.Value;
 
 import java.io.Serializable;

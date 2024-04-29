@@ -12,7 +12,7 @@
 package com.suivi.colis.suivicolis.dto;
 
 import com.suivi.colis.suivicolis.entity.Transaction;
-import com.suivi.colis.suivicolis.models.enums.TransactionType;
+import com.suivi.colis.suivicolis.model.enums.TransactionType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;

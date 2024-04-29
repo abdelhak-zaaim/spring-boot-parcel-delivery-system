@@ -11,10 +11,10 @@
 
 package com.suivi.colis.suivicolis.entity;
 
-import com.suivi.colis.suivicolis.models.MapsLocationPoint;
-import com.suivi.colis.suivicolis.models.enums.Role;
-import com.suivi.colis.suivicolis.models.enums.VehicleType;
-import com.suivi.colis.suivicolis.validations.location.ValidMapsLocationPoint;
+import com.suivi.colis.suivicolis.model.MapsLocationPoint;
+import com.suivi.colis.suivicolis.model.enums.Role;
+import com.suivi.colis.suivicolis.model.enums.VehicleType;
+import com.suivi.colis.suivicolis.validation.location.ValidMapsLocationPoint;
 import jakarta.persistence.*;
 import lombok.*;
 

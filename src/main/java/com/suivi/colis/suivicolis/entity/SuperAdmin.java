@@ -10,7 +10,7 @@
 
 package com.suivi.colis.suivicolis.entity;
 
-import com.suivi.colis.suivicolis.models.enums.Role;
+import com.suivi.colis.suivicolis.model.enums.Role;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.*;

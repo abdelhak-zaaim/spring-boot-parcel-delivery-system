@@ -12,7 +12,7 @@ package com.suivi.colis.suivicolis;
 
 import com.suivi.colis.suivicolis.entity.AdminEmployee;
 import com.suivi.colis.suivicolis.repository.AdminRepo;
-import com.suivi.colis.suivicolis.services.AdminService;
+import com.suivi.colis.suivicolis.service.AdminService;
 import jakarta.persistence.Convert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

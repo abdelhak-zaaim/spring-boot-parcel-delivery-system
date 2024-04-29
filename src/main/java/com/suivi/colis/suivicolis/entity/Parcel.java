@@ -10,8 +10,8 @@
 
 package com.suivi.colis.suivicolis.entity;
 
-import com.suivi.colis.suivicolis.models.enums.ParcelStatus;
-import com.suivi.colis.suivicolis.models.enums.ParcelType;
+import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
+import com.suivi.colis.suivicolis.model.enums.ParcelType;
 import jakarta.persistence.*;
 import lombok.*;
 
