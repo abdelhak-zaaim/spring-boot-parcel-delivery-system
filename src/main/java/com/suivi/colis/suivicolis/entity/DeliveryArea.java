@@ -17,6 +17,7 @@ import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -49,14 +50,14 @@ public class DeliveryArea {
 
     @PrePersist
     protected void onCreated() {
-        java.util.Date date = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        java.util.Date date = new Date();
         this.creationDate = date;
         this.lastUpdateDate = date;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        this.lastUpdateDate = new Date();
     }
 
 

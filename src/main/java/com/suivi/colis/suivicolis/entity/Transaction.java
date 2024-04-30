@@ -44,7 +44,7 @@ public class Transaction {
 
     @PrePersist
     protected void onCreated() {
-        this.transactionDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        this.transactionDate = new Date();
     }
 
 

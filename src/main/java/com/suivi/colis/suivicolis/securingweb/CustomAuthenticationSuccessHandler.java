@@ -34,14 +34,15 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                     redirectStrategy.sendRedirect(request, response, "/admin/home");
                 } catch (Exception e) {
 
-                    e.printStackTrace();
+
                 }
+
             } else if (authority.getAuthority().equals("CUSTOMER")) {
                 try {
                     redirectStrategy.sendRedirect(request, response, "/customer/home");
                 } catch (Exception e) {
 
-                    e.printStackTrace();
+
                 }
             } else {
                 throw new IllegalStateException();

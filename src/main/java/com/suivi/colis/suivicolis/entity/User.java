@@ -78,14 +78,14 @@ public class User {
     @PrePersist
     protected void onCreated() {
         this.password = passwordEncoder.encode(this.password);
-        Date date = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        Date date = new Date();
         this.registeredAt = date;
         this.lastUpdateDate = date;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        this.lastUpdateDate = new Date();
     }
 
     @Override

@@ -46,7 +46,7 @@ public class ParcelHistory {
 
     @PrePersist
     protected void onCreated() {
-        this.ParcelTracking = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        this.ParcelTracking = new Date();
 
     }
 

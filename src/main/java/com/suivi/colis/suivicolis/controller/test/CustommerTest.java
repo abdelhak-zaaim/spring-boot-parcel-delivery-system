@@ -28,7 +28,7 @@ public class CustommerTest {
         this.customerService = customerService;
     }
 
-    @GetMapping("/test/custommer/add")
+    @GetMapping("/test/customer/add")
     public ResponseEntity<Customer> addCustommer() {
         //addding a custommer for testing purposes
         Customer customer = new Customer();

@@ -72,14 +72,14 @@ public class Address {
 
     @PrePersist
     protected void onCreated() {
-        Date date = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        Date date = new Date();
         this.creationDate = date;
         this.lastUpdateDate = date;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = DateUtils.getCurrentDateWithSpecifiedTimeZone();
+        this.lastUpdateDate = new Date();
     }
 
 

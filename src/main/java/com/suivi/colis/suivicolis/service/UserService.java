@@ -33,12 +33,14 @@ package com.suivi.colis.suivicolis.service;
 import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.repository.UserRepo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 
 @Service
+@Slf4j
 public class UserService {
 
     private final UserRepo userRepository;
@@ -52,10 +54,9 @@ public class UserService {
     }
 
     public Optional<User> getUserByEmail(String email) {
-        System.out.println("email: " + email);
-        Optional<User> user = userRepository.findByEmail(email);
+        log.debug("email: " ,email);
 
-        return user;
+        return userRepository.findByEmail(email);
     }
 
     public void deleteUser(Long id) {

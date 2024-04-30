@@ -14,12 +14,12 @@ package com.suivi.colis.suivicolis.validation.admin.privilegesgroupvalidate;
 
 import com.suivi.colis.suivicolis.entity.PrivilegesGroup;
 import com.suivi.colis.suivicolis.model.enums.Privilege;
-
+import lombok.extern.slf4j.Slf4j;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.HashSet;
 import java.util.Set;
-
+@Slf4j
 public class PrivilegesGroupValidator implements ConstraintValidator<PrivilegeValidation, PrivilegesGroup> {
     private PrivilegesGroup privilegesGroup;
 
@@ -29,7 +29,7 @@ public class PrivilegesGroupValidator implements ConstraintValidator<PrivilegeVa
 
     @Override
     public boolean isValid(PrivilegesGroup privilegesGroup, ConstraintValidatorContext context) {
-        System.out.println("Validating PrivilegesGroup: " + privilegesGroup);
+        log.debug("Validating PrivilegesGroup: " + privilegesGroup);
 
         if (privilegesGroup.getName() == null || privilegesGroup.getName().isEmpty()) {
             return false;
