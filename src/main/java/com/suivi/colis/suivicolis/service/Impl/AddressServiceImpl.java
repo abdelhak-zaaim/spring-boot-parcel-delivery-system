@@ -12,26 +12,37 @@
 package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Address;
+import com.suivi.colis.suivicolis.service.AddressService;
 import org.springframework.stereotype.Service;
 import com.suivi.colis.suivicolis.repository.AddressRepo;
-@Service
-public class AddressServiceImpl {
-   private final AddressRepo addressRepo;
-   public AddressServiceImpl(AddressRepo addressRepo) {
-       this.addressRepo = addressRepo;
-   }
 
-   public Address addAddress(Address address) {
-       return addressRepo.save(address);
-   }
-   public Address updateAddress(Address address) {
-       return addressRepo.save(address);
-   }
-    public void deleteAddress(Long id) {
-         addressRepo.deleteById(id);
+@Service
+public class AddressServiceImpl implements AddressService {
+    private final AddressRepo addressRepo;
+
+    public AddressServiceImpl(AddressRepo addressRepo) {
+        this.addressRepo = addressRepo;
     }
-    public Address getAddress(Long id) {
+
+    @Override
+    public Address updateAddress(Address address) {
+        return addressRepo.save(address);
+    }
+
+    @Override
+    public void deleteAddress(Long id) {
+        addressRepo.deleteById(id);
+    }
+
+    @Override
+    public Address loadAddressById(Long id) {
         return addressRepo.findById(id).orElse(null);
     }
+
+    @Override
+    public Address saveAddress(Address address) {
+        return addressRepo.save(address);
+    }
+
 
 }

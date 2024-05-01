@@ -48,7 +48,7 @@ public class parcelTest {
       address.setState("Some State");
       address.setStreet("marja");
       address.setZip("20000");
-      address = addressService.addAddress(address);
+      address = addressService.saveAddress(address);
 
       DeliveryAddress deliveryAddress = new DeliveryAddress();
       deliveryAddress.setAddress("fes marja");
@@ -84,7 +84,7 @@ public class parcelTest {
       parcel.setReceiverAddress(deliveryAddress1);
 
 
-      Parcel p = parcelService.addParcel(parcel);
+      Parcel p = parcelService.saveParcel(parcel);
       return ResponseEntity.ok(p);
    }
 }

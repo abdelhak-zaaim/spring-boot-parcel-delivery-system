@@ -53,7 +53,7 @@ public class Test {
 
     @GetMapping("/test/get/user")
     public ResponseEntity<User> getUser() {
-        User user = userService.getUserById(1L);
+        User user = userService.loadUserById(1L);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -97,7 +97,7 @@ public class Test {
         parcel.setType(ParcelType.DOCUMENT); // Assuming ParcelType is an enum with a value of TYPE1
 
         try {
-            paarcelService.addParcel(parcel);
+            paarcelService.saveParcel(parcel);
         } catch (Exception e) {
             return new ResponseEntity<>("parcel not added added" + e.toString(), HttpStatus.OK);
         }
