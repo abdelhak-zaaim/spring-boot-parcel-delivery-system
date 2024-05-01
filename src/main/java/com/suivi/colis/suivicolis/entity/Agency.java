@@ -32,24 +32,34 @@ public class Agency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true, nullable = false)
     private String agencyCode;
+
     @Column(nullable = false)
     private String agencyName;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address agencyAddress;
+
     private Date agencyEstablishedDate;
+
     @ManyToOne
     private AdminEmployee createdBy;
+
     private String agencyContactNumber;
     private String agencyEmail;
+
     @OneToMany(mappedBy = "associatedAgency")
     @ToString.Exclude
     private Set<AgencyEmployee> agencyEmployees;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(updatable = false)
     private Date creationDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;

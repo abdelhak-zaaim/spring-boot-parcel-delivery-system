@@ -58,6 +58,7 @@ public class Address {
     private String country;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;

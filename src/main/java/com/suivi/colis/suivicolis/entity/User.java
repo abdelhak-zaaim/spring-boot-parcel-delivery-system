@@ -58,19 +58,26 @@ public class User {
 
     @Column(nullable = false)
     private String phoneNumber;
+
     @ManyToOne
     private Address address;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(updatable = false)
     private Date registeredAt;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
+
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
     @Column(unique = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String token;
+
     @Column(unique = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String refreshToken;
@@ -86,7 +93,7 @@ public class User {
     private List<LoginLog> loginLogs;
 
     @ManyToOne
-    private PrivilegesGroup privilegesGroup ;
+    private PrivilegesGroup privilegesGroup;
 
     @PrePersist
     protected void onCreated() {

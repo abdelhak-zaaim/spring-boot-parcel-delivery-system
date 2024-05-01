@@ -14,12 +14,15 @@ package com.suivi.colis.suivicolis.service.Impl;
 import com.suivi.colis.suivicolis.entity.Transaction;
 import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.repository.TransactionRepo;
+import com.suivi.colis.suivicolis.service.TransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
-public class TransactionServiceImpl {
+public class TransactionServiceImpl implements TransactionService {
     UserServiceImpl userService;
     TransactionRepo transactionRepo;
 
@@ -28,16 +31,28 @@ public class TransactionServiceImpl {
         this.userService = userService;
     }
 
-    public Transaction getTransactionById(Long id) {
+
+    @Override
+    public void deleteTransaction(Long id) {
+        transactionRepo.deleteById(id);
+
+    }
+
+    @Override
+    public Transaction loadTransactionById(Long id) {
         return transactionRepo.findById(id).orElse(null);
     }
 
-    public Transaction addTransaction(Transaction transaction) {
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public Transaction saveTransaction(Transaction transaction) {
         return transactionRepo.save(transaction);
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void makeTransactionBetweenTowUsers(User user1, User user2, double amount) {
 
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public List<Transaction> makeMultipleTransactions(List<Transaction> transactions) {
+        return transactionRepo.saveAll(transactions);
     }
 }

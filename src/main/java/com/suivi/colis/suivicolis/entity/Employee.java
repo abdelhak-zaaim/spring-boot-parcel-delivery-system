@@ -30,7 +30,9 @@ public class Employee extends User {
 
     @Column(unique = true)
     private String employeeNumber;
+
     private double salary;
+
     @ManyToOne
     @JoinColumn(name = "assigned_by")
     private AdminEmployee assignedBy;

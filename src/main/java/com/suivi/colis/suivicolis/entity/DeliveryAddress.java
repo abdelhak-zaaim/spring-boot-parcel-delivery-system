@@ -51,28 +51,37 @@ public class DeliveryAddress  {
     @NotNull
     @Column(nullable = false)
     private String address;
+
     @NotNull
     @Column(nullable = false)
     private String state;
+
     @NotNull
     @Column(nullable = false)
     private String city;
+
     @NotNull
     @Column(nullable = false,columnDefinition = "varchar(255) default 'Morocco'") // for now we use morocco as default country
     private String country;
+
     @NotNull
     @Column(nullable = false)
     private String postalCode;
+
     @NotNull
     @Column(nullable = false)
     private String contactName;
+
     @NotNull
     @Column(nullable = false)
     private String contactNumber;
 
     private String contactEmail;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
     private Date creationDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
 

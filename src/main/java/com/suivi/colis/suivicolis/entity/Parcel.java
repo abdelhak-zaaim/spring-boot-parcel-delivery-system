@@ -34,20 +34,26 @@ public class Parcel {
 
     @Column(nullable = false, unique = true, updatable = false)
     private String codeBar;
+
     private float height;
     private float width;
     private float weight;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ParcelStatus status;
+
     @Enumerated(EnumType.STRING)
     private ParcelType Type;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date creationDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
+
     private Date estimatedDeliveryDate;
     private Date deleveryDate;
 
@@ -72,6 +78,7 @@ public class Parcel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Agency departedAgency;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Agency destinationAgency;
 

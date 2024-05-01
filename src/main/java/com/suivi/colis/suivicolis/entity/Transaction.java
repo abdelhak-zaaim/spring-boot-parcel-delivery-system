@@ -31,7 +31,7 @@ public class Transaction {
 
     @ManyToOne
     private User user;
-
+    @Column(updatable = false , nullable = false, precision = 10, scale = 2)
     private double amount;
 
     @Enumerated(EnumType.STRING)
@@ -40,7 +40,8 @@ public class Transaction {
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date transactionDate;
+    @Column(updatable = false)
+    private Date transactionDate ;
 
     @PrePersist
     protected void onCreated() {

@@ -46,7 +46,9 @@ public class DeliveryArea {
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(updatable = false)
     private java.util.Date creationDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private java.util.Date lastUpdateDate;
