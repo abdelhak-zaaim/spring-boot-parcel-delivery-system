@@ -11,6 +11,7 @@
 
 package com.suivi.colis.suivicolis.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.entity.converters.ListLocationPointListConverter;
 import com.suivi.colis.suivicolis.model.MapsLocationPoint;
 import com.suivi.colis.suivicolis.util.helpers.DateUtils;
@@ -44,8 +45,10 @@ public class DeliveryArea {
     private AdminEmployee createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private java.util.Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private java.util.Date lastUpdateDate;
 
     @PrePersist
