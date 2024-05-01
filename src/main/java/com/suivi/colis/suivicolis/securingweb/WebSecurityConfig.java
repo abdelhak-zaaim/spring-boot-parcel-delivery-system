@@ -45,6 +45,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
                 requests.requestMatchers("/", "/home/**","/login_page", "/test/**", "/test/custommer/add").permitAll() // the /test/** paths for testing todo: delete it after testing
+                        .requestMatchers("/css/**","/js/**","/img/**").permitAll()
                         .requestMatchers("/customer/**").hasRole(Role.CUSTOMER_ROLE)
                         .requestMatchers("/delivery/**").hasRole(Role.DELIVERY_MAN_ROLE)
                         .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
