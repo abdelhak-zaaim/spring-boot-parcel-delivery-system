@@ -32,12 +32,12 @@ public class CustommerTest {
     public ResponseEntity<Customer> addCustommer() {
         //addding a custommer for testing purposes
         Customer customer = new Customer();
-        customer.setEmail("test@test.com");
+        customer.setEmail("abdeelhakzammii@gmail.com");
         customer.setName("test");
         customer.setPassword("12345678");
         customer.setPhoneNumber("123456789");
         customer.setStatus(UserStatus.ACTIVE);
-        customer.setCin("ZH6953");
+        customer.setCin("ZH6954");
         customer.setDateOfBirth(new Date("09/01/2002"));
         try {
             return ResponseEntity.ok(customerService.addCustomer(customer));
