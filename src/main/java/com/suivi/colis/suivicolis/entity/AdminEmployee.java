@@ -27,8 +27,7 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue(Role.ADMIN_EMPLOYEE_ROLE)
 public class AdminEmployee extends Employee {
 
-    @OneToOne
-    private PrivilegesGroup privilegesGroup;
+private String adminEmployeeNumber;
 
 
 }
