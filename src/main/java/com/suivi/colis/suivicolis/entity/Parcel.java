@@ -62,6 +62,7 @@ public class Parcel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer senderCustomer;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -70,16 +71,20 @@ public class Parcel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departedAddress", referencedColumnName = "id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DeliveryAddress pickupAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destinationAddress", referencedColumnName = "id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DeliveryAddress receiverAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Agency departedAgency;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Agency destinationAgency;
 
     @PrePersist
