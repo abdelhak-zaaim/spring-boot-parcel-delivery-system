@@ -28,11 +28,15 @@ jobs:
       # Checkout project source
       - uses: actions/checkout@v4
       # Scan code using Bearer CLI
+      - name: Run Java application
+        run: mvn test
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
       - name: Run Report
         id: report
         uses: bearer/bearer-action@828eeb928ce2f4a7ca5ed57fb8b59508cb8c79bc
         with:
-          api-key: ${{ secrets.BEARER_TOKEN }}
+          api-key: ${{ secrets.yml.BEARER_TOKEN }}
           format: sarif
           output: results.sarif
           exit-code: 0
