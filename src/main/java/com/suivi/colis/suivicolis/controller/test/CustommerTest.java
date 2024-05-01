@@ -40,7 +40,7 @@ public class CustommerTest {
         customer.setCin("ZH6954");
         customer.setDateOfBirth(new Date("09/01/2002"));
         try {
-            return ResponseEntity.ok(customerService.addCustomer(customer));
+            return ResponseEntity.ok(customerService.saveCustomer(customer));
 
         } catch (Exception e) {
             throw new IllegalIdentifierException("Failed to add customer");
@@ -51,7 +51,7 @@ public class CustommerTest {
     @GetMapping("/test/custommer/update")
     public ResponseEntity<Customer> updateCustommer() {
         //updating a custommer for testing purposes
-        Customer customer = customerService.getCustomer(1L);
+        Customer customer = customerService.loadCustomerById(1L);
         customer.setEmail("abdelhak@tset.com");
         return ResponseEntity.ok(customerService.updateCustomer(customer));
 

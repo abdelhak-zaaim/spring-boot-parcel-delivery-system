@@ -14,45 +14,38 @@ package com.suivi.colis.suivicolis.service.Impl;
 import com.suivi.colis.suivicolis.entity.Customer;
 import com.suivi.colis.suivicolis.repository.CustomerRepo;
 
+import com.suivi.colis.suivicolis.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerServiceImpl {
+public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepo customerRepository;
+
     public CustomerServiceImpl(CustomerRepo customerRepository) {
         this.customerRepository = customerRepository;
     }
 
+    @Override
     public void deleteCustomer(Long id) {
-        try {
-
-            customerRepository.deleteById(id);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete customer", e);
-        }
+        customerRepository.deleteById(id);
     }
 
-    public Customer addCustomer(Customer customer) {
-        try {
-           return customerRepository.save(customer);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to add customer", e);
-        }
+    @Override
+    public Customer loadCustomerById(Long id) {
+        return customerRepository.findById(id).orElse(null);
     }
 
-    public Customer getCustomer(Long id) {
-        return customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+    @Override
+    public Customer saveCustomer(Customer customer) {
+
+        return customerRepository.save(customer);
+
     }
 
+    @Override
     public Customer updateCustomer(Customer customer) {
-        try {
-            return customerRepository.save(customer);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to update customer", e);
-        }
+        return customerRepository.save(customer);
     }
 
 }

@@ -11,7 +11,7 @@
 package com.suivi.colis.suivicolis.controller.test;
 
 import com.suivi.colis.suivicolis.entity.AdminEmployee;
-import com.suivi.colis.suivicolis.service.Impl.AdminServiceImpl;
+import com.suivi.colis.suivicolis.service.Impl.AdminEmployeeServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +20,9 @@ import java.util.Date;
 
 @Controller
 public class AdminTest {
-    private AdminServiceImpl adminService;
+    private AdminEmployeeServiceImpl adminService;
 
-    public AdminTest(AdminServiceImpl adminService) {
+    public AdminTest(AdminEmployeeServiceImpl adminService) {
         this.adminService = adminService;
     }
 

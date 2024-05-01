@@ -59,7 +59,7 @@ public class parcelTest {
       deliveryAddress.setContactNumber("123456789");
       deliveryAddress.setContactName("abdelhak");
 
-      DeliveryAddress deliveryAddress1 = deliveryAddressService.addDeliveryAddress(deliveryAddress);
+      DeliveryAddress deliveryAddress1 = deliveryAddressService.saveDeliveryAddress(deliveryAddress);
 
 
       DeliveryAddress deliveryAddress2 = new DeliveryAddress();
@@ -70,7 +70,7 @@ public class parcelTest {
       deliveryAddress2.setPostalCode("30000");
       deliveryAddress2.setContactNumber("0675757677");
       deliveryAddress2.setContactName("abdelhak");
-      deliveryAddress2 = deliveryAddressService.addDeliveryAddress(deliveryAddress2);
+      deliveryAddress2 = deliveryAddressService.saveDeliveryAddress(deliveryAddress2);
 
 
       Parcel parcel = new Parcel();
@@ -79,7 +79,7 @@ public class parcelTest {
       parcel.setHeight(3);
       parcel.setWeight(4);
       parcel.setPickupAddress(deliveryAddress2);
-      Customer customer = customerService.getCustomer(1L);
+      Customer customer = customerService.loadCustomerById(1L);
       parcel.setSenderCustomer(customer);
       parcel.setReceiverAddress(deliveryAddress1);
 

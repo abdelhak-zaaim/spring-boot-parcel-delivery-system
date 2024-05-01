@@ -13,33 +13,37 @@ package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Agency;
 import com.suivi.colis.suivicolis.repository.AgencyRepo;
+import com.suivi.colis.suivicolis.service.AgencyService;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 
 @Service
-public class AgencyServiceImpl {
+public class AgencyServiceImpl implements AgencyService {
 
 
     private final AgencyRepo agencyRepository;
+
     public AgencyServiceImpl(AgencyRepo agencyRepository) {
         this.agencyRepository = agencyRepository;
     }
 
+    @Override
     public void deleteAgency(Long id) {
         agencyRepository.deleteById(id);
     }
 
-    public void addAgency(Agency agency) {
-
-        agency.setAgencyCode(generateAgencyCode());
-        agencyRepository.save(agency);
-    }
-
-    public Agency getAgency(Long id) {
+    @Override
+    public Agency loadAgencyById(Long id) {
         return agencyRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public Agency saveAgency(Agency agency) {
+        return agencyRepository.save(agency);
+    }
+
+    @Override
     public Agency updateAgency(Agency agency) {
         return agencyRepository.save(agency);
     }

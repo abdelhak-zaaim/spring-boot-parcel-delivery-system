@@ -13,24 +13,33 @@ package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.DeliveryAddress;
 import com.suivi.colis.suivicolis.repository.DeliveryAddressRepo;
+import com.suivi.colis.suivicolis.service.DeliveryAddressService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeliveryAddressServiceImpl {
-   DeliveryAddressRepo deliveryAddressRepo;
-   public DeliveryAddressServiceImpl(DeliveryAddressRepo deliveryAddressRepo) {
-         this.deliveryAddressRepo = deliveryAddressRepo;
-   }
+public class DeliveryAddressServiceImpl implements DeliveryAddressService {
+    DeliveryAddressRepo deliveryAddressRepo;
 
-   public void deleteDeliveryAddress(Long id) {
+    public DeliveryAddressServiceImpl(DeliveryAddressRepo deliveryAddressRepo) {
+        this.deliveryAddressRepo = deliveryAddressRepo;
+    }
+
+    @Override
+    public void deleteDeliveryAddress(Long id) {
         deliveryAddressRepo.deleteById(id);
-   }
+    }
 
-   public DeliveryAddress getDeliveryAddress(Long id) {
-       return deliveryAddressRepo.findById(id).orElse(null);
-   }
+    public DeliveryAddress loadDeliveryAddress(Long id) {
+        return deliveryAddressRepo.findById(id).orElse(null);
+    }
 
-    public DeliveryAddress addDeliveryAddress(DeliveryAddress deliveryAddress) {
-         return deliveryAddressRepo.save(deliveryAddress);
+    @Override
+    public DeliveryAddress saveDeliveryAddress(DeliveryAddress deliveryAddress) {
+        return deliveryAddressRepo.save(deliveryAddress);
+    }
+
+    @Override
+    public DeliveryAddress updateDeliveryAddress(DeliveryAddress deliveryAddress) {
+        return deliveryAddressRepo.save(deliveryAddress);
     }
 }

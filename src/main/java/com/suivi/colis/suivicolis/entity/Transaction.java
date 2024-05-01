@@ -31,7 +31,7 @@ public class Transaction {
 
     @ManyToOne
     private User user;
-    @Column(updatable = false , nullable = false, precision = 10, scale = 2)
+    @Column(updatable = false )
     private double amount;
 
     @Enumerated(EnumType.STRING)

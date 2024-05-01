@@ -1,0 +1,23 @@
+/*
+ * **
+ *  * @project : SuiviColis
+ *  * @created : 01/05/2024, 19:21
+ *  * @modified : 01/05/2024, 19:21
+ *  * @description : This file is part of the SuiviColis project.
+ *  * @license : MIT License
+ * **
+ */
+
+package com.suivi.colis.suivicolis.service;
+
+import com.suivi.colis.suivicolis.entity.Customer;
+
+public interface CustomerService {
+    void deleteCustomer(Long id);
+
+    Customer loadCustomerById(Long id);
+
+    Customer saveCustomer(Customer customer);
+
+    Customer updateCustomer(Customer customer);
+}

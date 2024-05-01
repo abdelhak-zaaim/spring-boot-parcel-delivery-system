@@ -13,35 +13,36 @@ package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Employee;
 import com.suivi.colis.suivicolis.repository.EmployeeRepo;
+import com.suivi.colis.suivicolis.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeRepo employeeRepository ;
+    private final EmployeeRepo employeeRepository;
+
     public EmployeeServiceImpl(EmployeeRepo employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
+    @Override
     public void deleteEmployee(Long id) {
-
         employeeRepository.deleteById(id);
     }
 
-    public void addEmployee(Employee employee) {
-        employeeRepository.save(employee);
-    }
-
-    public Employee getEmployee(Long id) {
+    @Override
+    public Employee loadEmployeeById(Long id) {
         return employeeRepository.findById(id).orElse(null);
     }
 
-    public Employee updateEmployee(Employee employee) {
+    @Override
+    public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public Iterable<Employee> getEmployees() {
-        return employeeRepository.findAll();
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        return employeeRepository.save(employee);
     }
 
 

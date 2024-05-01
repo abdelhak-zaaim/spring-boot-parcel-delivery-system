@@ -13,6 +13,7 @@ package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.PrivilegesGroup;
 import com.suivi.colis.suivicolis.repository.PrivilegesGroupRepo;
+import com.suivi.colis.suivicolis.service.PrivilegesGroupService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.*;
@@ -20,30 +21,32 @@ import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated
-public class PrivilegesGroupServiceImpl {
+public class PrivilegesGroupServiceImpl implements PrivilegesGroupService {
 
     private final PrivilegesGroupRepo privilegesGroupRepo;
-    private final ApplicationContext applicationContext;
 
-
-    public PrivilegesGroupServiceImpl(PrivilegesGroupRepo privilegesGroupRepo, ApplicationContext applicationContext) {
+    public PrivilegesGroupServiceImpl(PrivilegesGroupRepo privilegesGroupRepo) {
         this.privilegesGroupRepo = privilegesGroupRepo;
-        this.applicationContext = applicationContext;
     }
 
-    public PrivilegesGroup addPrivilegesGroup(PrivilegesGroup privilegesGroup) throws IllegalArgumentException {
 
-        Validator validator = applicationContext.getBean(Validator.class);
-
-        BindingResult errors = new BeanPropertyBindingResult(privilegesGroup, "PrivilegesGroup");
-        validator.validate(privilegesGroup, errors);
-        if (errors.hasErrors()) {
-            throw new IllegalArgumentException("Invalid PrivilegesGroup data");
-        }
-      return   privilegesGroupRepo.save(privilegesGroup);
+    @Override
+    public void deletePrivilegesGroup(Long id) {
+        privilegesGroupRepo.deleteById(id);
     }
 
-    public PrivilegesGroup getPrivilegesGroupById(Long id) {
+    @Override
+    public PrivilegesGroup loadPrivilegesGroupById(Long id) {
         return privilegesGroupRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public PrivilegesGroup savePrivilegesGroup(PrivilegesGroup privilegesGroup) {
+        return privilegesGroupRepo.save(privilegesGroup);
+    }
+
+    @Override
+    public PrivilegesGroup updatePrivilegesGroup(PrivilegesGroup privilegesGroup) {
+        return privilegesGroupRepo.save(privilegesGroup);
     }
 }

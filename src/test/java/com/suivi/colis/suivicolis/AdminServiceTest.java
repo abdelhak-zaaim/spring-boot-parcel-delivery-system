@@ -11,8 +11,8 @@
 package com.suivi.colis.suivicolis;
 
 import com.suivi.colis.suivicolis.entity.AdminEmployee;
-import com.suivi.colis.suivicolis.repository.AdminRepo;
-import com.suivi.colis.suivicolis.service.Impl.AdminServiceImpl;
+import com.suivi.colis.suivicolis.repository.AdminEmployeeRepo;
+import com.suivi.colis.suivicolis.service.Impl.AdminEmployeeServiceImpl;
 import jakarta.persistence.Convert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,10 +37,10 @@ class AdminServiceTest {
     }
 
     @Mock
-    private AdminRepo adminRepo;
+    private AdminEmployeeRepo adminRepo;
 
     @InjectMocks
-    private AdminServiceImpl adminService;
+    private AdminEmployeeServiceImpl adminService;
 
     @BeforeEach
     void setUp() {
@@ -52,7 +52,7 @@ class AdminServiceTest {
         AdminEmployee admin = new AdminEmployee();
         when(adminRepo.findById(1L)).thenReturn(Optional.of(admin));
 
-        AdminEmployee result = adminService.getAdmin(1L);
+        AdminEmployee result = adminService.loadAdminById(1L);
 
         assertEquals(admin, result);
         verify(adminRepo, times(1)).findById(1L);
@@ -62,7 +62,7 @@ class AdminServiceTest {
     void getAdminReturnsNullWhenDoesNotExist() {
         when(adminRepo.findById(1L)).thenReturn(Optional.empty());
 
-        AdminEmployee result = adminService.getAdmin(1L);
+        AdminEmployee result = adminService.loadAdminById(1L);
 
         assertNull(result);
         verify(adminRepo, times(1)).findById(1L);
