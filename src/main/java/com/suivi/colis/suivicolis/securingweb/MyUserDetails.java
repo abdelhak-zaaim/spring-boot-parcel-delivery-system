@@ -10,6 +10,7 @@
 
 package com.suivi.colis.suivicolis.securingweb;
 
+import com.suivi.colis.suivicolis.entity.PrivilegesGroup;
 import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.model.enums.UserStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,7 +32,14 @@ public class MyUserDetails implements UserDetails {
    public Collection<? extends GrantedAuthority> getAuthorities() {
      List<GrantedAuthority> authorities = new ArrayList<>();
      authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX+this.user.getRole()));
-      return List.of();
+
+        PrivilegesGroup privilegesGroup = this.user.getPrivilegesGroup();
+        if (privilegesGroup != null) {
+            privilegesGroup.getPrivileges().forEach(privilege -> {
+                authorities.add(new SimpleGrantedAuthority(privilege.name()));
+            });
+        }
+      return authorities;
    }
 
    @Override
