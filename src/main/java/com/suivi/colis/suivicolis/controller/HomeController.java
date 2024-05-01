@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class HomeController {
     @GetMapping("/")
     public String home() {
-        return "index";
+        return "home/index";
     }
 
 
