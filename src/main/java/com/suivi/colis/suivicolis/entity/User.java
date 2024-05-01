@@ -11,6 +11,7 @@
 
 package com.suivi.colis.suivicolis.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.model.enums.Role;
 import com.suivi.colis.suivicolis.model.enums.UserStatus;
 import com.suivi.colis.suivicolis.util.helpers.DateUtils;
@@ -21,6 +22,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -45,6 +47,10 @@ public class User {
 
     @ValidEmail
     private String email;
+
+    @NotNull
+    @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = Role.USER_ROLE_NAME, insertable = false, updatable = false, nullable = false)
@@ -55,16 +61,19 @@ public class User {
     @ManyToOne
     private Address address;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date registeredAt;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
     @Enumerated(EnumType.STRING)
     private UserStatus status;
     @Column(unique = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String token;
     @Column(unique = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String refreshToken;
-    @Column(unique = true)
     private String cin;
 
     private Date dateOfBirth;
@@ -73,7 +82,11 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY)
     @ToString.Exclude
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<LoginLog> loginLogs;
+
+    @ManyToOne
+    private PrivilegesGroup privilegesGroup ;
 
     @PrePersist
     protected void onCreated() {
