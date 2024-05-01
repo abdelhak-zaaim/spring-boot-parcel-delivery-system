@@ -34,6 +34,7 @@ import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -46,21 +47,29 @@ public class DeliveryAddress  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     @Column(nullable = false)
     private String address;
+    @NotNull
     @Column(nullable = false)
     private String state;
+    @NotNull
     @Column(nullable = false)
     private String city;
+    @NotNull
     @Column(nullable = false,columnDefinition = "varchar(255) default 'Morocco'") // for now we use morocco as default country
     private String country;
+    @NotNull
     @Column(nullable = false)
     private String postalCode;
+    @NotNull
     @Column(nullable = false)
     private String contactName;
+    @NotNull
     @Column(nullable = false)
     private String contactNumber;
-    @Column(nullable = false)
+
     private String contactEmail;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
