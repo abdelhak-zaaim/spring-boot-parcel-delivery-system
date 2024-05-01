@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -9,7 +10,7 @@
  */
 
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import com.suivi.colis.suivicolis.entity.Employee;
 import com.suivi.colis.suivicolis.model.enums.UserStatus;
@@ -24,7 +25,7 @@ import java.util.Date;
  * DTO for {@link Employee}
  */
 @Value
-public class EmployeeDto implements Serializable {
+public class EmployeeRequestDto implements Serializable {
     @NotNull(message = "tye name should be not empty")
     @Size
     @NotEmpty
@@ -35,7 +36,7 @@ public class EmployeeDto implements Serializable {
     String email;
     String role;
     String phoneNumber;
-    AddressDto address;
+    AddressRequestDto address;
     Date registeredAt;
     Date lastUpdateDate;
     UserStatus status;

@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -9,10 +10,10 @@
  */
 
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import java.util.Date;
-public record ErrorDto(
+public record ErrorRequestDto(
         String message,
         int statusCode,
         Date timestamp,

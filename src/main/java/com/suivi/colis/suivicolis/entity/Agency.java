@@ -13,11 +13,15 @@ package com.suivi.colis.suivicolis.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.model.MapsLocationPoint;
+import com.suivi.colis.suivicolis.util.Constants;
 import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import com.suivi.colis.suivicolis.validation.location.ValidMapsLocationPoint;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.Set;
 
@@ -48,11 +52,16 @@ public class Agency {
     @ManyToOne
     private AdminEmployee createdBy;
 
+    @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     private String agencyContactNumber;
+
+    @Email
+    @NotNull
     private String agencyEmail;
 
     @OneToMany(mappedBy = "associatedAgency")
     @ToString.Exclude
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AgencyEmployee> agencyEmployees;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,7 +9,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import lombok.Value;
 
@@ -18,7 +19,7 @@ import java.io.Serializable;
  * DTO for {@link com.suivi.colis.suivicolis.model.MapsLocationPoint}
  */
 @Value
-public class MapsLocationPointDto implements Serializable {
+public class MapsLocationPointRequestDto implements Serializable {
     Double latitude;
     Double longitude;
 }

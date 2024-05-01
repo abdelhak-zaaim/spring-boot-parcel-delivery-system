@@ -1,3 +1,5 @@
+
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,7 +10,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import lombok.Value;
 
@@ -19,7 +21,8 @@ import java.util.Date;
  * DTO for {@link com.suivi.colis.suivicolis.entity.Address}
  */
 @Value
-public class AddressDto implements Serializable {
+public class AddressRequestDto implements Serializable {
+
     String street;
     String city;
     String state;
@@ -27,4 +30,5 @@ public class AddressDto implements Serializable {
     String country;
     Date creationDate;
     Date lastUpdateDate;
+
 }

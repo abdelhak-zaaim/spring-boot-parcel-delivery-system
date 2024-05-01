@@ -14,15 +14,18 @@ package com.suivi.colis.suivicolis.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.model.enums.Role;
 import com.suivi.colis.suivicolis.model.enums.UserStatus;
+import com.suivi.colis.suivicolis.util.Constants;
 import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import com.suivi.colis.suivicolis.validation.user.UserValidate;
 import com.suivi.colis.suivicolis.validation.user.email.ValidEmail;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -57,6 +60,7 @@ public class User {
     private String role;
 
     @Column(nullable = false)
+    @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     private String phoneNumber;
 
     @ManyToOne
@@ -81,10 +85,14 @@ public class User {
     @Column(unique = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String refreshToken;
+
+    @Pattern(message = "CIN not valid", regexp = "^[A-Z0-9]{1,20}$")
     private String cin;
 
     private Date dateOfBirth;
     private double balance = 0;
+
+    @URL(message = "not valid image url")
     private String image;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -121,6 +129,7 @@ public class User {
 
     @Override
     public final int hashCode() {
+
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

@@ -32,6 +32,7 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
+
     @Override
     public void sendSimpleMessageUsingTemplate(String toEmail, String subject, String... templateModel) {
 

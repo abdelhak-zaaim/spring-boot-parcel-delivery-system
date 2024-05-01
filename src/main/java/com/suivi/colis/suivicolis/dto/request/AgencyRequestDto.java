@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,10 +9,12 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import lombok.Value;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -20,14 +23,18 @@ import java.util.Set;
  * DTO for {@link com.suivi.colis.suivicolis.entity.Agency}
  */
 @Value
-public class AgencyDto implements Serializable {
+public class AgencyRequestDto implements Serializable {
     String agencyCode;
+    @NotBlank
+    @NotNull
     String agencyName;
-    AddressDto agencyAddress;
+    @NotNull
+    AddressRequestDto agencyAddress;
     Date agencyEstablishedDate;
     String agencyContactNumber;
+    @NotNull
     String agencyEmail;
     Set<AgencyEmployeeDto> agencyEmployees;
     Date creationDate;
-    MapsLocationPointDto locationPoint;
+    MapsLocationPointRequestDto locationPoint;
 }

@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -9,7 +10,7 @@
  */
 
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import com.suivi.colis.suivicolis.entity.Transaction;
 import com.suivi.colis.suivicolis.model.enums.TransactionType;
@@ -25,8 +26,8 @@ import java.util.Date;
  * DTO for {@link Transaction}
  */
 @Value
-public class TransactionDto implements Serializable {
-    UserDto user;
+public class TransactionRequestDto implements Serializable {
+    UserRequestDto user;
     @Positive
     double amount;
     @NotNull

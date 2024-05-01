@@ -55,16 +55,7 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails userDetails = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(userDetails);
-//    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -81,6 +72,7 @@ public class WebSecurityConfig {
 
         return new ProviderManager(authenticationProvider);
     }
+
 
 }
 

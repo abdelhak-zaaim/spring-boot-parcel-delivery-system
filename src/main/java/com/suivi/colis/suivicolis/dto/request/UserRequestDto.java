@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,7 +9,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.dto;
+package com.suivi.colis.suivicolis.dto.request;
 
 import com.suivi.colis.suivicolis.model.enums.UserStatus;
 import jakarta.validation.constraints.*;
@@ -22,7 +23,7 @@ import java.util.Date;
  * DTO for {@link com.suivi.colis.suivicolis.entity.User}
  */
 @Value
-public class UserDto implements Serializable {
+public class UserRequestDto implements Serializable {
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]+$")
     String name;
@@ -32,16 +33,12 @@ public class UserDto implements Serializable {
     @Pattern(message = "not valid moroccan number", regexp = "^\\+212[5-7]\\d{8}$")
     String phoneNumber;
     @NotNull
-    AddressDto address;
-    Date registeredAt;
-    Date lastUpdateDate;
+    AddressRequestDto address;
     UserStatus status;
     @Pattern(message = "CIN not valid", regexp = "^[A-Z0-9]{1,20}$")
     String cin;
     @Future(message = "Date of perth not vaalid")
     Date dateOfBirth;
-    @Digits(integer = 10, fraction = 2)
-    double balance;
     @URL(message = "not valid image url")
     String image;
 }
