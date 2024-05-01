@@ -20,16 +20,16 @@ public class AddressService {
        this.addressRepo = addressRepo;
    }
 
-   public Address AddAddress(Address address) {
+   public Address addAddress(Address address) {
        return addressRepo.save(address);
    }
-   public Address UpdateAddress(Address address) {
+   public Address updateAddress(Address address) {
        return addressRepo.save(address);
    }
-    public void DeleteAddress(Long id) {
+    public void deleteAddress(Long id) {
          addressRepo.deleteById(id);
     }
-    public Address GetAddress(Long id) {
+    public Address getAddress(Long id) {
         return addressRepo.findById(id).orElse(null);
     }
 
