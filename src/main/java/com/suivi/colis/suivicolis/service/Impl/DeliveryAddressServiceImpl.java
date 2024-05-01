@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,16 +9,16 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.DeliveryAddress;
 import com.suivi.colis.suivicolis.repository.DeliveryAddressRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeliveryAddressService {
+public class DeliveryAddressServiceImpl {
    DeliveryAddressRepo deliveryAddressRepo;
-   public DeliveryAddressService( DeliveryAddressRepo deliveryAddressRepo) {
+   public DeliveryAddressServiceImpl(DeliveryAddressRepo deliveryAddressRepo) {
          this.deliveryAddressRepo = deliveryAddressRepo;
    }
 

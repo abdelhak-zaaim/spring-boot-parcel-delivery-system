@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,22 +9,21 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Transaction;
 import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.repository.TransactionRepo;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class TransactionService {
-    UserService userService;
+public class TransactionServiceImpl {
+    UserServiceImpl userService;
     TransactionRepo transactionRepo;
 
-    public TransactionService(TransactionRepo transactionRepo, UserService userService) {
+    public TransactionServiceImpl(TransactionRepo transactionRepo, UserServiceImpl userService) {
         this.transactionRepo = transactionRepo;
         this.userService = userService;
     }

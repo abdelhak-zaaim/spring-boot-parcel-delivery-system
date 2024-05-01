@@ -1,22 +1,3 @@
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:51
- *  * @modified : 25/04/2024, 18:39
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:39
- *  * @modified : 25/04/2024, 15:13
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
 
 /*
  * *
@@ -28,7 +9,7 @@
  *
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.AdminEmployee;
 import com.suivi.colis.suivicolis.repository.AdminRepo;
@@ -37,11 +18,11 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class AdminService {
+public class AdminServiceImpl {
 
     private final AdminRepo adminRepo;
 
-    public AdminService(AdminRepo adminRepo) {
+    public AdminServiceImpl(AdminRepo adminRepo) {
         this.adminRepo = adminRepo;
     }
 

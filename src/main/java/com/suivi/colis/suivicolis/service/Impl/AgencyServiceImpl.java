@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,21 +9,20 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Agency;
 import com.suivi.colis.suivicolis.repository.AgencyRepo;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 @Service
-public class AgencyService {
+public class AgencyServiceImpl {
 
 
     private final AgencyRepo agencyRepository;
-    public AgencyService(AgencyRepo agencyRepository) {
+    public AgencyServiceImpl(AgencyRepo agencyRepository) {
         this.agencyRepository = agencyRepository;
     }
 

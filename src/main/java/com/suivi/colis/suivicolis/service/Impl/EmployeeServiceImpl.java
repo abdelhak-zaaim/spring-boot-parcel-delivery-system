@@ -1,22 +1,3 @@
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:51
- *  * @modified : 25/04/2024, 18:39
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:39
- *  * @modified : 25/04/2024, 14:57
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
 
 /*
  * **
@@ -28,17 +9,17 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Employee;
 import com.suivi.colis.suivicolis.repository.EmployeeRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmployeeService {
+public class EmployeeServiceImpl {
 
     private final EmployeeRepo employeeRepository ;
-    public EmployeeService(EmployeeRepo employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepo employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 

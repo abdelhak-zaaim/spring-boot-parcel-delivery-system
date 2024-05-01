@@ -1,22 +1,3 @@
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:51
- *  * @modified : 25/04/2024, 18:39
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:39
- *  * @modified : 25/04/2024, 18:37
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
 
 /*
  * **
@@ -28,7 +9,7 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.PrivilegesGroup;
 import com.suivi.colis.suivicolis.repository.PrivilegesGroupRepo;
@@ -39,13 +20,13 @@ import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated
-public class PrivilegesGroupService {
+public class PrivilegesGroupServiceImpl {
 
     private final PrivilegesGroupRepo privilegesGroupRepo;
     private final ApplicationContext applicationContext;
 
 
-    public PrivilegesGroupService(PrivilegesGroupRepo privilegesGroupRepo, ApplicationContext applicationContext) {
+    public PrivilegesGroupServiceImpl(PrivilegesGroupRepo privilegesGroupRepo, ApplicationContext applicationContext) {
         this.privilegesGroupRepo = privilegesGroupRepo;
         this.applicationContext = applicationContext;
     }

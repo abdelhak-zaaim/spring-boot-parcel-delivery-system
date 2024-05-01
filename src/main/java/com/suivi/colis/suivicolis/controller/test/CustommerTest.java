@@ -12,7 +12,7 @@ package com.suivi.colis.suivicolis.controller.test;
 
 import com.suivi.colis.suivicolis.entity.Customer;
 import com.suivi.colis.suivicolis.model.enums.UserStatus;
-import com.suivi.colis.suivicolis.service.CustomerService;
+import com.suivi.colis.suivicolis.service.Impl.CustomerServiceImpl;
 import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,9 +22,9 @@ import java.util.Date;
 
 @Controller
 public class CustommerTest {
-    private CustomerService customerService;
+    private CustomerServiceImpl customerService;
 
-    public CustommerTest(CustomerService customerService) {
+    public CustommerTest(CustomerServiceImpl customerService) {
         this.customerService = customerService;
     }
 

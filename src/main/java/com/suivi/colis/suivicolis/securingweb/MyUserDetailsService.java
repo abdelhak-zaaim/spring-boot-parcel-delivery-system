@@ -21,7 +21,7 @@
 package com.suivi.colis.suivicolis.securingweb;
 
 import com.suivi.colis.suivicolis.entity.User;
-import com.suivi.colis.suivicolis.service.UserService;
+import com.suivi.colis.suivicolis.service.Impl.UserServiceImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,10 +31,10 @@ import java.util.Optional;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
 
-    public MyUserDetailsService(UserService userService) {
+    public MyUserDetailsService(UserServiceImpl userService) {
         this.userService = userService;
     }
 

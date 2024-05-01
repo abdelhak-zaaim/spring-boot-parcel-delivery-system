@@ -15,10 +15,10 @@ import com.suivi.colis.suivicolis.entity.Customer;
 import com.suivi.colis.suivicolis.entity.DeliveryAddress;
 import com.suivi.colis.suivicolis.entity.Parcel;
 import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
-import com.suivi.colis.suivicolis.service.AddressService;
-import com.suivi.colis.suivicolis.service.CustomerService;
-import com.suivi.colis.suivicolis.service.DeliveryAddressService;
-import com.suivi.colis.suivicolis.service.ParcelService;
+import com.suivi.colis.suivicolis.service.Impl.AddressServiceImpl;
+import com.suivi.colis.suivicolis.service.Impl.CustomerServiceImpl;
+import com.suivi.colis.suivicolis.service.Impl.DeliveryAddressServiceImpl;
+import com.suivi.colis.suivicolis.service.Impl.ParcelServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +26,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class parcelTest {
 
-   AddressService addressService;
-   DeliveryAddressService deliveryAddressService;
-   CustomerService customerService;
-   ParcelService parcelService;
+   AddressServiceImpl addressService;
+   DeliveryAddressServiceImpl deliveryAddressService;
+   CustomerServiceImpl customerService;
+   ParcelServiceImpl parcelService;
 
-   public parcelTest(AddressService addressService, DeliveryAddressService deliveryAddressService, CustomerService customerService, ParcelService parcelService) {
+   public parcelTest(AddressServiceImpl addressService, DeliveryAddressServiceImpl deliveryAddressService, CustomerServiceImpl customerService, ParcelServiceImpl parcelService) {
       this.addressService = addressService;
       this.deliveryAddressService = deliveryAddressService;
       this.customerService = customerService;

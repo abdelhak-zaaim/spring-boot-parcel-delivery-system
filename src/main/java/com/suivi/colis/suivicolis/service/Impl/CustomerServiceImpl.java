@@ -1,22 +1,3 @@
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:51
- *  * @modified : 25/04/2024, 18:39
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:39
- *  * @modified : 25/04/2024, 15:13
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
 
 /*
  * **
@@ -28,7 +9,7 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Customer;
 import com.suivi.colis.suivicolis.repository.CustomerRepo;
@@ -36,10 +17,10 @@ import com.suivi.colis.suivicolis.repository.CustomerRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService {
+public class CustomerServiceImpl {
 
     private final CustomerRepo customerRepository;
-    public CustomerService(CustomerRepo customerRepository) {
+    public CustomerServiceImpl(CustomerRepo customerRepository) {
         this.customerRepository = customerRepository;
     }
 

@@ -11,7 +11,7 @@
 package com.suivi.colis.suivicolis.securingweb;
 
 import com.suivi.colis.suivicolis.model.enums.Role;
-import com.suivi.colis.suivicolis.service.UserService;
+import com.suivi.colis.suivicolis.service.Impl.UserServiceImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,8 +34,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private UserService userService;
-    public WebSecurityConfig(UserService userService) {
+    private UserServiceImpl userService;
+    public WebSecurityConfig(UserServiceImpl userService) {
         this.userService = userService;
     }
 

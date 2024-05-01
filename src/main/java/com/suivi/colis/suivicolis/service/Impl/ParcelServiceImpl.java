@@ -9,7 +9,7 @@
  *  **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Parcel;
 import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
@@ -21,15 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 @Service
-public class ParcelService {
+public class ParcelServiceImpl {
 
 
     private final ParcelRepo parcelRepository;
 
-    public ParcelService(ParcelRepo parcelRepository) {
+    public ParcelServiceImpl(ParcelRepo parcelRepository) {
         this.parcelRepository = parcelRepository;
     }
 

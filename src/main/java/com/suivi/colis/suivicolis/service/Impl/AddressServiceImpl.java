@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : SuiviColis
@@ -8,15 +9,15 @@
  * **
  */
 
-package com.suivi.colis.suivicolis.service;
+package com.suivi.colis.suivicolis.service.Impl;
 
 import com.suivi.colis.suivicolis.entity.Address;
 import org.springframework.stereotype.Service;
 import com.suivi.colis.suivicolis.repository.AddressRepo;
 @Service
-public class AddressService {
+public class AddressServiceImpl {
    private final AddressRepo addressRepo;
-   public AddressService(AddressRepo addressRepo) {
+   public AddressServiceImpl(AddressRepo addressRepo) {
        this.addressRepo = addressRepo;
    }
 

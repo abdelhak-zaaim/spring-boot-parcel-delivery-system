@@ -12,7 +12,7 @@ package com.suivi.colis.suivicolis;
 
 import com.suivi.colis.suivicolis.entity.AdminEmployee;
 import com.suivi.colis.suivicolis.repository.AdminRepo;
-import com.suivi.colis.suivicolis.service.AdminService;
+import com.suivi.colis.suivicolis.service.Impl.AdminServiceImpl;
 import jakarta.persistence.Convert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class AdminServiceTest {
     private AdminRepo adminRepo;
 
     @InjectMocks
-    private AdminService adminService;
+    private AdminServiceImpl adminService;
 
     @BeforeEach
     void setUp() {

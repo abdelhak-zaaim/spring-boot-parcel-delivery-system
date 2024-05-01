@@ -24,10 +24,9 @@ import com.suivi.colis.suivicolis.entity.Parcel;
 import com.suivi.colis.suivicolis.entity.User;
 import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.model.enums.ParcelType;
-import com.suivi.colis.suivicolis.service.ParcelService;
-import com.suivi.colis.suivicolis.service.PrivilegesGroupService;
-import com.suivi.colis.suivicolis.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.suivi.colis.suivicolis.service.Impl.ParcelServiceImpl;
+import com.suivi.colis.suivicolis.service.Impl.PrivilegesGroupServiceImpl;
+import com.suivi.colis.suivicolis.service.Impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,12 +40,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  * */
 @Controller
 public class Test {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PrivilegesGroupService privilegesGroupService;
-    @Autowired
-    private ParcelService paarcelService;
+
+    private UserServiceImpl userService;
+    private PrivilegesGroupServiceImpl privilegesGroupService;
+    private ParcelServiceImpl paarcelService;
+
+    public Test(UserServiceImpl userService, PrivilegesGroupServiceImpl privilegesGroupService, ParcelServiceImpl paarcelService) {
+        this.userService = userService;
+        this.privilegesGroupService = privilegesGroupService;
+        this.paarcelService = paarcelService;
+    }
 
     @GetMapping("/test/get/user")
     public ResponseEntity<User> getUser() {
@@ -54,6 +57,10 @@ public class Test {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+@GetMapping("/test/timeline")
+    public String timeline() {
+        return "timeline";
+    }
 
 
 
