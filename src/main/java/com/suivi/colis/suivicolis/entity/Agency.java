@@ -11,6 +11,7 @@
 
 package com.suivi.colis.suivicolis.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.model.MapsLocationPoint;
 import com.suivi.colis.suivicolis.util.helpers.DateUtils;
 import com.suivi.colis.suivicolis.validation.location.ValidMapsLocationPoint;
@@ -47,8 +48,10 @@ public class Agency {
     @ToString.Exclude
     private Set<AgencyEmployee> agencyEmployees;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
 
     @ValidMapsLocationPoint
