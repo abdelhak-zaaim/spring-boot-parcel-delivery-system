@@ -10,6 +10,7 @@
 
 package com.suivi.colis.suivicolis.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.model.enums.ParcelType;
 import jakarta.persistence.*;
@@ -42,35 +43,36 @@ public class Parcel {
     @Enumerated(EnumType.STRING)
     private ParcelType Type;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
     private Date estimatedDeliveryDate;
     private Date deleveryDate;
 
-    @OneToMany
-    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ParcelHistory> parcelHistories;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private Customer senderCustomer;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
     private Payment payment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departedAddress", referencedColumnName = "id")
     private DeliveryAddress pickupAddress;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destinationAddress", referencedColumnName = "id")
     private DeliveryAddress receiverAddress;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agency departedAgency;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agency destinationAgency;
 
     @PrePersist

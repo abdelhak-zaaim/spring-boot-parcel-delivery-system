@@ -1,22 +1,3 @@
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:51
- *  * @modified : 25/04/2024, 18:39
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : SuiviColis
- *  * @created : 25/04/2024, 18:39
- *  * @modified : 25/04/2024, 14:57
- *  * @description : This file is part of the SuiviColis project.
- *  * @license : MIT License
- * **
- */
 
 /*
  * **
@@ -33,7 +14,10 @@ package com.suivi.colis.suivicolis.service;
 import com.suivi.colis.suivicolis.entity.Parcel;
 import com.suivi.colis.suivicolis.model.enums.ParcelStatus;
 import com.suivi.colis.suivicolis.repository.ParcelRepo;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -44,10 +28,12 @@ public class ParcelService {
 
 
     private final ParcelRepo parcelRepository;
+
     public ParcelService(ParcelRepo parcelRepository) {
         this.parcelRepository = parcelRepository;
     }
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Parcel addParcel(Parcel parcel) {
         parcel.setCodeBar(generateParcelBarcode());
         return parcelRepository.save(parcel);
