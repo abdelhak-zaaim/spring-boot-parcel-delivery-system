@@ -12,12 +12,15 @@
 package com.suivi.colis.suivicolis.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.suivicolis.entity.converters.PrivilegeListConverter;
 import com.suivi.colis.suivicolis.model.enums.Privilege;
 import com.suivi.colis.suivicolis.validation.admin.privilegesgroupvalidate.PrivilegeValidation;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -35,14 +38,19 @@ public class PrivilegesGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @NotBlank
+    @Column(unique = true)
     private String name;
 
     @Convert(converter = PrivilegeListConverter.class)
     private List<Privilege> privileges;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
 
     @PrePersist
