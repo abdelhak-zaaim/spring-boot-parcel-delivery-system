@@ -2,20 +2,20 @@
 
 /*
  * **
- *  * @project : SuiviColis
+ *  * @project : DeliX
  *  * @created : 29/04/2024, 19:58
  *  * @modified : 29/04/2024, 19:57
- *  * @description : This file is part of the SuiviColis project.
+ *  * @description : This file is part of the DeliX project.
  *  * @license : MIT License
  * **
  */
 
 /*
  * **
- *  * @project : SuiviColis
+ *  * @project : DeliX
  *  * @created : 29/04/2024, 19:57
  *  * @modified : 29/04/2024, 19:57
- *  * @description : This file is part of the SuiviColis project.
+ *  * @description : This file is part of the DeliX project.
  *  * @license : MIT License
  * **
  */

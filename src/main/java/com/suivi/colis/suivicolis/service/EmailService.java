@@ -1,9 +1,9 @@
 /*
  * **
- *  * @project : SuiviColis
+ *  * @project : DeliX
  *  * @created : 01/05/2024, 18:38
  *  * @modified : 01/05/2024, 18:38
- *  * @description : This file is part of the SuiviColis project.
+ *  * @description : This file is part of the DeliX project.
  *  * @license : MIT License
  * **
  */

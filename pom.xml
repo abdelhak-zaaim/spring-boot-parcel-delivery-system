@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.suivi.colis</groupId>
-    <artifactId>SuiviColis</artifactId>
+    <artifactId>DeliX</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SuiviColis</name>
     <description>SuiviColis</description>

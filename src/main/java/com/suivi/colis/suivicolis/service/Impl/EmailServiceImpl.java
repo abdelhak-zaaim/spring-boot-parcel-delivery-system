@@ -1,9 +1,9 @@
 /*
  * **
- *  * @project : SuiviColis
+ *  * @project : DeliX
  *  * @created : 01/05/2024, 18:39
  *  * @modified : 01/05/2024, 18:39
- *  * @description : This file is part of the SuiviColis project.
+ *  * @description : This file is part of the DeliX project.
  *  * @license : MIT License
  * **
  */
@@ -22,6 +22,7 @@ public class EmailServiceImpl implements EmailService {
     public EmailServiceImpl(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
+
     @Override
     public void sendSimpleMessage(String toEmail, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -32,9 +33,12 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
-
     @Override
     public void sendSimpleMessageUsingTemplate(String toEmail, String subject, String... templateModel) {
-
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject(subject);
+        message.setText(String.format(templateModel[0], templateModel[1]));
+        emailSender.send(message);
     }
 }

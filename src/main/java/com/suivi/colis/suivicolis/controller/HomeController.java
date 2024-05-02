@@ -1,9 +1,9 @@
 /*
  * **
- *  * @project : SuiviColis
+ *  * @project : DeliX
  *  * @created : 24/04/2024, 17:23
  *  * @modified : 24/04/2024, 17:23
- *  * @description : This file is part of the SuiviColis project.
+ *  * @description : This file is part of the DeliX project.
  *  * @license : MIT License
  *  **
  */
@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class HomeController {
     @GetMapping("/")
     public String home() {
+
         return "home/index";
     }
 

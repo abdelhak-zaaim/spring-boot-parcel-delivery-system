@@ -12,9 +12,9 @@ target/
 .settings
 .springBeans
 .sts4-cache
-.idea
+.idea_bac
 ### IntelliJ IDEA ###
-.idea
+.idea_bac
 *.iws
 *.iml
 *.ipr
