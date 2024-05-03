@@ -31,7 +31,7 @@ Here are the properties you need to set:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/<yourDatabaseNaame>?createDatabaseIfNotExist=true
 spring.datasource.username=root # your database username
-spring.datasource.password=<yourDatabassePassword> # keep it empty if you dont use password of the database
+spring.datasource.password=<yourDatabassePassword> # keep it empty if you dont use password for the database
 ```
 
 4. **Run the project**
