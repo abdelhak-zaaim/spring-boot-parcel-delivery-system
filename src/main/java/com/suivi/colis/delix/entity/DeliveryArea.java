@@ -41,7 +41,7 @@ public class DeliveryArea {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
-    private AdminEmployee createdBy;
+    private Admin createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 @Entity
-@DiscriminatorValue(Role.ADMIN_EMPLOYEE_ROLE)
-public class AdminEmployee extends Employee {
+@DiscriminatorValue(Role.ADMIN_ROLE)
+public class Admin extends Employee {
 
 private String adminEmployeeNumber;
 

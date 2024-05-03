@@ -11,7 +11,7 @@
 
 package com.suivi.colis.delix.service.Impl;
 
-import com.suivi.colis.delix.entity.AdminEmployee;
+import com.suivi.colis.delix.entity.Admin;
 import com.suivi.colis.delix.repository.AdminEmployeeRepo;
 
 import com.suivi.colis.delix.service.AdminEmployeeService;
@@ -34,16 +34,16 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
     }
 
     @Override
-    public AdminEmployee loadAdminById(Long id) {
+    public Admin loadAdminById(Long id) {
         return adminEmployeeRepo.findById(id).orElse(null);
     }
 
-    public AdminEmployee saveAdmin(AdminEmployee admin) {
+    public Admin saveAdmin(Admin admin) {
         return adminEmployeeRepo.save(admin);
     }
 
     @Override
-    public AdminEmployee updateAdmin(AdminEmployee admin) {
+    public Admin updateAdmin(Admin admin) {
         return adminEmployeeRepo.save(admin);
     }
 }

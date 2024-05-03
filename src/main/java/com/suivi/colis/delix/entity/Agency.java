@@ -49,7 +49,7 @@ public class Agency {
     private Date agencyEstablishedDate;
 
     @ManyToOne
-    private AdminEmployee createdBy;
+    private Admin createdBy;
 
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     private String agencyContactNumber;
@@ -75,7 +75,7 @@ public class Agency {
     @ValidMapsLocationPoint
     private MapsLocationPoint locationPoint;
 
-    public Agency(String agencyCode, String agencyName, Address agencyAddress, AdminEmployee createdBy) {
+    public Agency(String agencyCode, String agencyName, Address agencyAddress, Admin createdBy) {
         this.agencyCode = agencyCode;
         this.agencyName = agencyName;
         this.agencyAddress = agencyAddress;

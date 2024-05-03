@@ -9,13 +9,14 @@
  */
 
 package com.suivi.colis.delix.service;
-import com.suivi.colis.delix.entity.AdminEmployee;
+import com.suivi.colis.delix.entity.Admin;
+
 public interface AdminEmployeeService {
     void deleteAdmin(Long id);
 
-    AdminEmployee loadAdminById(Long id);
+    Admin loadAdminById(Long id);
 
-    AdminEmployee saveAdmin(AdminEmployee admin);
+    Admin saveAdmin(Admin admin);
 
-    AdminEmployee updateAdmin(AdminEmployee admin);
+    Admin updateAdmin(Admin admin);
 }

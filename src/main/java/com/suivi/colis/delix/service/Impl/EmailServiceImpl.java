@@ -34,17 +34,22 @@ public class EmailServiceImpl implements EmailService {
         this.emailSender = emailSender;
     }
 
+    /**
+     * this function for signing a simple email
+     * @param toEmail : this is the email for the target user
+     *
+     *
+     **/
     @Override
     public void sendSimpleMessage(String toEmail, String subject, String text) {
-          SimpleMailMessage message = new SimpleMailMessage();
-          message.setTo(toEmail);
-          message.setSubject(subject);
-          message.setText(text);
-
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject(subject);
+        message.setText(text);
 
         try {
             emailSender.send(message);
-           log.debug("Email sent successfully");
+            log.debug("Email sent successfully");
         } catch (MailException e) {
             log.debug("Error occurred while sending email " + e.getMessage());
         }

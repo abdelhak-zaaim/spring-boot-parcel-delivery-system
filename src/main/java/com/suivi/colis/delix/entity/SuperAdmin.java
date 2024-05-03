@@ -24,7 +24,7 @@ import lombok.*;
 @Entity
 @DiscriminatorValue(Role.SUPER_ADMIN_RULE)
 
-public class SuperAdmin extends AdminEmployee {
+public class SuperAdmin extends Admin {
 
    private String superAdminNumber;
 

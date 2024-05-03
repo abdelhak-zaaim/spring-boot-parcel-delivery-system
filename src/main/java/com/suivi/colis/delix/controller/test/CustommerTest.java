@@ -10,8 +10,10 @@
 
 package com.suivi.colis.delix.controller.test;
 
+import com.suivi.colis.delix.entity.Address;
 import com.suivi.colis.delix.entity.Customer;
 import com.suivi.colis.delix.model.enums.UserStatus;
+import com.suivi.colis.delix.service.AddressService;
 import com.suivi.colis.delix.service.Impl.CustomerServiceImpl;
 import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.http.ResponseEntity;
@@ -23,21 +25,27 @@ import java.util.Date;
 @Controller
 public class CustommerTest {
     private CustomerServiceImpl customerService;
+    private AddressService addressService;
 
-    public CustommerTest(CustomerServiceImpl customerService) {
+    public CustommerTest(CustomerServiceImpl customerService, AddressService addressService) {
         this.customerService = customerService;
+        this.addressService = addressService;
     }
 
     @GetMapping("/test/customer/add")
     public ResponseEntity<Customer> addCustommer() {
+        Address address = new Address("marjaa","fes","fes-maknes","30000","morocco");
+        address = addressService.saveAddress(address);
+
         //addding a custommer for testing purposes
         Customer customer = new Customer();
-        customer.setEmail("abdeelhakzammii@gmail.com");
+        customer.setEmail("test@gmail.com");
         customer.setName("test");
         customer.setPassword("12345678");
         customer.setPhoneNumber("123456789");
         customer.setStatus(UserStatus.ACTIVE);
-        customer.setCin("ZH6954");
+        customer.setCin("ZH6952");
+        customer.setAddress(address);
         customer.setDateOfBirth(new Date("09/01/2002"));
         try {
             return ResponseEntity.ok(customerService.saveCustomer(customer));

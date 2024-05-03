@@ -14,6 +14,10 @@ import lombok.Getter;
 
 @Getter
 public enum AgencyEmployeeRole {
+
+
+
    MANAGER,
-   STAFF
+
+   MEMBER
 }

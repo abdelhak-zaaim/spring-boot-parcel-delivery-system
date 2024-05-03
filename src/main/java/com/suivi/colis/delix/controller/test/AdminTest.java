@@ -10,7 +10,7 @@
 
 package com.suivi.colis.delix.controller.test;
 
-import com.suivi.colis.delix.entity.AdminEmployee;
+import com.suivi.colis.delix.entity.Admin;
 import com.suivi.colis.delix.service.Impl.AdminEmployeeServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,12 +28,12 @@ public class AdminTest {
 
     @GetMapping("/test/admin")
     public ResponseEntity<String> testAdmin() {
-        AdminEmployee admin = new AdminEmployee();
+        Admin admin = new Admin();
         admin.setId(1L);
-        admin.setName("AdminEmployee");
+        admin.setName("Admin");
         admin.setEmail("fhefgh@ghr.rg");
         admin.setPassword("admin");
-        admin.setRole("AdminEmployee");
+        admin.setRole("Admin");
         admin.setPhoneNumber("1234567890");
         admin.setDateOfBirth(new Date("12/12/2000"));
         return ResponseEntity.ok(adminService.saveAdmin(admin).toString());

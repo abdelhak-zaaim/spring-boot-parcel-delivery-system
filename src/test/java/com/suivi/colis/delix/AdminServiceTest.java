@@ -10,7 +10,7 @@
 
 package com.suivi.colis.delix;
 
-import com.suivi.colis.delix.entity.AdminEmployee;
+import com.suivi.colis.delix.entity.Admin;
 import com.suivi.colis.delix.repository.AdminEmployeeRepo;
 import com.suivi.colis.delix.service.Impl.AdminEmployeeServiceImpl;
 import jakarta.persistence.Convert;
@@ -33,7 +33,7 @@ class AdminServiceTest {
 
     @GetMapping("/test/admin")
     public ResponseEntity<String> testAdmin() {
-        return ResponseEntity.ok("AdminEmployee");
+        return ResponseEntity.ok("Admin");
     }
 
     @Mock
@@ -49,10 +49,10 @@ class AdminServiceTest {
 
     @Test
     void getAdminReturnsAdminWhenExists() {
-        AdminEmployee admin = new AdminEmployee();
+        Admin admin = new Admin();
         when(adminRepo.findById(1L)).thenReturn(Optional.of(admin));
 
-        AdminEmployee result = adminService.loadAdminById(1L);
+        Admin result = adminService.loadAdminById(1L);
 
         assertEquals(admin, result);
         verify(adminRepo, times(1)).findById(1L);
@@ -62,7 +62,7 @@ class AdminServiceTest {
     void getAdminReturnsNullWhenDoesNotExist() {
         when(adminRepo.findById(1L)).thenReturn(Optional.empty());
 
-        AdminEmployee result = adminService.loadAdminById(1L);
+        Admin result = adminService.loadAdminById(1L);
 
         assertNull(result);
         verify(adminRepo, times(1)).findById(1L);
@@ -70,10 +70,10 @@ class AdminServiceTest {
 
     @Test
     void saveAdminSavesAndReturnsAdmin() {
-        AdminEmployee admin = new AdminEmployee();
+        Admin admin = new Admin();
         when(adminRepo.save(admin)).thenReturn(admin);
 
-        AdminEmployee result = adminService.saveAdmin(admin);
+        Admin result = adminService.saveAdmin(admin);
 
         assertEquals(admin, result);
         verify(adminRepo, times(1)).save(admin);

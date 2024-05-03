@@ -97,7 +97,6 @@ public class Test {
         // Create new Parcel object
         Parcel parcel = new Parcel();
 
-// Set properties
 
         parcel.setHeight(10.0f);
         parcel.setWidth(20.0f);

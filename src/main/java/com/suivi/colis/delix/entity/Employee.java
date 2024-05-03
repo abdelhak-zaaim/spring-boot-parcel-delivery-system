@@ -32,7 +32,7 @@ public class Employee extends User {
 
     @ManyToOne
     @JoinColumn(name = "assigned_by")
-    private AdminEmployee assignedBy;
+    private Admin assignedBy;
 
 
 }
