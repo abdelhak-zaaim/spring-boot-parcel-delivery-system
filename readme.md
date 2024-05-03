@@ -12,14 +12,14 @@ In the future, this project aims to incorporate an intelligent transport optimiz
    You can clone the repository by running the following command in your terminal:
 
    ```bash
-   git clone https://github.com/abdelhak-zaaim/SuiviColis.git
+   git clone https://github.com/abdelhak-zaaim/DeliX.git
     ```
 2. **Navigate to the project directory**
 
    Once you have cloned the repository, navigate to the project directory using the following command:
 
    ```bash
-   cd SuiviColis
+   cd DeliX
    ```
 
 3. Database Configuration
