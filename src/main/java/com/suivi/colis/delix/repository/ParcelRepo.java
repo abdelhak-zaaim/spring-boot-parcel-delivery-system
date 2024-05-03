@@ -14,11 +14,13 @@ import com.suivi.colis.delix.entity.Parcel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface ParcelRepo extends JpaRepository<Parcel, Long> {
     boolean existsByCodeBar(String agencyCode);
     List<Parcel> findAllBySenderCustomerId(Long customerId);
-
+    Parcel findByCodeBar(String codeBar);
+    List<Parcel> findAllByCreationDateBetween(Date startDate, Date endDate);
 }

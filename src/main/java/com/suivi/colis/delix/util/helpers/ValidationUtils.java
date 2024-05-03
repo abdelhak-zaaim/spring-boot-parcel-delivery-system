@@ -30,8 +30,6 @@ public class ValidationUtils {
     }
 
     public static boolean isEasyPassword(String password) {
-        // we use sseparate  validation for easy password ,because we may need to change it later
-
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
         Pattern pat = Pattern.compile(passwordRegex);
         if (password == null)

@@ -4,11 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SuiviColisApplication {
+public class DeliXApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SuiviColisApplication.class, args);
-
+        SpringApplication.run(DeliXApplication.class, args);
     }
 
 }

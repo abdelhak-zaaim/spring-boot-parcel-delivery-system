@@ -14,11 +14,8 @@ import com.suivi.colis.delix.entity.Employee;
 
 public interface EmployeeService {
     void deleteEmployee(Long id);
-
     Employee loadEmployeeById(Long id);
-
     Employee saveEmployee(Employee employee);
-
     Employee updateEmployee(Employee employee);
     Employee updateEmployeeEmail(Long employeeId, String newEmail);
 }

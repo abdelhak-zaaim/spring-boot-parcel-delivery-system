@@ -34,12 +34,6 @@ public class EmailServiceImpl implements EmailService {
         this.emailSender = emailSender;
     }
 
-    /**
-     * this function for signing a simple email
-     * @param toEmail : this is the email for the target user
-     *
-     *
-     **/
     @Override
     public void sendSimpleMessage(String toEmail, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();

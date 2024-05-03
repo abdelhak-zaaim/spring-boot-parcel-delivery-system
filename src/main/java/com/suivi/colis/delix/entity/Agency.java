@@ -1,4 +1,3 @@
-
 /*
  * **
  *  * @project : DeliX
@@ -13,14 +12,12 @@ package com.suivi.colis.delix.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suivi.colis.delix.model.MapsLocationPoint;
-import com.suivi.colis.delix.util.Constants;
 import com.suivi.colis.delix.validation.location.ValidMapsLocationPoint;
 import jakarta.persistence.*;
 import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.Set;
 
@@ -30,16 +27,20 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 @Entity
-
+@Table(name = "agency", indexes = {
+        @Index(name = "index_agency_code", columnList = "agency_code"),
+        @Index(name = "index_id", columnList = "id")
+})
 public class Agency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false , name = "agency_code", updatable = false)
     private String agencyCode;
 
     @Column(nullable = false)
+    @NotNull
     private String agencyName;
 
     @OneToOne(cascade = CascadeType.ALL)

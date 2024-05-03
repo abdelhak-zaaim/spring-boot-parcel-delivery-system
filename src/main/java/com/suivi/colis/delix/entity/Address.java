@@ -33,6 +33,7 @@ package com.suivi.colis.delix.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -45,20 +46,31 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
+    @NotNull
     private String street;
+
+    @NotNull
     @Column(nullable = false)
     private String city;
+
+    @NotNull
     @Column(nullable = false)
     private String state;
+
+    @NotNull
     @Column(nullable = false)
     private String zip;
-    @Column(nullable = false , columnDefinition = "varchar(255) default 'Morocco'")
+
+    @NotNull
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'Morocco'")
     private String country;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
     private Date creationDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
 

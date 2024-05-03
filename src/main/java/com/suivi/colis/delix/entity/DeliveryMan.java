@@ -30,7 +30,7 @@ public class DeliveryMan extends Employee {
 
     private String licenseNumber;
 
-    private String vihiculeMtricule;
+    private String vehicularMatriculate;
 
 
     @Enumerated(EnumType.STRING)

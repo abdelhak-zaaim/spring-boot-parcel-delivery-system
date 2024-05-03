@@ -10,6 +10,8 @@
 
 package com.suivi.colis.delix.securingweb;
 
+import com.suivi.colis.delix.model.enums.Privilege;
+import com.suivi.colis.delix.model.enums.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
@@ -29,7 +31,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         authorities.forEach(authority -> {
-            if (authority.getAuthority().equals("ADMIN")) {
+            if (authority.getAuthority().equals(Role.ADMIN_ROLE)) {
                 try {
                     redirectStrategy.sendRedirect(request, response, "/admin/home");
                 } catch (Exception e) {
@@ -37,7 +39,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
                 }
 
-            } else if (authority.getAuthority().equals("ROLE_CUSTOMER")) {
+            } else if (authority.getAuthority().equals(Role.CUSTOMER_ROLE)) {
                 try {
                     redirectStrategy.sendRedirect(request, response, "/home/index");
                 } catch (Exception e) {
