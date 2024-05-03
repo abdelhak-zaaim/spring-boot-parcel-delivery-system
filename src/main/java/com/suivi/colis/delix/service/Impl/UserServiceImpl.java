@@ -16,6 +16,8 @@ import com.suivi.colis.delix.repository.UserRepo;
 
 import com.suivi.colis.delix.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,7 +25,7 @@ import java.util.*;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepo userRepository;
 
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
@@ -47,14 +49,20 @@ public class UserServiceImpl implements UserService {
     }
 
     public Optional<User> getUserByEmail(String email) {
-        log.debug("email: ", email);
-
         return userRepository.findByEmail(email);
     }
 
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByEmail(email);
+        user.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
+        return user.get();
+
     }
 
 

@@ -16,19 +16,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Getter
 public enum UserStatus {
-    ACTIVE(new SimpleGrantedAuthority("ACTIVE")),
-    INACTIVE(new SimpleGrantedAuthority("INACTIVE")),
-    SUSPENDED(new SimpleGrantedAuthority("SUSPENDED")),
-    DELETED(new SimpleGrantedAuthority("DELETED")),
-    EXPIRED(new SimpleGrantedAuthority("EXPIRED")),
-    LOCKED(new SimpleGrantedAuthority("LOCKED")),
-    DISABLED(new SimpleGrantedAuthority("DISABLED"));
-
-
-    private final GrantedAuthority grantedAuthority;
-
-    UserStatus(GrantedAuthority grantedAuthority) {
-        this.grantedAuthority = grantedAuthority;
-    }
+    ACTIVE,
+    INACTIVE,
+    SUSPENDED,
+    DELETED,
+    EXPIRED,
+    LOCKED,
+    DISABLED;
 
 }

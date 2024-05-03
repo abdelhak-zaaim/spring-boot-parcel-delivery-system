@@ -21,23 +21,24 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Table(name = "users")
-@Getter
-@Setter
-@ToString
+@Data
 @RequiredArgsConstructor
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
-public class User {
+public class User implements UserDetails {
+    private final static String ROLE_PREFIX = "ROLE_";
     private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Id
@@ -48,6 +49,9 @@ public class User {
     private String name;
 
     @ValidEmail
+    @NotNull
+    @NotBlank
+    @Column(nullable = false, unique = true)
     private String email;
 
     @NotNull
@@ -75,6 +79,8 @@ public class User {
     private Date lastUpdateDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @NotNull
     private UserStatus status;
 
     @Column(unique = true)
@@ -115,20 +121,51 @@ public class User {
         this.lastUpdateDate = new Date();
     }
 
+
+
+
     @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
-        User user = (User) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.getRole()));
+
+
+        if (this.privilegesGroup != null) {
+            this.privilegesGroup.getPrivileges().forEach(privilege -> {
+                authorities.add(new SimpleGrantedAuthority(privilege.name()));
+
+            });
+        }
+        return authorities;
     }
 
     @Override
-    public final int hashCode() {
+    public String getPassword() {
+        return this.password;
+    }
 
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return !this.status.equals(UserStatus.EXPIRED);
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.status.equals(UserStatus.LOCKED);
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.status != null && !this.status.equals(UserStatus.DISABLED);
     }
 }

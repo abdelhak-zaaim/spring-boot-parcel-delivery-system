@@ -37,9 +37,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
                 }
 
-            } else if (authority.getAuthority().equals("CUSTOMER")) {
+            } else if (authority.getAuthority().equals("ROLE_CUSTOMER")) {
                 try {
-                    redirectStrategy.sendRedirect(request, response, "/customer/home");
+                    redirectStrategy.sendRedirect(request, response, "/home/index");
                 } catch (Exception e) {
 
 

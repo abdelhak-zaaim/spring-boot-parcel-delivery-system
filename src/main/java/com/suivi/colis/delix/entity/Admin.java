@@ -16,18 +16,24 @@ package com.suivi.colis.delix.entity;
 import com.suivi.colis.delix.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.proxy.HibernateProxy;
 
-@Getter
+import java.util.Objects;
+
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
+@Data
 @DiscriminatorValue(Role.ADMIN_ROLE)
 public class Admin extends Employee {
 
 private String adminEmployeeNumber;
+
+
+
 
 
 }

@@ -51,17 +51,27 @@ public class CustommerTest {
             return ResponseEntity.ok(customerService.saveCustomer(customer));
 
         } catch (Exception e) {
-            throw new IllegalIdentifierException("Failed to add customer");
+            throw new IllegalIdentifierException("Error while adding the customer");
         }
 
     }
 
-    @GetMapping("/test/custommer/update")
+    @GetMapping("/test/customer/update")
     public ResponseEntity<Customer> updateCustommer() {
         //updating a custommer for testing purposes
         Customer customer = customerService.loadCustomerById(1L);
         customer.setEmail("abdelhak@tset.com");
         return ResponseEntity.ok(customerService.updateCustomer(customer));
+
+    }
+
+
+
+    @GetMapping("/test/customer/get")
+    public ResponseEntity<Customer> getCustommer() {
+        //getting a custommer for testing purposes
+        Customer customer = customerService.loadCustomerById(1L);
+        return ResponseEntity.ok(customer);
 
     }
 }

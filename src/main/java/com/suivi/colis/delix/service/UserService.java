@@ -11,6 +11,7 @@
 package com.suivi.colis.delix.service;
 
 import com.suivi.colis.delix.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
     void deleteUser(Long id);

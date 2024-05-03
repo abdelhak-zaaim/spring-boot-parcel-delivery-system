@@ -11,8 +11,9 @@
 package com.suivi.colis.delix.securingweb;
 
 import com.suivi.colis.delix.model.enums.Role;
-import com.suivi.colis.delix.service.Impl.UserServiceImpl;
 
+import com.suivi.colis.delix.service.Impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,10 +35,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private UserServiceImpl userService;
-    public WebSecurityConfig(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    //private UserServiceImpl userService;
+  //  public WebSecurityConfig(UserServiceImpl userService) {
+       // this.userService = userService;
+  //  }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -63,11 +64,12 @@ public class WebSecurityConfig {
     }
 
     @Bean
+
     public AuthenticationManager authenticationManager(
-            UserDetailsService userDetailsService,
+             UserServiceImpl userService,
             PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setUserDetailsService(userService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
 
         return new ProviderManager(authenticationProvider);
