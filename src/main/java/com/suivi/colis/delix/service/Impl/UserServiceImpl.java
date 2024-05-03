@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User saveUser(User user) {
-        user.setPassword(webSecurityConfig.passwordEncoder().encode(user.getPassword()));
+        user.setPassword(encodePassword(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -78,7 +78,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
-
+    public String encodePassword(String password) {
+        return webSecurityConfig.passwordEncoder().encode(password);
+    }
 }
 
 
