@@ -1,0 +1,230 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 07/11/2016 08:51
+  	*/
+
+	@font-face {
+	    font-family: "Flaticon";
+	    src: url("fonts/cons.eot");
+	    src: url("fonts/cons.eot?#iefix") format("embedded-opentype"), url("fonts/cons.woff") format("woff"), url("fonts/cons.ttf") format("truetype"), url("fonts/cons.svg#Flaticon") format("svg");
+	    font-weight: normal;
+	    font-style: normal;
+	}
+
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+	    @font-face {
+	        font-family: "Flaticon";
+	        src: url("fonts/cons.svg#Flaticon") format("svg");
+	    }
+	}
+
+	[class^="flaticon-"]:before,
+	[class*=" flaticon-"]:before,
+	[class^="flaticon-"]:after,
+	[class*=" flaticon-"]:after {
+	    font-family: Flaticon;
+	    font-size: 50px;
+	    font-style: normal;
+	    margin-left: 0;
+	    text-align: center;
+	}
+
+	.flaticon-apartment:before {
+	    content: "\f100";
+	}
+
+	.flaticon-apartments:before {
+	    content: "\f101";
+	}
+
+	.flaticon-barrier:before {
+	    content: "\f102";
+	}
+
+	.flaticon-blueprint:before {
+	    content: "\f103";
+	}
+
+	.flaticon-blueprint-1:before {
+	    content: "\f104";
+	}
+
+	.flaticon-building:before {
+	    content: "\f105";
+	}
+
+	.flaticon-bulldozer:before {
+	    content: "\f106";
+	}
+
+	.flaticon-chainsaw:before {
+	    content: "\f107";
+	}
+
+	.flaticon-concrete-mixer:before {
+	    content: "\f108";
+	}
+
+	.flaticon-contract:before {
+	    content: "\f109";
+	}
+
+	.flaticon-crane:before {
+	    content: "\f10a";
+	}
+
+	.flaticon-crane-1:before {
+	    content: "\f10b";
+	}
+
+	.flaticon-driller:before {
+	    content: "\f10c";
+	}
+
+	.flaticon-driller-1:before {
+	    content: "\f10d";
+	}
+
+	.flaticon-dump-truck:before {
+	    content: "\f10e";
+	}
+
+	.flaticon-electricity:before {
+	    content: "\f10f";
+	}
+
+	.flaticon-excavator:before {
+	    content: "\f110";
+	}
+
+	.flaticon-fence:before {
+	    content: "\f111";
+	}
+
+	.flaticon-fence-1:before {
+	    content: "\f112";
+	}
+
+	.flaticon-forklift:before {
+	    content: "\f113";
+	}
+
+	.flaticon-hammer:before {
+	    content: "\f114";
+	}
+
+	.flaticon-helmet:before {
+	    content: "\f115";
+	}
+
+	.flaticon-house:before {
+	    content: "\f116";
+	}
+
+	.flaticon-house-key:before {
+	    content: "\f117";
+	}
+
+	.flaticon-lift:before {
+	    content: "\f118";
+	}
+
+	.flaticon-measuring-tape:before {
+	    content: "\f119";
+	}
+
+	.flaticon-nail:before {
+	    content: "\f11a";
+	}
+
+	.flaticon-paint-brush:before {
+	    content: "\f11b";
+	}
+
+	.flaticon-pipe:before {
+	    content: "\f11c";
+	}
+
+	.flaticon-placeholder:before {
+	    content: "\f11d";
+	}
+
+	.flaticon-pliers:before {
+	    content: "\f11e";
+	}
+
+	.flaticon-roof:before {
+	    content: "\f11f";
+	}
+
+	.flaticon-saw:before {
+	    content: "\f120";
+	}
+
+	.flaticon-saw-1:before {
+	    content: "\f121";
+	}
+
+	.flaticon-saw-2:before {
+	    content: "\f122";
+	}
+
+	.flaticon-screw:before {
+	    content: "\f123";
+	}
+
+	.flaticon-screwdriver:before {
+	    content: "\f124";
+	}
+
+	.flaticon-shovel:before {
+	    content: "\f125";
+	}
+
+	.flaticon-skyline:before {
+	    content: "\f126";
+	}
+
+	.flaticon-spatula:before {
+	    content: "\f127";
+	}
+
+	.flaticon-steamroller:before {
+	    content: "\f128";
+	}
+
+	.flaticon-tank-truck:before {
+	    content: "\f129";
+	}
+
+	.flaticon-tools:before {
+	    content: "\f12a";
+	}
+
+	.flaticon-tractor:before {
+	    content: "\f12b";
+	}
+
+	.flaticon-trowel:before {
+	    content: "\f12c";
+	}
+
+	.flaticon-truck:before {
+	    content: "\f12d";
+	}
+
+	.flaticon-truck-1:before {
+	    content: "\f12e";
+	}
+
+	.flaticon-wall:before {
+	    content: "\f12f";
+	}
+
+	.flaticon-wheelbarrow:before {
+	    content: "\f130";
+	}
+
+	.flaticon-wrench:before {
+	    content: "\f131";
+	}
