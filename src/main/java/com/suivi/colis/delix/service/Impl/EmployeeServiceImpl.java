@@ -21,9 +21,11 @@ import org.springframework.stereotype.Service;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepo employeeRepository;
+    private final UserServiceImpl userService;
 
-    public EmployeeServiceImpl(EmployeeRepo employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepo employeeRepository, UserServiceImpl userService) {
         this.employeeRepository = employeeRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -38,6 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee saveEmployee(Employee employee) {
+        employee.setPassword(userService.encodePassword(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 

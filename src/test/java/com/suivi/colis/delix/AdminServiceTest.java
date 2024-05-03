@@ -12,7 +12,7 @@ package com.suivi.colis.delix;
 
 import com.suivi.colis.delix.entity.Admin;
 import com.suivi.colis.delix.repository.AdminEmployeeRepo;
-import com.suivi.colis.delix.service.Impl.AdminEmployeeServiceImpl;
+import com.suivi.colis.delix.service.Impl.AdminServiceImpl;
 import jakarta.persistence.Convert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class AdminServiceTest {
     private AdminEmployeeRepo adminRepo;
 
     @InjectMocks
-    private AdminEmployeeServiceImpl adminService;
+    private AdminServiceImpl adminService;
 
     @BeforeEach
     void setUp() {

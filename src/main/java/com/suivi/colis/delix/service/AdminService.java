@@ -11,7 +11,7 @@
 package com.suivi.colis.delix.service;
 import com.suivi.colis.delix.entity.Admin;
 
-public interface AdminEmployeeService {
+public interface AdminService {
     void deleteAdmin(Long id);
 
     Admin loadAdminById(Long id);

@@ -14,7 +14,7 @@ import com.suivi.colis.delix.entity.Admin;
 import com.suivi.colis.delix.entity.PrivilegesGroup;
 import com.suivi.colis.delix.model.enums.Privilege;
 import com.suivi.colis.delix.model.enums.UserStatus;
-import com.suivi.colis.delix.service.Impl.AdminEmployeeServiceImpl;
+import com.suivi.colis.delix.service.Impl.AdminServiceImpl;
 import com.suivi.colis.delix.service.Impl.PrivilegesGroupServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,10 +26,10 @@ import java.util.List;
 
 @Controller
 public class AdminTest {
-    private AdminEmployeeServiceImpl adminService;
+    private AdminServiceImpl adminService;
     private PrivilegesGroupServiceImpl privilegesGroupService;
 
-    public AdminTest(AdminEmployeeServiceImpl adminService, PrivilegesGroupServiceImpl privilegesGroupService) {
+    public AdminTest(AdminServiceImpl adminService, PrivilegesGroupServiceImpl privilegesGroupService) {
         this.adminService = adminService;
         this.privilegesGroupService = privilegesGroupService;
     }

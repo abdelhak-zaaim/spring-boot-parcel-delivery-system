@@ -17,10 +17,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SuperAdminServiceImpl implements SuperAdminService {
-    SuperAdminRepo superAdminRepo;
+    private final SuperAdminRepo superAdminRepo;
+    private final UserServiceImpl userService;
 
-    public SuperAdminServiceImpl(SuperAdminRepo superAdminRepo) {
+    public SuperAdminServiceImpl(SuperAdminRepo superAdminRepo, UserServiceImpl userService) {
         this.superAdminRepo = superAdminRepo;
+        this.userService = userService;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
     @Override
     public SuperAdmin saveSuperAdmin(SuperAdmin superAdmin) {
+        superAdmin.setPassword(userService.encodePassword(superAdmin.getPassword()));
         return superAdminRepo.save(superAdmin);
     }
 

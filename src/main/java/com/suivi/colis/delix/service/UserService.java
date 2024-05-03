@@ -15,10 +15,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
     void deleteUser(Long id);
+
     User loadUserById(Long id);
+
     User saveUser(User user);
+
     User updateUser(User user);
 
+    boolean existsUserByEmail(String email);
 
 
 }

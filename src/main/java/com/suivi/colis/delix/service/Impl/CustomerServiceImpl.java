@@ -21,9 +21,11 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepo customerRepository;
+    private final UserServiceImpl userService;
 
-    public CustomerServiceImpl(CustomerRepo customerRepository) {
+    public CustomerServiceImpl(CustomerRepo customerRepository, UserServiceImpl userService) {
         this.customerRepository = customerRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-
+        customer.setPassword(userService.encodePassword(customer.getPassword()));
         return customerRepository.save(customer);
 
     }
