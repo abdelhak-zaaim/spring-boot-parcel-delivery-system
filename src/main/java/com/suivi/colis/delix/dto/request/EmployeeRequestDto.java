@@ -14,9 +14,11 @@ package com.suivi.colis.delix.dto.request;
 
 import com.suivi.colis.delix.entity.Employee;
 import com.suivi.colis.delix.model.enums.UserStatus;
+import com.suivi.colis.delix.util.Constants;
 import jakarta.validation.constraints.*;
 import lombok.Value;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,6 +26,7 @@ import java.util.Date;
 /**
  * DTO for {@link Employee}
  */
+
 @Value
 public class EmployeeRequestDto implements Serializable {
     @NotNull(message = "tye name should be not empty")
@@ -35,10 +38,10 @@ public class EmployeeRequestDto implements Serializable {
     @NotEmpty
     String email;
     String role;
+
+    @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String phoneNumber;
     AddressRequestDto address;
-    Date registeredAt;
-    Date lastUpdateDate;
     UserStatus status;
     String cin;
     @Past

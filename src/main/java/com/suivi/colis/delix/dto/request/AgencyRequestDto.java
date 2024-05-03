@@ -11,10 +11,12 @@
 
 package com.suivi.colis.delix.dto.request;
 
+import com.suivi.colis.delix.util.Constants;
 import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -24,6 +26,10 @@ import java.util.Set;
  */
 @Value
 public class AgencyRequestDto implements Serializable {
+
+
+    @NotBlank
+    @NotNull
     String agencyCode;
     @NotBlank
     @NotNull
@@ -31,6 +37,7 @@ public class AgencyRequestDto implements Serializable {
     @NotNull
     AddressRequestDto agencyAddress;
     Date agencyEstablishedDate;
+    @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String agencyContactNumber;
     @NotNull
     String agencyEmail;

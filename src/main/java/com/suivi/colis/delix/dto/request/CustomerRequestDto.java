@@ -25,6 +25,7 @@ import java.util.Date;
 /**
  * DTO for {@link com.suivi.colis.delix.entity.Customer}
  */
+
 @Value
 public class CustomerRequestDto implements Serializable {
     @NotNull
@@ -36,6 +37,7 @@ public class CustomerRequestDto implements Serializable {
     @NotEmpty
     String email;
 
+    @NotNull
     String role;
 
     @NotEmpty
