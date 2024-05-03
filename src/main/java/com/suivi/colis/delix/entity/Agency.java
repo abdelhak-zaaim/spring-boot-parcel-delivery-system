@@ -51,7 +51,7 @@ public class Agency {
     @ManyToOne
     private Admin createdBy;
 
-    @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
+    @Column(name = "agency_contact_number")
     private String agencyContactNumber;
 
     @Email

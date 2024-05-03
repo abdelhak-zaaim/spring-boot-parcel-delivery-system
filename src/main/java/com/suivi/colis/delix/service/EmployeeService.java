@@ -20,4 +20,5 @@ public interface EmployeeService {
     Employee saveEmployee(Employee employee);
 
     Employee updateEmployee(Employee employee);
+    Employee updateEmployeeEmail(Long employeeId, String newEmail);
 }

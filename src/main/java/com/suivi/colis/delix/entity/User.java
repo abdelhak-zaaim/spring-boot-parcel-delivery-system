@@ -31,7 +31,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.*;
 
-@Table(name = "users")
+@Table(name = "users", indexes = {
+        @Index(name = "index_email", columnList = "email"),
+        @Index(name = "index_id", columnList = "id")
+})
 @Data
 @RequiredArgsConstructor
 @Entity
@@ -39,7 +42,6 @@ import java.util.*;
 @UserValidate
 public class User implements UserDetails {
     private final static String ROLE_PREFIX = "ROLE_";
-    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,7 +112,6 @@ public class User implements UserDetails {
 
     @PrePersist
     protected void onCreated() {
-        this.password = passwordEncoder.encode(this.password);
         Date date = new Date();
         this.registeredAt = date;
         this.lastUpdateDate = date;
@@ -120,8 +121,6 @@ public class User implements UserDetails {
     protected void onUpdate() {
         this.lastUpdateDate = new Date();
     }
-
-
 
 
     @Override

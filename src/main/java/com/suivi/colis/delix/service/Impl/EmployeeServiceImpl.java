@@ -14,6 +14,7 @@ package com.suivi.colis.delix.service.Impl;
 import com.suivi.colis.delix.entity.Employee;
 import com.suivi.colis.delix.repository.EmployeeRepo;
 import com.suivi.colis.delix.service.EmployeeService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,6 +44,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee updateEmployee(Employee employee) {
         return employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee updateEmployeeEmail(Long employeeId, String newEmail) {
+
+            Employee employee = employeeRepository.findById(employeeId)
+                    .orElseThrow(() -> new EntityNotFoundException("Employee with id " + employeeId + " not found"));
+
+            employee.setEmail(newEmail);
+            return employeeRepository.save(employee);
+
     }
 
 

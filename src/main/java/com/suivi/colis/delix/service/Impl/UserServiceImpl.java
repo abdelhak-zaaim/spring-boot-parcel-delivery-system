@@ -12,8 +12,10 @@
 package com.suivi.colis.delix.service.Impl;
 
 import com.suivi.colis.delix.entity.User;
+import com.suivi.colis.delix.exception.UserNotFoundException;
 import com.suivi.colis.delix.repository.UserRepo;
 
+import com.suivi.colis.delix.securingweb.WebSecurityConfig;
 import com.suivi.colis.delix.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,9 +30,11 @@ import java.util.*;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepo userRepository;
+    private final WebSecurityConfig webSecurityConfig;
 
-    public UserServiceImpl(UserRepo userRepository) {
+    public UserServiceImpl(UserRepo userRepository, WebSecurityConfig webSecurityConfig) {
         this.userRepository = userRepository;
+        this.webSecurityConfig = webSecurityConfig;
     }
 
     @Override
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User saveUser(User user) {
+        user.setPassword(webSecurityConfig.passwordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -63,6 +68,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
         return user.get();
 
+    }
+
+    public void updateUserEmail(Long userId, String newEmail) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found"));
+
+        user.setEmail(newEmail);
+        userRepository.save(user);
     }
 
 
