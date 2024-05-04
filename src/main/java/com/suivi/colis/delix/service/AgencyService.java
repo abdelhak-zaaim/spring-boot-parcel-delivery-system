@@ -12,6 +12,8 @@ package com.suivi.colis.delix.service;
 
 import com.suivi.colis.delix.entity.Agency;
 
+import java.util.List;
+
 public interface AgencyService {
     void deleteAgency(Long id);
 
@@ -20,4 +22,5 @@ public interface AgencyService {
     Agency saveAgency(Agency agency);
 
     Agency updateAgency(Agency agency);
+    List<Agency> getAllAgencies();
 }

@@ -13,18 +13,21 @@ package com.suivi.colis.delix.service.Impl;
 
 import com.suivi.colis.delix.entity.Agency;
 import com.suivi.colis.delix.repository.AgencyRepo;
+import com.suivi.colis.delix.service.AddressService;
 import com.suivi.colis.delix.service.AgencyService;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 @Service
 public class AgencyServiceImpl implements AgencyService {
-
+    private final AddressService addressService;
 
     private final AgencyRepo agencyRepository;
 
-    public AgencyServiceImpl(AgencyRepo agencyRepository) {
+    public AgencyServiceImpl(AddressService addressService, AgencyRepo agencyRepository) {
+        this.addressService = addressService;
         this.agencyRepository = agencyRepository;
     }
 
@@ -40,6 +43,7 @@ public class AgencyServiceImpl implements AgencyService {
 
     @Override
     public Agency saveAgency(Agency agency) {
+     //   agency.setAgencyAddress(addressService.saveAddress(agency.getAgencyAddress()));
         return agencyRepository.save(agency);
     }
 
@@ -48,13 +52,10 @@ public class AgencyServiceImpl implements AgencyService {
         return agencyRepository.save(agency);
     }
 
-    public String generateAgencyCode() {
-        SecureRandom random = new SecureRandom();
-        String generatedCode;
-        do {
-            int randomNumber = 10000000 + random.nextInt(90000000);
-            generatedCode = "AGC" + randomNumber;
-        } while (agencyRepository.existsByAgencyCode(generatedCode));
-        return generatedCode;
+    @Override
+    public List<Agency> getAllAgencies() {
+        return agencyRepository.findAll();
     }
+
+
 }
