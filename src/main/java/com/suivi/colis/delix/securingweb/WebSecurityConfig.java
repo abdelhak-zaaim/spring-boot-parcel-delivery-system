@@ -13,7 +13,6 @@ package com.suivi.colis.delix.securingweb;
 import com.suivi.colis.delix.model.enums.Role;
 
 import com.suivi.colis.delix.service.Impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,7 +24,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -35,16 +33,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    //private UserServiceImpl userService;
-  //  public WebSecurityConfig(UserServiceImpl userService) {
-       // this.userService = userService;
-  //  }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll() // the /test/** paths for testing todo: delete it after testing
+                requests.requestMatchers("/**", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll()
+
+                        // the /test/** paths for testing todo: delete it after testing
                         .requestMatchers("/css/**","/js/**","/img/**","/assets/**").permitAll()
+
                         .requestMatchers("/customer/**").hasRole(Role.CUSTOMER_ROLE)
                         .requestMatchers("/delivery/**").hasRole(Role.DELIVERY_MAN_ROLE)
                         .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
@@ -53,6 +49,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()).formLogin(Customizer.withDefaults())
 
                 .logout(LogoutConfigurer::permitAll);
+
 
         return http.build();
     }
@@ -64,7 +61,6 @@ public class WebSecurityConfig {
     }
 
     @Bean
-
     public AuthenticationManager authenticationManager(
              UserServiceImpl userService,
             PasswordEncoder passwordEncoder) {
