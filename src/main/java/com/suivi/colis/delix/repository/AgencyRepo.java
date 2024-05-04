@@ -14,7 +14,8 @@ import com.suivi.colis.delix.entity.Agency;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AgencyRepo extends JpaRepository<Agency, Long> {
-    boolean existsByAgencyCode(String agencyCode);
 }
