@@ -15,6 +15,7 @@ import com.suivi.colis.delix.model.MapsLocationPoint;
 import com.suivi.colis.delix.validation.location.ValidMapsLocationPoint;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -28,7 +29,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "agency", indexes = {
-        @Index(name = "index_agency_code", columnList = "agency_code"),
         @Index(name = "index_id", columnList = "id")
 })
 public class Agency {
@@ -36,8 +36,6 @@ public class Agency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false , name = "agency_code", updatable = false)
-    private String agencyCode;
 
     @Column(nullable = false)
     @NotNull
@@ -77,7 +75,6 @@ public class Agency {
     private MapsLocationPoint locationPoint;
 
     public Agency(String agencyCode, String agencyName, Address agencyAddress, Admin createdBy) {
-        this.agencyCode = agencyCode;
         this.agencyName = agencyName;
         this.agencyAddress = agencyAddress;
         this.createdBy = createdBy;
