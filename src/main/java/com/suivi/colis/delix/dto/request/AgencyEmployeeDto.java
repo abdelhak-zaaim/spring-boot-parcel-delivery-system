@@ -42,6 +42,7 @@ import java.util.Date;
  */
 @Value
 public class AgencyEmployeeDto implements Serializable {
+    Long id;
     @NotNull
     @NotBlank
     String name;

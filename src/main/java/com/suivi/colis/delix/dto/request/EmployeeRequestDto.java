@@ -29,6 +29,7 @@ import java.util.Date;
 
 @Value
 public class EmployeeRequestDto implements Serializable {
+    Long id;
     @NotNull(message = "tye name should be not empty")
     @Size
     @NotEmpty

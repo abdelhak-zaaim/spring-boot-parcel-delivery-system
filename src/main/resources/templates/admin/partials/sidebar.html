@@ -20,22 +20,17 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link "   data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#"  th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? '' : 'collapsed'}">
-                <i class="bi bi-menu-button-wide"></i><span>Agency's</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link" data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#"
+               th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? '' : 'collapsed'}">
+                <i class="bi bi-menu-button-wide"></i><span>Agency's</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="agency-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? 'show' : ''}">
-                <li>
-                    <a th:href="@{/admin/agency/add}" th:classappend="${currentPage == '/agency/add' ? 'active' : ''}">
-                        <i class="bi bi-circle"></i><span>Add agency</span>
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/agencies}" th:classappend="${currentPage == '/agencies' ? 'active' : ''}">
-                        <i class="bi bi-circle"></i><span>List agency's</span>
-                    </a>
-                </li>
-
+            <ul id="agency-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav"
+                th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? 'show' : ''}">
+                <li><a th:href="@{/admin/agency/add}"
+                       th:classappend="${currentPage == '/agency/add' ? 'active' : ''}"><i
+                        class="bi bi-circle"></i><span>Add agency</span></a></li>
+                <li><a th:href="@{/admin/agencies}" th:classappend="${currentPage == '/agencies' ? 'active' : ''}"><i
+                        class="bi bi-circle"></i><span>List agency's</span></a></li>
             </ul>
         </li>
 
@@ -52,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./customers"  th:classappend="${currentPage == '/customers' ? 'active' : ''}">
+                    <a href="./customers" th:classappend="${currentPage == '/customers' ? 'active' : ''}">
                         <i class="bi bi-circle"></i><span>List of Customers</span>
                     </a>
                 </li>
@@ -101,15 +96,6 @@
 
             </ul>
         </li>
-
-
-
-
-
-
-
-
-
 
 
         <li class="nav-heading">Pages</li>

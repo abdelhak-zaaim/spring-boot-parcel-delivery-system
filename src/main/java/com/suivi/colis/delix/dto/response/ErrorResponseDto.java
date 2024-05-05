@@ -10,10 +10,10 @@
  */
 
 
-package com.suivi.colis.delix.dto.request;
+package com.suivi.colis.delix.dto.response;
 
 import java.util.Date;
-public record ErrorRequestDto(
+public record ErrorResponseDto(
         String message,
         int statusCode,
         Date timestamp,

@@ -19,14 +19,14 @@ import java.io.Serializable;
  * DTO for {@link com.suivi.colis.delix.entity.Agency}
  */
 @Value
-public class AgencyDto implements Serializable {
+public class AgencyResponseDto implements Serializable {
     String agencyName;
     AddressDto agencyAddress;
     String agencyContactNumber;
     MapsLocationPointDto locationPoint;
 
 
-    public AgencyDto(Agency agency) {
+    public AgencyResponseDto(Agency agency) {
     this.agencyName = agency.getAgencyName();
     this.agencyAddress = new AddressDto(agency.getAgencyAddress());
     this.agencyContactNumber = agency.getAgencyContactNumber();

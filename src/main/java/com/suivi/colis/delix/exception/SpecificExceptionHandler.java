@@ -12,7 +12,7 @@ package com.suivi.colis.delix.exception;
 
 
 
-import com.suivi.colis.delix.dto.request.ErrorRequestDto;
+import com.suivi.colis.delix.dto.response.ErrorResponseDto;
 import com.suivi.colis.delix.exception.personalizedexceptions.DataValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
@@ -28,7 +28,7 @@ import java.util.Date;
 public class SpecificExceptionHandler {
     @ExceptionHandler(DataValidationException.class)
     public ResponseEntity<?> handleInvalidUserAttributesException(DataValidationException ex, HttpServletRequest request) {
-        ErrorRequestDto error = new ErrorRequestDto(ex.getMessage(), HttpStatus.BAD_REQUEST.value(), new Date(), request.getRequestURI());
+        ErrorResponseDto error = new ErrorResponseDto(ex.getMessage(), HttpStatus.BAD_REQUEST.value(), new Date(), request.getRequestURI());
 
         return BaseExceptionHandler.createErrorResponse(error, HttpStatus.BAD_REQUEST, request.getHeader("Accept"));
     }

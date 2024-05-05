@@ -24,6 +24,7 @@ import java.util.Date;
  */
 @Value
 public class UserRequestDto implements Serializable {
+    Long id;
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]+$")
     String name;

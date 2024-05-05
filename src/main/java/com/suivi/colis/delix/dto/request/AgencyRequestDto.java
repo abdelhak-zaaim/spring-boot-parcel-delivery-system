@@ -26,7 +26,7 @@ import java.util.Set;
  */
 @Value
 public class AgencyRequestDto implements Serializable {
-
+    Long id;
     @NotBlank
     @NotNull
     String agencyName;

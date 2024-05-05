@@ -23,6 +23,7 @@ import java.util.Date;
  */
 @Value
 public class AddressRequestDto implements Serializable {
+    Long id;
     @NotNull
     String street;
     @NotNull

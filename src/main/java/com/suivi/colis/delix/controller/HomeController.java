@@ -10,7 +10,7 @@
 
 package com.suivi.colis.delix.controller;
 
-import com.suivi.colis.delix.dto.response.AgencyDto;
+import com.suivi.colis.delix.dto.response.AgencyResponseDto;
 import com.suivi.colis.delix.entity.Agency;
 import com.suivi.colis.delix.service.Impl.AgencyServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -54,11 +53,11 @@ public class HomeController {
 
 
     @GetMapping("/home/get_location_agencys")
-    public ResponseEntity<List<AgencyDto>> getLocationAgency() {
+    public ResponseEntity<List<AgencyResponseDto>> getLocationAgency() {
         log.debug("Getting all agencies");
         List<Agency> agencies = agencyService.getAllAgencies();
         return ResponseEntity.ok(agencies.stream()
-                .map(AgencyDto::new)
+                .map(AgencyResponseDto::new)
                 .collect(Collectors.toList()));
     }
 

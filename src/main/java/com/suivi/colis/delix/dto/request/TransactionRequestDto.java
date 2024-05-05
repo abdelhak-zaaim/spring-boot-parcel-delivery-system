@@ -27,6 +27,7 @@ import java.util.Date;
  */
 @Value
 public class TransactionRequestDto implements Serializable {
+    Long id;
     UserRequestDto user;
     @Positive
     double amount;

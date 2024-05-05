@@ -28,6 +28,7 @@ import java.util.Date;
 
 @Value
 public class CustomerRequestDto implements Serializable {
+    Long id;
     @NotNull
     @NotEmpty
     String name;
