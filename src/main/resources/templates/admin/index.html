@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-
-<head th:replace="/admin/partials/head.html :: head"><title>DeliX - Dashboard</title></head>
-
+<head th:replace="admin/partials/head.html :: head"></head>
 
 <body>
 
 <header th:replace="admin/partials/header.html :: header"></header>
 
-<aside th:replace="admin/partials/sidebar.html :: aside"></aside>
+<aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/admin')"></aside>
 
 <main id="main" class="main">
-
 
 </main>
 

@@ -1,13 +1,5 @@
-<!--
-  ~ /***
-  ~  * @project : DeliX
-  ~  * @created : 05/05/2024, 12:42
-  ~  * @modified : 05/05/2024, 12:42
-  ~  * @description : This file is part of the DeliX project.
-  ~  * @license : MIT License
-  ~ ****/
-  -->
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -17,7 +9,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
+    <link th:href="@{/assets/img/favicon.png}" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -39,3 +31,4 @@
 
 
 </head>
+</html>

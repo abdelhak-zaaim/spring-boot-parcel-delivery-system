@@ -1,30 +1,20 @@
-<!--
-  ~ /***
-  ~  * @project : DeliX
-  ~  * @created : 04/05/2024, 21:33
-  ~  * @modified : 04/05/2024, 21:33
-  ~  * @description : This file is part of the DeliX project.
-  ~  * @license : MIT License
-  ~ ****/
-  -->
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
-<head th:replace="/admin/partials/head.html :: head"><title>DeliX - Add Agency</title></head>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/partials/head.html :: head"></head>
 
 <body>
 
 <header th:replace="admin/partials/header.html :: header"></header>
 
-<aside th:replace="admin/partials/sidebar.html :: aside"></aside>
-
+<aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/agency/add')"></aside>
 <main id="main" class="main">
 
     <div class="pagetitle">
         <h1>Add Agency</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/admin/">Admin</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/admin}">Admin</a></li>
                 <li class="breadcrumb-item">Agencies</li>
                 <li class="breadcrumb-item active">Add</li>
             </ol>
@@ -167,6 +157,7 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
+
 <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/vendor/chart.js/chart.umd.js"></script>
@@ -178,7 +169,6 @@
 
 
 <script src="/assets/js/main.js"></script>
-
 <!--maps init-->
 <script src="/assets/js/maps.js"></script>
 
