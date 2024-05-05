@@ -30,8 +30,7 @@ public class AgencyController {
     }
 
     @GetMapping("/admin/agency/add")
-    public String addAgency(Model model) {
-        model.addAttribute(Constants.CURRENT_PAGE, "/agency/add");
+    public String addAgency() {
         return "admin/agency/add";
     }
 
