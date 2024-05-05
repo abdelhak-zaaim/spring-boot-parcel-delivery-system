@@ -12,6 +12,7 @@
 
 package com.suivi.colis.delix.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -22,13 +23,15 @@ import java.util.Date;
  */
 @Value
 public class AddressRequestDto implements Serializable {
-
+    @NotNull
     String street;
+    @NotNull
     String city;
+    @NotNull
     String state;
+    @NotNull
     String zip;
+    @NotNull
     String country;
-    Date creationDate;
-    Date lastUpdateDate;
 
 }

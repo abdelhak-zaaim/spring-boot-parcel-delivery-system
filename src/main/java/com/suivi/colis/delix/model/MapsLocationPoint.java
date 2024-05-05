@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MapsLocationPoint {
+
     private Double latitude;
     private Double longitude;
 

@@ -1,0 +1,217 @@
+<!--
+  ~ /***
+  ~  * @project : DeliX
+  ~  * @created : 04/05/2024, 21:33
+  ~  * @modified : 04/05/2024, 21:33
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~ ****/
+  -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>DeliX - Add Agency</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCMuVVf83R6O5bfajZud_clhLYfMLYNKg&callback=initMap"
+            defer></script>
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<header th:replace="admin/partials/header.html :: header"></header>
+
+<aside th:replace="admin/partials/sidebar.html :: aside"></aside>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Add Agency</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/">Admin</a></li>
+                <li class="breadcrumb-item">Agencies</li>
+                <li class="breadcrumb-item active">Add</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Enter Agency details</h5>
+
+
+                        <form action="/admin/agency/add" method="post">
+
+
+                            <div class="row mb-3">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                                <div class="col-lg-6">
+                                    <div class="row mb-3">
+                                        <label for="agencyName" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="agencyName" id="agencyName" class="form-control" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <label for="agencyEmail" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" name="agencyEmail" id="agencyEmail" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="agencyContactNumber" class="col-sm-2 col-form-label">Phone</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="agencyContactNumber" id="agencyContactNumber" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="card-body">
+
+                                            <h5 class="card-title">Address</h5>
+                                            <div class="row mb-3">
+                                                <label for="country" class="col-sm-2 col-form-label">Country</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="agencyAddress.country" id="country"
+                                                           class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+
+                                                <label for="street" class="col-sm-2 col-form-label">Street</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="agencyAddress.street" id="street" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="city" class="col-sm-2 col-form-label">city</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="agencyAddress.city" id="city"
+                                                           class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="zipcode" class="col-sm-2 col-form-label">Zip Code</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" name="agencyAddress.zip" id="zipcode"
+                                                           class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="stat" class="col-sm-2 col-form-label">Stat</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="agencyAddress.state" id="stat"
+                                                           class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div id="map"></div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="latitude" class=" col-form-label">Latitude</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="locationPoint.latitude" id="latitude" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="longitude" class=" col-form-label">Longitude</label>
+                                            <div class="col-sm-10">
+                                                <input type="text"  name="locationPoint.longitude" id="longitude" class="form-control" required>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-11 text-end">
+                                    <button class="btn btn-primary  px-4" type="submit">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+</main>
+
+<!-- ======= Footer ======= -->
+<footer th:replace="admin/partials/footer.html :: footer">
+
+</footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+
+<!--maps init-->
+<script src="/assets/js/maps.js"></script>
+
+</body>
+
+</html>

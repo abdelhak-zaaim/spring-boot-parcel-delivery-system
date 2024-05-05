@@ -36,7 +36,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/**", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll()
+                requests.requestMatchers("/admin","/**", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll()
 
                         // the /test/** paths for testing todo: delete it after testing
                         .requestMatchers("/css/**","/js/**","/img/**","/assets/**").permitAll()

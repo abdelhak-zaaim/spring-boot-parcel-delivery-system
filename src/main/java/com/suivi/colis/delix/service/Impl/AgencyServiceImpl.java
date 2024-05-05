@@ -11,7 +11,10 @@
 
 package com.suivi.colis.delix.service.Impl;
 
+import com.suivi.colis.delix.dto.request.AgencyRequestDto;
+import com.suivi.colis.delix.entity.Address;
 import com.suivi.colis.delix.entity.Agency;
+import com.suivi.colis.delix.model.MapsLocationPoint;
 import com.suivi.colis.delix.repository.AgencyRepo;
 import com.suivi.colis.delix.service.AddressService;
 import com.suivi.colis.delix.service.AgencyService;
@@ -22,11 +25,11 @@ import java.util.List;
 
 @Service
 public class AgencyServiceImpl implements AgencyService {
-    private final AddressService addressService;
+    private final AddressServiceImpl addressService;
 
     private final AgencyRepo agencyRepository;
 
-    public AgencyServiceImpl(AddressService addressService, AgencyRepo agencyRepository) {
+    public AgencyServiceImpl(AddressServiceImpl addressService, AgencyRepo agencyRepository) {
         this.addressService = addressService;
         this.agencyRepository = agencyRepository;
     }
@@ -57,5 +60,17 @@ public class AgencyServiceImpl implements AgencyService {
         return agencyRepository.findAll();
     }
 
+ public Agency convertDtoToEntity(AgencyRequestDto agencyRequestDto) {
+    Agency agency = new Agency();
 
+    agency.setAgencyName(agencyRequestDto.getAgencyName());
+    Address address = addressService.convertDtoToEntity(agencyRequestDto.getAgencyAddress());
+    agency.setAgencyAddress(address);
+    agency.setAgencyContactNumber(agencyRequestDto.getAgencyContactNumber());
+    agency.setAgencyEmail(agencyRequestDto.getAgencyEmail());
+    agency.setLocationPoint(new MapsLocationPoint(agencyRequestDto.getLocationPoint().getLatitude(),
+            agencyRequestDto.getLocationPoint().getLongitude()));
+
+    return agency;
+}
 }

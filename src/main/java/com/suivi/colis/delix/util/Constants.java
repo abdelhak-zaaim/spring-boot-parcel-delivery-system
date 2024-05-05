@@ -12,6 +12,7 @@ package com.suivi.colis.delix.util;
 
 public class Constants {
    public final static String TIME_ZONE = "Africa/Casablanca";
+   public final static String CURRENT_PAGE = "currentPage";
     public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public final static String MOROCCAN_NUMBER_REGEXP = "(\\\\+212)[567][0-9]{8}";
 }

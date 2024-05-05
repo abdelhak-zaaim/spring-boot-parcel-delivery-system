@@ -1,86 +1,60 @@
 /*
  * **
  *  * @project : DeliX
- *  * @created : 04/05/2024, 17:24
- *  * @modified : 04/05/2024, 17:24
+ *  * @created : 04/05/2024, 23:22
+ *  * @modified : 04/05/2024, 23:22
  *  * @description : This file is part of the DeliX project.
  *  * @license : MIT License
  * **
  */
 
+var map;
+var marker; // Keep a reference to the current marker
+
 function initMap() {
-    // Map center coordinates
-    const center = { lat: 32.8792832, lng: -5.685523 };
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 32.8792832, lng: -5.685523},
+        zoom: 6
+    });
 
-    // Map options
-    const options = {
-        zoom: 7,
-        center: center
-    };
+    // Add a click event listener to the map
+    map.addListener('click', function(event) {
+        var latitude = event.latLng.lat();
+        var longitude = event.latLng.lng();
+        updateMarkerAndInputs(latitude, longitude);
+    });
 
-    // Create the map object
-    const map = new google.maps.Map(document.getElementById("map-container"), options);
+    // Add onchange event listeners to the latitude and longitude input fields
+    document.getElementById('latitude').addEventListener('change', updateMarkerFromInputs);
+    document.getElementById('longitude').addEventListener('change', updateMarkerFromInputs);
+}
 
-    fetch('/home/get_location_agencys', {
-        method: 'GET', // or 'POST'
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
+function updateMarkerAndInputs(latitude, longitude) {
+    // Update the latitude and longitude input fields
+    document.getElementById('latitude').value = latitude;
+    document.getElementById('longitude').value = longitude;
 
-            // convert data to a array list like this
-            // const locations = [
-            //     { lat: -33.8688, lng: 151.2093, content: "Sydney, Australia",  },
-            //     { lat: -37.8136, lng: 144.9631, content: "Melbourne, Australia",},
-            //     { lat: -41.2905, lng: 174.7792, content: "Wellington, New Zealand", }
-            // ];
-            const locations = []
-            for (const location of data) {
-                locations.push({ lat: location.locationPoint.latitude, lng: location.locationPoint.longitude, content: location.agencyName })
-            }
-            for (const location of locations) {
-                const marker = new google.maps.Marker({
-                    position: location,
-                    map: map,
-                    icon: "/assets/images/icons/flag.png",
+    // If a marker already exists, remove it
+    if (marker) {
+        marker.setMap(null);
+    }
 
+    // Add a new marker at the clicked location
+    marker = new google.maps.Marker({
+        position: {lat: latitude, lng: longitude},
+        map: map,
+        icon: '/home/assets/images/icons/flag.png' // replace with the URL of your icon
+    });
 
-                });
+    // Move the map to the new marker
+    map.panTo(marker.getPosition());
 
-                // Optional: Add info window content
-                if (location.content) {
-                    const infowindow = new google.maps.InfoWindow({
-                        content: location.content
-                    });
+    // Do something with the latitude and longitude
+    console.log('Latitude: ' + latitude + ', Longitude: ' + longitude);
+}
 
-                    marker.addListener("click", () => {
-                        infowindow.open(map, marker);
-                    });
-                }
-            }
-
-
-
-
-
-            console.log(data)})
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-
-
-
-    // Define locations
-    // const locations = [
-    //     { lat: -33.8688, lng: 151.2093, content: "Sydney, Australia",  },
-    //     { lat: -37.8136, lng: 144.9631, content: "Melbourne, Australia",},
-    //     { lat: -41.2905, lng: 174.7792, content: "Wellington, New Zealand", }
-    // ];
-
-    // Add markers to the map
-
+function updateMarkerFromInputs() {
+    var latitude = parseFloat(document.getElementById('latitude').value);
+    var longitude = parseFloat(document.getElementById('longitude').value);
+    updateMarkerAndInputs(latitude, longitude);
 }

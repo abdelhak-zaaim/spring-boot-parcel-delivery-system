@@ -27,21 +27,16 @@ import java.util.Set;
 @Value
 public class AgencyRequestDto implements Serializable {
 
-
-    @NotBlank
-    @NotNull
-    String agencyCode;
     @NotBlank
     @NotNull
     String agencyName;
     @NotNull
     AddressRequestDto agencyAddress;
-    Date agencyEstablishedDate;
+
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String agencyContactNumber;
     @NotNull
     String agencyEmail;
-    Set<AgencyEmployeeDto> agencyEmployees;
-    Date creationDate;
+    @NotNull
     MapsLocationPointRequestDto locationPoint;
 }

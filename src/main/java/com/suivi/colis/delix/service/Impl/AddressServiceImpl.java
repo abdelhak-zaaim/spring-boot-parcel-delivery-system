@@ -11,6 +11,7 @@
 
 package com.suivi.colis.delix.service.Impl;
 
+import com.suivi.colis.delix.dto.request.AddressRequestDto;
 import com.suivi.colis.delix.entity.Address;
 import com.suivi.colis.delix.service.AddressService;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,16 @@ public class AddressServiceImpl implements AddressService {
         return addressRepo.save(address);
     }
 
+    public Address convertDtoToEntity(AddressRequestDto addressRequestDto) {
+        Address address = new Address();
 
+        // Assuming Address and AddressRequestDto have similar fields
+        address.setStreet(addressRequestDto.getStreet());
+        address.setCity(addressRequestDto.getCity());
+        address.setState(addressRequestDto.getState());
+        address.setCountry(addressRequestDto.getCountry());
+        address.setZip(addressRequestDto.getZip());
+
+        return address;
+    }
 }

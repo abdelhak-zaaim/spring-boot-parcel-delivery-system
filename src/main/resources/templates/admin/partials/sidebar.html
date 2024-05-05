@@ -1,0 +1,168 @@
+<!--
+  ~ /***
+  ~  * @project : DeliX
+  ~  * @created : 04/05/2024, 20:56
+  ~  * @modified : 04/05/2024, 20:56
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~ ****/
+  -->
+
+<aside th:fragment="aside" id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " href="/admin" th:classappend="${currentPage != '/admin' ? 'collapsed' : ''}">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link "   data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#"  th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? '' : 'collapsed'}">
+                <i class="bi bi-menu-button-wide"></i><span>Agency's</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="agency-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? 'show' : ''}">
+                <li>
+                    <a th:href="@{/admin/agency/add}" th:classappend="${currentPage == '/agency/add' ? 'active' : ''}">
+                        <i class="bi bi-circle"></i><span>Add agency</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/agencies}" th:classappend="${currentPage == '/agencies' ? 'active' : ''}">
+                        <i class="bi bi-circle"></i><span>List agency's</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#customrs-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Customers</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="customrs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="./customer/add" th:classappend="${currentPage == '/customer/add' ? 'active' : ''}">
+                        <i class="bi bi-circle"></i><span>Add Customer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./customers"  th:classappend="${currentPage == '/customers' ? 'active' : ''}">
+                        <i class="bi bi-circle"></i><span>List of Customers</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#parcels-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Parcels</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="parcels-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="./parcel/add" th:classappend="${currentPage == '/parcel/add' ? 'active' : ''}">
+                        <i class="bi bi-circle"></i><span>Add Parcel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./parcel" th:classappend="${currentPage == '/parcel' ? 'active' : ''}">
+                        <i class="bi bi-circle"></i><span>List of Parcels</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#transporter-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Transporters</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="transporter-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="./transporters/add">
+                        <i class="bi bi-circle"></i><span>Add Transporter</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./transporters">
+                        <i class="bi bi-circle"></i><span>List of Transporters</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+        <li class="nav-heading">Pages</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>F.A.Q</span>
+            </a>
+        </li><!-- End F.A.Q Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-contact.html">
+                <i class="bi bi-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-register.html">
+                <i class="bi bi-card-list"></i>
+                <span>Register</span>
+            </a>
+        </li><!-- End Register Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-login.html">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Login</span>
+            </a>
+        </li><!-- End Login Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-error-404.html">
+                <i class="bi bi-dash-circle"></i>
+                <span>Error 404</span>
+            </a>
+        </li><!-- End Error 404 Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-blank.html">
+                <i class="bi bi-file-earmark"></i>
+                <span>Blank</span>
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
