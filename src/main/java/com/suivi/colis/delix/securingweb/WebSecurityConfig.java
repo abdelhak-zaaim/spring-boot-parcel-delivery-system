@@ -30,11 +30,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.authorizeHttpRequests((requests) ->
                 requests.requestMatchers("/admin","/**", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll()
 
@@ -49,7 +50,6 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()).formLogin(Customizer.withDefaults())
 
                 .logout(LogoutConfigurer::permitAll);
-
 
         return http.build();
     }
