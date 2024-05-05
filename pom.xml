@@ -11,8 +11,8 @@
     <groupId>com.suivi.colis</groupId>
     <artifactId>DeliX</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SuiviColis</name>
-    <description>SuiviColis</description>
+    <name>DeliX</name>
+    <description>DeliX</description>
     <properties>
         <java.version>17</java.version>
     </properties>
