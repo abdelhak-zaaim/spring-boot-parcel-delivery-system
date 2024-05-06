@@ -12,10 +12,13 @@
 package com.suivi.colis.delix.controller.admin;
 
 import com.suivi.colis.delix.dto.request.AgencyRequestDto;
+import com.suivi.colis.delix.dto.response.AlertMessageDto;
 import com.suivi.colis.delix.service.Impl.AgencyServiceImpl;
 import com.suivi.colis.delix.util.Constants;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,16 +37,21 @@ public class AgencyController {
     public String addAgency(Model model, CsrfToken csrfToken) {
         model.addAttribute("csrf_token", csrfToken.getToken());
 
-
-
         return "admin/agency/add";
     }
 
 
     @PostMapping("/admin/agency/add")
-    public String addAgency(@Valid AgencyRequestDto agencyRequestDto) {
+    public ResponseEntity<AlertMessageDto> addAgency(@Valid AgencyRequestDto agencyRequestDto) {
+
         log.debug("AgencyRequestDto : {}", agencyRequestDto.toString());
-        agencyService.saveAgency(agencyService.convertRequestDtoToEntity(agencyRequestDto));
-        return "redirect:/admin/agency/list";
+        try {
+            agencyService.saveAgency(agencyService.convertRequestDtoToEntity(agencyRequestDto));
+        }catch (Exception e) {
+            log.error("Error while saving agency : {}", e.getMessage());
+            return ResponseEntity.ok(new AlertMessageDto(AlertMessageDto.AlertType.ERROR.name().toLowerCase(), e.getMessage()));
+        }
+        return ResponseEntity.ok(new AlertMessageDto(AlertMessageDto.AlertType.SUCCESS.name().toLowerCase(), "Agency added successfully"));
+
     }
 }

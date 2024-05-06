@@ -8,40 +8,40 @@
         <li class="nav-item">
             <a class="nav-link " href="/admin" th:classappend="${currentPage != '/admin' ? 'collapsed' : ''}">
                 <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
+                <span>Tableau de bord</span>
             </a>
-        </li><!-- End Dashboard Nav -->
+        </li><!-- Fin de la navigation du tableau de bord -->
 
         <li class="nav-item">
             <a class="nav-link" data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#"
                th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? '' : 'collapsed'}">
-                <i class="bi bi-building"></i><span>Agency's</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-building"></i><span>Agences</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="agency-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav"
                 th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? 'show' : ''}">
                 <li><a th:href="@{/admin/agency/add}"
                        th:classappend="${currentPage == '/agency/add' ? 'active' : ''}"><i
-                        class="bi bi-circle"></i><span>Add agency</span></a></li>
+                        class="bi bi-circle"></i><span>Ajouter une agence</span></a></li>
                 <li><a th:href="@{/admin/agencies}" th:classappend="${currentPage == '/agencies' ? 'active' : ''}"><i
-                        class="bi bi-circle"></i><span>List agency's</span></a></li>
+                        class="bi bi-circle"></i><span>Liste des agences</span></a></li>
             </ul>
         </li>
 
 
-        <li class="nav-item">
+        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Under Development">
             <a class="nav-link collapsed" data-bs-target="#customrs-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-people"></i><span>Customers</span><i
+                <i class="bi bi-people"></i><span>Clients</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="customrs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="./customer/add" th:classappend="${currentPage == '/customer/add' ? 'active' : ''}">
-                        <i class="bi bi-circle"></i><span>Add Customer</span>
+                        <i class="bi bi-circle"></i><span>Ajouter un client</span>
                     </a>
                 </li>
                 <li>
                     <a href="./customers" th:classappend="${currentPage == '/customers' ? 'active' : ''}">
-                        <i class="bi bi-circle"></i><span>List of Customers</span>
+                        <i class="bi bi-circle"></i><span>Liste des clients</span>
                     </a>
                 </li>
 
@@ -49,20 +49,20 @@
         </li>
 
 
-        <li class="nav-item">
+        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Under Development">
             <a class="nav-link collapsed" data-bs-target="#parcels-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-box-seam"></i><span>Parcels</span><i
+                <i class="bi bi-box-seam"></i><span>Colis</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="parcels-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="./parcel/add" th:classappend="${currentPage == '/parcel/add' ? 'active' : ''}">
-                        <i class="bi bi-circle"></i><span>Add Parcel</span>
+                        <i class="bi bi-circle"></i><span>Ajouter un colis</span>
                     </a>
                 </li>
                 <li>
                     <a href="./parcel" th:classappend="${currentPage == '/parcel' ? 'active' : ''}">
-                        <i class="bi bi-circle"></i><span>List of Parcels</span>
+                        <i class="bi bi-circle"></i><span>Liste des colis</span>
                     </a>
                 </li>
 
@@ -70,20 +70,20 @@
         </li>
 
 
-        <li class="nav-item">
+        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Under Development">
             <a class="nav-link collapsed" data-bs-target="#transporter-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-truck"></i><span>Transporters</span><i
+                <i class="bi bi-truck"></i><span>Transporteurs</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="transporter-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="./transporters/add">
-                        <i class="bi bi-circle"></i><span>Add Transporter</span>
+                        <i class="bi bi-circle"></i><span>Ajouter un transporteur</span>
                     </a>
                 </li>
                 <li>
                     <a href="./transporters">
-                        <i class="bi bi-circle"></i><span>List of Transporters</span>
+                        <i class="bi bi-circle"></i><span>Liste des transporteurs</span>
                     </a>
                 </li>
 
@@ -91,20 +91,20 @@
         </li>
 
 
-        <li class="nav-item">
+        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Under Development">
             <a class="nav-link collapsed" data-bs-target="#deliveryman-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person-badge"></i><span>Delivery Man</span><i
+                <i class="bi bi-person-badge"></i><span>Livreur</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="deliveryman-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="./transporters/add">
-                        <i class="bi bi-circle"></i><span>Delivery Man</span>
+                        <i class="bi bi-circle"></i><span>Ajouter un livreur</span>
                     </a>
                 </li>
                 <li>
                     <a href="./transporters">
-                        <i class="bi bi-circle"></i><span>List of Delivery Man</span>
+                        <i class="bi bi-circle"></i><span>Liste des livreurs</span>
                     </a>
                 </li>
 

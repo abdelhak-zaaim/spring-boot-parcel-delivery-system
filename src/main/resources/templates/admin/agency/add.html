@@ -10,16 +10,19 @@
 <aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/agency/add')"></aside>
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Add Agency</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/admin}">Admin</a></li>
-                <li class="breadcrumb-item">Agencies</li>
-                <li class="breadcrumb-item active">Add</li>
-            </ol>
-        </nav>
-    </div>
+ <div class="pagetitle">
+    <h1>Ajouter une agence</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Admin</a></li>
+            <li class="breadcrumb-item">Agences</li>
+            <li class="breadcrumb-item active">Ajouter</li>
+        </ol>
+    </nav>
+</div>
+
+
+
 
     <section class="section">
         <div class="row">
@@ -32,116 +35,150 @@
                         <h5 class="card-title">Enter Agency details</h5>
 
 
-                        <form action="/admin/agency/add" method="post" >
+                        <form id="add_agency_form" action="/admin/agency/add" method="post">
 
-                            <input type="hidden"  name="_csrf" th:value="${csrf_token}"/>
-
-
-                            <div class="row mb-3">
-                                <div class="col-lg-6">
-                                    <div class="row mb-3">
-                                        <label for="agencyName" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="agencyName" id="agencyName" class="form-control"
-                                                   required>
-
-                                        </div>
-                                    </div>
+    <input type="hidden" name="_csrf" th:value="${csrf_token}"/>
 
 
-                                    <div class="row mb-3">
-                                        <label for="agencyEmail" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" name="agencyEmail" id="agencyEmail" class="form-control"
-                                                   required>
-                                        </div>
-                                    </div>
+    <div class="row mb-3">
+        <div class="col-lg-6">
+            <div class="row mb-3">
+                <label for="agencyName" class="col-sm-2 col-form-label">Nom</label>
+                <div class="col-sm-10">
+                    <input type="text" name="agencyName" id="agencyName" class="form-control"
+                           required>
 
-                                    <div class="row mb-3">
-                                        <label for="agencyContactNumber" class="col-sm-2 col-form-label">Phone</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="agencyContactNumber" id="agencyContactNumber"
-                                                   class="form-control" required>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="card-body">
-
-                                            <h5 class="card-title">Address</h5>
-                                            <div class="row mb-3">
-                                                <label for="country" class="col-sm-2 col-form-label">Country</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="agencyAddress.country" id="country"
-                                                           class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-
-                                                <label for="street" class="col-sm-2 col-form-label">Street</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="agencyAddress.street" id="street"
-                                                           class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="city" class="col-sm-2 col-form-label">city</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="agencyAddress.city" id="city"
-                                                           class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="zipcode" class="col-sm-2 col-form-label">Zip Code</label>
-                                                <div class="col-sm-10">
-                                                    <input type="number" name="agencyAddress.zip" id="zipcode"
-                                                           class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="stat" class="col-sm-2 col-form-label">Stat</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="agencyAddress.state" id="stat"
-                                                           class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                </div>
+            </div>
 
 
-                                <div class="col-lg-6">
-                                    <div id="map"></div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label for="latitude" class=" col-form-label">Latitude</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="locationPoint.latitude" id="latitude"
-                                                       class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label for="longitude" class=" col-form-label">Longitude</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="locationPoint.longitude" id="longitude"
-                                                       class="form-control" required>
-                                            </div>
-                                        </div>
+            <div class="row mb-3">
+                <label for="agencyEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" name="agencyEmail" id="agencyEmail" class="form-control"
+                           required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="agencyContactNumber" class="col-sm-2 col-form-label">Téléphone</label>
+                <div class="col-sm-10">
+                    <input type="text" name="agencyContactNumber" id="agencyContactNumber"
+                           class="form-control" required>
+                </div>
+            </div>
+
+            <div>
+                <div class="card-body">
+
+                    <h5 class="card-title">Adresse</h5>
+                    <div class="row mb-3">
+                        <label for="country" class="col-sm-2 col-form-label">Pays</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="agencyAddress.country" id="country"
+                                   class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+
+                        <label for="street" class="col-sm-2 col-form-label">Rue</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="agencyAddress.street" id="street"
+                                   class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="city" class="col-sm-2 col-form-label">Ville</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="agencyAddress.city" id="city"
+                                   class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="zipcode" style="padding-right: 0!important;" class="col-sm-2 col-form-label">Code Postal</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="agencyAddress.zip" id="zipcode"
+                                   class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="stat" class="col-sm-2 col-form-label">État</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="agencyAddress.state" id="stat"
+                                   class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
-                                    </div>
+        <div class="col-lg-6">
+            <div id="map"></div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="latitude" class=" col-form-label">Latitude</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="locationPoint.latitude" id="latitude"
+                               class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="longitude" class=" col-form-label">Longitude</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="locationPoint.longitude" id="longitude"
+                               class="form-control" required>
+                    </div>
+                </div>
 
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-lg-11 text-end">
-                                    <button class="btn btn-primary  px-4" type="submit">Submit</button>
-                                </div>
-                            </div>
 
-                        </form>
+            </div>
 
+        </div>
+    </div>
+
+
+    <div th:if="${message}" class="alert  alert-dismissible fade show" role="alert"
+         th:classappend="@{|alert-${message.type}}" th:text="${message.message}">
+
+        <button th:if="${message}" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Fermer"></button>
+    </div>
+
+
+    <div class="row mb-3">
+        <div class="col-lg-11 text-end">
+            <button class="btn btn-primary  px-4" type="submit">Soumettre</button>
+        </div>
+    </div>
+
+</form>
+                        <script>
+                            document.getElementById('add_agency_form').addEventListener('submit', function(event) {
+                                event.preventDefault(); // Prevent the form from submitting normally
+
+                                let url = this.action; // The URL to send the request to
+                                let formData = new FormData(this); // Create a FormData object from the form
+                                  $('#loader-wrapper').show();
+                                fetch(url, {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        $('#loader-wrapper').hide();
+                                        this.reset();
+                                        // Handle the response data here
+                                        console.log(data);
+                                    })
+                                    .catch(error => {
+                                        $('#loader-wrapper').hide();
+                                        // Handle the error here
+                                        console.error('Error:', error);
+                                    });
+                            });
+                        </script>
                     </div>
                 </div>
 
@@ -169,6 +206,7 @@
 <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
 <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/loading/js/main.js"></script>
 
 
 <script src="/assets/js/main.js"></script>

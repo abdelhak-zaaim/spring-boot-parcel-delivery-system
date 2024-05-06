@@ -3,6 +3,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <footer th:fragment="footer" id="footer" class="footer">
+<script>
+    $(document).ready(function() {
+
+        setTimeout(function(){
+            $('#loader-wrapper').hide();
+        }, 600);
+
+    });
+</script>
     <div class="copyright">
          Copyright &copy; <strong><span>DeliX</span> 2024</strong>. All Rights Reserved
     </div>
