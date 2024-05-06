@@ -36,20 +36,25 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/admin","/**", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll()
 
-                        // the /test/** paths for testing todo: delete it after testing
-                        .requestMatchers("/css/**","/js/**","/img/**","/assets/**").permitAll()
 
-                        .requestMatchers("/customer/**").hasRole(Role.CUSTOMER_ROLE)
-                        .requestMatchers("/delivery/**").hasRole(Role.DELIVERY_MAN_ROLE)
-                        .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
-                        .requestMatchers("/administration/**").hasAnyRole(Role.SUPER_ADMIN_RULE, Role.ADMIN_ROLE)
-                        .requestMatchers("/administration/users").hasAnyRole(Role.SUPER_ADMIN_RULE, Role.ADMIN_ROLE)
-                        .anyRequest().authenticated()).formLogin(Customizer.withDefaults())
+//        http.authorizeHttpRequests((requests) ->
+//                        requests.requestMatchers("/admin","/**", "/home/**","/login_page", "/test/**", "/test/customer/add").permitAll()
+//
+//                                // the /test/** paths for testing todo: delete it after testing
+//                                .requestMatchers("/css/**","/js/**","/img/**","/assets/**").permitAll()
+//
+//                                .requestMatchers("/customer/**").hasRole(Role.CUSTOMER_ROLE)
+//                                .requestMatchers("/delivery/**").hasRole(Role.DELIVERY_MAN_ROLE)
+//                                .requestMatchers("/agency/**").hasRole(Role.AGENCY_EMPLOYEE_ROLE)
+//                                .requestMatchers("/administration/**").hasAnyRole(Role.SUPER_ADMIN_RULE, Role.ADMIN_ROLE)
+//                                .requestMatchers("/administration/users").hasAnyRole(Role.SUPER_ADMIN_RULE, Role.ADMIN_ROLE)
+//                                .anyRequest().authenticated()).formLogin(Customizer.withDefaults())
+//
+//                .logout(LogoutConfigurer::permitAll);
 
-                .logout(LogoutConfigurer::permitAll);
+
+
 
         return http.build();
     }

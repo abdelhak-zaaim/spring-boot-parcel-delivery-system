@@ -16,6 +16,7 @@ import com.suivi.colis.delix.service.Impl.AgencyServiceImpl;
 import com.suivi.colis.delix.util.Constants;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,11 @@ public class AgencyController {
     }
 
     @GetMapping("/admin/agency/add")
-    public String addAgency() {
+    public String addAgency(Model model, CsrfToken csrfToken) {
+        model.addAttribute("_csrf", csrfToken.getToken());
+
+
+
         return "admin/agency/add";
     }
 
