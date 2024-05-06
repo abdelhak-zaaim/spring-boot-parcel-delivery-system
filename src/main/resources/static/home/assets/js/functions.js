@@ -260,22 +260,33 @@
 
     /* ------------------ NAV SPLIT ------------------ */
 
-    if ($('.body-scroll').length > 0) {
-        $(window).on("scroll", function() {
-            $('.section').each(function() {
-                var sectionID = $(this).attr("id"),
-                    sectionTop = $(this).offset().top - 100,
-                    sectionHight = $(this).outerHeight(),
-                    wScroll = $(window).scrollTop(),
-                    $navHref = $("a[href='#" + sectionID + "']"),
-                    $nav = $('.nav-split').find($navHref).parent();
-                if (wScroll > sectionTop - 1 && wScroll < sectionTop + sectionHight - 1) {
+if ($('.body-scroll').length > 0) {
+    $(window).on("scroll", function() {
+        $('.section').each(function() {
+            var sectionID = $(this).attr("id"),
+                sectionTop = $(this).offset().top - 100,
+                sectionHight = $(this).outerHeight(),
+                wScroll = $(window).scrollTop(),
+                $navHref = $("a[href='#" + sectionID + "']"),
+                $nav = $('.nav-split').find($navHref).parent();
+
+            if (wScroll > sectionTop - 1 && wScroll < sectionTop + sectionHight - 1) {
+                // Remove 'active' class from all navigation items
+                $('.nav-split').find('.active').removeClass('active');
+
+                if ($nav.parent().hasClass('dropdown-menu')) {
+                    $nav.parent().parent().addClass('active');
+                } else {
                     $nav.addClass('active');
-                    $nav.siblings().removeClass('active');
                 }
-            });
+            } else {
+                if ($nav.parent().hasClass('dropdown-menu')) {
+                 //   $nav.parent().parent().removeClass('active');
+                }
+            }
         });
-    }
+    });
+}
 
     /* ------------------ GOOGLE MAP ------------------ */
     $(".googleMap").each(function() {

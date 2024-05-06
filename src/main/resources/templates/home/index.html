@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Bootstrap HTML5 Construction Landing Page">
     <link href="/home/assets/images/favicon/favicon.ico" rel="icon">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Fonts
 ============================================= -->
     <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Roboto:wght@100;300;400;500;700;900&display=swap"
@@ -57,17 +57,20 @@
                 </div>
                 <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left nav-split nav-pos-right">
-                        <li class="active"><a data-scroll="scrollTo" href="#hero">home</a>
+                        <li class="active"><a data-scroll="scrollTo" href="#hero">Accueil</a>
                         </li>
                         <li><a data-scroll="scrollTo" href="#feature">services</a>
                         </li>
-                        <li><a data-scroll="scrollTo" href="#portfolio">Gallery</a>
-                        </li>
-                        <li><a data-scroll="scrollTo" href="#skills">Skills</a>
-                        </li>
-                        <li><a data-scroll="scrollTo" href="#pointsservice">Points De Service</a>
-                        </li>
-                        <li><a data-scroll="scrollTo" href="#contact">Nous Contacte</a>
+                        <li><a data-scroll="scrollTo" href="#pointsservice">Points De Service</a></li>
+                        <li data-scroll="scrollTo"  class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">À propos de DeliX <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-scroll="scrollTo" href="#portfolio">Gallery</a></li>
+                                <li><a data-scroll="scrollTo" href="#skills">Performance</a></li>
+
+                                <li><a data-scroll="scrollTo" href="#contact">Nous Contacte</a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -92,7 +95,7 @@
 
 
                             <p class="hero--bio ">Un prestataire de services logistiques à guichet unique spécialisé
-                                dans le transport des colis au Maroc </p>
+                                dans le transport et la livraison de colis au Maroc </p>
                             <div class="hero--action">
                                 <form class="form-inline">
                                     <input type="text" class="form-control" id="your-address" name="email"
@@ -187,23 +190,31 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 portfolio-filter">
                     <ul class="list-inline">
-                        <li><a class="active-filter" href="#" data-filter="*">All</a></li>
-                        <li><a href="#" data-filter=".filter-building">Building</a></li>
-                        <li><a href="#" data-filter=".filter-construction">Construction</a></li>
-                        <li><a href="#" data-filter=".filter-planning">Planning</a></li>
-                    </ul>
+    <li><a class="active-filter" href="#" data-filter="*">All</a></li>
+    <li><a href="#" data-filter=".filter-building">Transport</a></li>
+    <li><a href="#" data-filter=".filter-construction">Ramassage</a></li>
+    <li><a href="#" data-filter=".filter-planning">Livraison</a></li>
+
+</ul>
+<!--                    <ul class="list-inline">-->
+<!--                        <li><a class="active-filter" href="#" data-filter="*">All</a></li>-->
+<!--                        <li><a href="#" data-filter=".filter-building">Building</a></li>-->
+<!--                        <li><a href="#" data-filter=".filter-construction">Construction</a></li>-->
+<!--                        <li><a href="#" data-filter=".filter-planning">Planning</a></li>-->
+<!--                    </ul>-->
                 </div>
             </div>
             <div id="portfolio-all" class="row">
                 <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-building">
                     <div class="portfolio--img">
-                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/1.png" alt="portfolio image"/>
+                        <img loading="lazy" src="/home/assets/images/portfolio/logistic/1.jpg"
+                             alt="portfolio image"/>
                         <div class="portfolio--hover">
                             <div class="portfolio--meta">
                                 <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                                href="/home/assets/images/portfolio/constructions/1.png"></a>
+                                                                href="/home/assets/images/portfolio/logistic/1.jpg"></a>
                                 </div>
-                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <h6><a href="#">Transport</a></h6>
                             </div>
                         </div>
                     </div>
@@ -211,7 +222,8 @@
 
                 <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-construction">
                     <div class="portfolio--img">
-                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/2.jpg" alt="portfolio image"/>
+                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/2.jpg"
+                             alt="portfolio image"/>
                         <div class="portfolio--hover">
                             <div class="portfolio--meta">
                                 <div class="portfolio--zoom"><a class="img-gallery-item"
@@ -225,7 +237,8 @@
 
                 <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-planning">
                     <div class="portfolio--img">
-                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/3.jpg" alt="portfolio image"/>
+                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/3.jpg"
+                             alt="portfolio image"/>
                         <div class="portfolio--hover">
                             <div class="portfolio--meta">
                                 <div class="portfolio--zoom"><a class="img-gallery-item"
@@ -239,7 +252,8 @@
 
                 <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-construction">
                     <div class="portfolio--img">
-                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/4.jpg" alt="portfolio image"/>
+                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/4.jpg"
+                             alt="portfolio image"/>
                         <div class="portfolio--hover">
                             <div class="portfolio--meta">
                                 <div class="portfolio--zoom"><a class="img-gallery-item"
@@ -253,7 +267,8 @@
 
                 <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-building">
                     <div class="portfolio--img">
-                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/5.jpg" alt="portfolio image"/>
+                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/5.jpg"
+                             alt="portfolio image"/>
                         <div class="portfolio--hover">
                             <div class="portfolio--meta">
                                 <div class="portfolio--zoom"><a class="img-gallery-item"
@@ -267,7 +282,8 @@
 
                 <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-planning">
                     <div class="portfolio--img">
-                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/6.jpg" alt="portfolio image"/>
+                        <img loading="lazy" src="/home/assets/images/portfolio/constructions/6.jpg"
+                             alt="portfolio image"/>
                         <div class="portfolio--hover">
                             <div class="portfolio--meta">
                                 <div class="portfolio--zoom"><a class="img-gallery-item"
@@ -290,21 +306,23 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-5">
                     <div class="heading mb-30">
-                        <h2 class="heading--title">Quisque auctor sit amet urna ac suscipit desay. </h2>
-                        <p class="heading--desc">Quisque auctor sit amet urna ac suscipit. Orci varius natoque penatibus
-                            et magnis dis parturient montes, nascetur ridiculus mus. Quisque auctor sit amet urna ac
-                            suscipit. Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
+                        <h2 class="heading--title">Notre Performance</h2>
+                        <p class="heading--desc">Nous sommes extrêmement fiers de notre skills de livraison, nous nous
+                            efforçons constamment de répondre et de dépasser les attentes. Notre engagement envers
+                            l'excellence se reflète dans nos domaines de skills clés. Nous croyons en la transparence et
+                            la responsabilité, et nous voulons que nos clients sachent exactement comment nous nous en
+                            sortons. Voici un regard détaillé sur nos mesures de skills dans des domaines cruciaux de
+                            notre prestation de service.</p>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-1">
                     <div class="progressbar">
                         <div class="progress-title">
-                            <span class="title">Natoque</span>
-                            <span class="value">85%</span>
+                            <span class="title">Livraison à l'heure</span>
+                            <span class="value">90%</span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0"
+                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
                                  aria-valuemax="100">
                             </div>
                         </div>
@@ -312,11 +330,11 @@
 
                     <div class="progressbar">
                         <div class="progress-title">
-                            <span class="title">Orci varius</span>
-                            <span class="value">60%</span>
+                            <span class="title">Sécurité des colis</span>
+                            <span class="value">95%</span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                            <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0"
                                  aria-valuemax="100">
                             </div>
                         </div>
@@ -324,11 +342,11 @@
 
                     <div class="progressbar">
                         <div class="progress-title">
-                            <span class="title">Parturient</span>
-                            <span class="value">70%</span>
+                            <span class="title">Satisfaction du client</span>
+                            <span class="value">88%</span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                            <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0"
                                  aria-valuemax="100">
                             </div>
                         </div>
@@ -336,11 +354,11 @@
 
                     <div class="progressbar">
                         <div class="progress-title">
-                            <span class="title">Quisque</span>
-                            <span class="value">40%</span>
+                            <span class="title">Zone de couverture</span>
+                            <span class="value">80%</span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
                                  aria-valuemax="100">
                             </div>
                         </div>
@@ -349,6 +367,7 @@
             </div>
         </div>
     </section>
+
 
     <section id="cta2" class="section cta cta-2 bg-theme">
         <div class="container">
@@ -369,7 +388,7 @@
 
 
         <div class="container">
-            <div class="row" >
+            <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                     <div class="heading text-center mb-70">
                         <h2 class="heading--title">Trouver un point de service</h2>
@@ -382,7 +401,8 @@
             </div>
 
             <div class="row" style="margin-left: 0 !important;margin-right: 0 !important;">
-                <div class="col-xs-10  col-md-offset-1" style="min-width: 700px; width: 100%; padding: 0!important; margin-left: 0 !important;">
+                <div class="col-xs-10  col-md-offset-1"
+                     style="min-width: 700px; width: 100%; padding: 0!important; margin-left: 0 !important;">
                     <div id="map-container"></div>
                 </div>
             </div>
@@ -473,7 +493,16 @@
 
 
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('.dropdown-menu li a').click(function (e) {
+            $('.dropdown-menu li.active').removeClass('active');
+            var $parentt = $(this).parent();
+            $parentt.addClass('active');
+            e.preventDefault();
+        });
+    });
+</script>
 <script src="/home/assets/js/jquery-2.2.4.min.js"></script>
 <script src="/home/assets/js/plugins.js"></script>
 <script src="/home/assets/js/functions.js"></script>
