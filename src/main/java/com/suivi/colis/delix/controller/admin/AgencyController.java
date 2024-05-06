@@ -32,7 +32,7 @@ public class AgencyController {
 
     @GetMapping("/admin/agency/add")
     public String addAgency(Model model, CsrfToken csrfToken) {
-        model.addAttribute("_csrf", csrfToken.getToken());
+        model.addAttribute("csrf_token", csrfToken.getToken());
 
 
 
