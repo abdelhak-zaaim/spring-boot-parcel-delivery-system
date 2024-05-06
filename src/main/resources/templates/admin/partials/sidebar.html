@@ -15,7 +15,7 @@
         <li class="nav-item">
             <a class="nav-link" data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#"
                th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? '' : 'collapsed'}">
-                <i class="bi bi-menu-button-wide"></i><span>Agency's</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-building"></i><span>Agency's</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="agency-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav"
                 th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? 'show' : ''}">
@@ -30,7 +30,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#customrs-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Customers</span><i
+                <i class="bi bi-people"></i><span>Customers</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="customrs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -51,7 +51,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#parcels-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Parcels</span><i
+                <i class="bi bi-box-seam"></i><span>Parcels</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="parcels-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -72,7 +72,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#transporter-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Transporters</span><i
+                <i class="bi bi-truck"></i><span>Transporters</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="transporter-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -91,56 +91,27 @@
         </li>
 
 
-        <li class="nav-heading">Pages</li>
-
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
+            <a class="nav-link collapsed" data-bs-target="#deliveryman-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person-badge"></i><span>Delivery Man</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
             </a>
-        </li><!-- End Profile Page Nav -->
+            <ul id="deliveryman-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="./transporters/add">
+                        <i class="bi bi-circle"></i><span>Delivery Man</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./transporters">
+                        <i class="bi bi-circle"></i><span>List of Delivery Man</span>
+                    </a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-question-circle"></i>
-                <span>F.A.Q</span>
-            </a>
-        </li><!-- End F.A.Q Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-envelope"></i>
-                <span>Contact</span>
-            </a>
-        </li><!-- End Contact Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-card-list"></i>
-                <span>Register</span>
-            </a>
-        </li><!-- End Register Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Login</span>
-            </a>
-        </li><!-- End Login Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-dash-circle"></i>
-                <span>Error 404</span>
-            </a>
-        </li><!-- End Error 404 Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-file-earmark"></i>
-                <span>Blank</span>
-            </a>
+            </ul>
         </li>
+
+
 
     </ul>
 

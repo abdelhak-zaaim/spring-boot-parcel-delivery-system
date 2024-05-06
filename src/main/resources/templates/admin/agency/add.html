@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="admin/partials/head.html :: head"></head>
+<head th:replace="admin/partials/head.html :: head(titlePage='Delix | Add Agency')"></head>
 
 <body>
 
@@ -34,7 +34,7 @@
 
                         <form action="/admin/agency/add" method="post" >
 
-                            <input type="hidden"  name="_csrf" th:value="${_csrf}"/>
+                            <input type="hidden"  name="_csrf" th:value="${csrf_token}"/>
 
 
                             <div class="row mb-3">

@@ -9,7 +9,7 @@
  */
 
 var map;
-var marker; // Keep a reference to the current marker
+var marker;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -34,12 +34,10 @@ function updateMarkerAndInputs(latitude, longitude) {
     document.getElementById('latitude').value = latitude;
     document.getElementById('longitude').value = longitude;
 
-    // If a marker already exists, remove it
     if (marker) {
         marker.setMap(null);
     }
 
-    // Add a new marker at the clicked location
     marker = new google.maps.Marker({
         position: {lat: latitude, lng: longitude},
         map: map,
