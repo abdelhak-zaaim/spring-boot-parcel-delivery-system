@@ -2,6 +2,10 @@
 /* CSS for larger screens */
 /* CSS for larger screens */
 /* CSS for larger screens */
+
+body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 #map-container {
     width: 100%;
     height: 600px; /* adjust as needed */
