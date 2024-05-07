@@ -1,0 +1,65 @@
+<!--
+  ~
+  ~  * @project : DeliX
+  ~  * @created : 07/05/2024, 16:13
+  ~  * @modified : 07/05/2024, 16:13
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~
+  -->
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<footer th:fragment="footer" id="footer9" class="footer footer-5 footer-8 footer-9 bg-white text-center-xs pt-0 pb-0">
+    <script>
+        $('#btn-inscribe').click(function() {
+            $('.login-form').toggleClass('open');
+        })
+        $(document).ready(function () {
+
+            $('.dropdown-menu li a').click(function (e) {
+                $('.dropdown-menu li.active').removeClass('active');
+                var $parentt = $(this).parent();
+                $parentt.addClass('active');
+                e.preventDefault();
+            });
+        });
+    </script>
+    <div class="footer-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="widget--copyright">
+                        <span>Copyright &copy; DeliX 2024 / All Rights Reserved.</span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="widget--social text-right text-center-xs">
+                        <a class="facebook" href="#">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="twitter" href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a class="dribbble" href="#">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                        <a class="instagram" href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

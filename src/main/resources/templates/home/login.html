@@ -1,0 +1,82 @@
+<!--
+  ~
+  ~  * @project : DeliX
+  ~  * @created : 07/05/2024, 16:08
+  ~  * @modified : 07/05/2024, 16:08
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~
+  -->
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="home/partials/head :: head">
+    <style>
+
+    </style>
+</head>
+
+<body class="body-scroll">
+
+<div id="wrapper" class="wrapper clearfix">
+
+    <header th:replace="home/partials/header :: header"></header>
+    <section style="padding-top: 80px !important;"
+             class=" bg-white text-center ">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+
+                    <div class="card mb-3 center-form">
+                        <div class="card-body">
+
+                            <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Log in</span>
+
+                            </div>
+
+
+                            <form action="/login" method="post" style="margin-top: 30px;">
+                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                                <div class="form-group">
+                                    <label class="el-form-item__label" for="userName">E-mail:</label>
+                                    <input type="email" class="form-control" id="userName" name="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="el-form-item__label" for="password">Password:</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div data-v-5e9121d4="" class="opt-wrap">
+                                    <div data-v-5e9121d4="" class="opt">
+                                        <button data-v-5e9121d4 type="submit"
+                                                class="el-button unify-btn submit-btn el-button--default"><span>Log in</span>
+                                        </button>
+
+                                        <span data-v-5e9121d4 class="font-blue cur-pointer pwd-btn " style="margin-left: 20px">Register an account</span>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer th:replace="home/partials/footer :: footer"></footer>
+
+
+<script src="/home/assets/js/jquery-2.2.4.min.js"></script>
+<script src="/home/assets/js/plugins.js"></script>
+<script src="/home/assets/js/functions.js"></script>
+</body>
+
+</html>
