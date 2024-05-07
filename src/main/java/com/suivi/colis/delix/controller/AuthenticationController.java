@@ -40,9 +40,10 @@ public class AuthenticationController {
 
     public record LoginRequest(String username, String password) {
     }
-@GetMapping("/login_page")
+
+    @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "home/login";
     }
 
 }
