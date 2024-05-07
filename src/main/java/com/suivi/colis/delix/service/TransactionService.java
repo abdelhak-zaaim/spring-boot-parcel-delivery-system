@@ -11,11 +11,11 @@
 package com.suivi.colis.delix.service;
 
 import com.suivi.colis.delix.entity.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface TransactionService {
-    void deleteTransaction(Long id);
     Transaction loadTransactionById(Long id);
     Transaction saveTransaction(Transaction transaction);
     List<Transaction> makeMultipleTransactions(List<Transaction> transactions);
