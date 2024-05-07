@@ -12,6 +12,7 @@
 package com.suivi.colis.delix.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -61,9 +62,11 @@ public class DeliveryAddress  {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date creationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
 
     public DeliveryAddress(String address, String state, String city, String postalCode, String contactName, String contactNumber) {

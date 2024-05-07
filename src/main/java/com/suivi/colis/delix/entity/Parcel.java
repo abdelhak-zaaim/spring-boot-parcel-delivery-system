@@ -57,6 +57,7 @@ public class Parcel {
     private Date estimatedDeliveryDate;
     private Date deleveryDate;
 
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<ParcelHistory> parcelHistories;
 
@@ -70,12 +71,11 @@ public class Parcel {
     private Payment payment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departedAddress", referencedColumnName = "id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DeliveryAddress pickupAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "destinationAddress", referencedColumnName = "id")
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DeliveryAddress receiverAddress;
 
