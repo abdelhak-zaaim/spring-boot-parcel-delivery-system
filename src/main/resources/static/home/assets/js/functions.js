@@ -83,11 +83,11 @@
 
     /* ------------------  AJAX MAILCHIMP ------------------ */
 
-    $('.mailchimp').ajaxChimp({
-        url: "http://wplly.us5.list-manage.com/subscribe/post?u=91b69df995c1c90e1de2f6497&id=aa0f2ab5fa", //Replace with your own mailchimp Campaigns URL.
-        callback: chimpCallback
-
-    });
+    // $('.mailchimp').ajaxChimp({
+    //     url: "http://wplly.us5.list-manage.com/subscribe/post?u=91b69df995c1c90e1de2f6497&id=aa0f2ab5fa", //Replace with your own mailchimp Campaigns URL.
+    //     callback: chimpCallback
+    //
+    // });
 
     function chimpCallback(resp) {
         if (resp.result === 'success') {
