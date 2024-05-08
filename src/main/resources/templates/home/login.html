@@ -11,9 +11,7 @@
 <html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="home/partials/head :: head">
-    <style>
 
-    </style>
 </head>
 
 <body class="body-scroll">
@@ -21,6 +19,8 @@
 <div id="wrapper" class="wrapper clearfix">
 
     <header th:replace="home/partials/header :: header"></header>
+
+
     <section style="padding-top: 80px !important;"
              class=" bg-white text-center ">
 
@@ -31,7 +31,7 @@
                     <div class="card mb-3 center-form">
                         <div class="card-body">
 
-                            <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Log in</span>
+                            <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Se connecter</span>
 
                             </div>
 
@@ -44,16 +44,17 @@
                                     <input type="email" class="form-control" id="userName" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="el-form-item__label" for="password">Password:</label>
+                                    <label class="el-form-item__label" for="password">Mot de passe:</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div data-v-5e9121d4="" class="opt-wrap">
                                     <div data-v-5e9121d4="" class="opt">
                                         <button data-v-5e9121d4 type="submit"
-                                                class="el-button unify-btn submit-btn el-button--default"><span>Log in</span>
+                                                class="el-button unify-btn submit-btn el-button--default"><span>Connexion</span>
                                         </button>
 
-                                        <span data-v-5e9121d4 class="font-blue cur-pointer pwd-btn " style="margin-left: 20px">Register an account</span>
+                                        <span data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
+                                              style="margin-left: 20px">Créer un compte</span>
                                     </div>
 
                                 </div>
@@ -72,7 +73,6 @@
 
 
 <footer th:replace="home/partials/footer :: footer"></footer>
-
 
 <script src="/home/assets/js/jquery-2.2.4.min.js"></script>
 <script src="/home/assets/js/plugins.js"></script>
