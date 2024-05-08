@@ -11,13 +11,15 @@
 
 package com.suivi.colis.delix.service.Impl;
 
+import com.suivi.colis.delix.dto.response.UserResponseDto;
 import com.suivi.colis.delix.entity.User;
 import com.suivi.colis.delix.exception.UserNotFoundException;
 import com.suivi.colis.delix.repository.UserRepo;
 
-import com.suivi.colis.delix.securingweb.WebSecurityConfig;
+import com.suivi.colis.delix.securingweb.SecurityConfig;
 import com.suivi.colis.delix.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,9 +32,9 @@ import java.util.*;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepo userRepository;
-    private final WebSecurityConfig webSecurityConfig;
+    private final SecurityConfig webSecurityConfig;
 
-    public UserServiceImpl(UserRepo userRepository, WebSecurityConfig webSecurityConfig) {
+    public UserServiceImpl(UserRepo userRepository, SecurityConfig webSecurityConfig) {
         this.userRepository = userRepository;
         this.webSecurityConfig = webSecurityConfig;
     }
@@ -75,6 +77,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+
+
+
     public void updateUserEmail(Long userId, String newEmail) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found"));
@@ -84,8 +89,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public String encodePassword(String password) {
-        return webSecurityConfig.passwordEncoder().encode(password);
+        return SecurityConfig.passwordEncoder().encode(password);
     }
+
+
 }
 
 
