@@ -30,8 +30,8 @@ public class ParcelHistory {
     @Id
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "idParcel", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Parcel idParcel;
 
     // the status of the parcel as a string

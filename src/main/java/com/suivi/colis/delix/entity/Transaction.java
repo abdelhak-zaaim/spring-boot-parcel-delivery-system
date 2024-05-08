@@ -35,7 +35,7 @@ public class Transaction {
     @ManyToOne
     private User fromUser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User toUser;
 
     @Column(unique = true,updatable = false)

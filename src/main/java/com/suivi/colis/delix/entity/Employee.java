@@ -30,7 +30,7 @@ public class Employee extends User {
 
     private double salary;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_by")
     private Admin assignedBy;
 
