@@ -1,7 +1,14 @@
 ## Introduction
 
-DeliX is a comprehensive package tracking system, developed using a robust technology stack that includes Java, SQL, Spring Boot, and Maven. It leverages the power of JPA (Java Persistence API) for seamless database operations and Spring Security for robust authentication and authorization mechanisms. The system allows users to track their packages in real-time, providing timely updates on package location, delivery status, and estimated delivery time. With its intuitive interface and reliable performance.
+The DeliX project is a comprehensive system currently under development, designed to streamline the transport and delivery of parcels. It is being developed using the robust Spring Boot framework, which is known for its ability to create stand-alone, production-grade applications swiftly and with ease.
 
+The project harnesses the power of Java Persistence API (JPA), a standard interface for accessing databases in Java, providing a simplified way of handling relational data and object mapping. This ensures efficient and streamlined database operations, making the system capable of handling large volumes of data with ease.
+
+Security is a paramount concern in the DeliX project. It utilizes Spring Security, a powerful and highly customizable authentication and access-control framework, to ensure robust security mechanisms. This includes respecting all roles of security, thereby enhancing the overall security of the system and ensuring that access to sensitive data and functionalities is strictly controlled and limited to authorized users.
+
+The DeliX project places a strong emphasis on code readability and maintainability. The codebase is structured and written in a way that promotes clarity and ease of understanding. This not only improves the efficiency of the development process but also ensures that the system can be easily adapted and extended in the future, thereby enhancing its maintainability.
+
+The ultimate goal of the DeliX project is to evolve into a complete system for transport and delivery of parcels. It aims to provide a comprehensive solution that covers all aspects of the delivery process, from order placement and tracking to delivery confirmation. By leveraging modern technologies and following best practices, the DeliX project is well on its way to achieving this goal.
 ## Future Enhancements
 
 In the future, this project aims to incorporate an intelligent transport optimization algorithm. This will further enhance the efficiency of the package tracking process, ensuring packages are delivered in the most effective and timely manner.
