@@ -12,6 +12,7 @@
 package com.suivi.colis.delix.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.suivi.colis.delix.dto.response.UserResponseDto;
 import com.suivi.colis.delix.model.enums.Role;
 import com.suivi.colis.delix.model.enums.UserStatus;
 import com.suivi.colis.delix.util.Constants;
@@ -107,8 +108,6 @@ public class User implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<LoginLog> loginLogs;
 
-    @ManyToOne
-    private PrivilegesGroup privilegesGroup;
 
     @PrePersist
     protected void onCreated() {
@@ -128,13 +127,6 @@ public class User implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.getRole()));
 
-
-        if (this.privilegesGroup != null) {
-            this.privilegesGroup.getPrivileges().forEach(privilege -> {
-                authorities.add(new SimpleGrantedAuthority(privilege.name()));
-
-            });
-        }
         return authorities;
     }
 
@@ -167,4 +159,21 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.status != null && !this.status.equals(UserStatus.DISABLED);
     }
+
+
+    public UserResponseDto toUserResponseDto() {
+        return new UserResponseDto(this.getId(),
+                this.getName(),
+                this.getEmail(),
+                this.getRole(),
+                this.getPhoneNumber(),
+                this.getAddress() != null ? this.getAddress().toAddressResponseDto() : null,
+                this.getStatus(),
+                this.getCin(),
+                this.getDateOfBirth(),
+                this.getImage()
+        );
+    }
+
+
 }
