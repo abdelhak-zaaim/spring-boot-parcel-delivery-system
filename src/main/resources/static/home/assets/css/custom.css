@@ -1,0 +1,195 @@
+/*
+ *
+ *  * @project : DeliX
+ *  * @created : 08/05/2024, 15:06
+ *  * @modified : 08/05/2024, 15:06
+ *  * @description : This file is part of the DeliX project.
+ *  * @license : MIT License
+ *
+ */
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.navbar-nav > li > a{
+    color: #000 !important;
+}
+.center-screen {
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-direction: column;
+
+
+    min-height: 100vh;
+}
+
+input[type="email"], input[type="password"] {
+    /*border: 1px solid #fd9c40;*/
+    border :1px solid #dcdfe6;
+    border-radius: 5px !important;
+    color: #606266;
+}
+
+#btn-inscribe{
+    color: #fff !important;
+    font-size: 12px;
+    transform: scale(0.95);
+    padding: 8px 20px;
+    border-radius: 4px;
+    background-color: #F5AF00;
+    border-color: #ff8300;
+    margin-top: 33px;
+}
+
+
+
+
+
+
+
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.center-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+
+.el-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px
+}
+
+.unify-btn {
+    color: #fff;
+    background-color: #F5AF00;
+    border: none;
+}
+.unify-btn:hover {
+    color: #fff;
+    background-color: rgba(245, 175, 0, 0.67);
+    border-color: #ff8300
+}
+.opt-wrap[data-v-5e9121d4] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+.submit-btn[data-v-5e9121d4] {
+    width: 174px;
+}
+.font-blue {
+    color: #2454ff;
+}
+.pwd-btn[data-v-5e9121d4] {
+    font-size: 16px;
+}
+.cur-pointer {
+    cursor: pointer;
+}
+.text-center{
+    text-align: left !important;
+}
+
+.strong-title[data-v-5e9121d4] {
+    font-size: 36px;
+    font-weight: 900;
+    color: #000;
+}
+.box-title[data-v-5e9121d4] {
+    justify-content: space-between !important;
+}
+
+.el-form-item__label:before  {
+    content: "*";
+    color: #f56c6c;
+    margin-right: 4px;
+}
+
+
+
+
+
+@import "bourbon";
+
+
+
+.login-wrapper {
+    width: 300px;
+    margin: 40px auto 0;
+}
+
+
+.login-container {
+    position: relative;
+}
+
+.login-form {
+    display: none;
+    position: absolute;
+    padding: 20px;
+    margin-top: 10px;
+    background: #ffffff !important;
+
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 0;
+        outline: 0;
+        background: #f1f1f1;
+        font-weight: 300;
+        font-style: italic;
+        border-radius: 2px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    input[type="submit"] {
+        color: #ffF;
+        background: #1BBC9B;
+        font-style: normal;
+        box-shadow: 0 4px 0 darken(#1BBC9B, 5%);
+    }
+}
+
+@include keyframes(slide) {
+    0% {
+        opacity: 0;
+        @include transform(translateY(20px));
+    }
+    100% {
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
+
+.open {
+    @include animation(slide 1s);
+    display: block;
+}

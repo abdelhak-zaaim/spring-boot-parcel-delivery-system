@@ -15,10 +15,14 @@ import com.suivi.colis.delix.entity.Address;
 import com.suivi.colis.delix.entity.Agency;
 import com.suivi.colis.delix.model.MapsLocationPoint;
 import com.suivi.colis.delix.service.Impl.AgencyServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Slf4j
 @Controller
 public class agencyTest {
 
@@ -34,16 +38,16 @@ public class agencyTest {
         Agency agency = new Agency();
         agency.setAgencyName("CASA hub");
         agency.setAgencyContactNumber("0665458798");
-        agency.setAgencyEmail("casa@test.com");
+        agency.setAgencyEmail("casrra@test.com");
 
         Address address = new Address("3ayn dyab", "CASA", "casa-rabat", "20000", "Morocco");
-            agency.setAgencyAddress(address);
+        agency.setAgencyAddress(address);
         MapsLocationPoint mapsLocationPoint = new MapsLocationPoint(34.1865145, -6.1249762);
         agency.setLocationPoint(
                 mapsLocationPoint);
 
-
-        agencyService.saveAgency(agency);
-        return ResponseEntity.ok(agency);
+        Agency agency1 = agencyService.saveAgency(agency);
+     //   agency1.getCreationDate();
+        return ResponseEntity.ok(agency1);
     }
 }

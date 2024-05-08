@@ -10,6 +10,7 @@
 
 package com.suivi.colis.delix.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +25,7 @@ public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationController(AuthenticationManager authenticationManager) {
+    public AuthenticationController( AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
@@ -45,5 +46,7 @@ public class AuthenticationController {
     public String loginPage() {
         return "home/login";
     }
+
+
 
 }

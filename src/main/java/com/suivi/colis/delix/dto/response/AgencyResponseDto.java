@@ -20,16 +20,18 @@ import java.io.Serializable;
  */
 @Value
 public class AgencyResponseDto implements Serializable {
+    Long id;
     String agencyName;
-    AddressDto agencyAddress;
+    AddressResponseDto agencyAddress;
     String agencyContactNumber;
     MapsLocationPointDto locationPoint;
 
 
     public AgencyResponseDto(Agency agency) {
-    this.agencyName = agency.getAgencyName();
-    this.agencyAddress = new AddressDto(agency.getAgencyAddress());
-    this.agencyContactNumber = agency.getAgencyContactNumber();
-    this.locationPoint = new MapsLocationPointDto(agency.getLocationPoint());
-}
+        this.id = agency.getId();
+        this.agencyName = agency.getAgencyName();
+        this.agencyAddress = agency.getAgencyAddress().toAddressResponseDto();
+        this.agencyContactNumber = agency.getAgencyContactNumber();
+        this.locationPoint = new MapsLocationPointDto(agency.getLocationPoint());
+    }
 }

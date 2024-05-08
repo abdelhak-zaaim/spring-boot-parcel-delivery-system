@@ -66,20 +66,23 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChainAdmin(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/admin*").authorizeHttpRequests(
+            http.securityMatcher("/admin*", "/admin/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
-                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin*")).hasRole("ADMIN");
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin*")).hasRole(Role.ADMIN_ROLE);
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/login")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole(Role.ADMIN_ROLE);
                             }
 
 
-                    ).securityMatcher("/admin*","/admin/**")
+                    ).securityMatcher("/admin", "/admin/**")
 
 
-                    .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=loginError").defaultSuccessUrl("/admin/"))
+                    .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin/"))
 
-                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/protectedLinks").deleteCookies("JSESSIONID")).exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"))
+                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/protectedLinks").deleteCookies("JSESSIONID"))
+                    .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
+                            httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/403"))
 
 
             ;
@@ -113,10 +116,14 @@ public class SecurityConfig {
             http.securityMatcher("/*").authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/user*")).hasRole("USER")).securityMatcher("/*")
 
 
-
                     .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
+
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/test/**")).permitAll();
+
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login*")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/403")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/404")).permitAll();
                             }
 
                     )
