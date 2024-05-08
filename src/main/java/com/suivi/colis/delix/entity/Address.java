@@ -30,6 +30,7 @@
 
 package com.suivi.colis.delix.entity;
 
+import com.suivi.colis.delix.dto.response.AddressResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -94,5 +95,11 @@ public class Address {
         this.lastUpdateDate = new Date();
     }
 
+    public AddressResponseDto toAddressResponseDto() {
+
+        return new AddressResponseDto(this.getId(),  this.getStreet(), this.getState(), this.getZip(),  this.getCountry(), this.getCity());
+
+
+    }
 
 }
