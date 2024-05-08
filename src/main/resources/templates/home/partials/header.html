@@ -50,11 +50,11 @@
 
 
                         <div class="login-container">
-                            <form class="login-form">
-                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <form method="post" action="/login" class="login-form">
+                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-                                <input type="text" placeholder="Email">
-                                <input type="password" placeholder="Password">
+                                <input  type="email" name="username" placeholder="Email" required>
+                                <input type="password" name="password" placeholder="Password" required>
                                 <button data-v-5e9121d4="" type="submit" class="el-button unify-btn submit-btn el-button--default"><span>Log in</span>
                                 </button>
                             </form>
