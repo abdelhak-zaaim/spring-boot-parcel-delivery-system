@@ -39,10 +39,10 @@ public class DeliveryMan extends Employee {
     @ValidMapsLocationPoint
     private MapsLocationPoint locationPoint;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private DeliveryArea deliveryArea;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agency associatedAgency;
 
 }

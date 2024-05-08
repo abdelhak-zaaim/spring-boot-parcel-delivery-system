@@ -39,7 +39,7 @@ public class TransporterTracking {
     private double latitude;
     private double longitude;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Transporter asigned_transporter;
 
 }

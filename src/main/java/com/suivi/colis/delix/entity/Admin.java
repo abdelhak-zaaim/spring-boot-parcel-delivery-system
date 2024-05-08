@@ -38,7 +38,7 @@ import java.util.Objects;
 public class Admin extends Employee implements UserDetails {
     private final static String ROLE_PREFIX = "ROLE_";
     private String adminEmployeeNumber;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private PrivilegesGroup privilegesGroup;
 
     @Override

@@ -69,7 +69,7 @@ public class User implements UserDetails {
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     private String phoneNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Address address;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -162,6 +162,7 @@ public class User implements UserDetails {
 
 
     public UserResponseDto toUserResponseDto() {
+
         return new UserResponseDto(this.getId(),
                 this.getName(),
                 this.getEmail(),

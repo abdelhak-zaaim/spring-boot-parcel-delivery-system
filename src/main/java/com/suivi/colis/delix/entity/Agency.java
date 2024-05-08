@@ -57,7 +57,7 @@ public class Agency {
     @NotNull
     private String agencyEmail;
 
-    @OneToMany(mappedBy = "associatedAgency")
+    @OneToMany(mappedBy = "associatedAgency", fetch = FetchType.LAZY)
     @ToString.Exclude
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AgencyEmployee> agencyEmployees;
