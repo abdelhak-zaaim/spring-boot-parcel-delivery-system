@@ -55,5 +55,5 @@ spring.datasource.password=<yourDatabassePassword> # keep it empty if you dont u
    ```bash
    http://localhost:8080
    ```
-## Conclusion
+## Note
 Please note that these steps assume that you have Java, Mysql and Maven installed on your machine.
