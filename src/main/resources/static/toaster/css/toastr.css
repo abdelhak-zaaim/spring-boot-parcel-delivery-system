@@ -1,0 +1,124 @@
+/* --------------------- Created By InCoder --------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+
+
+
+
+
+
+.toast-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+
+
+
+
+
+
+.toast-container .inAlert{
+    display: flex;
+    min-height: 3rem;
+    min-width: 18rem;
+    max-width: 24rem;
+    align-items: center;
+    padding: .5rem .5rem;
+    border-radius: .4rem;
+    transform: translateX(25rem);
+    justify-content: space-between;
+    color: rgb(255 255 255 / 80%);
+    transition: transform .5s cubic-bezier(0.24, 0.91, 0.62, 1.24);
+}
+
+.toast-container .inAlert.slide-in {
+    transform: translateX(0rem);
+}
+
+.toast-container .inAlert.error .icon i {
+    content: '\f058';
+}
+
+.toast-container .inAlert.error {
+    background-color: rgb(226 45 59 / 80%)
+}
+
+.toast-container .inAlert.success {
+    background-color: rgba(125, 243, 80, 0.89)
+}
+
+.toast-container .inAlert.info {
+    background-color: rgb(25 140 146 / 80%)
+}
+
+.toast-container .inAlert.warning {
+    background-color: rgb(214 175 12 / 80%)
+}
+
+.toast-container i {
+    font-size: 1.5rem;
+    margin:  0 .5rem;
+    color: rgb(255 255 255 / 80%)
+}
+
+.toast-container .inAlert .wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.toast-container .inAlert .wrapper .title {
+    text-transform: capitalize;
+}
+
+.toast-container .inAlert .closeAlert {
+    cursor: pointer;
+}
+
+.toast-container .inAlert .wrapper .message {
+    font-size: .8rem;
+}
+
+.optionsWrapper{
+    width: 20rem;
+    padding: .5rem .5rem;
+    border-radius: .4rem;
+    background-color: #fff;
+}
+
+.optionsWrapper .selectOption {
+    margin-bottom: .6rem;
+}
+
+.optionsWrapper p {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.optionsWrapper select,
+.optionsWrapper textarea {
+    width: 100%;
+}
+
+.optionsWrapper select{
+    height: 2rem;
+    padding: 0 .2rem;
+    border-radius: .3rem;
+}
+
+.optionsWrapper textarea {
+    outline: none;
+    padding: .2rem;
+    border-radius: .3rem
+}
+
+.optionsWrapper textarea:focus{
+    border: 2px solid #4a43be;
+}

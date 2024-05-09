@@ -154,7 +154,7 @@
     </div>
 
 </form>
-                        <script>
+                        <script >
                             document.getElementById('add_agency_form').addEventListener('submit', function(event) {
                                 event.preventDefault(); // Prevent the form from submitting normally
 
@@ -167,13 +167,18 @@
                                 })
                                     .then(response => response.json())
                                     .then(data => {
+
                                         $('#loader-wrapper').hide();
+                                        showAlert({type: data.type,message: data.message })
+
                                         this.reset();
                                         // Handle the response data here
                                         console.log(data);
+
                                     })
                                     .catch(error => {
                                         $('#loader-wrapper').hide();
+                                        showAlert("error",error )
                                         // Handle the error here
                                         console.error('Error:', error);
                                     });

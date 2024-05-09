@@ -30,7 +30,13 @@
     <link href="/assets/css/style.css" rel="stylesheet">
     <title th:if="${titlePage}" th:text="${titlePage}"></title>
 
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <link href="/loading/css/main.css" rel="stylesheet">
     <link href="/loading/css/normalize.css" rel="stylesheet">
+
+    <link href="/toaster/css/toastr.css" rel="stylesheet">
+
 </head>
 </html>

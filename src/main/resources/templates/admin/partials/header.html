@@ -34,13 +34,13 @@
                     <img src="https://media.licdn.com/dms/image/D4E03AQFQAuxB_ZJfZA/profile-displayphoto-shrink_800_800/0/1708263859392?e=1720656000&v=beta&t=nq8tSBGUqt-jy1aeYHHuP-HuSl4frgC1mNhPPJ_dDuY"
                          alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2" th:if="${#authentication.isAuthenticated()}"
-                          th:text="${currentUser.name}">A. Zaaim</span>
+                          th:text="${#authentication.getPrincipal().getName()}">A. Zaaim</span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
 
-                        <h6 th:if="${#authentication.isAuthenticated()}" th:text="${currentUser.name}"></h6>
+                        <h6 th:if="${#authentication.isAuthenticated()}" th:text="${#authentication.principal.name}"></h6>
                         <span th:if="${#authentication.isAuthenticated()}"
                               th:text="${#authentication.principal.username}">Super Admin</span>
                     </li>
@@ -74,7 +74,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="/admin/logout">
+                        <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;" onclick="logout()">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>

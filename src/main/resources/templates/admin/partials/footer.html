@@ -11,7 +11,55 @@
         }, 600);
 
     });
+
+let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+function logout() {
+    fetch('/admin/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            [header]: token
+        },
+        body: '' // No body for this request
+    })
+    .then(response => {
+        if(response.ok) {
+            // Redirect to login page or show a success message
+            window.location.href = '/admin/login';
+        } else {
+            // Handle errors
+            console.error('Logout failed');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+    toastr.options = {
+        "closeButton": true,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    $(document).ready(function onDocumentReady() {
+        setInterval(function doThisEveryTwoSeconds() {
+            toastr.success("Hello World!");
+        }, 2000);   // 2000 is 2 seconds
+    });
 </script>
+
+    <script  src="/toaster/js/toaster.js"></script>
     <div class="copyright">
          Copyright &copy; <strong><span>DeliX</span> 2024</strong>. All Rights Reserved
     </div>
