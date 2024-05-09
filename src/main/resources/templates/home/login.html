@@ -47,6 +47,9 @@
                                     <label class="el-form-item__label" for="password">Mot de passe:</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
+
+
+
                                 <div data-v-5e9121d4="" class="opt-wrap">
                                     <div data-v-5e9121d4="" class="opt">
                                         <button data-v-5e9121d4 type="submit"
@@ -73,10 +76,15 @@
 
 
 <footer th:replace="home/partials/footer :: footer"></footer>
+<script src="/home/assets/toaster/toast.js"></script>
+<script th:inline="javascript">
 
-<script src="/home/assets/js/jquery-2.2.4.min.js"></script>
-<script src="/home/assets/js/plugins.js"></script>
-<script src="/home/assets/js/functions.js"></script>
+    if([[${param.error}]]!=null) {
+        toast(" Les informations d'identification ne correspondent pas!", "error");
+    }
+
+
+</script>
 </body>
 
 </html>

@@ -4,6 +4,9 @@
 
 <footer th:fragment="footer" id="footer" class="footer">
 <script>
+    let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
     $(document).ready(function() {
 
         setTimeout(function(){
@@ -12,8 +15,6 @@
 
     });
 
-let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
 function logout() {
     fetch('/admin/logout', {
@@ -35,28 +36,7 @@ function logout() {
     })
     .catch(error => console.error('Error:', error));
 }
-    toastr.options = {
-        "closeButton": true,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-bottom-center",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
 
-    $(document).ready(function onDocumentReady() {
-        setInterval(function doThisEveryTwoSeconds() {
-            toastr.success("Hello World!");
-        }, 2000);   // 2000 is 2 seconds
-    });
 </script>
 
     <script  src="/toaster/js/toaster.js"></script>
