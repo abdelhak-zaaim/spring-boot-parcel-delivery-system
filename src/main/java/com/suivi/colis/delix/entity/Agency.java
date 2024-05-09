@@ -55,6 +55,7 @@ public class Agency {
 
     @Email
     @NotNull
+    @Column(unique = true)
     private String agencyEmail;
 
     @OneToMany(mappedBy = "associatedAgency", fetch = FetchType.LAZY)
