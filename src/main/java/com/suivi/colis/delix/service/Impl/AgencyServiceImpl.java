@@ -76,5 +76,10 @@ public class AgencyServiceImpl implements AgencyService {
         return new AgencyResponseDto(agency);
     }
 
+    public List<AgencyResponseDto> convertEntityListToResponseDtoList(List<Agency> agencies) {
+        return agencies.stream().map(this::convertEntityToResponseDto).toList();
+    }
+
+
 
 }
