@@ -80,7 +80,7 @@ public class SecurityConfig {
 
                     .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin/"))
 
-                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/protectedLinks").deleteCookies("JSESSIONID"))
+                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/admin/login").deleteCookies("JSESSIONID"))
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/403"))
 
@@ -131,7 +131,7 @@ public class SecurityConfig {
                     // log in
                     .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/login").loginProcessingUrl("/login").failureUrl("/login?error=loginError").defaultSuccessUrl("/"))
                     // logout
-                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/protectedLinks").deleteCookies("JSESSIONID")).exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
+                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID")).exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
             return http.build();
         }
 
