@@ -11,24 +11,24 @@
 
 package com.suivi.colis.delix.controller.advice;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import com.suivi.colis.delix.entity.User;
-
-@ControllerAdvice
-public class GlobalControllerAdvice {
-
-    @ModelAttribute
-    public void addAttributes(Model model) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            User user = (User) principal;
-            model.addAttribute("currentUser", user.toUserResponseDto());
-
-        }
-    }
-}
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.ControllerAdvice;
+//import org.springframework.web.bind.annotation.ModelAttribute;
+//import com.suivi.colis.delix.entity.User;
+//
+//@ControllerAdvice
+//public class GlobalControllerAdvice {
+//
+//    @ModelAttribute
+//    public void addAttributes(Model model) {
+//        Object principal = SecurityContextHolder.getContext().getAuthentication()==null?null:SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        if (principal instanceof UserDetails) {
+//            User user = (User) principal;
+//            model.addAttribute("currentUser", user.toUserResponseDto());
+//
+//        }
+//    }
+//}
