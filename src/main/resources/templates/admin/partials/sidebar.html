@@ -14,15 +14,15 @@
 
         <li class="nav-item">
             <a class="nav-link" data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#"
-               th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? '' : 'collapsed'}">
+               th:classappend="${currentPage == '/agency/add' || currentPage == '/admin/agencies' ? '' : 'collapsed'}">
                 <i class="bi bi-building"></i><span>Agences</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="agency-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav"
-                th:classappend="${currentPage == '/agency/add' || currentPage == '/agencies' ? 'show' : ''}">
+                th:classappend="${currentPage == '/agency/add' || currentPage == '/admin/agencies' ? 'show' : ''}">
                 <li><a th:href="@{/admin/agency/add}"
                        th:classappend="${currentPage == '/agency/add' ? 'active' : ''}"><i
                         class="bi bi-circle"></i><span>Ajouter une agence</span></a></li>
-                <li><a th:href="@{/admin/agencies}" th:classappend="${currentPage == '/agencies' ? 'active' : ''}"><i
+                <li><a th:href="@{/admin/agencies}" th:classappend="${currentPage == '/admin/agencies' ? 'active' : ''}"><i
                         class="bi bi-circle"></i><span>Liste des agences</span></a></li>
             </ul>
         </li>

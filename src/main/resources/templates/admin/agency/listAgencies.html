@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/partials/head.html :: head(titlePage='Delix | Add Agency')"></head>
+
+
+<title>list de Agences</title>
+</head>
+<body>
+
+<header th:replace="admin/partials/header.html :: header"></header>
+
+<aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/admin/agencies')"></aside>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Data Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/">Admin</a></li>
+                <li class="breadcrumb-item">Agencies</li>
+                <li class="breadcrumb-item active">List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Les Agence aux service </h5>
+                        <!-- display listAgenciesDTO -->
+
+                        <!--   <p th:text=" ${listDtoAgencies}"></p> &lt;!&ndash; display listAgenciesDTO &ndash;&gt -->
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <b>N</b>om de l'agence
+                                </th>
+                                <th>La Ville</th>
+                                <th>Quartier</th>
+                                <th>TelePhone</th>
+                                <th>latitude</th>
+                                <th>longitude</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="agencyDto :${listDtoAgencies}">
+                                <td th:text="${agencyDto.agencyName}">NULL</td>
+                                <td th:text="${agencyDto.agencyAddress.city}">NULL</td>
+                                <td th:text="${agencyDto.agencyAddress.street}">NULL</td>
+                                <td th:text="${agencyDto.agencyContactNumber}">NULL</td>
+                                <td th:text="${agencyDto.locationPoint.latitude}">NULL</td>
+                                <td th:text="${agencyDto.locationPoint.longitude}">NULL</td>
+                                <td>
+                                    <div class="row">
+                                    <a th:href="@{'/admin/agency/edit/' + ${agencyDto.id}}" class=" col-lg-6"><i class="bi bi-pencil-square"></i> </a>
+                                    <a style="color: red;" th:href="@{'/admin/agency/delete/' + ${agencyDto.id}}" class="col-lg-6 "><i class="bi bi-trash"></i> </a>
+                                    </div>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+
+<footer th:replace="admin/partials/footer.html :: footer">
+
+</footer>
+
+</body>
+</html>

@@ -54,4 +54,11 @@ public class AgencyController {
         return ResponseEntity.ok(new AlertMessageDto(AlertMessageDto.AlertType.SUCCESS.name().toLowerCase(), "Agency added successfully"));
 
     }
+
+    @GetMapping("/admin/agencies")
+    public String getAgencies(Model model) {
+        model.addAttribute(Constants.CURRENT_PAGE, "/admin/agencies");
+        model.addAttribute("listDtoAgencies", agencyService.convertEntityListToResponseDtoList(agencyService.getAllAgencies()));
+        return "admin/agency/listAgencies";
+    }
 }
