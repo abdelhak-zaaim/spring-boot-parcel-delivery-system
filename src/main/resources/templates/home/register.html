@@ -7,14 +7,143 @@
   ~  * @license : MIT License
   ~
   -->
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="home/partials/head :: head">
+
+</head>
+
+<body class="body-scroll">
+
+<div id="wrapper" class="wrapper clearfix">
+
+    <header th:replace="home/partials/header :: header"></header>
+
+
+    <section style="padding-top: 80px !important;"
+             class=" bg-white text-center ">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+
+                    <div class="card mb-3 center-form">
+                        <div class="card-body">
+
+                            <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Register DeliX</span>
+
+                            </div>
+
+
+                            <form id="register_form" action="/register" method="post" style="margin-top: 30px;">
+                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+                                       th:value="${_csrf.token}"/>
+
+                                <div class="row">
+
+                                    <div class=" col-lg-6">
+                                        <label class="el-form-item__label" for="firstName">Prénom:</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName"
+                                               required>
+                                    </div>
+                                    <div class=" col-lg-6">
+                                        <label class="el-form-item__label" for="lastName">Nome:</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <label class="el-form-item__label" for="phoneNumber">Numéro de téléphone:</label>
+                                    <input type="tel" class="form-control" id="phoneNumber"
+                                           pattern="(\+212|0)[567][0-9]{8}" name="phoneNumber" required>
+                                </div>
+
+                                <div>
+                                    <label class="el-form-item__label" for="email">E-mail:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label class="el-form-item__label" for="password">Mot de passe:</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               required>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="el-form-item__label" for="RePassword">Re-entrer le mot de
+                                            passe:</label>
+                                        <input type="password" class="form-control" id="RePassword" name="rePassword"
+                                               required>
+                                    </div>
+                                </div>
+
+                                <div data-v-5e9121d4="" class="opt-wrap">
+                                    <div data-v-5e9121d4="" class="opt">
+                                        <button data-v-5e9121d4 type="submit"
+                                                class="el-button unify-btn submit-btn el-button--default"><span>S'inscrire</span>
+                                        </button>
+
+                                        <a href="/login" data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
+                                           style="margin-left: 20px">Compte existant? Aller à la connexion</a>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                            <script>
+                                document.getElementById('register_form').addEventListener('submit', function (event) {
+                                    event.preventDefault(); // Prevent the form from submitting normally
+
+                                    let url = this.action; // The URL to send the request to
+                                    let formData = new FormData(this); // Create a FormData object from the form
+                                    $('#loader-wrapper').show();
+                                    fetch(url, {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+
+                                            if (data.code == 200) {
+                                                toast(data.message);
+                                                this.reset();
+                                            } else {
+                                                toast(data.message, "error");
+                                            }
+                                        })
+                                        .catch(error => {
+                                            toast("error , please try again", "error");
+                                        });
+                                });
+                            </script>
+
+
+                            <br> <br> <br>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer th:replace="home/partials/footer :: footer"></footer>
+<script src="/home/assets/toaster/toast.js"></script>
+<script th:inline="javascript">
+
+    if ([[${param.error}]] != null) {
+        toast(" Les informations d'identification ne correspondent pas!", "error");
+    }
+
+
+</script>
 </body>
+
 </html>

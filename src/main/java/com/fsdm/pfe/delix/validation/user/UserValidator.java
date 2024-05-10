@@ -46,7 +46,7 @@ public class UserValidator implements ConstraintValidator<UserValidate, User> {
    public boolean isValid(User user, ConstraintValidatorContext context) {
       // todo : add more validation , hadxi makafix , for now its okay
 
-      return user.getName() != null && !user.getName().isEmpty() &&
+      return user.getFirstName() != null && !user.getFirstName().isEmpty() &&
               user.getEmail() != null && !user.getEmail().isEmpty() && ValidationUtils.isValidEmail(user.getEmail());
    }
 }

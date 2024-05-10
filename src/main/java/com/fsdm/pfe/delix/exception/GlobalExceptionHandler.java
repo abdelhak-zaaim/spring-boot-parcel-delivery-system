@@ -42,8 +42,6 @@ public class GlobalExceptionHandler {
     }
 
 
-
-
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<List<String>> handleRuntimeException(RuntimeException ex) {
         List<String> errors = List.of(ex.getMessage());

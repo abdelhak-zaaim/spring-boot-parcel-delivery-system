@@ -40,7 +40,8 @@ public class CustommerTest {
         //addding a custommer for testing purposes
         Customer customer = new Customer();
         customer.setEmail("test@gmail.com");
-        customer.setName("test");
+        customer.setFirstName("test");
+        customer.setLastName("test");
         customer.setPassword("12345678");
         customer.setPhoneNumber("123456789");
         customer.setStatus(UserStatus.ACTIVE);

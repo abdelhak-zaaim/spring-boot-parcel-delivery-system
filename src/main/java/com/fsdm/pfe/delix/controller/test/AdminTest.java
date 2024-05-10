@@ -44,7 +44,8 @@ public class AdminTest {
 
         Admin admin = new Admin();
         admin.setId(1L);
-        admin.setName("Admin");
+        admin.setFirstName("Admin");
+        admin.setLastName("Admino");
         admin.setEmail("admin2@test.com");
         admin.setPassword("12345678");
         admin.setPrivilegesGroup(privilegesGroup);

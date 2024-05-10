@@ -31,15 +31,18 @@ public class CustomerRequestDto implements Serializable {
     Long id;
     @NotNull
     @NotEmpty
-    String name;
+    String firstName;
+
+    @NotNull
+    @NotEmpty
+    String lastName;
 
     @NotNull
     @Email
     @NotEmpty
     String email;
 
-    @NotNull
-    String role;
+    String password;
 
     @NotEmpty
     @NotNull
@@ -47,19 +50,18 @@ public class CustomerRequestDto implements Serializable {
     String phoneNumber;
 
     AddressRequestDto address;
-    Date registeredAt;
-    Date lastUpdateDate;
 
     @Enumerated(EnumType.STRING)
     UserStatus status;
+
+
     String cin;
     @Past(message = "Date of birth must be in the past")
+
     Date dateOfBirth;
 
-    double balance;
 
     @URL(message = "not valid image url")
     String image;
-    PrivilegesGroupRequestDto privilegesGroup;
-    String customerNumber;
+
 }

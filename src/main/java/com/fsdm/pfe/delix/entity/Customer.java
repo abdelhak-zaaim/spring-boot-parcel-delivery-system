@@ -30,20 +30,19 @@
 
 package com.fsdm.pfe.delix.entity;
 
+import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrePersist;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @AllArgsConstructor
 @Getter
@@ -57,6 +56,27 @@ public class Customer extends User implements UserDetails {
 
     @Column( unique = true )
     private String customerNumber;
+
+
+
+
+    public Customer(RegisterRequestDto registerRequestDto) {
+        super.setEmail(registerRequestDto.getEmail());
+        super.setFirstName(registerRequestDto.getFirstName());
+        super.setLastName(registerRequestDto.getLastName());
+        super.setPassword(registerRequestDto.getPassword());
+        super.setPhoneNumber(registerRequestDto.getPhoneNumber());
+    }
+
+
+
+    @PrePersist
+    protected void onCreated() {
+        super.setStatus(UserStatus.EMAIL_NOT_VERIFIED);
+        Date date = new Date();
+        this.setRegisteredAt(date);
+        this.setLastUpdateDate(date);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -94,7 +114,8 @@ public class Customer extends User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.getStatus() != null && !this.getStatus().equals(UserStatus.DISABLED);
+
+        return this.getStatus() != null && this.getStatus().equals(UserStatus.ACTIVE);
     }
 
 

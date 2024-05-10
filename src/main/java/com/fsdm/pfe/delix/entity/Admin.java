@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -52,7 +53,13 @@ public class Admin extends Employee implements UserDetails {
         }
         return authorities;
     }
-
+    @PrePersist
+    protected void onCreated() {
+        super.setStatus(UserStatus.ACTIVE);
+        Date date = new Date();
+        this.setRegisteredAt(date);
+        this.setLastUpdateDate(date);
+    }
     @Override
     public String getPassword() {
         return super.getPassword();
@@ -80,6 +87,7 @@ public class Admin extends Employee implements UserDetails {
 
     @Override
     public boolean isEnabled() {
+
         return this.getStatus() != null && !this.getStatus().equals(UserStatus.DISABLED);
     }
 }

@@ -37,7 +37,8 @@
 
 
                             <form action="/login" method="post" style="margin-top: 30px;">
-                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+                                       th:value="${_csrf.token}"/>
 
                                 <div class="form-group">
                                     <label class="el-form-item__label" for="userName">E-mail:</label>
@@ -49,20 +50,19 @@
                                 </div>
 
 
-
                                 <div data-v-5e9121d4="" class="opt-wrap">
                                     <div data-v-5e9121d4="" class="opt">
                                         <button data-v-5e9121d4 type="submit"
                                                 class="el-button unify-btn submit-btn el-button--default"><span>Connexion</span>
                                         </button>
 
-                                        <span data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
-                                              style="margin-left: 20px">Créer un compte</span>
+                                        <a href="/register" data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
+                                           style="margin-left: 20px">Créer un compte</a>
                                     </div>
 
                                 </div>
                             </form>
-
+                            <br> <br> <br>
                         </div>
 
                     </div>
@@ -79,7 +79,7 @@
 <script src="/home/assets/toaster/toast.js"></script>
 <script th:inline="javascript">
 
-    if([[${param.error}]]!=null) {
+    if ([[${param.error}]] != null) {
         toast(" Les informations d'identification ne correspondent pas!", "error");
     }
 

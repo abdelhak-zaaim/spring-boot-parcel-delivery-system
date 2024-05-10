@@ -14,12 +14,14 @@ import lombok.Getter;
 
 @Getter
 public enum UserStatus {
+
     ACTIVE,
     INACTIVE,
     SUSPENDED,
     DELETED,
     EXPIRED,
     LOCKED,
+    EMAIL_NOT_VERIFIED,
     DISABLED;
 
 }

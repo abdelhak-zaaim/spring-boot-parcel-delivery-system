@@ -26,6 +26,7 @@ import java.util.Date;
 @Order(1)
 @ControllerAdvice
 public class SpecificExceptionHandler {
+
     @ExceptionHandler(DataValidationException.class)
     public ResponseEntity<?> handleInvalidUserAttributesException(DataValidationException ex, HttpServletRequest request) {
         ErrorResponseDto error = new ErrorResponseDto(ex.getMessage(), HttpStatus.BAD_REQUEST.value(), new Date(), request.getRequestURI());

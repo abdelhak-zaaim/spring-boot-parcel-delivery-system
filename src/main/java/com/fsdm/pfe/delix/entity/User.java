@@ -17,14 +17,17 @@ import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.util.Constants;
 import com.fsdm.pfe.delix.validation.user.UserValidate;
-import com.fsdm.pfe.delix.validation.user.email.ValidEmail;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 @Table(name = "users", indexes = {
@@ -36,19 +39,24 @@ import java.util.*;
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
-public class User  {
+public class User implements Serializable {
     protected final static String ROLE_PREFIX = "ROLE_";
+    @Serial
     private static final long serialVersionUID = 1L;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(nullable = false)
-    private String name;
+    private String firstName;
 
-    @ValidEmail
+    @NotNull
+    @Column(nullable = false)
+    private String lastName;
+
+    @Email
     @NotNull
     @NotBlank
     @Column(nullable = false, unique = true)
@@ -106,12 +114,7 @@ public class User  {
     private List<LoginLog> loginLogs;
 
 
-    @PrePersist
-    protected void onCreated() {
-        Date date = new Date();
-        this.registeredAt = date;
-        this.lastUpdateDate = date;
-    }
+    private Date verifiedAt;
 
     @PreUpdate
     protected void onUpdate() {
@@ -122,7 +125,7 @@ public class User  {
     public UserResponseDto toUserResponseDto() {
 
         return new UserResponseDto(this.getId(),
-                this.getName(),
+                this.getFirstName(),
                 this.getEmail(),
                 this.getRole(),
                 this.getPhoneNumber(),

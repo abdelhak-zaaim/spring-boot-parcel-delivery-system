@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.service;
 
+import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
 import com.fsdm.pfe.delix.entity.Customer;
 
 public interface CustomerService {
@@ -20,4 +21,6 @@ public interface CustomerService {
     Customer saveCustomer(Customer customer);
 
     Customer updateCustomer(Customer customer);
+
+    Customer registerCustomer(RegisterRequestDto registerRequestDto);
 }
