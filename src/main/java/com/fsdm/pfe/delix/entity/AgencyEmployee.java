@@ -44,6 +44,7 @@ import lombok.*;
 @Entity
 @DiscriminatorValue(Role.AGENCY_EMPLOYEE_ROLE)
 public class AgencyEmployee extends Employee {
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Agency associatedAgency;
 

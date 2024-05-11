@@ -29,7 +29,7 @@ import lombok.*;
 @DiscriminatorValue(Role.TRANSPORTER_ROLE)
 
 public class Transporter extends Employee {
-    
+
     private String registrationNumber;
 
     private String licenseNumber;

@@ -45,7 +45,7 @@ public class parcelTest {
       Address address = new Address();
       address.setCity("fes");
       address.setCountry("Morocco");
-      address.setState("Some State");
+      address.setState("Some Province");
       address.setStreet("marja");
       address.setZip("20000");
       address = addressService.saveAddress(address);

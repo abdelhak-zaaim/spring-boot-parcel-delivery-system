@@ -26,7 +26,7 @@ public class AdminAuthenticationController {
 
     private final AuthenticationManager authenticationManager;
 
-    public AdminAuthenticationController(@Qualifier("adminAuthenticationManager") AuthenticationManager authenticationManager) {
+    public AdminAuthenticationController( AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
@@ -36,19 +36,19 @@ public class AdminAuthenticationController {
     }
 
 
-//    @PostMapping("/admin/login")
-//    public ResponseEntity<String> login(@RequestBody AuthenticationController.LoginRequest loginRequest) {
-//
-//        System.out.println(loginRequest.username() + "/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-//
-//
-//
-//        Authentication authenticationRequest =
-//                UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.username(), loginRequest.password());
-//        Authentication authenticationResponse =
-//                this.authenticationManager.authenticate(authenticationRequest);
-//        return ResponseEntity.ok(authenticationResponse.toString());
-//    }
+    @PostMapping("/admin/login")
+    public ResponseEntity<String> login(@RequestBody AuthenticationController.LoginRequest loginRequest) {
+
+        System.out.println(loginRequest.username() + "/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+
+
+
+        Authentication authenticationRequest =
+                UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.username(), loginRequest.password());
+        Authentication authenticationResponse =
+                this.authenticationManager.authenticate(authenticationRequest);
+        return ResponseEntity.ok(authenticationResponse.toString());
+    }
 
     @GetMapping("/403")
     public String accessDenied() {

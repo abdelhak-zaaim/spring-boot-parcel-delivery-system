@@ -11,13 +11,11 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
-import com.fsdm.pfe.delix.entity.Customer;
-import com.fsdm.pfe.delix.entity.VerificationToken;
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.exception.UserNotFoundException;
 import com.fsdm.pfe.delix.repository.UserRepo;
 
-import com.fsdm.pfe.delix.securingweb.SecurityConfig;
+import com.fsdm.pfe.delix.config.SecurityConfig;
 import com.fsdm.pfe.delix.service.UserService;
 import com.fsdm.pfe.delix.util.Constants;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +29,12 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepository;
-    private final SecurityConfig webSecurityConfig;
+
     private final EmailServiceImpl emailService;
 
-    public UserServiceImpl(UserRepo userRepository, SecurityConfig webSecurityConfig, EmailServiceImpl emailService) {
+    public UserServiceImpl(UserRepo userRepository, EmailServiceImpl emailService) {
         this.userRepository = userRepository;
-        this.webSecurityConfig = webSecurityConfig;
+
         this.emailService = emailService;
     }
 

@@ -9,7 +9,8 @@
   -->
 
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <header th:fragment="header" id="navbar-spy" class="header header-1 header-transparent header-fixed">
     <nav id="primary-menu" class="navbar navbar-fixed-top" style="background: #f9f9f9 !important">
         <div class="container">
@@ -31,6 +32,19 @@
                 <ul class="nav navbar-nav navbar-left nav-split nav-pos-right">
                     <li class="active"><a data-scroll="scrollTo" href="/#hero">Accueil</a>
                     </li>
+
+
+                    <li sec:authorize="isAuthenticated() && hasRole('ROLE_CUSTOMER')"  class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">Expédition<span class="caret"></span></a>
+                        <ul class="dropdown-menu"  >
+                            <li><a data-scroll="scrollTo" href="">Envoyer un colis</a></li>
+                            <li><a data-scroll="scrollTo" href="">Mes envois</a></li>
+
+                            <li><a data-scroll="scrollTo" href="">Devis</a></li>
+                        </ul>
+                    </li>
+
                     <li><a data-scroll="scrollTo" href="/#feature">services</a>
                     </li>
                     <li><a data-scroll="scrollTo" href="/#pointsservice">Points De Service</a></li>
@@ -45,7 +59,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))">
                         <a id="btn-inscribe">S'inscrire / Se connecter</a>
 
 
@@ -62,6 +76,30 @@
 
 
                     </li>
+
+
+
+
+                    <li sec:authorize="isAuthenticated() && hasRole('ROLE_CUSTOMER')" class="dropdown el-popper"
+                        style="display: flex; align-items: center; justify-content: center;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false" style="margin-top: 31px!important;">
+                            <img style="width: 38px; height:38px; border-radius: 50px"
+                                 src="/home/assets/images/profile/profile.png"
+                                 alt=""
+                            >
+
+                            <span class="dropdown-toggle"
+                                  th:text="${#authentication.principal.firstName} + ' ' + ${#authentication.principal.lastName}"></span> <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li style="cursor: pointer !important;"><a  >Profile</a></li>
+                            <li style="cursor: pointer !important;" ><a th:onclick="logout()" >Log ont</a></li>
+
+                        </ul>
+                    </li>
+
+
                 </ul>
             </div>
         </div>

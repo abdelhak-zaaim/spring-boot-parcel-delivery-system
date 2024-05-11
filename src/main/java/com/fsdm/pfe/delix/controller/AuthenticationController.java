@@ -38,20 +38,20 @@ public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationController(CustomerServiceImpl customerService, @Qualifier("userAuthenticationManager") AuthenticationManager authenticationManager) {
+    public AuthenticationController(CustomerServiceImpl customerService, AuthenticationManager authenticationManager) {
         this.customerService = customerService;
         this.authenticationManager = authenticationManager;
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<String> loginUser(@RequestBody LoginRequest loginRequest) {
-//
-//        Authentication authenticationRequest =
-//                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
-//        Authentication authenticationResponse =
-//                this.authenticationManager.authenticate(authenticationRequest);
-//        return ResponseEntity.ok(authenticationResponse.toString());
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody LoginRequest loginRequest) {
+
+        Authentication authenticationRequest =
+                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
+        Authentication authenticationResponse =
+                this.authenticationManager.authenticate(authenticationRequest);
+        return ResponseEntity.ok(authenticationResponse.toString());
+    }
 
 
     public record LoginRequest(String username, String password) {
@@ -91,6 +91,12 @@ public class AuthenticationController {
         }
 
         return "home/index";
+    }
+
+
+    @GetMapping("/test/index")
+    public String index() {
+        return "home/index_if_login";
     }
 
 }

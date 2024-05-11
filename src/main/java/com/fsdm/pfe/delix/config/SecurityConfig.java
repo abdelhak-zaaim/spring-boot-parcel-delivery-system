@@ -8,7 +8,7 @@
  *
  */
 
-package com.fsdm.pfe.delix.securingweb;
+package com.fsdm.pfe.delix.config;
 
 import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
@@ -46,7 +46,7 @@ public class SecurityConfig {
     public static class AdminSecurityConfig {
 
         @Bean
-        public SecurityFilterChain securityFilterChainAdmin(@Qualifier("adminAuthenticationManager") AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+        public SecurityFilterChain securityFilterChainAdmin( AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/admin*", "/admin/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
@@ -67,8 +67,7 @@ public class SecurityConfig {
 
 
         @Bean
-        @Qualifier("adminAuthenticationManager")
-        @Primary
+
         public AuthenticationManager authenticationManagerAdmin(
                 AdminServiceImpl adminService,
                 PasswordEncoder passwordEncoder) {
@@ -89,10 +88,9 @@ public class SecurityConfig {
     public static class UserSecurityConfig {
 
         @Bean
-        public SecurityFilterChain filterChainApp2(@Qualifier("userAuthenticationManager") AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+        public SecurityFilterChain filterChainApp2(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/*").authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/user*")).hasRole("USER")).securityMatcher("/*")
-
 
                     .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
 
@@ -114,12 +112,10 @@ public class SecurityConfig {
 
 
         @Bean
-        @Qualifier("userAuthenticationManager")
+        @Primary
         public AuthenticationManager authenticationManagerUser(
                 CustomerServiceImpl customerService,
                 PasswordEncoder passwordEncoder) {
-            System.out.println("User /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-
 
             DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
             authenticationProvider.setUserDetailsService(customerService);

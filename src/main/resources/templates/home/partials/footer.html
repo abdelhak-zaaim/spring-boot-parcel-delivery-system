@@ -13,6 +13,32 @@
 
 <body>
 <footer th:fragment="footer" id="footer9" class="footer footer-5 footer-8 footer-9 bg-white text-center-xs pt-0 pb-0">
+
+    <script>
+        let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+        function logout() {
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    [header]: token
+                },
+                body: '' // No body for this request
+            })
+                .then(response => {
+                    if(response.ok) {
+                        // Redirect to login page or show a success message
+                        window.location.href = '/login';
+                    } else {
+                        // Handle errors
+                        console.error('Logout failed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
     <script>
         $('#btn-inscribe').click(function() {
             $('.login-form').toggleClass('open');

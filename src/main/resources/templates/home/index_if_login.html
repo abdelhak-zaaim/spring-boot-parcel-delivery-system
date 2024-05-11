@@ -34,13 +34,14 @@
 
     <title>DeliX | Delivery Service</title></head>
 
+
 <body class="body-scroll">
 
 <div id="wrapper" class="wrapper clearfix">
 
     <header id="navbar-spy" class="header header-1 header-transparent header-fixed">
         <nav id="primary-menu" class="navbar navbar-fixed-top">
-            <div class="container">
+            <div class="container" style="justify-content: center;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#navbar-collapse-1" aria-expanded="false">
@@ -55,7 +56,8 @@
                         <img class="logo-light" src="/home/assets/images/logo/small_logo.png" alt="Logo">
                     </a>
                 </div>
-                <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
+                <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1"
+                     style="height: 100% !important; justify-content: center">
                     <ul class="nav navbar-nav navbar-left nav-split nav-pos-right">
                         <li class="active"><a data-scroll="scrollTo" href="#hero">Accueil</a>
                         </li>
@@ -73,19 +75,26 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <div id="btn-profile" data-v-f35cb0e8=""
-                                 class="el-dropdown-link user-dropdown-link el-dropdown-selfdefine" aria-haspopup="list"
-                                 aria-controls="dropdown-menu-2826" role="button" tabindex="0"><img data-v-f35cb0e8=""
-                                                                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAaVBMVEUAAAD/gwD/ggD/ggD/ggD/gAD/////gAD/gwD/gwD/////gQD/////gQD/////////////////ggD/////////gwD/////4L//9+//okD/wYD/kiD/79//0Z//sWD/sV//mjD/6M//qlB355tsAAAAFXRSTlMAv5BAzxC/IO/fQDCQgO/ej4B/MBBvAO2CAAAAyklEQVQoz3WR6w6DMAhGsd6n7g5tvUy393/IRQc0XfT8anoCfAEQ0ntSI1aJaSAmTVBJUgjkBiNMLqbM8I+s5Bo2kfvVGdzBbAmQ8daRnZFZs0i2njZ6yQnQ8PNFjJcynWRFWf7otB8JTjtW/HLq+KMGPGqIqryoWVWN++GxWmNIfEvOekSN0eEBBtIj1YRF+Wkkek8f6afrHTT8OPCe+CiLI8Ut6yQ55cCG3SCnhDIbKcJmJTDPNlbXHAKnIojiBDGPtjgTXYqbii/ErCuWePJhtAAAAABJRU5ErkJggg=="
-                                                                                                    alt=""
-                                                                                                    style="margin: 0px 5px;">
-                                <span  data-v-f35cb0e8="" class="dropdown-toggle"
-                                      style="display: inline-block; max-width: 100px; text-overflow: ellipsis; overflow: hidden;">
-              Abdelhak Zaaim
-            </span>
-                              </div>
+
+                        <li class="dropdown el-popper"
+                            style="display: flex; align-items: center; justify-content: center;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false" style="margin-top: 31px!important;">
+                                <img style="width: 38px; height:38px; border-radius: 50px"
+                                     src="/home/assets/images/profile/profile.png"
+                                     alt=""
+                                     >
+                                <span class="dropdown-toggle"
+                                >Abdelhak Zaaim</span> <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a data-scroll="scrollTo" href="#portfolio">Profile</a></li>
+                                <li><a data-scroll="scrollTo" href="#skills">Log ont</a></li>
+
+                            </ul>
                         </li>
+
+
                     </ul>
                 </div>
             </div>

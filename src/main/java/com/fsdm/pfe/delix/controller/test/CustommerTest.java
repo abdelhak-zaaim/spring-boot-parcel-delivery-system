@@ -33,11 +33,10 @@ public class CustommerTest {
     }
 
     @GetMapping("/test/customer/add")
-    public ResponseEntity<Customer> addCustommer() {
+    public ResponseEntity<Customer> addCustomer() {
         Address address = new Address("marjaa","fes","fes-maknes","30000","morocco");
         address = addressService.saveAddress(address);
 
-        //addding a custommer for testing purposes
         Customer customer = new Customer();
         customer.setEmail("test@gmail.com");
         customer.setFirstName("test");
@@ -58,19 +57,14 @@ public class CustommerTest {
     }
 
     @GetMapping("/test/customer/update")
-    public ResponseEntity<Customer> updateCustommer() {
-        //updating a custommer for testing purposes
+    public ResponseEntity<Customer> updateCustomer() {
         Customer customer = customerService.loadCustomerById(1L);
         customer.setEmail("abdelhak@tset.com");
         return ResponseEntity.ok(customerService.updateCustomer(customer));
-
     }
 
-
-
     @GetMapping("/test/customer/get")
-    public ResponseEntity<Customer> getCustommer() {
-        //getting a custommer for testing purposes
+    public ResponseEntity<Customer> getCustomer() {
         Customer customer = customerService.loadCustomerById(1L);
         return ResponseEntity.ok(customer);
 
