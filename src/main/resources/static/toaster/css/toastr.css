@@ -52,7 +52,7 @@
 }
 
 .toast-container .inAlert.success {
-    background-color: rgba(125, 243, 80, 0.89)
+    background-color: #f0f9eb
 }
 
 .toast-container .inAlert.info {

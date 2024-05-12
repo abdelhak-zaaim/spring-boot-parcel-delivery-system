@@ -24,7 +24,7 @@ document.addEventListener("visibilitychange", (event) => {
 // FUNCTIONS:
 function toast(text, type) {
     const toasts = document.querySelectorAll(".toasty");
-    let toastsHeight = 0;
+    let toastsHeight = 30;
     toasts.forEach((toast) => {
         toastsHeight += toast.offsetHeight;
     });

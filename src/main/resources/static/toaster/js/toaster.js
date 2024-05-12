@@ -29,8 +29,8 @@ const showAlert = (data) => {
         icon = 'fa-circle-info'
     }
 
-    let alert = `<div class="inAlert ${type}">
-                    <div class="wrapper">
+    let alert = `<div class="inAlert ${type} ">
+                    <div class="wrapper ">
                         <div class="icon">
                         <i class="fa-solid ${icon}"></i>
                         </div>
