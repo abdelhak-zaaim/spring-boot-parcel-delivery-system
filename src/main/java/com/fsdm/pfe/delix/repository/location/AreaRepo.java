@@ -13,7 +13,10 @@ package com.fsdm.pfe.delix.repository.location;
 import com.fsdm.pfe.delix.entity.location.Area;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface AreaRepo extends JpaRepository<Area, Long> {
     Area findByCode(String code);
     void deleteByCode(String code);
+    List<Area> findByCityCode_Code(String cityCode);
 }

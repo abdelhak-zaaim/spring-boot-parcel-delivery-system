@@ -45,7 +45,7 @@ public class LocationController {
         }
 
         try {
-            List<CityResponseDto> cities = CityServiceImpl.convertListToDto(cityService.loadAll());
+            List<CityResponseDto> cities = CityServiceImpl.convertListToDto(cityService.loadByProvinceCode(code));
             return ResponseEntity.ok(ResponseDataDto.builder().data(cities).success(true).error(null).build());
         } catch (Exception e) {
             return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).build());
@@ -61,7 +61,7 @@ public class LocationController {
         }
 
         try {
-            List<AreaResponseDto> cities = AreaServiceImpl.convertListToDto(areaService.loadAll());
+            List<AreaResponseDto> cities = AreaServiceImpl.convertListToDto(areaService.loadByCityCode(code));
             return ResponseEntity.ok(ResponseDataDto.builder().data(cities).success(true).error(null).build());
         } catch (Exception e) {
             return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).build());

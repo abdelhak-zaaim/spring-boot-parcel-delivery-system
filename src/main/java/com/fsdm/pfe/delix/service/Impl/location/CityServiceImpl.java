@@ -69,6 +69,11 @@ public class CityServiceImpl implements CityService {
         return cityRepo.saveAll(cities);
     }
 
+    @Override
+    public List<City> loadByProvinceCode(String provinceCode) {
+        return cityRepo.findByProvinceCode_Code(provinceCode);
+    }
+
 
     public static List<CityResponseDto> convertListToDto(List<City> cities) {
         return cities.stream()

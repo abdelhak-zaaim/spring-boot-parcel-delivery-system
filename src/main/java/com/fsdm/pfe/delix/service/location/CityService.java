@@ -23,4 +23,5 @@ public interface CityService {
     void delete(Long id);
     void deleteByCode(String code);
     List<City> saveAll(List<City> cities);
+    List<City> loadByProvinceCode(String provinceCode);
 }

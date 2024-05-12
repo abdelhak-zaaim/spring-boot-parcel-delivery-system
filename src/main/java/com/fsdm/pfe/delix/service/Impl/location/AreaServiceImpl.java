@@ -71,6 +71,11 @@ public class AreaServiceImpl implements AreaService {
       return areaRepo.saveAll(areas);
    }
 
+   @Override
+   public List<Area> loadByCityCode(String cityCode) {
+      return areaRepo.findByCityCode_Code(cityCode);
+   }
+
    public static List<AreaResponseDto> convertListToDto(List<Area> areas) {
       return areas.stream()
               .map(AreaResponseDto::new)
