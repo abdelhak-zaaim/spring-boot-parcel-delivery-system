@@ -15,6 +15,7 @@
 <footer th:fragment="footer" id="footer9" class="footer footer-5 footer-8 footer-9 bg-white text-center-xs pt-0 pb-0">
 
     <script>
+
         let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
         let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
         function logout() {
