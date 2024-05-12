@@ -13,6 +13,8 @@ package com.fsdm.pfe.delix.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fsdm.pfe.delix.entity.location.Area;
+import com.fsdm.pfe.delix.entity.location.Province;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,24 +37,15 @@ public class DeliveryAddress  {
     private String address;
 
     @NotNull
-    @Column(nullable = false)
-    private String state;
+    @ManyToOne
+    private Area area;
 
     @NotNull
     @Column(nullable = false)
-    private String city;
-
-    @NotNull
-    @Column(nullable = false,columnDefinition = "varchar(255) default 'Morocco'") // for now we use morocco as default country
-    private String country;
-
+    private String contactFirstName;
     @NotNull
     @Column(nullable = false)
-    private String postalCode;
-
-    @NotNull
-    @Column(nullable = false)
-    private String contactName;
+    private String contactLastName;
 
     @NotNull
     @Column(nullable = false)
@@ -69,12 +62,8 @@ public class DeliveryAddress  {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
 
-    public DeliveryAddress(String address, String state, String city, String postalCode, String contactName, String contactNumber) {
+    public DeliveryAddress(String address, String contactNumber) {
         this.address = address;
-        this.state = state;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.contactName = contactName;
         this.contactNumber = contactNumber;
     }
 
