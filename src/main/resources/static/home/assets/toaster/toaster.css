@@ -18,22 +18,22 @@
 .toasty {
     padding: 0.5em 1em;
     position: fixed;
-    bottom: 0;
+    bottom: 30px;
     left: 50%;
-    color: oklch(from var(--toastColor) 15% 0 h);
+    color: #67c23a;
     font-size: 1rem;
 
     text-align: center;
-    background-color: var(--toastColor);
-    border: 2px solid oklch(from var(--toastColor) 60% c h);
+    background-color: #f0f9eb;
+    border: 2px solid #e1f3d8;
     border-radius: 6px;
     transform: translateX(-50%) translateY(100%);
     animation: 6s ease-out 0s 1 both toasty;
 
     &.warning {
-        color: oklch(from var(--warnColor) 15% 0.03 h);
-        background-color: var(--warnColor);
-        border: 2px solid oklch(from var(--warnColor) 60% c h);
+        color: #e6a23c;
+        background-color: #fdf6ec;
+        border: 2px solid #faecd8;
     }
 
     &.error {

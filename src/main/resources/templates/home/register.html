@@ -96,7 +96,7 @@
                             <script>
                                 document.getElementById('register_form').addEventListener('submit', function (event) {
                                     event.preventDefault(); // Prevent the form from submitting normally
-
+                                    startLoading()
                                     let url = this.action; // The URL to send the request to
                                     let formData = new FormData(this); // Create a FormData object from the form
                                     $('#loader-wrapper').show();
@@ -113,9 +113,11 @@
                                             } else {
                                                 toast(data.message, "error");
                                             }
+                                            closeLoading();
                                         })
                                         .catch(error => {
                                             toast("error , please try again", "error");
+                                            closeLoading();
                                         });
                                 });
                             </script>
@@ -136,14 +138,8 @@
 
 <footer th:replace="home/partials/footer :: footer"></footer>
 <script src="/home/assets/toaster/toast.js"></script>
-<script th:inline="javascript">
+<script src="/home/assets/toaster/loading.js"></script>
 
-    if ([[${param.error}]] != null) {
-        toast(" Les informations d'identification ne correspondent pas!", "error");
-    }
-
-
-</script>
 </body>
 
 </html>

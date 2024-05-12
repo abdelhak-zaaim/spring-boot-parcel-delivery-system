@@ -1,9 +1,33 @@
 
+ .sub-title-new {
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
 
 body{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
+.select-style {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+}
+.el-select-dropdown__item {
+    font-size: 14px;
+    padding: 0 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #606266;
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
 .dropdown-menu>li>a {
     padding: 8px 20px;
 }
@@ -1751,7 +1775,7 @@ section {
 \*------------------------------------*/
 
 .form-control {
-    color: #bdbdbd;
+    color: #606266;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -1760,10 +1784,10 @@ section {
     border: 1px solid #e0e0e0;
     background: #ffffff;
     padding-left: 24px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
-    border-radius: 5px 0 0 5px;
-    /*border-radius: 4px;*/
+    /*border-radius: 5px 0 0 5px !important;*/
+    border-radius: 4px;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
