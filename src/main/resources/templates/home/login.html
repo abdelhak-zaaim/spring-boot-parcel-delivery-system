@@ -8,13 +8,20 @@
   ~
   -->
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head th:replace="home/partials/head :: head">
 
 </head>
 
 <body class="body-scroll">
+<script sec:authorize="isAuthenticated() && hasRole('ROLE_CUSTOMER')">
+
+    window.location.href = '/';
+
+
+</script>
 
 <div id="wrapper" class="wrapper clearfix">
 
@@ -36,7 +43,7 @@
                             </div>
 
 
-                            <form action="/login" method="post" style="margin-top: 30px;">
+                            <form id="login_form" action="/login" method="post" style="margin-top: 30px;">
                                 <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
                                        th:value="${_csrf.token}"/>
 
@@ -62,6 +69,45 @@
 
                                 </div>
                             </form>
+                            <script>
+                                let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+                                let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+                                document.getElementById('login_form').addEventListener('submit', function (e) {
+                                    e.preventDefault();
+                                    startLoading();
+                                    const username = e.target.elements.username.value;
+                                    const password = e.target.elements.password.value;
+
+                                    fetch('/login', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            [header]: token
+                                        },
+                                        body: JSON.stringify({
+                                            username: username,
+                                            password: password
+                                        })
+                                    })
+                                        .then(function (response) {
+                                            return response.json();
+                                        }).then(function (data) {
+                                        if (data.success) {
+                                            toast(data.message);
+                                            setTimeout(function () {
+                                                window.location.href = '/';
+                                            }, 2000);
+
+                                        } else {
+                                            toast(data.message, 'error')
+
+                                        }
+                                        closeLoading();
+
+                                        console.log(data);
+                                    })
+                                });
+                            </script>
                             <br> <br> <br>
                         </div>
 
@@ -77,14 +123,9 @@
 
 <footer th:replace="home/partials/footer :: footer"></footer>
 <script src="/home/assets/toaster/toast.js"></script>
-<script th:inline="javascript">
-
-    if ([[${param.error}]] != null) {
-        toast(" Les informations d'identification ne correspondent pas!", "error");
-    }
+<script src="/home/assets/toaster/loading.js"></script>
 
 
-</script>
 </body>
 
 </html>
