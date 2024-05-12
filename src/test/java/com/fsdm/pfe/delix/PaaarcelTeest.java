@@ -57,22 +57,13 @@ public class PaaarcelTeest {
         address = addressService.saveAddress(address);
         DeliveryAddress deliveryAddress = new DeliveryAddress();
         deliveryAddress.setAddress("fes marja");
-        deliveryAddress.setCity("fes");
-        deliveryAddress.setCountry("Morocco");
-        deliveryAddress.setPostalCode("20000");
-        deliveryAddress.setContactNumber("123456789");
-        deliveryAddress.setContactName("abdelhak");
+
 
         DeliveryAddress deliveryAddress1 = deliveryAddressService.saveDeliveryAddress(deliveryAddress);
 
 
         DeliveryAddress deliveryAddress2 = new DeliveryAddress();
-        deliveryAddress.setAddress("rue 1");
-        deliveryAddress.setCity("casablanca");
-        deliveryAddress.setCountry("Morocco");
-        deliveryAddress.setPostalCode("30000");
-        deliveryAddress.setContactNumber("0675757677");
-        deliveryAddress.setContactName("abdelhak");
+
         deliveryAddress2 = deliveryAddressService.saveDeliveryAddress(deliveryAddress2);
 
 

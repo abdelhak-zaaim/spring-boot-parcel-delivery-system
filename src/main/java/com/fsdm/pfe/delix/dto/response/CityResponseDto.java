@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.dto.response;
 
+import com.fsdm.pfe.delix.entity.location.City;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * DTO for {@link com.fsdm.pfe.delix.entity.location.City}
  */
+
 @Value
 public class CityResponseDto implements Serializable {
     Long id;
@@ -26,21 +28,17 @@ public class CityResponseDto implements Serializable {
     String name;
     String countryCode;
     String postalCode;
-    ProvinceResponseDto provinceCode;
-    List<AreaDto> areas;
-    Date createdAt;
-    Date updatedAt;
+    String provinceCode;
 
-    /**
-     * DTO for {@link com.fsdm.pfe.delix.entity.location.Area}
-     */
-    @Value
-    public static class AreaDto implements Serializable {
-        Long id;
-        String code;
-        String name;
-        String postcode;
-        Date createdAt;
-        Date updatedAt;
+
+    public CityResponseDto(City city) {
+        this.id = city.getId();
+        this.code = city.getCode();
+        this.name = city.getName();
+        this.countryCode = city.getCountryCode();
+        this.postalCode = city.getPostalCode();
+        this.provinceCode =  city.getProvinceCode().getCode();
+
     }
+
 }

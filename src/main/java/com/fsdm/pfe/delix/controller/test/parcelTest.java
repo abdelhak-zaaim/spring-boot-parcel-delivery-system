@@ -52,24 +52,16 @@ public class parcelTest {
 
       DeliveryAddress deliveryAddress = new DeliveryAddress();
       deliveryAddress.setAddress("fes marja");
-      deliveryAddress.setCity("fes");
-      deliveryAddress.setCountry("Morocco");
-      deliveryAddress.setState("fes maknes");
-      deliveryAddress.setPostalCode("20000");
+
       deliveryAddress.setContactNumber("123456789");
-      deliveryAddress.setContactName("abdelhak");
+
 
       DeliveryAddress deliveryAddress1 = deliveryAddressService.saveDeliveryAddress(deliveryAddress);
 
 
       DeliveryAddress deliveryAddress2 = new DeliveryAddress();
       deliveryAddress2.setAddress("rue 1"); // Add this line
-      deliveryAddress2.setCity("casablanca");
-      deliveryAddress2.setCountry("Morocco");
-      deliveryAddress2.setState("casa settat");
-      deliveryAddress2.setPostalCode("30000");
-      deliveryAddress2.setContactNumber("0675757677");
-      deliveryAddress2.setContactName("abdelhak");
+
       deliveryAddress2 = deliveryAddressService.saveDeliveryAddress(deliveryAddress2);
 
 

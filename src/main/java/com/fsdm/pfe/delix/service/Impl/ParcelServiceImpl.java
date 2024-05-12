@@ -14,6 +14,7 @@ package com.fsdm.pfe.delix.service.Impl;
 import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.model.enums.ParcelStatus;
+import com.fsdm.pfe.delix.model.enums.ParcelType;
 import com.fsdm.pfe.delix.repository.ParcelRepo;
 
 import com.fsdm.pfe.delix.service.ParcelService;
@@ -21,8 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -95,6 +95,17 @@ public class ParcelServiceImpl implements ParcelService {
         return parcels.stream().map(this::convertEntityToResponseDto).toList();
     }
 
+
+    public static List<Map<String, String>> getParcelTypesAsArrayOfMaps() {
+        List<Map<String, String>> list = new ArrayList<>();
+        for (ParcelType parcelType : ParcelType.values()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("name", parcelType.name());
+            map.put("message", parcelType.getMessage());
+            list.add(map);
+        }
+        return list;
+    }
 
 }
 

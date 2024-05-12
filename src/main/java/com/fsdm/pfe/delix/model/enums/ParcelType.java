@@ -14,9 +14,20 @@ import lombok.Getter;
 
 @Getter
 public enum ParcelType {
-    DOCUMENT,
-    CONTAINS_BATTER,
-    CONTAINS_LIQUID,
-    CONTAINS_FRAGILE,
-    CONTAINS_DANGEROUS,
+
+    DOCUMENT("Ceci est un document"),
+    CONTAINS_BATTER("Ce colis contient de la pâte"),
+    CONTAINS_LIQUID("Ce colis contient du liquide"),
+    CONTAINS_FRAGILE("Ce colis contient des articles fragiles"),
+    CONTAINS_DANGEROUS("Ce colis contient des articles dangereux");
+
+    private final String message;
+
+    ParcelType(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

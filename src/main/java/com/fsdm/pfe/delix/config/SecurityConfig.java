@@ -12,6 +12,7 @@ package com.fsdm.pfe.delix.config;
 
 import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
@@ -24,6 +25,8 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -46,11 +49,13 @@ public class SecurityConfig {
     public static class AdminSecurityConfig {
 
         @Bean
-        public SecurityFilterChain securityFilterChainAdmin( AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+        public SecurityFilterChain securityFilterChainAdmin(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/admin*", "/admin/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
+
+
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin*")).hasRole(Role.ADMIN_ROLE);
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/login")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole(Role.ADMIN_ROLE);
@@ -67,7 +72,7 @@ public class SecurityConfig {
 
 
         @Bean
-
+        @Primary
         public AuthenticationManager authenticationManagerAdmin(
                 AdminServiceImpl adminService,
                 PasswordEncoder passwordEncoder) {
@@ -85,34 +90,72 @@ public class SecurityConfig {
 
     @Configuration
     @Order(2)
+
     public static class UserSecurityConfig {
+
 
         @Bean
         public SecurityFilterChain filterChainApp2(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+//            MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
+//            http.securityMatcher("/*").authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
+//
+//
+//                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/*")).hasRole(Role.CUSTOMER_ROLE)).securityMatcher("/*", "/express/**")
+//                    .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
+//
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll();
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/test/**")).permitAll();
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/register*")).permitAll();
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login*")).permitAll();
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/verify*")).permitAll();
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/403")).permitAll();
+//                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/404")).permitAll();
+//                    //    authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE).anyRequest().permitAll();
+//
+//                    })
+//
+//                    // log in
+//                    //.formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/login").loginProcessingUrl("/login").failureUrl("/login?error").defaultSuccessUrl("/"))
+//                    // logout
+//                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID")).exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
+//
+
+
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/*").authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/user*")).hasRole("USER")).securityMatcher("/*")
+            http.securityMatcher("/public/**", "/express/**", "/*",  "/express/location/city*").authorizeHttpRequests(
+                            authorizationManagerRequestMatcherRegistry ->
+                            {
 
-                    .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
 
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll();
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/test/**")).permitAll();
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/register*")).permitAll();
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login*")).permitAll();
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/verify*")).permitAll();
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/403")).permitAll();
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/404")).permitAll();
-                    })
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
 
-                    // log in
-                    .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/login").loginProcessingUrl("/login").failureUrl("/login?error").defaultSuccessUrl("/"))
-                    // logout
-                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID")).exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
+
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/test/**")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/register*")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login*")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/verify*")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/403")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/404")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/public/**")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
+
+
+                            }
+                    ).securityMatcher("/public/**", "/express/**", "/*")
+
+                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
+                    .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
+                            httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
+
             return http.build();
+
+
         }
 
 
         @Bean
-        @Primary
+
         public AuthenticationManager authenticationManagerUser(
                 CustomerServiceImpl customerService,
                 PasswordEncoder passwordEncoder) {

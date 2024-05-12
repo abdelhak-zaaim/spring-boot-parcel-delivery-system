@@ -60,6 +60,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     @Override
     public Customer registerCustomer(RegisterRequestDto registerRequestDto) {
+
         if (!registerRequestDto.getPassword().equals(registerRequestDto.getRePassword())) {
             throw new UserRegistrationException("Passwords do not match");
         }
@@ -68,8 +69,9 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         if (customerRepository.existsByEmail(registerRequestDto.getEmail())) {
             throw new UserRegistrationException("User With this Email already exists");
         }
-
-        Customer customer = customerRepository.save(new Customer(registerRequestDto));
+        Customer customer = new Customer(registerRequestDto);
+        customer.setPassword(userService.encodePassword(customer.getPassword()));
+        customer = customerRepository.save(customer);
 
         if (customer == null) {
             throw new UserRegistrationException("User Registration Failed");
@@ -88,6 +90,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         return customer.get();
 
     }
+
 
     public boolean verifyEmail(String token) {
 

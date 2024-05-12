@@ -21,25 +21,17 @@ import java.io.Serializable;
 @Value
 public class DeliveryAddressResponseDto implements Serializable {
 
-    public DeliveryAddressResponseDto(DeliveryAddress deliveryAddress) {
+    Long id;
+    String address;
+    AreaResponseDto area;
+    String contactNumber;
+    String contactEmail;
+
+    public DeliveryAddressResponseDto( DeliveryAddress deliveryAddress) {
+        this.area = new AreaResponseDto(deliveryAddress.getArea());
         this.contactEmail = deliveryAddress.getContactEmail();
         this.contactNumber = deliveryAddress.getContactNumber();
-        this.contactName = deliveryAddress.getContactName();
-        this.postalCode = deliveryAddress.getPostalCode();
-        this.country = deliveryAddress.getCountry();
-        this.city = deliveryAddress.getCity();
-        this.state = deliveryAddress.getState();
         this.address = deliveryAddress.getAddress();
         this.id = deliveryAddress.getId();
     }
-
-    Long id;
-    String address;
-    String state;
-    String city;
-    String country;
-    String postalCode;
-    String contactName;
-    String contactNumber;
-    String contactEmail;
 }

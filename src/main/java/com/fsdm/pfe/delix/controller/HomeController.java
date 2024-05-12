@@ -128,7 +128,7 @@ public class HomeController {
 
     @GetMapping("/home/migrate_locations_citys")
     public ResponseEntity<List<List<City>>> migrateLocationCity() {
-        List<Province> provinces = provinceService.findAll();
+        List<Province> provinces = provinceService.loadAll();
         List<List<City>> cityList = new ArrayList<>();
         provinces.stream().map(province -> {
 
@@ -183,7 +183,7 @@ public class HomeController {
     @GetMapping("/home/migrate_locations_areas")
     public ResponseEntity<List<List<Area>>> migrateLocationAreas() {
 
-        List<City> cities = cityService.findAll();
+        List<City> cities = cityService.loadAll();
         List<List<Area>> areaList = new ArrayList<>();
         cities.stream().map(city -> {
 

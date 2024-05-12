@@ -45,4 +45,14 @@ public enum Role {
         this.grantedAuthority = grantedAuthority;
     }
 
+
+ public String getCustomerRoleName() {
+        return "ROLE_CUSTOMER";
+    }
+
+    public String getAdminRuleName() {
+        return "ROLE_ADMIN";
+    }
+
+
 }

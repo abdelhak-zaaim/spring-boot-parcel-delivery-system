@@ -10,12 +10,17 @@
 
 package com.fsdm.pfe.delix.service.Impl.location;
 
+import com.fsdm.pfe.delix.dto.response.AreaResponseDto;
+import com.fsdm.pfe.delix.dto.response.CityResponseDto;
 import com.fsdm.pfe.delix.entity.location.Area;
+import com.fsdm.pfe.delix.entity.location.City;
 import com.fsdm.pfe.delix.repository.location.AreaRepo;
 import com.fsdm.pfe.delix.service.location.AreaService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AreaServiceImpl implements AreaService {
    private final AreaRepo areaRepo;
@@ -35,19 +40,19 @@ public class AreaServiceImpl implements AreaService {
    }
 
    @Override
-   public Area findById(Long id) {
+   public Area loadById(Long id) {
       return areaRepo.findById(id).orElse(null);
    }
 
 
 
    @Override
-   public Area findByCode(String code) {
+   public Area loadByCode(String code) {
       return areaRepo.findByCode(code);
    }
 
    @Override
-   public List<Area> findAll() {
+   public List<Area> loadAll() {
       return areaRepo.findAll();
    }
 
@@ -66,5 +71,10 @@ public class AreaServiceImpl implements AreaService {
       return areaRepo.saveAll(areas);
    }
 
+   public static List<AreaResponseDto> convertListToDto(List<Area> areas) {
+      return areas.stream()
+              .map(AreaResponseDto::new)
+              .collect(Collectors.toList());
+   }
 
 }

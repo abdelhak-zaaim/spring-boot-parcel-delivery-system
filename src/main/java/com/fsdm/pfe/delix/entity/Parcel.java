@@ -35,8 +35,11 @@ public class Parcel {
     @Column(nullable = false, unique = true, updatable = false)
     private String codeBar;
 
+    private int appointmentTime;
+
     private float height;
     private float width;
+    private float length;
     private float weight;
 
     @Enumerated(EnumType.STRING)

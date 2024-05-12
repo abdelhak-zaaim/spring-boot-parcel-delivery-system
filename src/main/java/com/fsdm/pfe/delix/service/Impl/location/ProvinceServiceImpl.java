@@ -10,12 +10,14 @@
 
 package com.fsdm.pfe.delix.service.Impl.location;
 
+import com.fsdm.pfe.delix.dto.response.ProvinceResponseDto;
 import com.fsdm.pfe.delix.entity.location.Province;
 import com.fsdm.pfe.delix.repository.location.ProvinceRepo;
 import com.fsdm.pfe.delix.service.location.ProvinceService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProvinceServiceImpl implements ProvinceService {
@@ -36,17 +38,17 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public Province findById(Long id) {
+    public Province loadById(Long id) {
         return provinceRepo.findById(id).orElse(null);
     }
 
     @Override
-    public Province findByCode(String code) {
+    public Province loadByCode(String code) {
         return provinceRepo.findByCode(code).orElse(null);
     }
 
     @Override
-    public List<Province> findAll() {
+    public List<Province> loadAll() {
         return provinceRepo.findAll();
     }
 
@@ -63,5 +65,10 @@ public class ProvinceServiceImpl implements ProvinceService {
     @Override
     public List<Province> saveAll(List<Province> provinces) {
         return provinceRepo.saveAll(provinces);
+    }
+    public static List<ProvinceResponseDto> convertListToDto(List<Province> provinces) {
+        return provinces.stream()
+                .map(ProvinceResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
