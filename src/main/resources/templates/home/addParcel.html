@@ -36,7 +36,7 @@
                             </div>
 
 
-                            <form id="add_new_parcel_form" th:action="@{/express/add_parcel}" method="post"
+                            <form id="add_new_parcel_form" th:action="@{/express/add-parcel}" method="post"
                                   style="margin-top: 30px;">
                                 <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
                                        th:value="${_csrf.token}"/>
@@ -55,9 +55,9 @@
                                         <label class="el-form-item__label"
                                                for="pickupRequestAddress.firstName">Prénom</label> <br>
                                         <input
-                                               th:value="${#authentication.principal.firstName}" type="text"
-                                               class="form-control " id="pickupRequestAddress.firstName"
-                                               name="pickupRequestAddress.contactFirstName" required>
+                                                th:value="${#authentication.principal.firstName}" type="text"
+                                                class="form-control " id="pickupRequestAddress.firstName"
+                                                name="pickupRequestAddress.contactFirstName" required>
 
 
                                     </div>
@@ -84,22 +84,24 @@
                                         <label class="el-form-item__label" for="pickUpProvince">Province</label>
                                         <select class="form-control" id="pickUpProvince" name="pickUpProvince"
                                                 required>
-                                            <option disabled selected> Sélectionnez la province</option>
+                                            <option disabled selected>-- Sélectionnez la province --</option>
                                             <option th:each="province:${provinces}" th:value="${province.code}"
                                                     th:text="${province.name}"></option>
-
-
                                         </select>
                                     </div>
                                     <div class=" col-lg-4">
                                         <label class="el-form-item__label" for="pickUpCity">Ville</label>
                                         <select class="form-control" id="pickUpCity" name="pickUpCity"
-                                                required></select>
+                                                required>
+                                            <option disabled selected>-- Sélectionnez la Province dabord --</option>
+                                        </select>
                                     </div>
                                     <div class="col-lg-4 custom-select">
                                         <label class="el-form-item__label" for="pickUpArea">Quartier</label>
                                         <select class="form-control select-hidden" id="pickUpArea"
-                                                name="pickupRequestAddress.area" required></select>
+                                                name="pickupRequestAddress.area" required>
+                                            <option disabled selected>-- Sélectionnez la Ville dabord --</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -154,7 +156,7 @@
                                         <label class="el-form-item__label" for="receiverProvince">Province</label>
                                         <select class="form-control" id="receiverProvince" name="receiverProvince"
                                                 required>
-                                            <option disabled selected> Sélectionnez la province</option>
+                                            <option disabled selected>-- Sélectionnez la province --</option>
                                             <option th:each="province:${provinces}" th:value="${province.code}"
                                                     th:text="${province.name}"></option>
                                         </select>
@@ -162,12 +164,17 @@
                                     <div class=" col-lg-4">
                                         <label class="el-form-item__label" for="receiverCity">Ville</label>
                                         <select class="form-control" id="receiverCity" name="receiverCity"
-                                                required></select>
+                                                required>
+
+                                            <option disabled selected>-- Sélectionnez la Province dabord --</option>
+                                        </select>
                                     </div>
                                     <div class="col-lg-4 custom-select">
                                         <label class="el-form-item__label" for="receiverArea">Quartier</label>
                                         <select class="form-control select-hidden" id="receiverArea"
-                                                name="receiverAddress.area" required></select>
+                                                name="receiverAddress.area" required>
+                                            <option disabled selected>-- Sélectionnez la Ville dabord --</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -224,7 +231,7 @@
                                     <div class="col-lg-6 custom-select">
                                         <label class="el-form-item__label" for="type">Type de colis</label>
                                         <select class="form-control select-hidden" id="type" name="type" required>
-                                            <option disabled selected> Sélectionnez le type de colis</option>
+                                            <option disabled selected  > -- Sélectionnez le type de colis --</option>
                                             <option th:each="parcelType:${parcelTypes}" th:value="${parcelType.name}"
                                                     th:text="${parcelType.message}"></option>
                                         </select>
@@ -233,7 +240,7 @@
                                 <div data-v-5e9121d4="" class="opt-wrap">
                                     <button data-v-5e9121d4 type="submit"
                                             class="el-button unify-btn submit-btn el-button--default">
-                                        <span>S'inscrire</span>
+                                        <span>Soumettre</span>
                                     </button>
 
 
@@ -252,9 +259,9 @@
                                             // Clear the city select element
                                             $('#receiverCity').empty();
                                             $('#receiverArea').empty();
-
+                                            $('#receiverArea').append('<option disabled selected>-- Sélectionnez la Ville dabord --</option>');
                                             // Populate the city select element with the received data
-                                            $('#receiverCity').append('<option disabled selected> Sélectionnez la ville</option>');
+                                            $('#receiverCity').append('<option disabled selected>-- Sélectionnez la ville --</option>');
                                             $.each(data.data, function (index, city) {
                                                 $('#receiverCity').append('<option value="' + city.code + '">' + city.name + '</option>');
                                             });
@@ -272,7 +279,7 @@
                                             $('#receiverArea').empty();
 
                                             // Populate the area select element with the received data
-                                            $('#receiverArea').append('<option disabled selected> Sélectionnez la Quartier</option>');
+                                            $('#receiverArea').append('<option disabled selected>-- Sélectionnez la Quartier --</option>');
                                             $.each(data.data, function (index, area) {
                                                 $('#receiverArea').append('<option value="' + area.code + '">' + area.name + '</option>');
                                             });
@@ -291,8 +298,9 @@
                                             // Clear the city select element
                                             $('#pickUpCity').empty();
                                             $('#pickUpArea').empty();
+                                            $('#pickUpArea').append('<option disabled selected>-- Sélectionnez la Ville dabord --</option>');
                                             // Populate the city select element with the received data
-                                            $('#pickUpCity').append('<option disabled selected> Sélectionnez la ville</option>');
+                                            $('#pickUpCity').append('<option disabled selected>-- Sélectionnez la ville --</option>');
                                             $.each(data.data, function (index, city) {
                                                 $('#pickUpCity').append('<option value="' + city.code + '">' + city.name + '</option>');
                                             });
@@ -310,7 +318,7 @@
                                             $('#pickUpArea').empty();
 
 
-                                            $('#pickUpArea').append('<option disabled selected> Sélectionnez la Quartier</option>');
+                                            $('#pickUpArea').append('<option disabled selected>-- Sélectionnez la Quartier --</option>');
                                             $.each(data.data, function (index, area) {
                                                 $('#pickUpArea').append('<option value="' + area.code + '">' + area.name + '</option>');
                                             });
@@ -322,7 +330,7 @@
                             </script>
 
                             <script>
-                                document.getElementById('fuvuyvuvu').addEventListener('submit', function (event) {
+                                document.getElementById('add_new_parcel_form').addEventListener('submit', function (event) {
 
 
                                     event.preventDefault(); // Prevent the form from submitting normally
@@ -337,13 +345,35 @@
                                         .then(response => response.json())
                                         .then(data => {
                                             console.log(data)
-                                            if (data.code == 200) {
-                                                toast(data.message);
+                                            if (data.success) {
+                                                closeLoading();
                                                 this.reset();
+                                                startTrackAnimated()
+
+                                                // wait 13 seconds before redirecting to the tracking page
+                                                setTimeout(function () {
+                                                    window.location.href = '/';
+                                                }, 13000);
+                                                //  toast(data.message);
+
                                             } else {
+                                                closeLoading();
                                                 toast(data.message, "error");
+
+                                                if (data.error != null) {
+                                                    data.error.forEach(function (error) {
+
+                                                        $('input[name="' + error.field + '"]').addClass('not-valid-item');
+                                                        $('select[name="' + error.field + '"]').addClass('not-valid-item');
+
+                                                    });
+
+                                                    }
+
+
+
                                             }
-                                            closeLoading();
+
                                         })
                                         .catch(error => {
                                             toast("error , please try again", "error");

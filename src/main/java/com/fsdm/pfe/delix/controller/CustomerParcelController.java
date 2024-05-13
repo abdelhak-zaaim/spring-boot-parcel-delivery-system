@@ -10,71 +10,89 @@
 
 package com.fsdm.pfe.delix.controller;
 
+import com.fsdm.pfe.delix.dto.request.GetQuoteRequestDto;
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
-import com.fsdm.pfe.delix.dto.response.ErrorResponseDto;
-import com.fsdm.pfe.delix.dto.response.MessageResponseDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.location.Province;
 import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.location.ProvinceServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Controller
 public class CustomerParcelController {
+    private final Validator validator;
     private final ProvinceServiceImpl provinceService;
     private final ParcelServiceImpl parcelService;
 
-    public CustomerParcelController(ProvinceServiceImpl provinceService, ParcelServiceImpl parcelService) {
+    public CustomerParcelController(Validator validator, ProvinceServiceImpl provinceService, ParcelServiceImpl parcelService) {
+        this.validator = validator;
         this.provinceService = provinceService;
         this.parcelService = parcelService;
     }
 
-    @GetMapping("/express/add_parcel")
+    @GetMapping("/express/add-parcel")
     public String addParcel(Model model) {
         List<Province> provinces = provinceService.loadAll();
         model.addAttribute("provinces", ProvinceServiceImpl.convertListToDto(provinces));
-        model.addAttribute("parcelRequestDto", new ParcelRequestDto());
         model.addAttribute("parcelTypes", ParcelServiceImpl.getParcelTypesAsArrayOfMaps());
         return "home/addParcel";
     }
 
 
-    @PostMapping("/express/add_parcel")
-    public String addParcelRequest(@Valid @ModelAttribute("parcelRequestDto") ParcelRequestDto parcelRequestDto, BindingResult bindingResult, Model model) {
+    @PostMapping("/express/add-parcel")
+    public ResponseEntity<ResponseDataDto> addParcelRequest(ParcelRequestDto parcelRequestDto) {
+        DataBinder binder = new DataBinder(parcelRequestDto);
+        binder.setValidator(validator);
+        binder.validate();
+        BindingResult result = binder.getBindingResult();
 
-
-        if (bindingResult.hasErrors()) {
-            return "home/addParcel";
-
-        } else {
-            try {
-                Parcel parcel = parcelService.saveParcelFromDto(parcelRequestDto);
-
-                if (parcel != null) {
-                    model.addAttribute("MessageResponseDto", new MessageResponseDto(true, "Parcel added successfully"));
-                } else {
-                    model.addAttribute("MessageResponseDto", new MessageResponseDto(false, "An error occurred while adding the parcel"));
-                }
-            } catch (Exception e) {
-                model.addAttribute("MessageResponseDto", new MessageResponseDto(false, "An error occurred while adding the parcel"));
-            }
-
-
-            return "home/addParcel";
+        if (result.hasErrors()) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("please verify the inputs").build());
         }
 
 
+        try {
+            Parcel parcel = parcelService.saveParcel(parcelService.saveParcelFromDto(parcelRequestDto));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(parcelRequestDto).success(false).error(e.getMessage()).message(e.getMessage()).build());
+        }
+
+        return ResponseEntity.ok(ResponseDataDto.builder().data(parcelRequestDto).success(true).message("the parcel added successfully").error(null).build());
+
     }
 
+
+    @GetMapping("/express/order-quote")
+    public String getQuote(Model model) {
+        List<Province> provinces = provinceService.loadAll();
+        model.addAttribute("provinces", ProvinceServiceImpl.convertListToDto(provinces));
+        model.addAttribute("parcelTypes", ParcelServiceImpl.getParcelTypesAsArrayOfMaps());
+        return "home/orderQuote";
+    }
+
+    @PostMapping("/express/order-quote")
+    public ResponseEntity<ResponseDataDto> getQuoteRequest(GetQuoteRequestDto getQuoteRequestDto) {
+        DataBinder binder = new DataBinder(getQuoteRequestDto);
+        binder.setValidator(validator);
+        binder.validate();
+        BindingResult result = binder.getBindingResult();
+
+        if (result.hasErrors()) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("please verify the inputs").build());
+        }
+        int quote = parcelService.generateQuote(getQuoteRequestDto);
+
+        return ResponseEntity.ok(ResponseDataDto.builder().data(quote).success(true).error(null).message("votre devis est : " + quote).build());
+
+    }
 }

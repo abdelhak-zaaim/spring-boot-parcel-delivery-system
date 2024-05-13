@@ -89,15 +89,17 @@ public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpS
 
         if (authenticationResponse.isAuthenticated()) {
             User user = (User) authenticationResponse.getPrincipal();
+
+
+
+
             if (!user.isEmailVerified()){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email not verified", "Email not verified yet, please verify your email"));
             }
 
 
-
-
             // Save login log
-            loginLogService.saveLoginLog((Customer) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), request.getRemoteAddr(), true, "login");
+            loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), request.getRemoteAddr(), true, "login");
         }
 
         return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));

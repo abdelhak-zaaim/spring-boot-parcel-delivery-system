@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.dto.request;
 
 import com.fsdm.pfe.delix.model.enums.ParcelType;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ import java.io.Serializable;
  * DTO for {@link com.fsdm.pfe.delix.entity.Parcel}
  */
 @Value
-@NoArgsConstructor(force = true)
+
 @AllArgsConstructor
 public class ParcelRequestDto implements Serializable {
     Long id;
@@ -51,8 +52,9 @@ public class ParcelRequestDto implements Serializable {
     ParcelType type;
     int appointmentTime;
 
-    @NotNull
+    @Valid
     DeliveryAddressRequestDto pickupRequestAddress;
-    @NotNull
+    @Valid
     DeliveryAddressRequestDto receiverAddress;
+
 }

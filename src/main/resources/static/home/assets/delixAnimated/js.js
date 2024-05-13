@@ -18,18 +18,18 @@
  *
  */
 
-$('.order').click(function (e) {
-
-    let button = $(this);
-
-    if (!button.hasClass('animate')) {
-
-        setTimeout(() => {
-            button.removeClass('animate');
-        }, 10000);
-    }
-
-});
+// $('.order').click(function (e) {
+//
+//     let button = $(this);
+//
+//     if (!button.hasClass('animate')) {
+//
+//         setTimeout(() => {
+//             button.removeClass('animate');
+//         }, 10000);
+//     }
+//
+// });
 
 
 function startTrackAnimated() {
@@ -41,7 +41,7 @@ function startTrackAnimated() {
     trackanimated.innerHTML = `
         <div data-v-5e9121d4="" class="opt-wrap">
             <button id="btn-start-track-animated" class="order ">
-                <span class="success">Order Placed successfully
+                <span class="success">Votre colis a été soumis avec succès
                     <svg viewBox="0 0 12 10">
                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                     </svg>

@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,8 @@ import java.io.Serializable;
 public class DeliveryAddressRequestDto implements Serializable {
     Long id;
     @NotNull
+    @NotBlank
+    @NotEmpty
     String area;
     @NotNull
     @NotEmpty
@@ -37,11 +40,12 @@ public class DeliveryAddressRequestDto implements Serializable {
     String contactLastName;
 
     @NotNull
-    
+
     @NotBlank
     @NotEmpty
     String contactNumber;
     @NotNull
     @NotEmpty
+    @Email
     String contactEmail;
 }

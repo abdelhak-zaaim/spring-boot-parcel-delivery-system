@@ -14,6 +14,7 @@ package com.fsdm.pfe.delix.exception;
 
 import com.fsdm.pfe.delix.dto.response.ArgumentNotValidDto;
 import com.fsdm.pfe.delix.dto.response.ErrorResponseDto;
+import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.DataValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
@@ -35,18 +36,18 @@ public class SpecificExceptionHandler {
 
 
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<ArgumentNotValidDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getAllErrors().forEach((error) -> {
-//            String fieldName = ((FieldError) error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            errors.put(fieldName, errorMessage);
-//        });
-//
-//        return new ResponseEntity<>(ArgumentNotValidDto.builder().success(false).message("please check the fields").errors(errors).build(), HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseDataDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        return new ResponseEntity<>(ResponseDataDto.builder().data(errors).success(true).error(null).message("please verify the inputs").build(), HttpStatus.BAD_REQUEST);
+    }
 
 
 

@@ -24,7 +24,7 @@ import java.io.Serializable;
 public class ResponseDataDto implements Serializable {
     boolean success;
     String message;
-    String error;
+    Object error;
     Object data;
 
 }

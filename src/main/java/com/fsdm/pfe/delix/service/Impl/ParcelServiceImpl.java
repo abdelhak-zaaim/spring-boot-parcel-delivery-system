@@ -11,6 +11,7 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.dto.request.GetQuoteRequestDto;
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
 import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
@@ -30,6 +31,13 @@ import java.util.*;
 @Service
 @Transactional
 public class ParcelServiceImpl implements ParcelService {
+
+
+    private static final double BASE_PRICE_REGULAR = 10.0;
+    private static final double BASE_PRICE_EXPRESS = 30.0;
+    private static final double DENSITY_FACTOR = 1;
+    private static final double DISTANCE_FACTOR = 0.3;
+
 
     private final ParcelRepo parcelRepository;
     private final DeliveryAddressServiceImpl deliveryAddressService;
@@ -135,6 +143,39 @@ public class ParcelServiceImpl implements ParcelService {
 
 
     }
+
+
+    public int generateQuote(GetQuoteRequestDto requestDto) {
+        double basePrice;
+
+        if (requestDto.getParcelType() == ParcelType.DOCUMENT) {
+            basePrice = BASE_PRICE_REGULAR;
+        } else {
+            basePrice = BASE_PRICE_EXPRESS;
+        }
+
+        double volume = requestDto.getLength() * requestDto.getWidth() * requestDto.getHeight();
+
+        double density = requestDto.getWeight() / volume;
+
+        double distance = calculateDistance(requestDto.getPickUpArea(), requestDto.getDeliveryArea());
+
+        double quote = basePrice + (density * DENSITY_FACTOR) + (distance * DISTANCE_FACTOR);
+
+        return (int)quote;
+    }
+
+    private double calculateDistance(String pickUpArea, String deliveryArea) {
+
+
+
+
+
+
+        return 100;
+    }
+
+
 }
 
 
