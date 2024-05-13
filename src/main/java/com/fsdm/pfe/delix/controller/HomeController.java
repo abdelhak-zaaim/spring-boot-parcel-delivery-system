@@ -90,9 +90,22 @@ public class HomeController {
                 .collect(Collectors.toList()));
     }
 
-
     @GetMapping("/home/migrate_locations")
-    public ResponseEntity<List<Province>> migrateLocation() {
+    public ResponseEntity<String> migrateLocation() {
+        migrateLocationProvances();
+
+        migrateLocationCity();
+        migrateLocationAreas();
+       return ResponseEntity.ok("ok");
+
+
+    }
+
+
+
+
+   // @GetMapping("/home/migrate_locations")
+    public ResponseEntity<List<Province>> migrateLocationProvances() {
         WebClient webClient = WebClient.create("https://speedaf.com/oms/province/MA/queryList?countryCode=MA");
         List<Province> provinceDtoList = new ArrayList<>();
         Mono<Map<String, Object>> result = webClient.get()
@@ -126,7 +139,7 @@ public class HomeController {
         return ResponseEntity.ok(provinceServiceImpl.saveAll(provinceDtoList));
     }
 
-    @GetMapping("/home/migrate_locations_citys")
+  //  @GetMapping("/home/migrate_locations_citys")
     public ResponseEntity<List<List<City>>> migrateLocationCity() {
         List<Province> provinces = provinceService.loadAll();
         List<List<City>> cityList = new ArrayList<>();
@@ -180,7 +193,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/home/migrate_locations_areas")
+  //  @GetMapping("/home/migrate_locations_areas")
     public ResponseEntity<List<List<Area>>> migrateLocationAreas() {
 
         List<City> cities = cityService.loadAll();

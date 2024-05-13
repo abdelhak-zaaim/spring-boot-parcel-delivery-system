@@ -22,22 +22,26 @@ import java.io.Serializable;
  * DTO for {@link com.fsdm.pfe.delix.entity.DeliveryAddress}
  */
 @Value
-public class DeliveryAddressDto implements Serializable {
+public class DeliveryAddressRequestDto implements Serializable {
     Long id;
     @NotNull
     String area;
     @NotNull
+    @NotEmpty
     String address;
     @NotNull
+    @NotEmpty
     String contactFirstName;
+    @NotEmpty
     @NotNull
     String contactLastName;
 
     @NotNull
+    
+    @NotBlank
     @NotEmpty
-            @NotBlank
-
     String contactNumber;
     @NotNull
+    @NotEmpty
     String contactEmail;
 }

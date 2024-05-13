@@ -12,7 +12,9 @@ package com.fsdm.pfe.delix.controller;
 
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
 import com.fsdm.pfe.delix.dto.response.ErrorResponseDto;
+import com.fsdm.pfe.delix.dto.response.MessageResponseDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
+import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.location.Province;
 import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.location.ProvinceServiceImpl;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -41,28 +44,37 @@ public class CustomerParcelController {
     public String addParcel(Model model) {
         List<Province> provinces = provinceService.loadAll();
         model.addAttribute("provinces", ProvinceServiceImpl.convertListToDto(provinces));
-
+        model.addAttribute("parcelRequestDto", new ParcelRequestDto());
         model.addAttribute("parcelTypes", ParcelServiceImpl.getParcelTypesAsArrayOfMaps());
         return "home/addParcel";
     }
 
 
     @PostMapping("/express/add_parcel")
-    public ResponseEntity<ResponseDataDto> addParcelRequest(@Valid ParcelRequestDto parcelRequestDto, BindingResult bindingResult,Model model) {
-
-if(bindingResult.hasErrors()){
-
-    ResponseEntity.ok(ResponseDataDto.builder().data(bindingResult.getAllErrors()).success(true).error(null).build());
+    public String addParcelRequest(@Valid @ModelAttribute("parcelRequestDto") ParcelRequestDto parcelRequestDto, BindingResult bindingResult, Model model) {
 
 
+        if (bindingResult.hasErrors()) {
+            return "home/addParcel";
 
-   // return ResponseEntity.ok(ErrorResponseDto.builder().data(null).success(false).errors(bindingResult.getAllErrors()).build());
-}
+        } else {
+            try {
+                Parcel parcel = parcelService.saveParcelFromDto(parcelRequestDto);
+
+                if (parcel != null) {
+                    model.addAttribute("MessageResponseDto", new MessageResponseDto(true, "Parcel added successfully"));
+                } else {
+                    model.addAttribute("MessageResponseDto", new MessageResponseDto(false, "An error occurred while adding the parcel"));
+                }
+            } catch (Exception e) {
+                model.addAttribute("MessageResponseDto", new MessageResponseDto(false, "An error occurred while adding the parcel"));
+            }
 
 
-        System.out.println(parcelRequestDto);
+            return "home/addParcel";
+        }
 
-        return ResponseEntity.ok(ResponseDataDto.builder().data(parcelRequestDto).success(true).error(null).build());
+
     }
 
 }

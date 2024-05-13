@@ -13,6 +13,7 @@ package com.fsdm.pfe.delix.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fsdm.pfe.delix.dto.request.DeliveryAddressRequestDto;
 import com.fsdm.pfe.delix.entity.location.Area;
 import com.fsdm.pfe.delix.entity.location.Province;
 import jakarta.persistence.*;
@@ -66,6 +67,17 @@ public class DeliveryAddress  {
         this.address = address;
         this.contactNumber = contactNumber;
     }
+
+    public DeliveryAddress(Long id, Area area, String address, String contactFirstName, String contactLastName, String contactNumber, String contactEmail) {
+        this.id = id;
+        this.area = area;
+        this.address = address;
+        this.contactFirstName = contactFirstName;
+        this.contactLastName = contactLastName;
+        this.contactNumber = contactNumber;
+        this.contactEmail = contactEmail;
+    }
+
 
     @PrePersist
     protected void onCreated() {

@@ -11,7 +11,10 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
 import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
+import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
+import com.fsdm.pfe.delix.entity.DeliveryAddress;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.model.enums.ParcelStatus;
 import com.fsdm.pfe.delix.model.enums.ParcelType;
@@ -29,9 +32,11 @@ import java.util.*;
 public class ParcelServiceImpl implements ParcelService {
 
     private final ParcelRepo parcelRepository;
+    private final DeliveryAddressServiceImpl deliveryAddressService;
 
-    public ParcelServiceImpl(ParcelRepo parcelRepository) {
+    public ParcelServiceImpl(ParcelRepo parcelRepository, DeliveryAddressServiceImpl deliveryAddressService) {
         this.parcelRepository = parcelRepository;
+        this.deliveryAddressService = deliveryAddressService;
     }
 
     @Override
@@ -107,6 +112,29 @@ public class ParcelServiceImpl implements ParcelService {
         return list;
     }
 
+    @Transactional
+    public Parcel saveParcelFromDto(ParcelRequestDto parcelRequestDto) {
+
+        DeliveryAddress pickupAddress = deliveryAddressService.convertRequestToEntity(parcelRequestDto.getPickupRequestAddress());
+        DeliveryAddress receiverAddress = deliveryAddressService.convertRequestToEntity(parcelRequestDto.getReceiverAddress());
+
+
+        Parcel parcel = new Parcel();
+        parcel.setHeight(parcelRequestDto.getHeight());
+        parcel.setWidth(parcelRequestDto.getWidth());
+        parcel.setLength(parcelRequestDto.getLength());
+        parcel.setWeight(parcelRequestDto.getWeight());
+        parcel.setType(parcelRequestDto.getType());
+        parcel.setAppointmentTime(parcelRequestDto.getAppointmentTime());
+        parcel.setCodeBar(generateParcelBarcode());
+
+        parcel.setPickupAddress(deliveryAddressService.saveDeliveryAddress(pickupAddress));
+        parcel.setReceiverAddress(deliveryAddressService.saveDeliveryAddress(receiverAddress));
+        parcel.setStatus(ParcelStatus.PENDING);
+        return parcelRepository.save(parcel);
+
+
+    }
 }
 
 

@@ -93,6 +93,8 @@ public class Parcel {
 
     @PrePersist
     protected void onCreated() {
+
+
         Date date = new Date();
         this.creationDate = date;
         this.lastUpdateDate = date;

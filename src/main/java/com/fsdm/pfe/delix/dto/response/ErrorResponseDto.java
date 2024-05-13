@@ -12,11 +12,17 @@
 
 package com.fsdm.pfe.delix.dto.response;
 
+import lombok.Value;
+
+import java.io.Serializable;
 import java.util.Date;
-public record ErrorResponseDto(
-        String message,
-        int statusCode,
-        Date timestamp,
-        String path
-) {
+
+@Value
+
+public class ErrorResponseDto implements Serializable {
+    String message;
+    int statusCode;
+    Date timestamp;
+    String path;
+
 }

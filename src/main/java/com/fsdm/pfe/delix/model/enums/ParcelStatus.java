@@ -19,5 +19,6 @@ public enum ParcelStatus {
     RETURNED,
     LOST,
     CANCELED,
-    DELETED
+    DELETED,
+    PENDING
 }

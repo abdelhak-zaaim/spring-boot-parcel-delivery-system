@@ -11,17 +11,22 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.dto.request.DeliveryAddressRequestDto;
 import com.fsdm.pfe.delix.entity.DeliveryAddress;
+import com.fsdm.pfe.delix.entity.location.Area;
 import com.fsdm.pfe.delix.repository.DeliveryAddressRepo;
 import com.fsdm.pfe.delix.service.DeliveryAddressService;
+import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DeliveryAddressServiceImpl implements DeliveryAddressService {
     DeliveryAddressRepo deliveryAddressRepo;
+    private final AreaServiceImpl areaService;
 
-    public DeliveryAddressServiceImpl(DeliveryAddressRepo deliveryAddressRepo) {
+    public DeliveryAddressServiceImpl(DeliveryAddressRepo deliveryAddressRepo, AreaServiceImpl areaService) {
         this.deliveryAddressRepo = deliveryAddressRepo;
+        this.areaService = areaService;
     }
 
     @Override
@@ -42,4 +47,24 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
     public DeliveryAddress updateDeliveryAddress(DeliveryAddress deliveryAddress) {
         return deliveryAddressRepo.save(deliveryAddress);
     }
+
+    public DeliveryAddress convertRequestToEntity(DeliveryAddressRequestDto deliveryAddressRequestDto) {
+
+        Area area = areaService.loadByCode(deliveryAddressRequestDto.getArea());
+        if (area == null) {
+            throw new IllegalArgumentException("Area not found");
+        }
+
+        return new DeliveryAddress(
+                deliveryAddressRequestDto.getId(),
+                area,
+                deliveryAddressRequestDto.getAddress(),
+                deliveryAddressRequestDto.getContactFirstName(),
+                deliveryAddressRequestDto.getContactLastName(),
+                deliveryAddressRequestDto.getContactNumber(),
+                deliveryAddressRequestDto.getContactEmail()
+        );
+    }
+
+
 }
