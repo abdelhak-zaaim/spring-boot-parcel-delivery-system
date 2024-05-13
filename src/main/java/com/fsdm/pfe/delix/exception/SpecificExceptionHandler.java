@@ -12,20 +12,44 @@ package com.fsdm.pfe.delix.exception;
 
 
 
+import com.fsdm.pfe.delix.dto.response.ArgumentNotValidDto;
 import com.fsdm.pfe.delix.dto.response.ErrorResponseDto;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.DataValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Order(1)
 @ControllerAdvice
 public class SpecificExceptionHandler {
+
+
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ResponseEntity<ArgumentNotValidDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getAllErrors().forEach((error) -> {
+//            String fieldName = ((FieldError) error).getField();
+//            String errorMessage = error.getDefaultMessage();
+//            errors.put(fieldName, errorMessage);
+//        });
+//
+//        return new ResponseEntity<>(ArgumentNotValidDto.builder().success(false).message("please check the fields").errors(errors).build(), HttpStatus.BAD_REQUEST);
+//    }
+
+
+
 
     @ExceptionHandler(DataValidationException.class)
     public ResponseEntity<?> handleInvalidUserAttributesException(DataValidationException ex, HttpServletRequest request) {

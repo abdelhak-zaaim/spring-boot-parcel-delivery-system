@@ -27,6 +27,7 @@ public class ParcelResponseDto implements Serializable {
 
 
     Long id;
+
     String codeBar;
     float height;
     float width;

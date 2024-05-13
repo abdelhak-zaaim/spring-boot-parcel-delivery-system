@@ -36,7 +36,8 @@
                             </div>
 
 
-                            <form id="add_parcel" action="/express/add_parcel" method="post" style="margin-top: 30px;">
+                            <form id="add_new_parcel_form" action="/express/add_parcel" method="post"
+                                  style="margin-top: 30px;">
                                 <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
                                        th:value="${_csrf.token}"/>
 
@@ -133,14 +134,15 @@
                                 <div class="row">
                                     <div class=" col-lg-6">
                                         <label class="el-form-item__label"
-                                               for="receiverAddress.firstName">Prénom</label>
-                                        <input type="text" class="form-control" id="receiverAddress.firstName"
-                                               name="receiverAddress.firstName" required>
+                                               for="receiverAddress.contactFirstName">Prénom</label>
+                                        <input type="text" class="form-control" id="receiverAddress.contactFirstName"
+                                               name="receiverAddress.contactFirstName" required>
                                     </div>
                                     <div class=" col-lg-6">
-                                        <label class="el-form-item__label" for="receiverAddress.lastName">Nom</label>
-                                        <input type="text" class="form-control" id="receiverAddress.lastName"
-                                               name="receiverAddress.lastName" required>
+                                        <label class="el-form-item__label"
+                                               for="receiverAddress.contactLastName">Nom</label>
+                                        <input type="text" class="form-control" id="receiverAddress.contactLastName"
+                                               name="receiverAddress.contactLastName" required>
                                     </div>
                                 </div>
 
@@ -225,32 +227,15 @@
                                         </select>
                                     </div>
                                 </div>
-
-
                                 <div data-v-5e9121d4="" class="opt-wrap">
-                                    <button class="order">
-
-                                        <span class="success">Order Placed successfully
-    <svg viewBox="0 0 12 10">
-      <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-    </svg>
-  </span>
-                                        <div class="box"></div>
-                                        <div class="truck">
-                                            <div class="back text--center">
-                                                <img style="height: 12px" src="/home/assets/images/logo/small_logo.png">
-                                            </div>
-                                            <div class="front">
-                                                <div class="window"></div>
-                                            </div>
-                                            <div class="light top"></div>
-                                            <div class="light bottom"></div>
-                                        </div>
-                                        <div class="lines"></div>
+                                    <button data-v-5e9121d4 type="submit"
+                                            class="el-button unify-btn submit-btn el-button--default">
+                                        <span>S'inscrire</span>
                                     </button>
 
 
                                 </div>
+
                             </form>
 
                             <script>
@@ -333,24 +318,12 @@
 
                             </script>
 
-
                             <script>
-                                $('.order').click(function (e) {
+                                document.getElementById('add_new_parcel_form').addEventListener('submit', function (event) {
 
-                                    let button = $(this);
 
-                                    if (!button.hasClass('animate')) {
-                                        button.addClass('animate');
-                                        setTimeout(() => {
-                                            button.removeClass('animate');
-                                        }, 10000);
-                                    }
 
-                                });
 
-                            </script>
-                            <script>
-                                document.getElementById('register_form').addEventListener('submit', function (event) {
                                     event.preventDefault(); // Prevent the form from submitting normally
                                     startLoading()
                                     let url = this.action; // The URL to send the request to
@@ -362,7 +335,7 @@
                                     })
                                         .then(response => response.json())
                                         .then(data => {
-
+                                            console.log(data)
                                             if (data.code == 200) {
                                                 toast(data.message);
                                                 this.reset();
@@ -474,6 +447,7 @@
 <script src="/home/assets/js/jquery-2.2.4.min.js"></script>
 <script src="/home/assets/js/plugins.js"></script>
 <script src="/home/assets/js/functions.js"></script>
+<script src="/home/assets/delixAnimated/js.js"></script>
 </body>
 
 </html>
