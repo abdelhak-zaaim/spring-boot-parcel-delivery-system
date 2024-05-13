@@ -12,6 +12,9 @@ package com.fsdm.pfe.delix.service;
 
 import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
 import com.fsdm.pfe.delix.entity.Customer;
+import io.netty.util.internal.ObjectPool;
+
+import java.util.Optional;
 
 public interface CustomerService {
     void deleteCustomer(Long id);
@@ -23,4 +26,6 @@ public interface CustomerService {
     Customer updateCustomer(Customer customer);
 
     Customer registerCustomer(RegisterRequestDto registerRequestDto);
+
+    Optional<Customer> loadByEmail(String email);
 }

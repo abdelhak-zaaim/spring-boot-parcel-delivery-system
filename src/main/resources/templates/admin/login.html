@@ -9,7 +9,7 @@
   -->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <meta charset="utf-8">
@@ -48,6 +48,11 @@
 <main>
     <div class="container">
 
+        <script sec:authorize="isAuthenticated() && hasAnyRole('ROLE_ADMIN')">
+    setTimeout(function () {
+        window.location.href = '/admin/';
+    }, 2000);
+</script>
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -69,14 +74,14 @@
                                     <p class="text-center small">Entrez votre nom d'utilisateur et votre mot de passe
                                         pour vous connecter</p>
                                 </div>
-                                <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show"
+                                <div th:if="${message}" th:text="${message}" class="alert  alert-dismissible fade show" th:classappend="${!isLongedIn ? 'alert-danger' : 'alert-success'}"
                                      role="alert">
                                     <i class="bi bi-exclamation-octagon me-1"></i>
-                                    Les informations d'identification ne correspondent pas
+
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                             aria-label="Close"></button>
                                 </div>
-                                <form action="/admin/login" method="post" class="row g-3 needs-validation" novalidate>
+                                <form action="/admin/login" method="post" class="row g-3 needs-validation" enctype="application/json" novalidate>
                                     <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
                                            th:value="${_csrf.token}"/>
 

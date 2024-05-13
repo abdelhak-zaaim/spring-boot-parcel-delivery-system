@@ -54,7 +54,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
             if (user.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED)) {
                 user.setStatus(UserStatus.ACTIVE);
                 user.setVerifiedAt(new Date());
-                userService.saveUser(user);
+                userService.updateUser(user);
                 verificationTokenRepo.delete(verificationToken);
             }
             verificationTokenRepo.delete(verificationToken);

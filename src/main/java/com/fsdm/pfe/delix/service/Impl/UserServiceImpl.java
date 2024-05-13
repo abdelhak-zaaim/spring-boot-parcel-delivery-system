@@ -19,6 +19,7 @@ import com.fsdm.pfe.delix.config.SecurityConfig;
 import com.fsdm.pfe.delix.service.UserService;
 import com.fsdm.pfe.delix.util.Constants;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,12 +28,13 @@ import java.util.*;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-
+    private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepository;
 
     private final EmailServiceImpl emailService;
 
-    public UserServiceImpl(UserRepo userRepository, EmailServiceImpl emailService) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, EmailServiceImpl emailService) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
 
         this.emailService = emailService;
@@ -45,13 +47,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        user.setPassword(encodePassword(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
     public User updateUser(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public String encodePassword(String password) {
-        return SecurityConfig.passwordEncoder().encode(password);
+        return passwordEncoder.encode(password);
     }
 
 

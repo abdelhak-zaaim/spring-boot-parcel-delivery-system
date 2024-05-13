@@ -23,6 +23,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "city", indexes = {@Index(name = "index_city_code", columnList = "code")})
+
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

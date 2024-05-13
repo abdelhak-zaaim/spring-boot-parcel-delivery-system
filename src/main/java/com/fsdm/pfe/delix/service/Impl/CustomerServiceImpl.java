@@ -18,20 +18,28 @@ import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationExcep
 import com.fsdm.pfe.delix.repository.CustomerRepo;
 
 import com.fsdm.pfe.delix.service.CustomerService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+
 @Service
 public class CustomerServiceImpl implements CustomerService, UserDetailsService {
-
+    private final PasswordEncoder passwordEncoder;
     private final CustomerRepo customerRepository;
     private final UserServiceImpl userService;
     private final VerificationTokenServiceImpl verificationTokenService;
 
-    public CustomerServiceImpl(CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService) {
+    public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService) {
+        this.passwordEncoder = passwordEncoder;
         this.customerRepository = customerRepository;
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
@@ -69,8 +77,11 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         if (customerRepository.existsByEmail(registerRequestDto.getEmail())) {
             throw new UserRegistrationException("User With this Email already exists");
         }
+
+
+
         Customer customer = new Customer(registerRequestDto);
-        customer.setPassword(userService.encodePassword(customer.getPassword()));
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer = customerRepository.save(customer);
 
         if (customer == null) {
@@ -82,10 +93,22 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     }
 
     @Override
+    public Optional<Customer> loadByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+
+    @Override
     public Customer loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Optional<Customer> customer = customerRepository.findByEmail(email);
         customer.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
+
+
+
+
+        System.out.println( "fghrgbrgirg////////////////////////////////////////////"+customer.get().getPassword());
+
 
         return customer.get();
 
@@ -96,4 +119,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
         return verificationTokenService.verifyEmail(token);
     }
+
+
 }

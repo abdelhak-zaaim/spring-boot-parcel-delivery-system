@@ -87,8 +87,6 @@ public class Customer extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        ArrayList<String> arrayList = new ArrayList<>(10);
-        LinkedList<String> linkedList = new LinkedList<String>();
         return super.getPassword();
     }
 
@@ -114,9 +112,10 @@ public class Customer extends User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-
-        return this.getStatus() != null && this.getStatus().equals(UserStatus.ACTIVE);
+        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE)|| this.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED));
     }
+
+
 
 
 }

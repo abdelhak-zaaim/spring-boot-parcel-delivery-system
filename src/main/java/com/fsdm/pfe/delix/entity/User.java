@@ -121,6 +121,9 @@ public class User implements Serializable {
         this.lastUpdateDate = new Date();
     }
 
+    public boolean isEmailVerified() {
+        return this.getStatus().equals(UserStatus.ACTIVE);
+    }
 
     public UserResponseDto toUserResponseDto() {
 
