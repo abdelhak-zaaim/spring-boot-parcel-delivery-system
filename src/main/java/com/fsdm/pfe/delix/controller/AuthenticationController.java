@@ -15,6 +15,7 @@ import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.dto.response.MessageDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
+import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.LoginLogServiceImpl;
@@ -32,6 +33,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
@@ -49,6 +51,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Map;
 
 @Controller
@@ -68,56 +71,49 @@ public class AuthenticationController {
     }
 
 
-   @PostMapping("/login")
-public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
-    try {
-        // Create an authentication request using the provided username and password
-        Authentication authenticationRequest =
-                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            // Create an authentication request using the provided username and password
+            Authentication authenticationRequest =
+                    new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
 
-        // Attempt to authenticate the user
-        Authentication authenticationResponse =
-                this.authenticationManager.authenticate(authenticationRequest);
+            // Attempt to authenticate the user
+            Authentication authenticationResponse =
+                    this.authenticationManager.authenticate(authenticationRequest);
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        context.setAuthentication(authenticationResponse);
-        securityContextRepository.saveContext(context, request, response);
-
-
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            context.setAuthentication(authenticationResponse);
+            securityContextRepository.saveContext(context, request, response);
 
 
-
-        if (authenticationResponse.isAuthenticated()) {
-            User user = (User) authenticationResponse.getPrincipal();
-
+            if (authenticationResponse.isAuthenticated()) {
+                User user = (User) authenticationResponse.getPrincipal();
 
 
+                if (!user.isEmailVerified()) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email not verified", "Email not verified yet, please verify your email"));
+                }
 
-            if (!user.isEmailVerified()){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email not verified", "Email not verified yet, please verify your email"));
+
+                // Save login log
+                loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), request.getRemoteAddr(), true, "login");
             }
 
+            return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
 
-            // Save login log
-            loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), request.getRemoteAddr(), true, "login");
+
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
+        } catch (BadCredentialsException e) {
+            e.printStackTrace();
+            // Handle incorrect password
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password"));
+        } catch (AuthenticationException e) {
+            // Handle other authentication failures
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         }
-
-        return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
-
-
-
-
-    } catch (UsernameNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
-    } catch (BadCredentialsException e) {
-        e.printStackTrace();
-        // Handle incorrect password
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password"));
-    } catch (AuthenticationException e) {
-        // Handle other authentication failures
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
     }
-}
 
     public record LoginRequest(String username, String password) {
     }
@@ -125,6 +121,17 @@ public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpS
     @GetMapping("/login")
     public String loginPage() {
         return "home/login";
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutUser(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        try {
+            customerService.logoutCustomer(auth);
+            return ResponseEntity.ok(new MessageDto(200, "Logout successful"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageDto(403, "Operation not allowed"));
+        }
     }
 
     @GetMapping("/register")

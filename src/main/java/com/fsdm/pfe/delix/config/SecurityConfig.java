@@ -141,7 +141,7 @@ public class SecurityConfig {
                             }
                     ).securityMatcher("/public/**", "/express/**", "/*")
 
-                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
+                 //   .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
 
