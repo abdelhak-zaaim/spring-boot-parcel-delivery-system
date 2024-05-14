@@ -107,9 +107,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
 
 
-        System.out.println( "fghrgbrgirg////////////////////////////////////////////"+customer.get().getPassword());
-
-
         return customer.get();
 
     }
