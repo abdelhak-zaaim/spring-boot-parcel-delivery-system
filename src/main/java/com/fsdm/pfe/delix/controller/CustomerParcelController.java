@@ -62,7 +62,7 @@ public class CustomerParcelController {
 
 
         try {
-            Parcel parcel = parcelService.saveParcel(parcelService.saveParcelFromDto(parcelRequestDto));
+            Parcel parcel = parcelService.saveParcelFromDto(parcelRequestDto);
         } catch (Exception e) {
             return ResponseEntity.ok(ResponseDataDto.builder().data(parcelRequestDto).success(false).error(e.getMessage()).message(e.getMessage()).build());
         }
@@ -72,7 +72,7 @@ public class CustomerParcelController {
     }
 
 
-    @GetMapping("/express/order-quote")
+    @GetMapping("/order-quote")
     public String getQuote(Model model) {
         List<Province> provinces = provinceService.loadAll();
         model.addAttribute("provinces", ProvinceServiceImpl.convertListToDto(provinces));
@@ -80,7 +80,7 @@ public class CustomerParcelController {
         return "home/orderQuote";
     }
 
-    @PostMapping("/express/order-quote")
+    @PostMapping("/order-quote")
     public ResponseEntity<ResponseDataDto> getQuoteRequest(GetQuoteRequestDto getQuoteRequestDto) {
         DataBinder binder = new DataBinder(getQuoteRequestDto);
         binder.setValidator(validator);
