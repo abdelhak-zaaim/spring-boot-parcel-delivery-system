@@ -33,3 +33,6 @@ build/
 ### VS Code ###
 .vscode/
 .DS_Store
+
+# CUSTOM
+./src/main/resources/application.properties
