@@ -1,0 +1,61 @@
+<!--
+  ~
+  ~  * @project : DeliX
+  ~  * @created : 15/05/2024, 20:58
+  ~  * @modified : 15/05/2024, 20:58
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~
+  -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/partials/head.html :: head(titlePage='DeliX | Dashbouard')"></head>
+
+<body>
+
+<header th:replace="admin/partials/header.html :: header"></header>
+
+<aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/admin')"></aside>
+
+
+<main id="main" class="main">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Accès Refusé</h2>
+                        <p class="card-text text-center">Vous n'avez pas la permission d'accéder à cette page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="admin/partials/footer.html :: footer">
+
+</footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

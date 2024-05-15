@@ -95,4 +95,9 @@ return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(
     public String notFound() {
         return "error/404";
     }
+
+    @GetMapping("/admin/accessDenied")
+    public String accessDeniedAdmin() {
+        return "admin/accessDenied";
+    }
 }

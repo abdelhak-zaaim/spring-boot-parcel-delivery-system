@@ -78,10 +78,10 @@ public class SecurityConfig {
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
 
                             {
-                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/403");
-                                // if the user is not authenticated, redirect to the login page
+                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
                                 httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
-                                    request.getRequestDispatcher("/admin/login").forward(request, response);
+
+                                    response.sendRedirect("/admin/login");
                                 });
 
 
@@ -148,9 +148,11 @@ public class SecurityConfig {
 
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             {
-                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
+                  httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/accessDenied");
                                 httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
-                                    request.getRequestDispatcher("/login").forward(request, response);
+                                  //  request.getRequestDispatcher("/login").forward(request, response);
+
+                                    response.sendRedirect("/login");
                                 });
 
 
