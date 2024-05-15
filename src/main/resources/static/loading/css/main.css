@@ -1,4 +1,9 @@
 
+
+.not-valid-item{
+    border-color: #dd4b4b!important;
+
+}
 .chromeframe {
     margin: 0.2em 0;
     background: rgba(230, 221, 221, 0.34);

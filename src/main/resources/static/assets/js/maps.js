@@ -56,3 +56,48 @@ function updateMarkerFromInputs() {
     var longitude = parseFloat(document.getElementById('longitude').value);
     updateMarkerAndInputs(latitude, longitude);
 }
+
+
+function searchLocationProvance(address) {
+
+    fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(address) + '&key=AIzaSyCCMuVVf83R6O5bfajZud_clhLYfMLYNKg')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.results && data.results.length > 0) {
+                var location = data.results[0].geometry.location;
+                map.panTo(new google.maps.LatLng(location.lat, location.lng));
+
+                map.setZoom(9);
+
+            } else {
+                console.error('No results found for address: ' + address);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error fetching geocoding data: ' + error);
+        });
+}
+
+function searchLocationCity(address) {
+
+    fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(address) + '&key=AIzaSyCCMuVVf83R6O5bfajZud_clhLYfMLYNKg')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.results && data.results.length > 0) {
+                var location = data.results[0].geometry.location;
+                map.panTo(new google.maps.LatLng(location.lat, location.lng));
+
+                map.setZoom(14);
+
+            } else {
+                console.error('No results found for address: ' + address);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error fetching geocoding data: ' + error);
+        });
+}

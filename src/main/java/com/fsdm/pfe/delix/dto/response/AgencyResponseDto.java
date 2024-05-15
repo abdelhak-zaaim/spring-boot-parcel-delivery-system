@@ -25,6 +25,7 @@ public class AgencyResponseDto implements Serializable {
     AddressResponseDto agencyAddress;
     String agencyContactNumber;
     MapsLocationPointDto locationPoint;
+    String agencyContactEmail;
 
 
     public AgencyResponseDto(Agency agency) {
@@ -33,5 +34,6 @@ public class AgencyResponseDto implements Serializable {
         this.agencyAddress = agency.getAgencyAddress().toAddressResponseDto();
         this.agencyContactNumber = agency.getAgencyContactNumber();
         this.locationPoint = new MapsLocationPointDto(agency.getLocationPoint());
+        this.agencyContactEmail = agency.getAgencyEmail();
     }
 }

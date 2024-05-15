@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.dto.response;
 
+import com.fsdm.pfe.delix.entity.Address;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -20,18 +21,13 @@ import java.io.Serializable;
 @Value
 public class AddressResponseDto implements Serializable {
     Long id;
-    String street;
-    String city;
-    String state;
-    String zip;
-    String country;
+    String address;
+    AreaResponseDto area;
 
-    public AddressResponseDto(Long id, String street, String city, String state, String zip, String country) {
-        this.id = id;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.country = country;
+    public AddressResponseDto(Address address) {
+        this.id = address.getId();
+        this.address = address.getAddress();
+        this.area = new AreaResponseDto(address.getArea());
+
     }
 }

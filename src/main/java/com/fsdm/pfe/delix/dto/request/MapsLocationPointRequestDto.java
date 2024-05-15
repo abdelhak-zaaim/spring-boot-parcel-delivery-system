@@ -11,6 +11,8 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
@@ -22,7 +24,11 @@ import java.io.Serializable;
 @Value
 public class MapsLocationPointRequestDto implements Serializable {
     @NotNull
+    @Min(-99)
+    @Max(99)
     Double latitude;
     @NotNull
+    @Min(-99)
+    @Max(99)
     Double longitude;
 }

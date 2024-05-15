@@ -32,29 +32,7 @@ public class CustommerTest {
         this.addressService = addressService;
     }
 
-    @GetMapping("/test/customer/add")
-    public ResponseEntity<Customer> addCustomer() {
-        Address address = new Address("marjaa","fes","fes-maknes","30000","morocco");
-        address = addressService.saveAddress(address);
 
-        Customer customer = new Customer();
-        customer.setEmail("test@gmail.com");
-        customer.setFirstName("test");
-        customer.setLastName("test");
-        customer.setPassword("12345678");
-        customer.setPhoneNumber("123456789");
-        customer.setStatus(UserStatus.ACTIVE);
-        customer.setCin("ZH6952");
-        customer.setAddress(address);
-        customer.setDateOfBirth(new Date("09/01/2002"));
-        try {
-            return ResponseEntity.ok(customerService.saveCustomer(customer));
-
-        } catch (Exception e) {
-            throw new IllegalIdentifierException("Error while adding the customer");
-        }
-
-    }
 
     @GetMapping("/test/customer/update")
     public ResponseEntity<Customer> updateCustomer() {

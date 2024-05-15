@@ -78,7 +78,7 @@ public class AdminAuthenticationController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         } catch (BadCredentialsException e) {
             // Handle incorrect password
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password"));
+return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Email ou mot de passe incorrect"));
         } catch (AuthenticationException e) {
             // Handle other authentication failures
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));

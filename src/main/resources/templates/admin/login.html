@@ -38,7 +38,11 @@
     <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-
+<style>
+    .hide {
+        display: none ! important;
+    }
+</style>
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
@@ -51,10 +55,10 @@
     <div class="container">
 
         <script sec:authorize="isAuthenticated() && hasAnyRole('ROLE_ADMIN')">
-    setTimeout(function () {
-        window.location.href = '/admin/';
-    }, 2000);
-</script>
+            setTimeout(function () {
+                window.location.href = '/admin/';
+            }, 2000);
+        </script>
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -70,20 +74,21 @@
 
                             <div class="card-body">
 
-                                <div  class="pt-4 pb-2">
+                                <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4 alert-primary ">Administration
                                         Panel</h5>
                                     <p class="text-center small">Entrez votre nom d'utilisateur et votre mot de passe
                                         pour vous connecter</p>
                                 </div>
-                                <div th:if="${message}" th:text="${message}" class="alert  alert-dismissible fade show" th:classappend="${!isLongedIn ? 'alert-danger' : 'alert-success'}"
+                                <div id="message-alert" class="alert  alert-dismissible  hide"
                                      role="alert">
                                     <i class="bi bi-exclamation-octagon me-1"></i>
 
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                             aria-label="Close"></button>
                                 </div>
-                                <form id="admin_login_form" action="/admin/login" method="post" class="row g-3 needs-validation" >
+                                <form id="admin_login_form" action="/admin/login" method="post"
+                                      class="row g-3 needs-validation">
                                     <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
                                            th:value="${_csrf.token}"/>
 
@@ -140,20 +145,33 @@
                                             .then(function (response) {
                                                 return response.json();
                                             }).then(function (data) {
+                                            const alertmsg = $("#message-alert");
                                             if (data.success) {
-                                                toast(data.message);
+                                                alertmsg.removeClass("alert-danger")
+                                                alertmsg.addClass("show")
+                                                alertmsg.removeClass("hide")
+                                                alertmsg.addClass("alert-success")
+
+                                                alertmsg.text(data.message);
                                                 setTimeout(function () {
                                                     window.location.href = '/admin/';
                                                 }, 2000);
 
                                             } else {
-                                                toast(data.message, 'error')
+                                                alertmsg.removeClass("alert-success")
+                                                alertmsg.addClass("show")
+                                                alertmsg.removeClass("hide")
+                                                alertmsg.addClass("alert-danger")
 
+                                                alertmsg.text(data.message);
                                             }
-
-
-                                            console.log(data);
-                                        })
+                                        }).then(function () {
+                                            setTimeout(function () {
+                                                $("#message-alert").addClass("hide");
+                                            }, 5000);
+                                        }).catch(function (error) {
+                                            console.error('Request failed', error);
+                                        });
                                     });
                                 </script>
 
@@ -184,14 +202,11 @@
 <script src="/assets/vendor/php-email-form/validate.js"></script>
 
 
-
 <script src="/home/assets/js/jquery-2.2.4.min.js"></script>
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
-<script  src="/toaster/js/toaster.js"></script>
-
-
+<script src="/toaster/js/toaster.js"></script>
 
 
 </body>

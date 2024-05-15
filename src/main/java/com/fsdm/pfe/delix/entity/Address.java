@@ -30,7 +30,9 @@
 
 package com.fsdm.pfe.delix.entity;
 
+import com.fsdm.pfe.delix.dto.request.AddressRequestDto;
 import com.fsdm.pfe.delix.dto.response.AddressResponseDto;
+import com.fsdm.pfe.delix.entity.location.Area;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,23 +52,10 @@ public class Address {
 
     @Column(nullable = false)
     @NotNull
-    private String street;
+    private String address;
 
-    @NotNull
-    @Column(nullable = false)
-    private String city;
-
-    @NotNull
-    @Column(nullable = false)
-    private String state;
-
-    @NotNull
-    @Column(nullable = false)
-    private String zip;
-
-    @NotNull
-    @Column(nullable = false, columnDefinition = "varchar(255) default 'Morocco'")
-    private String country;
+    @ManyToOne
+    Area area;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
@@ -75,13 +64,6 @@ public class Address {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
 
-    public Address(String street, String city, String state, String zip, String country) {
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.country = country;
-    }
 
     @PrePersist
     protected void onCreated() {
@@ -95,11 +77,9 @@ public class Address {
         this.lastUpdateDate = new Date();
     }
 
+
     public AddressResponseDto toAddressResponseDto() {
-
-        return new AddressResponseDto(this.getId(),  this.getStreet(), this.getState(), this.getZip(),  this.getCountry(), this.getCity());
-
+        return new AddressResponseDto(this);
 
     }
-
 }

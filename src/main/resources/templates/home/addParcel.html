@@ -84,7 +84,7 @@
                                         <label class="el-form-item__label" for="pickUpProvince">Province</label>
                                         <select class="form-control" id="pickUpProvince" name="pickUpProvince"
                                                 required>
-                                            <option disabled selected>-- Sélectionnez la province --</option>
+                                            <option disabled selected value>Sélectionnez la province</option>
                                             <option th:each="province:${provinces}" th:value="${province.code}"
                                                     th:text="${province.name}"></option>
                                         </select>
@@ -93,14 +93,14 @@
                                         <label class="el-form-item__label" for="pickUpCity">Ville</label>
                                         <select class="form-control" id="pickUpCity" name="pickUpCity"
                                                 required>
-                                            <option disabled selected>-- Sélectionnez la Province dabord --</option>
+                                            <option disabled selected value>Sélectionnez la Province dabord</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-4 custom-select">
                                         <label class="el-form-item__label" for="pickUpArea">Quartier</label>
                                         <select class="form-control select-hidden" id="pickUpArea"
                                                 name="pickupRequestAddress.area" required>
-                                            <option disabled selected>-- Sélectionnez la Ville dabord --</option>
+                                            <option disabled selected value>Sélectionnez la Ville dabord</option>
                                         </select>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                                         <label class="el-form-item__label" for="receiverProvince">Province</label>
                                         <select class="form-control" id="receiverProvince" name="receiverProvince"
                                                 required>
-                                            <option disabled selected>-- Sélectionnez la province --</option>
+                                            <option disabled selected value>Sélectionnez la province</option>
                                             <option th:each="province:${provinces}" th:value="${province.code}"
                                                     th:text="${province.name}"></option>
                                         </select>
@@ -166,14 +166,14 @@
                                         <select class="form-control" id="receiverCity" name="receiverCity"
                                                 required>
 
-                                            <option disabled selected>-- Sélectionnez la Province dabord --</option>
+                                            <option disabled selected value>Sélectionnez la Province dabord</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-4 custom-select">
                                         <label class="el-form-item__label" for="receiverArea">Quartier</label>
                                         <select class="form-control select-hidden" id="receiverArea"
                                                 name="receiverAddress.area" required>
-                                            <option disabled selected>-- Sélectionnez la Ville dabord --</option>
+                                            <option disabled selected value>Sélectionnez la Ville dabord</option>
                                         </select>
                                     </div>
                                 </div>
@@ -259,9 +259,9 @@
                                             // Clear the city select element
                                             $('#receiverCity').empty();
                                             $('#receiverArea').empty();
-                                            $('#receiverArea').append('<option disabled selected>-- Sélectionnez la Ville dabord --</option>');
+                                            $('#receiverArea').append('<option disabled selected value>Sélectionnez la Ville dabord</option>');
                                             // Populate the city select element with the received data
-                                            $('#receiverCity').append('<option disabled selected>-- Sélectionnez la ville --</option>');
+                                            $('#receiverCity').append('<option disabled selected value>Sélectionnez la ville</option>');
                                             $.each(data.data, function (index, city) {
                                                 $('#receiverCity').append('<option value="' + city.code + '">' + city.name + '</option>');
                                             });
@@ -279,7 +279,7 @@
                                             $('#receiverArea').empty();
 
                                             // Populate the area select element with the received data
-                                            $('#receiverArea').append('<option disabled selected>-- Sélectionnez la Quartier --</option>');
+                                            $('#receiverArea').append('<option disabled selected value="">Sélectionnez la Quartier</option>');
                                             $.each(data.data, function (index, area) {
                                                 $('#receiverArea').append('<option value="' + area.code + '">' + area.name + '</option>');
                                             });
@@ -298,9 +298,9 @@
                                             // Clear the city select element
                                             $('#pickUpCity').empty();
                                             $('#pickUpArea').empty();
-                                            $('#pickUpArea').append('<option disabled selected>-- Sélectionnez la Ville dabord --</option>');
+                                            $('#pickUpArea').append('<option disabled selected value="">Sélectionnez la Ville dabord</option>');
                                             // Populate the city select element with the received data
-                                            $('#pickUpCity').append('<option disabled selected>-- Sélectionnez la ville --</option>');
+                                            $('#pickUpCity').append('<option disabled selected value>Sélectionnez la ville</option>');
                                             $.each(data.data, function (index, city) {
                                                 $('#pickUpCity').append('<option value="' + city.code + '">' + city.name + '</option>');
                                             });
@@ -318,7 +318,7 @@
                                             $('#pickUpArea').empty();
 
 
-                                            $('#pickUpArea').append('<option disabled selected>-- Sélectionnez la Quartier --</option>');
+                                            $('#pickUpArea').append('<option disabled selected value>Sélectionnez la Quartier</option>');
                                             $.each(data.data, function (index, area) {
                                                 $('#pickUpArea').append('<option value="' + area.code + '">' + area.name + '</option>');
                                             });

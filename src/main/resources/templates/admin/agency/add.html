@@ -35,7 +35,7 @@
                         <h5 class="card-title">Enter Agency details</h5>
 
 
-                        <form id="add_agency_form" action="/admin/agency/add" method="post">
+                        <form id="add_agency_form"  action="/admin/agency/add" method="post">
 
     <input type="hidden" name="_csrf" th:value="${csrf_token}"/>
 
@@ -73,46 +73,116 @@
 
                     <h5 class="card-title">Adresse</h5>
                     <div class="row mb-3">
-                        <label for="country" class="col-sm-2 col-form-label">Pays</label>
+                        <label for="Province" class="col-sm-2 col-form-label">Province</label>
                         <div class="col-sm-10">
-                            <input type="text" name="agencyAddress.country" id="country"
-                                   class="form-control" required>
+
+                            <select name="province" id="province" class="form-select" required>
+                                <option disabled selected value>Sélectionnez la province</option>
+                                <option th:each="province:${provinces}" th:value="${province.code}"
+                                        th:text="${province.name}"></option>
+                            </select>
+
                         </div>
                     </div>
                     <div class="row mb-3">
 
-                        <label for="street" class="col-sm-2 col-form-label">Rue</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="agencyAddress.street" id="street"
-                                   class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
                         <label for="city" class="col-sm-2 col-form-label">Ville</label>
                         <div class="col-sm-10">
-                            <input type="text" name="agencyAddress.city" id="city"
-                                   class="form-control" required>
+
+
+                            <select name="city" id="city" class="form-select" required>
+                                <option disabled selected value>Sélectionnez la Province dabord</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="zipcode" style="padding-right: 0!important;" class="col-sm-2 col-form-label">Code Postal</label>
+                        <label for="area" class="col-sm-2 col-form-label">Quartier</label>
                         <div class="col-sm-10">
-                            <input type="number" name="agencyAddress.zip" id="zipcode"
-                                   class="form-control" required>
+
+                            <select  name="agencyAddress.areaCode" id="area" class="form-select" required>
+                                <option disabled selected value>Sélectionnez la Ville dabord</option>
+
+
+                            </select>
+
+
+
+
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="stat" class="col-sm-2 col-form-label">État</label>
+                        <label for="address" style="padding-right: 0!important;" class="col-sm-2 col-form-label">Address</label>
                         <div class="col-sm-10">
-                            <input type="text" name="agencyAddress.state" id="stat"
+                            <input type="text" name="agencyAddress.address" id="address"
                                    class="form-control" required>
                         </div>
                     </div>
+
+
+
+
+
                 </div>
             </div>
 
         </div>
 
+
+
+        <script>
+            $(document).ready(function () {
+                $('#province').change(function () {
+                    // Get the selected province code
+                    var provinceName = $(this).find('option:selected').text();
+                    searchLocationProvance(provinceName);
+                    var provinceCode = $(this).val();
+
+
+
+
+                    // Send a GET request to the server
+                    $.get('/express/location/city?code=' + provinceCode, function (data) {
+                        // Clear the city select element
+                        $('#city').empty();
+                        $('#area').empty();
+                        $('#area').append('<option disabled selected value>Sélectionnez la Ville dabord</option>');
+                        // Populate the city select element with the received data
+                        $('#city').append('<option disabled selected value>Sélectionnez la ville</option>');
+                        $.each(data.data, function (index, city) {
+                            $('#city').append('<option value="' + city.code + '">' + city.name + '</option>');
+                        });
+                    });
+                });
+
+
+
+
+
+                $('#city').change(function () {
+                    // Get the selected city code
+                    var cityCode = $(this).val();
+
+                    var cityName = $(this).find('option:selected').text();
+                    searchLocationCity(cityName);
+                    // Send a GET request to the server
+                    $.get('/express/location/area?code=' + cityCode, function (data) {
+                        // Clear the area select element
+                        $('#area').empty();
+
+                        // Populate the area select element with the received data
+                        $('#area').append('<option disabled selected value>Sélectionnez la Quartier</option>');
+                        $.each(data.data, function (index, area) {
+                            $('#area').append('<option value="' + area.code + '">' + area.name + '</option>');
+                        });
+                    });
+                });
+            });
+
+
+
+
+
+        </script>
 
         <div class="col-lg-6">
             <div id="map"></div>
@@ -154,6 +224,71 @@
     </div>
 
 </form>
+
+                        <script>
+                            const showAlert = (data) => {
+                                let { type, message } = data
+                                let autoClose
+                                data.autoClose == undefined ? autoClose = 3000 : autoClose = data.autoClose
+
+                                let toastContainer = document.createElement('div')
+                                toastContainer.classList.add('toast-container')
+                                var container = document.querySelector('.toast-container')
+                                if (typeof (container) != 'undefined' && container != null) return
+                                document.body.appendChild(toastContainer)
+                                let icon
+                                if(type == 'error') {
+                                    icon = 'fa-circle-exclamation'
+                                } else if(type == 'success'){
+                                    icon = 'fa-circle-check'
+                                } else if(type == 'warning'){
+                                    icon = 'fa-triangle-exclamation'
+                                } else if(type == 'info'){
+                                    icon = 'fa-circle-info'
+                                }
+
+                                let alert = `<div class="inAlert ${type} ">
+                    <div class="wrapper ">
+                        <div class="icon">
+                        <i class="fa-solid ${icon}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="title">${type}</div>
+                            <div class="message">${message}</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-xmark closeAlert"></i>
+                </div>`
+                                toastContainer.insertAdjacentHTML('afterbegin', alert)
+                                setTimeout(() => {
+                                    var isAlert = document.querySelector('.inAlert')
+                                    if (typeof (isAlert) != 'undefined' && isAlert != null) isAlert.classList.add('slide-in')
+                                }, 100)
+
+                                setTimeout(() => {
+                                    var isAlert = document.querySelector('.inAlert')
+                                    if (typeof (isAlert) != 'undefined' && isAlert != null) isAlert.classList.remove('slide-in')
+                                    setTimeout(() => {
+                                        document.querySelector('.inAlert').remove()
+                                        removeToast()
+                                    }, 100)
+                                }, autoClose)
+
+                                let closeBtn = document.querySelector('.closeAlert')
+                                closeBtn.addEventListener('click', () => {
+                                    document.querySelector('.inAlert').classList.remove('slide-in')
+                                    setTimeout(() => {
+                                        document.querySelector('.inAlert').remove()
+                                        removeToast()
+                                    }, 100)
+                                })
+                            }
+
+                            const removeToast = () => {
+                                var container = document.querySelector('.toast-container')
+                                if (!container.hasChildNodes()) container.remove()
+                            }
+                        </script>
                         <script >
                             document.getElementById('add_agency_form').addEventListener('submit', function(event) {
                                 event.preventDefault(); // Prevent the form from submitting normally
@@ -167,11 +302,35 @@
                                 })
                                     .then(response => response.json())
                                     .then(data => {
-
                                         $('#loader-wrapper').hide();
-                                        showAlert({type: data.type,message: data.message })
 
-                                        this.reset();
+
+                                        if (data.success) {
+
+                                            showAlert({type: "success",message: data.message })
+
+                                            setTimeout(() => {
+                                                window.location.href = "/admin/agencies"
+                                            }, 3000)
+
+                                        } else {
+
+
+                                            showAlert({type: "success",message: data.message })
+
+
+                                            if (data.error != null) {
+                                                data.error.forEach(function (error) {
+
+                                                    $('input[name="' + error.field + '"]').addClass('not-valid-item');
+                                                    $('select[name="' + error.field + '"]').addClass('not-valid-item');
+
+                                                });
+
+                                            }
+
+                                        }
+
                                         // Handle the response data here
                                         console.log(data);
 
@@ -212,6 +371,7 @@
 <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="/assets/vendor/php-email-form/validate.js"></script>
 <script src="/loading/js/main.js"></script>
+<script src="/toaster/js/toaster.js"></script>
 
 
 <script src="/assets/js/main.js"></script>

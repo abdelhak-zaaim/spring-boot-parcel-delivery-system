@@ -1,4 +1,6 @@
-
+.not-valid-item {
+    border-color: #e36e6e !important;
+}
 
  .sub-title-new {
     margin-bottom: 30px;

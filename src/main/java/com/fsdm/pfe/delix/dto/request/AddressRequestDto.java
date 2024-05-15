@@ -12,6 +12,8 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
@@ -24,14 +26,10 @@ import java.io.Serializable;
 public class AddressRequestDto implements Serializable {
     Long id;
     @NotNull
-    String street;
+    @NotEmpty
+    String address;
     @NotNull
-    String city;
-    @NotNull
-    String state;
-    @NotNull
-    String zip;
-    @NotNull
-    String country;
-
+    @NotEmpty
+   @NotBlank
+    String areaCode;
 }

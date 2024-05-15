@@ -109,6 +109,10 @@
 
                                             if (data.code == 200) {
                                                 toast(data.message);
+
+                                                setTimeout(() => {
+                                                    window.location.href = "/login";
+                                                }, 2000);
                                                 this.reset();
                                             } else {
                                                 toast(data.message, "error");

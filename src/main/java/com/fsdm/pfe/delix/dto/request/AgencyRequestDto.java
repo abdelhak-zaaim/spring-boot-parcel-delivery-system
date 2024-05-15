@@ -12,6 +12,7 @@
 package com.fsdm.pfe.delix.dto.request;
 
 import com.fsdm.pfe.delix.util.Constants;
+import jakarta.validation.Valid;
 import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
@@ -28,13 +29,14 @@ public class AgencyRequestDto implements Serializable {
     @NotBlank
     @NotNull
     String agencyName;
-    @NotNull
+
+    @Valid
     AddressRequestDto agencyAddress;
 
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String agencyContactNumber;
     @NotNull
     String agencyEmail;
-    @NotNull
+    @Valid
     MapsLocationPointRequestDto locationPoint;
 }

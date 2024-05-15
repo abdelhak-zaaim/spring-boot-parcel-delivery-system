@@ -76,7 +76,17 @@ public class SecurityConfig {
                     // .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin/"))
                     .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/admin/login").deleteCookies("JSESSIONID"))
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                            httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/403"));
+
+                            {
+                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/403");
+                                // if the user is not authenticated, redirect to the login page
+                                httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
+                                    request.getRequestDispatcher("/admin/login").forward(request, response);
+                                });
+
+
+                            }
+                    );
 
 
             return http.build();
@@ -139,26 +149,11 @@ public class SecurityConfig {
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             {
                                 httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
-//                                httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
-//                                    request.getRequestDispatcher("/forbidden-page").forward(request, response);
-//
-////                                    if (request.getMethod().equals("GET")) {
-////                                    } else if (request.getMethod().equals("POST")) {
-////                                        response.setContentType("application/json");
-////                                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-////                                        response.getOutputStream().println(ResponseDataDto.builder().message("Access Denied").build().toString());
-////                                    }
-//
-//                                });
-                                httpSecurityExceptionHandlingConfigurer.accessDeniedHandler((request, response, accessDeniedException) -> {
-                                    if (request.getMethod().equals("GET")) {
-                                        request.getRequestDispatcher("/forbidden-page").forward(request, response);
-                                    } else if (request.getMethod().equals("POST")) {
-                                        response.setContentType("application/json");
-                                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                                        response.getOutputStream().println(ResponseDataDto.builder().message("Access Denied").build().toString());
-                                    }
+                                httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
+                                    request.getRequestDispatcher("/login").forward(request, response);
                                 });
+
+
 
                             }
                     );

@@ -94,7 +94,7 @@ public class AuthenticationController {
 
 
                 if (!user.isEmailVerified()) {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email not verified", "Email not verified yet, please verify your email"));
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email non vérifié", "Email non vérifié, veuillez vérifier votre email"));
                 }
 
                 String ipAddress = request.getHeader("X-Forwarded-For");
@@ -156,14 +156,14 @@ public class AuthenticationController {
             }
 
 
-            Customer customer = customerService.registerCustomer(registerRequestDto ,baseUrl);
+            Customer customer = customerService.registerCustomer(registerRequestDto, baseUrl);
 
             MessageDto messageDto = new MessageDto(200, "Account created successfully , please check your email to verify your account");
             messageDto.setData(customer);
             return ResponseEntity.ok(messageDto);
         } catch (UserRegistrationException e) {
             return ResponseEntity.badRequest().body(new MessageDto(300, e.getMessage()));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(new MessageDto(300, "An error occurred, please try again"));
         }
     }

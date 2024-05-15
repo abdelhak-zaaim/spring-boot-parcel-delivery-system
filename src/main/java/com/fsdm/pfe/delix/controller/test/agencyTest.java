@@ -29,22 +29,5 @@ public class agencyTest {
         this.agencyService = agencyService;
     }
 
-    @GetMapping("/test/agency/add")
-    public ResponseEntity<Agency> addagencys() {
-        // add agency for testing
-        Agency agency = new Agency();
-        agency.setAgencyName("CASA hub");
-        agency.setAgencyContactNumber("0665458798");
-        agency.setAgencyEmail("casrra@test.com");
 
-        Address address = new Address("3ayn dyab", "CASA", "casa-rabat", "20000", "Morocco");
-        agency.setAgencyAddress(address);
-        MapsLocationPoint mapsLocationPoint = new MapsLocationPoint(34.1865145, -6.1249762);
-        agency.setLocationPoint(
-                mapsLocationPoint);
-
-        Agency agency1 = agencyService.saveAgency(agency);
-     //   agency1.getCreationDate();
-        return ResponseEntity.ok(agency1);
-    }
 }

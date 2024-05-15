@@ -43,11 +43,10 @@
                                 <th>
                                     <b>N</b>om de l'agence
                                 </th>
-                                <th>La Ville</th>
                                 <th>Quartier</th>
+                                <th>Address</th>
                                 <th>TelePhone</th>
-                                <th>latitude</th>
-                                <th>longitude</th>
+                                <th>Email</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -55,11 +54,10 @@
 
                             <tr th:each="agencyDto :${listDtoAgencies}" th:id="@{row-+${agencyDto.id}}">
                                 <td th:text="${agencyDto.agencyName}">NULL</td>
-                                <td th:text="${agencyDto.agencyAddress.city}">NULL</td>
-                                <td th:text="${agencyDto.agencyAddress.street}">NULL</td>
-                                <td th:text="${agencyDto.agencyContactNumber}">NULL</td>
-                                <td th:text="${agencyDto.locationPoint.latitude}">NULL</td>
-                                <td th:text="${agencyDto.locationPoint.longitude}">NULL</td>
+                                <td th:text="${agencyDto.agencyAddress.area.getName()}">NULL</td>
+                                <td th:text="${agencyDto.agencyAddress.address}">NULL</td>
+                                <td th:text="${agencyDto.getAgencyContactNumber()}">NULL</td>
+                                <td th:text="${agencyDto.getAgencyContactEmail()}">NULL</td>
                                 <td>
                                     <div class="row">
                                         <a style="cursor: pointer;" th:onclick="@{}" th:href="@{'/admin/agency/edit/' + ${agencyDto.id}}"
