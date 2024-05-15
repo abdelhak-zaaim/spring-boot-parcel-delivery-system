@@ -68,4 +68,11 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
         admin.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
         return admin.get();
     }
+
+
+
+    public Admin loadUserByEmail(String email) {
+        Optional<Admin> admin = adminEmployeeRepo.findByEmail(email);
+        return admin.orElse(null);
+    }
 }

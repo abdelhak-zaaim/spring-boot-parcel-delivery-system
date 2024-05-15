@@ -51,6 +51,7 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
     public DeliveryAddress convertRequestToEntity(DeliveryAddressRequestDto deliveryAddressRequestDto) {
 
         Area area = areaService.loadByCode(deliveryAddressRequestDto.getArea());
+
         if (area == null) {
             throw new IllegalArgumentException("Area not found");
         }

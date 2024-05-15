@@ -14,6 +14,8 @@ import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
 import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.dto.response.MessageDto;
 import com.fsdm.pfe.delix.entity.Customer;
+import com.fsdm.pfe.delix.util.Constants;
+import com.fsdm.pfe.delix.util.helpers.HttpUtils;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
@@ -72,7 +74,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> loginCustomer(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
         try {
             // Create an authentication request using the provided username and password
             Authentication authenticationRequest =
@@ -95,9 +97,13 @@ public class AuthenticationController {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email not verified", "Email not verified yet, please verify your email"));
                 }
 
+                String ipAddress = request.getHeader("X-Forwarded-For");
+                if (ipAddress == null) {
+                    ipAddress = request.getRemoteAddr();
+                }
 
                 // Save login log
-                loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), request.getRemoteAddr(), true, "login");
+                loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), ipAddress, true, "login");
             }
 
             return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
@@ -106,7 +112,6 @@ public class AuthenticationController {
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         } catch (BadCredentialsException e) {
-            e.printStackTrace();
             // Handle incorrect password
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password"));
         } catch (AuthenticationException e) {
@@ -140,15 +145,26 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<MessageDto> registerAccount(@Valid RegisterRequestDto registerRequestDto) {
+    public ResponseEntity<MessageDto> registerAccount(@Valid RegisterRequestDto registerRequestDto, HttpServletRequest request) {
 
         try {
-            Customer customer = customerService.registerCustomer(registerRequestDto);
+            String baseUrl;
+            try {
+                baseUrl = HttpUtils.getServerUrl(request);
+            } catch (Exception e) {
+                baseUrl = Constants.BASE_URL; // todo change this to your base url
+            }
+
+
+            Customer customer = customerService.registerCustomer(registerRequestDto ,baseUrl);
+
             MessageDto messageDto = new MessageDto(200, "Account created successfully , please check your email to verify your account");
             messageDto.setData(customer);
             return ResponseEntity.ok(messageDto);
         } catch (UserRegistrationException e) {
             return ResponseEntity.badRequest().body(new MessageDto(300, e.getMessage()));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(new MessageDto(300, "An error occurred, please try again"));
         }
     }
 
@@ -171,4 +187,9 @@ public class AuthenticationController {
         return "home/index_if_login";
     }
 
+
+    @GetMapping("/forbidden-page")
+    public String forbiddenPage() {
+        return "home/forbiddenPage";  // This should be the name of your forbidden page view
+    }
 }

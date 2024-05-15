@@ -46,11 +46,11 @@ public enum Role {
     }
 
 
- public String getCustomerRoleName() {
+ public static String getCustomerRoleName() {
         return "ROLE_CUSTOMER";
     }
 
-    public String getAdminRuleName() {
+    public static String getAdminRuleName() {
         return "ROLE_ADMIN";
     }
 

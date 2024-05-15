@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -25,6 +26,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
@@ -53,11 +55,11 @@ public class AdminAuthenticationController {
 
 
     @PostMapping("/admin/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpServletRequest request,HttpServletResponse response, Model model) {
+    public ResponseEntity<?> login(@RequestBody AuthenticationController.LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
         try {
             // Create an authentication request using the provided username and password
             Authentication authenticationRequest =
-                    new UsernamePasswordAuthenticationToken(username, password);
+                    new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
 
             // Attempt to authenticate the user
             Authentication authenticationResponse =
@@ -69,20 +71,19 @@ public class AdminAuthenticationController {
 
             sessionRegistry.registerNewSession(request.getSession().getId(), authenticationResponse.getPrincipal());
 
+            return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
 
 
-
-
-            model.addAttribute("isLongedIn", authenticationResponse.isAuthenticated());
-            model.addAttribute("message", "Login successful");
-
+        }catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
+        } catch (BadCredentialsException e) {
+            // Handle incorrect password
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password"));
         } catch (AuthenticationException e) {
-            // Handle authentication failure
-        //    model.addAttribute("isLongedIn", false);
-            model.addAttribute("message", e.getMessage());
+            // Handle other authentication failures
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         }
 
-        return "admin/login";
     }
 
 

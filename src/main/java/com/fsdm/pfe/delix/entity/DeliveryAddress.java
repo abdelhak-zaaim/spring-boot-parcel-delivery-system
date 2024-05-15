@@ -68,6 +68,7 @@ public class DeliveryAddress  {
         this.contactNumber = contactNumber;
     }
 
+
     public DeliveryAddress(Long id, Area area, String address, String contactFirstName, String contactLastName, String contactNumber, String contactEmail) {
         this.id = id;
         this.area = area;

@@ -37,6 +37,7 @@ public class LoginLogServiceImpl implements LoginLogService {
       loginLog.setLoginStatus(loginStatus);
       loginLog.setLoginMethod(loginMethod);
 
+
       loginLogRepo.save(loginLog);
    }
 }

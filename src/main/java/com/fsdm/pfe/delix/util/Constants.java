@@ -11,11 +11,18 @@
 package com.fsdm.pfe.delix.util;
 
 public class Constants {
-    public final static String BASE_URL = "http://localhost:8080";
+    public final static String BASE_URL = "https://delix.ma";
 
     public final static String TIME_ZONE = "Africa/Casablanca";
     public final static String CURRENT_PAGE = "currentPage";
     public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public final static String MOROCCAN_NUMBER_REGEXP = "(\\+212|0)[567][0-9]{8}";
     public final static String COUNTRY_CODE = "+212";
+
+
+
+    // amazon s3
+    public final static String BUCKET_NAME = "delix-document";
+    public final static String AWS_ACCESS= "AKIAV6DFGLVXOPQ3MXCE";
+    public final static String AWS_SECRET= "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";
 }

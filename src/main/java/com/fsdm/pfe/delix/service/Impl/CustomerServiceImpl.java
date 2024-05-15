@@ -11,23 +11,40 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.controller.AuthenticationController;
+import com.fsdm.pfe.delix.dto.request.LoginRequestDto;
 import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
+import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
+import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.repository.CustomerRepo;
 
 import com.fsdm.pfe.delix.service.CustomerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collection;
 import java.util.Optional;
 
 
@@ -38,11 +55,20 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     private final UserServiceImpl userService;
     private final VerificationTokenServiceImpl verificationTokenService;
 
-    public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService) {
+    private final LoginLogServiceImpl loginLogService;
+    private final AuthenticationManager authenticationManager;
+    private final SecurityContextRepository securityContextRepository =
+            new HttpSessionSecurityContextRepository();
+
+
+
+    public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, LoginLogServiceImpl loginLogService, AuthenticationManager authenticationManager) {
         this.passwordEncoder = passwordEncoder;
         this.customerRepository = customerRepository;
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
+        this.loginLogService = loginLogService;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -67,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     }
 
     @Override
-    public Customer registerCustomer(RegisterRequestDto registerRequestDto) {
+    public Customer registerCustomer(RegisterRequestDto registerRequestDto, String baseUrl) {
 
         if (!registerRequestDto.getPassword().equals(registerRequestDto.getRePassword())) {
             throw new UserRegistrationException("Passwords do not match");
@@ -87,7 +113,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         if (customer == null) {
             throw new UserRegistrationException("User Registration Failed");
         } else {
-            userService.sendEmailVerificationToken(customer.getEmail(), verificationTokenService.createVerification(customer).getToken());
+            userService.sendEmailVerification(customer.getEmail(), verificationTokenService.createVerification(customer).getToken() , baseUrl);
         }
         return customer;
     }
@@ -117,5 +143,60 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         return verificationTokenService.verifyEmail(token);
     }
 
+    @Override
+    public void logoutCustomer(Authentication auth) {
+        if (auth != null) {
+            Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+            boolean isCustomer = authorities.stream()
+                    .anyMatch(role -> role.getAuthority().equals(Role.getCustomerRoleName()));
+            if (isCustomer) {
+                SecurityContextHolder.clearContext();
+            } else {
+                throw new RuntimeException("Operation not allowed");
+            }
+        }
+    }
 
+
+
+    public LoginResponseDto loginCustomer(LoginRequestDto loginRequest, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Authentication authenticationRequest =
+                    new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
+
+            Authentication authenticationResponse =
+                    this.authenticationManager.authenticate(authenticationRequest);
+
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            context.setAuthentication(authenticationResponse);
+            securityContextRepository.saveContext(context, request, response);
+
+            if (authenticationResponse.isAuthenticated()) {
+                Customer user = (Customer) authenticationResponse.getPrincipal();
+
+                if (!user.isEmailVerified()) {
+                    return new LoginResponseDto(false, false, "Email not verified", "Email not verified yet, please verify your email");
+                }
+
+                String ipAddress = request.getHeader("X-Forwarded-For");
+                if (ipAddress == null) {
+                    ipAddress = request.getRemoteAddr();
+                }
+
+                // Save login log
+                loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), ipAddress, true, "login");
+            }
+
+            return new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful");
+
+        } catch (UsernameNotFoundException e) {
+            return new LoginResponseDto(false, false, e.getMessage(), e.getMessage());
+        } catch (BadCredentialsException e) {
+            // Handle incorrect password
+            return new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password");
+        } catch (AuthenticationException e) {
+            // Handle other authentication failures
+            return new LoginResponseDto(false, false, e.getMessage(), e.getMessage());
+        }
+    }
 }

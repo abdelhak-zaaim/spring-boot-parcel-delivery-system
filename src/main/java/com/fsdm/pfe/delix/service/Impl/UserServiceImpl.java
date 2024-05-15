@@ -83,9 +83,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public void sendEmailVerificationToken(String email, String verificationToken) {
+    public void sendEmailVerification(String email, String verificationToken, String baseUrl) {
 
-        String verificationLink = Constants.BASE_URL + "/verify?token=" + verificationToken;
+        String verificationLink = baseUrl + "/verify?token=" + verificationToken;
 
         emailService.sendSimpleMessage(email, "Please verify your email",
                 "Click the following link to verify your email: " + verificationLink);

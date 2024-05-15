@@ -10,8 +10,10 @@
 
 package com.fsdm.pfe.delix.config;
 
+import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -52,7 +54,6 @@ public class SecurityConfig {
     }
 
 
-
     @Configuration
     @Order(1)
     public static class AdminSecurityConfig {
@@ -72,11 +73,10 @@ public class SecurityConfig {
 
                     ).securityMatcher("/admin", "/admin/**")
 
-                   // .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin/"))
+                    // .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin/"))
                     .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/admin/login").deleteCookies("JSESSIONID"))
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/403"));
-
 
 
             return http.build();
@@ -117,15 +117,11 @@ public class SecurityConfig {
 
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/public/**", "/express/**", "/*",  "/express/location/city*").authorizeHttpRequests(
+            http.securityMatcher("/public/**", "/express/**", "/*", "/express/location/city*").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
-
-
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/area")).permitAll();
-
-
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/test/**")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/register*")).permitAll();
@@ -137,13 +133,35 @@ public class SecurityConfig {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/order-quote")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
 
-
                             }
                     ).securityMatcher("/public/**", "/express/**", "/*")
 
-                 //   .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                            httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"));
+                            {
+                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
+//                                httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
+//                                    request.getRequestDispatcher("/forbidden-page").forward(request, response);
+//
+////                                    if (request.getMethod().equals("GET")) {
+////                                    } else if (request.getMethod().equals("POST")) {
+////                                        response.setContentType("application/json");
+////                                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+////                                        response.getOutputStream().println(ResponseDataDto.builder().message("Access Denied").build().toString());
+////                                    }
+//
+//                                });
+                                httpSecurityExceptionHandlingConfigurer.accessDeniedHandler((request, response, accessDeniedException) -> {
+                                    if (request.getMethod().equals("GET")) {
+                                        request.getRequestDispatcher("/forbidden-page").forward(request, response);
+                                    } else if (request.getMethod().equals("POST")) {
+                                        response.setContentType("application/json");
+                                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                                        response.getOutputStream().println(ResponseDataDto.builder().message("Access Denied").build().toString());
+                                    }
+                                });
+
+                            }
+                    );
 
             return http.build();
 
@@ -160,9 +178,6 @@ public class SecurityConfig {
             authenticationProvider.setPasswordEncoder(passwordEncoder);
             return new ProviderManager(authenticationProvider);
         }
-
-
-
 
 
     }
