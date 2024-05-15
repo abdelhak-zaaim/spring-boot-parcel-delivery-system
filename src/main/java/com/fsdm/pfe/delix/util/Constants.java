@@ -23,6 +23,6 @@ public class Constants {
 
     // amazon s3
     public final static String BUCKET_NAME = "delix-document";
-    public final static String AWS_ACCESS= "AKIAV6DFGLVXOPQ3MXCE";
-    public final static String AWS_SECRET= "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";
+    public final static String AWS_ACCESS= "AWS_ACCESS";
+    public final static String AWS_SECRET= "AWS_SECRET";
 }
