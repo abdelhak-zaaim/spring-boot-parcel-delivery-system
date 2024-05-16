@@ -59,7 +59,7 @@
                                 <td th:text="${parcel.getType()}">NULL</td>
                                 <td th:text="${parcel.getCreationDate()}">NULL</td>
                                 <td th:text="${parcel.getWeight()}">NULL</td>
-                                <td th:text="${parcel.getReceiverAddress().getCity()}">NULL</td>
+                                <td th:text="${parcel.getReceiverAddress().getAddress()}">NULL</td>
                                 <td>
                                     <div class="row">
                                         <a style="cursor: pointer;" th:onclick="@{}" th:href="@{'/admin/agency/edit/' + ${parcel.id}}"
