@@ -24,6 +24,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 public class Area {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -31,9 +32,7 @@ public class Area {
 
     @Column(name = "code", nullable = false)
     private String code;
-
     private String name;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_code", referencedColumnName = "code")

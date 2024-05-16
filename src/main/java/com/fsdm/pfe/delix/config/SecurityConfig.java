@@ -27,8 +27,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,9 +42,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
 @Configuration
@@ -177,6 +182,34 @@ public class SecurityConfig {
         }
 
 
+    }
+
+    @Configuration
+    @EnableWebSecurity
+    @EnableMethodSecurity
+    @Order(3)
+    public static class ApiSecurityConfig {
+
+
+
+//        @Bean
+//        SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//            http.csrf(AbstractHttpConfigurer::disable)
+//                    .cors(AbstractHttpConfigurer::disable)
+//                    .authorizeHttpRequests(req -> req.requestMatchers(WHITE_LIST_URL)
+//                            .permitAll()
+//                            .anyRequest()
+//                            .authenticated())
+//                    .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler))
+//                    .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+//                    .authenticationProvider(authenticationProvider())
+//                    .addFilterBefore(
+//                            authenticationJwtTokenFilter(),
+//                            UsernamePasswordAuthenticationFilter.class
+//                    );
+//
+//            return http.build();
+//        }
     }
 
 

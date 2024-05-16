@@ -15,12 +15,10 @@ import com.fsdm.pfe.delix.entity.PrivilegesGroup;
 import com.fsdm.pfe.delix.model.enums.Privilege;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.PrivilegesGroupServiceImpl;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
@@ -52,7 +50,7 @@ public ApplicationRunner createAdminRunner() {
             List<Privilege> privileges = new ArrayList<>();
             privileges.add(Privilege.PARCELS_DELETE);
             privileges.add(Privilege.PARCELS_ADD);
-            PrivilegesGroup privilegesGroup = new PrivilegesGroup("initial_admin2", privileges);
+            PrivilegesGroup privilegesGroup = new PrivilegesGroup("initial_admin", privileges);
             privilegesGroup = privilegesGroupService.savePrivilegesGroup(privilegesGroup);
 
             Admin admin = new Admin();

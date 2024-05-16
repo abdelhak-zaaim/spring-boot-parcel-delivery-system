@@ -25,4 +25,7 @@ public class Constants {
     public final static String BUCKET_NAME = "delix-document";
     public final static String AWS_ACCESS= "AWS_ACCESS";
     public final static String AWS_SECRET= "AWS_SECRET";
+
+    // jwt
+    private String jwtSecret = "4261656C64756E67";
 }
