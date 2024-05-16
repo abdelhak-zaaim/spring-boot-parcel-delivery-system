@@ -62,7 +62,7 @@ public class CustomerParcelController {
 
 
         try {
-            Parcel parcel = parcelService.saveParcelFromDto(parcelRequestDto);
+        parcelService.saveParcelFromDto(parcelRequestDto);
         } catch (Exception e) {
             return ResponseEntity.ok(ResponseDataDto.builder().data(parcelRequestDto).success(false).error(e.getMessage()).message(e.getMessage()).build());
         }
