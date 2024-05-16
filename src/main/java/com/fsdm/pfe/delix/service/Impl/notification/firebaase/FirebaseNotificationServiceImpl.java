@@ -10,7 +10,10 @@
 
 package com.fsdm.pfe.delix.service.Impl.notification.firebaase;
 
+import com.fsdm.pfe.delix.entity.User;
+import com.fsdm.pfe.delix.exception.personalizedexceptions.FirebaseUserNotFoundException;
 import com.fsdm.pfe.delix.model.NotificationRequest;
+import com.fsdm.pfe.delix.service.Impl.notification.UserNotificationServiceImpl;
 import com.google.firebase.messaging.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,8 +25,32 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 @Slf4j
-public class FCMService {
+public class FirebaseNotificationServiceImpl extends UserNotificationServiceImpl {
+    @Override
+    public void sendNotificationToUser(String title, String message, User user) {
+        super.sendNotificationToUser(title, message, user);
+        if (user.getFirebaseUser().getMessagingKey() != null) {
+            NotificationRequest request = new NotificationRequest();
+            request.setTitle(title);
+            request.setBody(message);
+            request.setToken(user.getFirebaseUser().getMessagingKey());
+            try {
+                sendMessageToToken(request);
+            } catch (InterruptedException | ExecutionException e) {
+                log.error("An error occurred while sending a message to a token. Device token: " + user.getFirebaseUser().getMessagingKey(), e);
+            }
+        }else {
+            throw new FirebaseUserNotFoundException("User with id: " + user.getId() + " has no firebase messaging key");
+        }
 
+    }
+
+    @Override
+    public void sendNotificationToAll(String title, String message) {
+        super.sendNotificationToAll(title, message);
+        // todo : we need to implement this method
+
+    }
 
     public void sendMessageToToken(NotificationRequest request)
             throws InterruptedException, ExecutionException {
@@ -31,7 +58,7 @@ public class FCMService {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonOutput = gson.toJson(message);
         String response = sendAndGetResponse(message);
-        log.info("Sent message to token. Device token: " + request.getToken() + ", " + response+ " msg "+jsonOutput);
+        log.info("Sent message to token. Device token: " + request.getToken() + ", " + response + " msg " + jsonOutput);
     }
 
     private String sendAndGetResponse(Message message) throws InterruptedException, ExecutionException {
@@ -46,10 +73,12 @@ public class FCMService {
                 .setNotification(AndroidNotification.builder()
                         .setTag(topic).build()).build();
     }
+
     private ApnsConfig getApnsConfig(String topic) {
         return ApnsConfig.builder()
                 .setAps(Aps.builder().setCategory(topic).setThreadId(topic).build()).build();
     }
+
     private Message getPreconfiguredMessageToToken(NotificationRequest request) {
         return getPreconfiguredMessageBuilder(request).setToken(request.getToken())
                 .build();

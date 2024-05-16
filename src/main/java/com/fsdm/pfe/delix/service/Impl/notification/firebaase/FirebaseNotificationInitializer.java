@@ -25,7 +25,7 @@ import java.io.IOException;
 
 @Service
 @Slf4j
-public class FCMInitializer {
+public class FirebaseNotificationInitializer {
 
     @Value("${app.firebase-configuration-file}")
     private String firebaseConfigPath;

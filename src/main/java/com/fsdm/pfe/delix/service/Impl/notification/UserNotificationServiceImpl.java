@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.service.Impl.notification;
 
+import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.service.notification.UserNotificationService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserNotificationServiceImpl implements UserNotificationService {
 
     @Override
-    public void sendNotificationToUser(String title, String message, String user) {
+    public void sendNotificationToUser(String title, String message, User user) {
 
     }
 

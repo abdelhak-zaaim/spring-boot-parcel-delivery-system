@@ -10,9 +10,12 @@
 
 package com.fsdm.pfe.delix.model;
 
-import lombok.Data;
+import lombok.*;
 
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NotificationRequest {
     private String title;
     private String body;

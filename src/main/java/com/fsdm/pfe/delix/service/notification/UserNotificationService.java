@@ -10,8 +10,10 @@
 
 package com.fsdm.pfe.delix.service.notification;
 
+import com.fsdm.pfe.delix.entity.User;
+
 public interface UserNotificationService {
-    void sendNotificationToUser(String title, String message, String user);
+    void sendNotificationToUser(String title, String message, User user);
 
     void sendNotificationToAll(String title, String message);
 }
