@@ -5,4 +5,11 @@
     <option name="newEntityIdStrategy" value="Identity" />
     <option name="renamerInitialized" value="true" />
   </component>
+  <component name="JpaPluginProjectSettings">
+    <option name="entityNameTemplate" />
+    <option name="isLombokBuilder" value="true" />
+    <option name="isLombokAllArgsConstructor" value="true" />
+    <option name="isLombokNoArgsConstructor" value="true" />
+    <option name="scaffoldingLanguage" />
+  </component>
 </project>
