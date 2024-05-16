@@ -61,7 +61,7 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChainAdmin(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/admin*", "/admin/**").authorizeHttpRequests(
+            http.securityMatcher("/admin", "/admin/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
 
@@ -78,7 +78,7 @@ public class SecurityConfig {
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
 
                             {
-                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
+                            //    httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
                                 httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
 
                                     response.sendRedirect("/admin/login");
