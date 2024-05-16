@@ -12,10 +12,13 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.User;
+import com.fsdm.pfe.delix.entity.notification.Notification;
 import com.fsdm.pfe.delix.exception.UserNotFoundException;
+import com.fsdm.pfe.delix.exception.personalizedexceptions.NotificationNotFoundException;
 import com.fsdm.pfe.delix.repository.UserRepo;
 
 import com.fsdm.pfe.delix.config.SecurityConfig;
+import com.fsdm.pfe.delix.repository.notification.NotificationRepo;
 import com.fsdm.pfe.delix.service.UserService;
 import com.fsdm.pfe.delix.util.Constants;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +33,14 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepository;
+    private final NotificationRepo notificationRepository;
 
     private final EmailServiceImpl emailService;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, EmailServiceImpl emailService) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, NotificationRepo notificationRepository, EmailServiceImpl emailService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.notificationRepository = notificationRepository;
 
         this.emailService = emailService;
     }
@@ -90,6 +95,42 @@ public class UserServiceImpl implements UserService {
         emailService.sendSimpleMessage(email, "Please verify your email",
                 "Click the following link to verify your email: " + verificationLink);
 
+    }
+
+    public void sendPasswordResetEmail(String email, String resetToken, String baseUrl) {
+
+        String resetLink = baseUrl + "/reset-password?token=" + resetToken;
+
+        emailService.sendSimpleMessage(email, "Password reset",
+                "Click the following link to reset your password: " + resetLink);
+
+    }
+
+    public void addNotificationToUser(Long userId, Notification notification) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found"));
+
+        user.addNotification(notification);
+        userRepository.save(user);
+    }
+
+
+    public void addNotificationToAllUsers(Notification notification) {
+        List<User> users = userRepository.findAll();
+        users.forEach(user -> user.addNotification(notification));
+        userRepository.saveAll(users);
+    }
+
+    public void deleteNotificationFromUser(Long userId, Long notificationId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found"));
+
+        Notification notification = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new NotificationNotFoundException("Notification with id " + notificationId + " not found"));
+
+        user.getNotifications().remove(notification);
+        notificationRepository.delete(notification);
+        userRepository.save(user);
     }
 }
 

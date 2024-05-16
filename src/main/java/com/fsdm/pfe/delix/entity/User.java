@@ -13,6 +13,8 @@ package com.fsdm.pfe.delix.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fsdm.pfe.delix.dto.response.UserResponseDto;
+import com.fsdm.pfe.delix.entity.notification.FirebaseUser;
+import com.fsdm.pfe.delix.entity.notification.Notification;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.util.Constants;
@@ -47,6 +49,12 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    FirebaseUser firebaseUser;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    Collection<Notification> notifications;
 
     @NotNull
     @Column(nullable = false)
@@ -139,6 +147,11 @@ public class User implements Serializable {
                 this.getImage()
         );
     }
-
+    public void addNotification(Notification notification) {
+        if (notifications == null) {
+            notifications = new ArrayList<>();
+        }
+        notifications.add(notification);
+    }
 
 }

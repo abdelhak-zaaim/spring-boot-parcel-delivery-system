@@ -36,3 +36,4 @@ build/
 
 # CUSTOM
 ./src/main/resources/application.properties
+./src/main/resources/firebase

@@ -26,6 +26,10 @@ public class Constants {
     public final static String AWS_ACCESS= "AWS_ACCESS";
     public final static String AWS_SECRET= "AWS_SECRET";
 
-    // jwt
-    private String jwtSecret = "4261656C64756E67";
+    // firebase
+    public final static String FIREBASE_MESSAGING_SENDER_ID = "891154420894";
+    public final static String FIREBASE_SERVER_KEY = "fbG7jzhHCrbLmvL0gULb9eyqLZdgtjPwbV_UXb1_qwE";
+
+
 }
+
