@@ -10,9 +10,13 @@
 
 package com.fsdm.pfe.delix.config;
 
+import com.fsdm.pfe.delix.config.jwt.AuthTokenFilter;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
+import com.fsdm.pfe.delix.repository.EmployeeRepo;
 import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.EmployeeServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +34,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
@@ -44,8 +49,13 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import java.util.List;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -83,7 +93,7 @@ public class SecurityConfig {
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
 
                             {
-                            //    httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
+                                //    httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
                                 httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
 
                                     response.sendRedirect("/admin/login");
@@ -153,13 +163,12 @@ public class SecurityConfig {
 
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             {
-                  httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/accessDenied");
+                                httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/admin/accessDenied");
                                 httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
-                                  //  request.getRequestDispatcher("/login").forward(request, response);
+                                    //  request.getRequestDispatcher("/login").forward(request, response);
 
                                     response.sendRedirect("/login");
                                 });
-
 
 
                             }
@@ -186,30 +195,69 @@ public class SecurityConfig {
 
     @Configuration
     @EnableWebSecurity
-    @EnableMethodSecurity
     @Order(3)
     public static class ApiSecurityConfig {
 
+        private final AuthTokenFilter authFilter;
+        private final EmployeeRepo employeeRepo;
+        private final UserServiceImpl userService;
 
+        public ApiSecurityConfig(AuthTokenFilter authFilter, EmployeeRepo employeeRepo, UserServiceImpl userService) {
+            this.authFilter = authFilter;
+            this.employeeRepo = employeeRepo;
+            this.userService = userService;
+        }
+        @Bean
+        public UserDetailsService userDetailsServiceApi() {
+            return new EmployeeServiceImpl(employeeRepo, userService);
+        }
 
 //        @Bean
-//        SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//            http.csrf(AbstractHttpConfigurer::disable)
-//                    .cors(AbstractHttpConfigurer::disable)
-//                    .authorizeHttpRequests(req -> req.requestMatchers(WHITE_LIST_URL)
-//                            .permitAll()
-//                            .anyRequest()
-//                            .authenticated())
-//                    .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler))
-//                    .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+//        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//            return http.csrf(csrf -> csrf.disable())
+//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/api/login", "/auth/generateToken").permitAll())
+//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/api/deliveryman/**").authenticated())
+//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/transporter/**").authenticated())
+//                    .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 //                    .authenticationProvider(authenticationProvider())
-//                    .addFilterBefore(
-//                            authenticationJwtTokenFilter(),
-//                            UsernamePasswordAuthenticationFilter.class
-//                    );
-//
-//            return http.build();
+//                    .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+//                    .build();
 //        }
+
+
+
+
+
+        @Bean
+        public SecurityFilterChain filterChainAppApi(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+
+
+            MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
+            http.securityMatcher("/api/**").authorizeHttpRequests(
+                            authorizationManagerRequestMatcherRegistry ->
+                            {
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/login")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/deliveryman/**").hasRole(Role.getDeliveryRoleName());
+                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/transporter/**").hasRole(Role.getTransporterRoleName());
+                            }
+                    ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/**");
+
+            return http.build();
+
+
+        }
+
+
+
+        @Bean
+        public AuthenticationProvider authenticationProviderApi() {
+            DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+            authenticationProvider.setUserDetailsService(userDetailsServiceApi());
+            authenticationProvider.setPasswordEncoder(passwordEncoder());
+            return authenticationProvider;
+        }
+
+
     }
 
 

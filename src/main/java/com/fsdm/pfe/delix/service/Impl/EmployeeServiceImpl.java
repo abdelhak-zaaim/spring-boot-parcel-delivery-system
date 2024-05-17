@@ -15,13 +15,16 @@ import com.fsdm.pfe.delix.entity.Employee;
 import com.fsdm.pfe.delix.repository.EmployeeRepo;
 import com.fsdm.pfe.delix.service.EmployeeService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl  implements EmployeeService , UserDetailsService {
 
     private final EmployeeRepo employeeRepository;
     private final UserServiceImpl userService;
@@ -30,6 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
         this.userService = userService;
     }
+
 
     @Override
     public void deleteEmployee(Long id) {
@@ -64,4 +68,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return employeeRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Employee with email " + username + " not found"));
+    }
 }

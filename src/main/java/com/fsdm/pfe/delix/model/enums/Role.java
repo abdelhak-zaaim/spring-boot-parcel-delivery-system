@@ -55,4 +55,12 @@ public enum Role {
     }
 
 
+    public static String getDeliveryRoleName() {
+        return "ROLE_DELIVERY";
+    }
+
+    public static String getTransporterRoleName() {
+        return "ROLE_TRANSPORTER";
+    }
+
 }
