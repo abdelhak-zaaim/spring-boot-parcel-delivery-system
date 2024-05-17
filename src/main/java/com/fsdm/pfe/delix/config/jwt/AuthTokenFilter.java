@@ -50,8 +50,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         String token = null;
         String username = null;
         if(authHeader != null && authHeader.startsWith("Bearer ")){
-            token = authHeader.substring(7);
-            username = jwtService.extractUsername(token);
+                token = authHeader.substring(7);
+                username = jwtService.extractUsername(token);
         }
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){

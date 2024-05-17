@@ -10,21 +10,17 @@
 
 package com.fsdm.pfe.delix.dto.api.authentication;
 
+import com.fsdm.pfe.delix.model.enums.Role;
 import lombok.Builder;
 import lombok.Value;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 @Value
 @Builder
 public class AuthenticationResponseDto {
-     String accessToken;
+     String token;
+     Collection<? extends GrantedAuthority> role;
 
-
-
-    public AuthenticationResponseDto(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
 }
