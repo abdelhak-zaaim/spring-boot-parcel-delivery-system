@@ -33,6 +33,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Collection;
+
 /*
  * actualy this is a test class
  * we used it for testing pruposes
@@ -111,5 +113,10 @@ public class Test {
         }
 
         return new ResponseEntity<>("parcel was added", HttpStatus.OK);
+    }
+
+    @GetMapping("/public/getUsers")
+    public ResponseEntity<Collection<User>> getUsers() {
+        return new ResponseEntity<>(userService.loadAllUsers(), HttpStatus.OK);
     }
 }

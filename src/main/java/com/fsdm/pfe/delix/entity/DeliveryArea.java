@@ -13,10 +13,13 @@ package com.fsdm.pfe.delix.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fsdm.pfe.delix.entity.converters.ListLocationPointListConverter;
+import com.fsdm.pfe.delix.entity.location.Area;
 import com.fsdm.pfe.delix.model.MapsLocationPoint;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +38,10 @@ public class DeliveryArea {
 
     @Column(nullable = false, unique = true)
     private String areaCode;
+
+    @ManyToMany
+    @NotNull
+    Collection<Area> areas;
 
     @Convert(converter = ListLocationPointListConverter.class)
     private List<MapsLocationPoint> areaVertices;

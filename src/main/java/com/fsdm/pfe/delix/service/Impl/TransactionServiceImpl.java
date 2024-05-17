@@ -17,6 +17,7 @@ import com.fsdm.pfe.delix.model.enums.TransactionType;
 import com.fsdm.pfe.delix.repository.TransactionRepo;
 import com.fsdm.pfe.delix.repository.UserRepo;
 import com.fsdm.pfe.delix.service.TransactionService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public Transaction transfer(User fromUser, User toUser, double amount, String description, TransactionType transactionType) {
+    public void transfer(@NotNull User fromUser,@NotNull User toUser,@NotNull double amount,@NotNull String description) {
 
         fromUser.setBalance(fromUser.getBalance() - amount);
         userRepository.save(fromUser);
@@ -65,14 +66,21 @@ public class TransactionServiceImpl implements TransactionService {
         toUser.setBalance(toUser.getBalance() + amount);
         userRepository.save(toUser);
 
-        Transaction transaction = new Transaction();
-        transaction.setFromUser(fromUser);
-        transaction.setToUser(toUser);
-        transaction.setAmount(amount);
-        transaction.setTransactionType(transactionType);
-        transaction.setDescription(description);
+        Transaction transactionFromUser = new Transaction();
+        transactionFromUser.setUser(fromUser);
 
-        return transactionRepo.save(transaction);
+        transactionFromUser.setAmount(amount);
+        transactionFromUser.setTransactionType(TransactionType.DEBIT);
+        transactionFromUser.setDescription(description);
+
+        transactionRepo.save(transactionFromUser);
+
+        Transaction transactionToUser = new Transaction();
+        transactionToUser.setUser(toUser);
+        transactionToUser.setAmount(amount);
+        transactionToUser.setTransactionType(TransactionType.CREDIT);
+        transactionToUser.setDescription(description);
+        transactionRepo.save(transactionToUser);
     }
 
 }

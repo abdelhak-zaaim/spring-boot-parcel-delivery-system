@@ -32,11 +32,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User fromUser;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User toUser;
+    private User user;
 
     @Column(unique = true,updatable = false)
     private String idempotencyKey;

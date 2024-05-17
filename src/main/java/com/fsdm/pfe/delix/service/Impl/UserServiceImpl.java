@@ -74,6 +74,10 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+public Collection<User> loadAllUsers() {
+        return userRepository.findAll();
+    }
+
 
     public void updateUserEmail(Long userId, String newEmail) {
         User user = userRepository.findById(userId)

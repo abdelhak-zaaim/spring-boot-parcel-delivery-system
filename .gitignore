@@ -12,7 +12,9 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
 ### IntelliJ IDEA ###
+
 .idea_bac
 .idea
 copyright
