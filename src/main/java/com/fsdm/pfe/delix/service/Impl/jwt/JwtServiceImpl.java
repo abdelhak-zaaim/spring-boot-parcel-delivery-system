@@ -31,10 +31,11 @@ import java.util.function.Function;
 public class JwtServiceImpl implements JwtService {
     private static final long EXPIRATION_TIME = 864_000_000; // 10 days
 
-    private static final String SECRET = "9a2f8c4e6b0d71f3e8b925a45747f894a3d6bc70fa8d5e21a15a6d8c3b9a0e7c";
+    private static final String SECRET = "9a2f8c4e6b0d71f3e8b925a4435GG5747f894a3d6bc70fa8d5e21a15a6d8c3b9a0e7c";
 
     @Override
     public String generateToken(UserDetails user) {
+
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .claim("authorities", populateAuthorities(user.getAuthorities()))
@@ -54,7 +55,6 @@ public class JwtServiceImpl implements JwtService {
         for (GrantedAuthority authority : authorities) {
             authoritiesSet.add(authority.getAuthority());
         }
-        //MEMBER, ADMIN
         return String.join(",", authoritiesSet);
     }
 

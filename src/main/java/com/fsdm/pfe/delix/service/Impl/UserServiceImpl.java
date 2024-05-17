@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
-
         this.emailService = emailService;
     }
 
@@ -54,6 +53,9 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
+
+
+
 
     @Override
     public User updateUser(User user) {

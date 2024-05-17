@@ -20,14 +20,13 @@
 
 package com.fsdm.pfe.delix.controller.test;
 
+import com.fsdm.pfe.delix.entity.DeliveryMan;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.model.enums.ParcelStatus;
 import com.fsdm.pfe.delix.model.enums.ParcelType;
-import com.fsdm.pfe.delix.service.Impl.EmailServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.PrivilegesGroupServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.UserServiceImpl;
+import com.fsdm.pfe.delix.model.enums.UserStatus;
+import com.fsdm.pfe.delix.service.Impl.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,17 +43,19 @@ import java.util.Collection;
 @Controller
 public class Test {
 
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
     private PrivilegesGroupServiceImpl privilegesGroupService;
-    private ParcelServiceImpl paarcelService;
+    private final ParcelServiceImpl paarcelService;
 
-    private EmailServiceImpl emailService;
+    private final DeliveryManServiceImpl deliveryManService;
+    private final EmailServiceImpl emailService;
 
 
-    public Test(UserServiceImpl userService, PrivilegesGroupServiceImpl privilegesGroupService, ParcelServiceImpl paarcelService, EmailServiceImpl emailService) {
+    public Test(UserServiceImpl userService, PrivilegesGroupServiceImpl privilegesGroupService, ParcelServiceImpl paarcelService, DeliveryManServiceImpl deliveryManService, EmailServiceImpl emailService) {
         this.userService = userService;
         this.privilegesGroupService = privilegesGroupService;
         this.paarcelService = paarcelService;
+        this.deliveryManService = deliveryManService;
         this.emailService = emailService;
     }
 
@@ -118,5 +119,25 @@ public class Test {
     @GetMapping("/public/getUsers")
     public ResponseEntity<Collection<User>> getUsers() {
         return new ResponseEntity<>(userService.loadAllUsers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/test/addDelivery")
+    public ResponseEntity<?> addDelivery() {
+        DeliveryMan deliveryMan = new DeliveryMan();
+        deliveryMan.setFirstName("Abdelhakim");
+        deliveryMan.setLastName("Bouzidi");
+        deliveryMan.setEmail("abde@d.com");
+        deliveryMan.setPassword("12345678");
+        deliveryMan.setPhoneNumber("0656565656");
+        deliveryMan.setCin("AB123456");
+        deliveryMan.setStatus(UserStatus.ACTIVE);
+
+        try {
+            return ResponseEntity.ok( deliveryManService.addNewDeliveryMan(deliveryMan));
+        } catch (Exception e) {
+            return ResponseEntity.ok("delivery not added" + e.toString());
+
+        }
+
     }
 }

@@ -24,7 +24,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Service
-public class EmployeeServiceImpl  implements EmployeeService , UserDetailsService {
+public class EmployeeServiceImpl  implements EmployeeService  {
 
     private final EmployeeRepo employeeRepository;
     private final UserServiceImpl userService;
@@ -67,10 +67,4 @@ public class EmployeeServiceImpl  implements EmployeeService , UserDetailsServic
 
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return employeeRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Employee with email " + username + " not found"));
-    }
 }

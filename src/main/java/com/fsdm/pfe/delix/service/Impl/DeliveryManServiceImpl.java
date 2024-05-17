@@ -11,16 +11,26 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.DeliveryMan;
+import com.fsdm.pfe.delix.repository.DeliveryManRepo;
 import com.fsdm.pfe.delix.service.DeliveryManService;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
-
+@Service
 public class DeliveryManServiceImpl implements DeliveryManService {
+   private final DeliveryManRepo deliveryManRepo;
+   private final UserServiceImpl userService;
 
-   @Override
-   public void addDeliveryMan(DeliveryMan deliveryMan) {
+    public DeliveryManServiceImpl(DeliveryManRepo deliveryManRepo, UserServiceImpl userService) {
+        this.deliveryManRepo = deliveryManRepo;
+        this.userService = userService;
+    }
 
+    @Override
+   public DeliveryMan addNewDeliveryMan(DeliveryMan deliveryMan) {
+       deliveryMan.setPassword(userService.encodePassword(deliveryMan.getPassword()));
+      return deliveryManRepo.save(deliveryMan);
    }
 
    @Override

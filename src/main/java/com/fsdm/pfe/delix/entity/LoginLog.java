@@ -21,6 +21,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class LoginLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

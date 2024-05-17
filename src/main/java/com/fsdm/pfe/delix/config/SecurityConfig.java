@@ -11,48 +11,29 @@
 package com.fsdm.pfe.delix.config;
 
 import com.fsdm.pfe.delix.config.jwt.AuthTokenFilter;
-import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.repository.EmployeeRepo;
-import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.EmployeeServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.UserServiceImpl;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
+import com.fsdm.pfe.delix.repository.VehicleOperatorEmployeeRepo;
+import com.fsdm.pfe.delix.service.Impl.*;
 import org.springframework.context.annotation.Primary;
 import com.fsdm.pfe.delix.model.enums.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import java.util.List;
@@ -142,7 +123,7 @@ public class SecurityConfig {
 
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/public/**", "/express/**", "/*", "/express/location/city*").authorizeHttpRequests(
+            http.securityMatcher("/public/**", "/express/**","/","/login","/register","/order-quote").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
@@ -152,14 +133,11 @@ public class SecurityConfig {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/register*")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login*")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/verify*")).permitAll();
-                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/403")).permitAll();
-                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/404")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/public/**")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/order-quote")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
-
                             }
-                    ).securityMatcher("/public/**", "/express/**", "/*")
+                    ).securityMatcher("/public/**", "/express/**","/","/login","/register","/order-quote","/verify","/test/**")
 
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             {
@@ -194,38 +172,21 @@ public class SecurityConfig {
     }
 
     @Configuration
-    @EnableWebSecurity
     @Order(3)
     public static class ApiSecurityConfig {
 
         private final AuthTokenFilter authFilter;
-        private final EmployeeRepo employeeRepo;
-        private final UserServiceImpl userService;
+        private final VehicleOperatorEmployeeRepo vehicleOperatorEmployeeRepo;
 
-        public ApiSecurityConfig(AuthTokenFilter authFilter, EmployeeRepo employeeRepo, UserServiceImpl userService) {
+        public ApiSecurityConfig(AuthTokenFilter authFilter, EmployeeRepo employeeRepo, UserServiceImpl userService, VehicleOperatorEmployeeRepo vehicleOperatorEmployeeRepo) {
             this.authFilter = authFilter;
-            this.employeeRepo = employeeRepo;
-            this.userService = userService;
+
+            this.vehicleOperatorEmployeeRepo = vehicleOperatorEmployeeRepo;
         }
         @Bean
         public UserDetailsService userDetailsServiceApi() {
-            return new EmployeeServiceImpl(employeeRepo, userService);
+            return new VehicleOperatorEmployeeServiceImpl(vehicleOperatorEmployeeRepo);
         }
-
-//        @Bean
-//        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//            return http.csrf(csrf -> csrf.disable())
-//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/api/login", "/auth/generateToken").permitAll())
-//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/api/deliveryman/**").authenticated())
-//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/transporter/**").authenticated())
-//                    .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                    .authenticationProvider(authenticationProvider())
-//                    .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-//                    .build();
-//        }
-
-
-
 
 
         @Bean
@@ -237,10 +198,10 @@ public class SecurityConfig {
                             authorizationManagerRequestMatcherRegistry ->
                             {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/login")).permitAll();
-                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/deliveryman/**").hasRole(Role.getDeliveryRoleName());
-                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/transporter/**").hasRole(Role.getTransporterRoleName());
+                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/deliveryman/**").hasRole("DELIVERY");
+                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/transporter/**").hasRole("TRANSPORTER");
                             }
-                    ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/**");
+                    ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProviderApi()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/**");
 
             return http.build();
 
@@ -257,6 +218,10 @@ public class SecurityConfig {
             return authenticationProvider;
         }
 
+        @Bean
+        public AuthenticationManager authenticationManagerApi(AuthenticationConfiguration config) throws Exception {
+            return config.getAuthenticationManager();
+        }
 
     }
 

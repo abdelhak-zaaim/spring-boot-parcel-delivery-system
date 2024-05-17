@@ -13,6 +13,7 @@ package com.fsdm.pfe.delix.config.jwt;
 
 import com.fsdm.pfe.delix.service.Impl.EmailServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.EmployeeServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.VehicleOperatorEmployeeServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.jwt.JwtServiceImpl;
 import com.fsdm.pfe.delix.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
@@ -31,12 +32,13 @@ import java.io.IOException;
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
 
-    private final EmployeeServiceImpl employeeService;
+    private final VehicleOperatorEmployeeServiceImpl vehicleOperatorEmployeeService;
 
     private final JwtServiceImpl jwtService;
 
-    AuthTokenFilter(EmployeeServiceImpl employeeService, JwtServiceImpl jwtService) {
-        this.employeeService = employeeService;
+    AuthTokenFilter(VehicleOperatorEmployeeServiceImpl vehicleOperatorEmployeeService, JwtServiceImpl jwtService) {
+        this.vehicleOperatorEmployeeService = vehicleOperatorEmployeeService;
+
         this.jwtService = jwtService;
     }
 
@@ -53,7 +55,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         }
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = employeeService.loadUserByUsername(username);
+            UserDetails userDetails = vehicleOperatorEmployeeService.loadUserByUsername(username);
 
             if(jwtService.isTokenValid(token, userDetails)){
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

@@ -38,5 +38,4 @@ public class Notification {
         this.user = user;
     }
 
-
 }

@@ -31,7 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.EMPLOYEE_ROLE)
-public class Employee extends User implements UserDetails {
+public class Employee extends User  {
 
     @Column(unique = true)
     private String employeeNumber;
@@ -43,41 +43,5 @@ public class Employee extends User implements UserDetails {
     private Admin assignedBy;
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.getRole()));
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return !this.getStatus().equals(UserStatus.EXPIRED);
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !this.getStatus().equals(UserStatus.LOCKED);
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE));
-    }
 
 }

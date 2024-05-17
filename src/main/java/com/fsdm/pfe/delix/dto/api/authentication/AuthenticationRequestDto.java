@@ -10,23 +10,16 @@
 
 package com.fsdm.pfe.delix.dto.api.authentication;
 
+import lombok.Value;
+
+@Value
+
 public class AuthenticationRequestDto {
-    private String email;
-    private String password;
+     String email;
+     String password;
+     boolean rememberMe;
 
-    public AuthenticationRequestDto() {
-    }
 
-    public AuthenticationRequestDto(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public String getPassword() {
-        return password;
-    }
 }

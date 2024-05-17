@@ -15,7 +15,7 @@ import com.fsdm.pfe.delix.entity.DeliveryMan;
 import java.util.Collection;
 
 public interface DeliveryManService {
-    void addDeliveryMan(DeliveryMan deliveryMan);
+    DeliveryMan addNewDeliveryMan(DeliveryMan deliveryMan);
     void updateDeliveryMan(DeliveryMan deliveryMan);
     void deleteDeliveryMan(DeliveryMan deliveryMan);
     DeliveryMan getDeliveryManById(Long id);

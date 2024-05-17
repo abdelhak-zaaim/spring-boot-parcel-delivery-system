@@ -28,16 +28,9 @@ import lombok.*;
 @Entity
 @DiscriminatorValue(Role.TRANSPORTER_ROLE)
 
-public class Transporter extends Employee {
+public class Transporter extends VehicleOperatorEmployee {
 
     private String registrationNumber;
-
-    private String licenseNumber;
-
-    private String vihiculeMtricule;
-
-    @Enumerated(EnumType.STRING)
-    private VehicleType vehicleType;
 
 
 }
