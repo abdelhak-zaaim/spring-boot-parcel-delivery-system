@@ -1,0 +1,299 @@
+<!--
+  ~
+  ~  * @project : DeliX
+  ~  * @created : 18/05/2024, 14:11
+  ~  * @modified : 18/05/2024, 14:11
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~
+  -->
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="home/partials/head :: head">
+
+</head>
+
+<body class="body-scroll">
+
+<div id="wrapper" class="wrapper clearfix">
+
+    <header th:replace="home/partials/header :: header"></header>
+
+
+    <div id="profile" class="bg-white text-center" >
+
+
+        <div class="tabs">
+
+            <div id="profile-title" class="box-title" style=" margin-bottom: 40px;" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Centre personnel</span>
+
+            </div>
+            <input type="radio" id="tab1" name="tab-control" checked>
+            <input type="radio" id="tab2" name="tab-control">
+
+            <ul>
+                <li title="Informations de base"><label for="tab1" role="button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+                    </svg>
+                    <br><span>Informations de base</span></label></li>
+                <li title="Delivery Contents"><label for="tab2" role="button">
+                    <svg viewBox="0 0 24 24">
+                        <path opacity="0.5" d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z" stroke="#1C274C" stroke-width="1.5"/>
+                        <path d="M12 10V14M10.2676 11L13.7317 13M13.7314 11L10.2673 13" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M6.73241 10V14M4.99999 11L8.46409 13M8.46386 11L4.99976 13" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M17.2681 10V14M15.5356 11L18.9997 13M18.9995 11L15.5354 13" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>                    </svg>
+                    <br><span>Modifier le mot de passe</span></label></li>
+
+
+
+            </ul>
+
+            <div class="slider">
+                <div class="indicator"></div>
+            </div>
+            <div class="content">
+                <section style="padding: 0 10px !important;overflow: visible!important;">
+                    <h2>Informations de base</h2>
+
+                    <div >
+
+                        <div class="row">
+
+                            <div  class="div-tabs">
+
+                                <div class="card mb-6 center-form">
+                                    <div class="card-body">
+
+
+
+
+                                        <form id="update_profile_form" action="/express/update-profile" method="post" style="margin-top: 30px;">
+                                            <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+                                                   th:value="${_csrf.token}"/>
+
+                                            <div class="row">
+
+                                                <div class=" col-lg-6">
+                                                    <label  class="el-form-item__label" for="firstName">Prénom</label>
+                                                    <input th:value="${userDetails.getFirstName()}" type="text" class="form-control" id="firstName" name="firstName"
+                                                           required>
+                                                </div>
+                                                <div class=" col-lg-6">
+                                                    <label  class="el-form-item__label" for="lastName">Nome</label>
+                                                    <input th:value="${userDetails.getLastName()}" type="text" class="form-control" id="lastName" name="lastName" required>
+                                                </div>
+
+                                            </div>
+
+                                            <div>
+                                                <label class="el-form-item__label" for="phoneNumber">Numéro de téléphone</label>
+                                                <input th:value="${userDetails.phoneNumber}" type="tel" class="form-control" id="phoneNumber"
+                                                       pattern="(\+212|0)[567][0-9]{8}" name="phoneNumber" required>
+                                            </div>
+
+                                            <div>
+                                                <label class="el-form-item__label" for="email">E-mail</label>
+                                                <input th:value="${#authentication.principal.email}" type="email" class="form-control"  disabled>
+                                            </div>
+
+
+
+                                            <div data-v-5e9121d4="" class="opt-wrap">
+                                                <div data-v-5e9121d4="" class="opt">
+                                                    <button data-v-5e9121d4 type="submit"
+                                                            class="el-button unify-btn submit-btn el-button--default"><span>Mise à jour</span>
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                        <script>
+                                            let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+                                            let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+                                            document.getElementById('update_profile_form').addEventListener('submit', function (event) {
+                                                event.preventDefault(); // Prevent the form from submitting normally
+                                                startLoading()
+                                                let url = this.action; // The URL to send the request to
+                                                let formData = new FormData(this);
+                                                let jsonDataUpdate = {
+                                                    firstName: formData.get('firstName'),
+                                                    lastName: formData.get('lastName'),
+                                                    phoneNumber: formData.get('phoneNumber')
+                                                };
+                                                // Create a FormData object from the form
+                                                $('#loader-wrapper').show();
+                                                fetch(url, {
+                                                    method: 'POST',
+                                                    body: JSON.stringify(jsonDataUpdate)
+                                                    ,
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                        [header]: token
+                                                    },
+                                                })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+
+                                                        if (data.success) {
+                                                            toast(data.message);
+                                                            setTimeout(() => {
+                                                                location.reload();
+                                                            }, 1000);
+                                                            this.reset();
+                                                        } else {
+                                                            toast(data.message, "error");
+                                                        }
+                                                        closeLoading();
+                                                    })
+                                                    .catch(error => {
+                                                        toast("error , please try again", "error");
+                                                        closeLoading();
+                                                    });
+                                            });
+                                        </script>
+
+
+                                        <br> <br> <br>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </section>
+                <section style="padding: 0 10px !important;overflow: visible!important;">
+                    <h2>Informations de base</h2>
+
+                    <div >
+
+                        <div class="row">
+
+                            <div  class="div-tabs">
+
+                                <div class="card mb-6 center-form">
+                                    <div class="card-body">
+
+
+
+
+                                        <form id="update_password_form" action="/express/update-password" method="post"  style="margin-top: 30px;">
+                                            <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+                                                   th:value="${_csrf.token}"/>
+
+
+
+                                            <div>
+                                                <label class="el-form-item__label" for="email">E-mail</label>
+                                                <input th:value="${#authentication.principal.email}" type="email" class="form-control" id="email"  disabled>
+                                            </div>
+
+                                            <div>
+                                                <label class="el-form-item__label" for="password">Ancien mot de passe</label>
+                                                <input  type="password" class="form-control" id="password" name="password" required>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label class="el-form-item__label" for="newPassword">Nouveau mot de passe</label>
+                                                    <input type="password" class="form-control" id="newPassword" name="newPassword"
+                                                           required>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="el-form-item__label" for="confirmPassword">Confirmer le mot de passe</label>
+                                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                                                           required>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div data-v-5e9121d4="" class="opt-wrap">
+                                                <div data-v-5e9121d4="" class="opt">
+                                                    <button data-v-5e9121d4 type="submit"
+                                                            class="el-button unify-btn submit-btn el-button--default"><span>Sauvegarder</span>
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                        <script>
+                                            document.getElementById('update_password_form').addEventListener('submit', function (event) {
+                                                event.preventDefault(); // Prevent the form from submitting normally
+                                                startLoading()
+                                                let url = this.action; // The URL to send the request to
+                                                let formData = new FormData(this);
+                                                let jsonDataUpdatePassword = {
+                                                    password: formData.get('password'),
+                                                    newPassword: formData.get('newPassword'),
+                                                    confirmPassword: formData.get('confirmPassword')
+                                                };
+                                                $('#loader-wrapper').show();
+                                                fetch(url, {
+                                                    method: 'POST',
+                                                    body: JSON.stringify(jsonDataUpdatePassword),
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                        [header]: token
+                                                    },
+                                                })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+
+                                                        if (data.success) {
+                                                            toast(data.message);
+
+                                                            setTimeout(() => {
+                                                                location.reload();
+                                                            }, 1000);
+                                                            this.reset();
+                                                        } else {
+                                                            toast(data.message, "error");
+                                                        }
+                                                        closeLoading();
+                                                    })
+                                                    .catch(error => {
+                                                        toast("error , please try again", "error");
+                                                        closeLoading();
+                                                    });
+                                            });
+                                        </script>
+
+
+                                        <br> <br> <br>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </section>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<footer th:replace="home/partials/footer :: footer"></footer>
+<script src="/home/assets/toaster/toast.js"></script>
+
+</body>
+
+</html>
