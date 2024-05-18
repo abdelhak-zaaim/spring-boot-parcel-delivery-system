@@ -11,24 +11,32 @@
 
 package com.fsdm.pfe.delix.controller.advice;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.fsdm.pfe.delix.dto.response.MyUserResponseDto;
+import com.fsdm.pfe.delix.entity.User;
+import com.fsdm.pfe.delix.service.Impl.UserServiceImpl;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 @ControllerAdvice
 public class GlobalControllerAdvice {
+    private final UserServiceImpl userService;
+
+    public GlobalControllerAdvice(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
 
+    @ModelAttribute
+    public void addUserDetails(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof UserDetails) {
+            User userDetails = userService.loadUserByUsername( ((UserDetails) auth.getPrincipal()).getUsername());
+            model.addAttribute("userDetails",new MyUserResponseDto(userDetails));
+        }
+    }
 }
