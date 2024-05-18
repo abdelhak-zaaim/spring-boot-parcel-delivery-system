@@ -35,7 +35,7 @@ import java.util.List;
 @Entity
 @Builder
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)
-public class DeliveryMan extends VehicleOperatorEmployee implements UserDetails {
+public class DeliveryMan extends VehicleOperatorEmployee{
 
 
 
