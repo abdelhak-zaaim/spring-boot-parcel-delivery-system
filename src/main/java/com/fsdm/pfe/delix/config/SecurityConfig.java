@@ -11,9 +11,13 @@
 package com.fsdm.pfe.delix.config;
 
 import com.fsdm.pfe.delix.config.jwt.AuthTokenFilter;
+import com.fsdm.pfe.delix.repository.DeliveryManRepo;
 import com.fsdm.pfe.delix.repository.EmployeeRepo;
+import com.fsdm.pfe.delix.repository.TransporterRepo;
 import com.fsdm.pfe.delix.repository.VehicleOperatorEmployeeRepo;
+import com.fsdm.pfe.delix.service.DeliveryManService;
 import com.fsdm.pfe.delix.service.Impl.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import com.fsdm.pfe.delix.model.enums.Role;
 import org.springframework.context.annotation.Bean;
@@ -36,9 +40,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import java.util.List;
 
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
 @Configuration
@@ -55,13 +57,11 @@ public class SecurityConfig {
     public static class AdminSecurityConfig {
 
         @Bean
-        public SecurityFilterChain securityFilterChainAdmin(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+        public SecurityFilterChain securityFilterChainAdmin( HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/admin", "/admin/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
-
-
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin*")).hasRole(Role.ADMIN_ROLE);
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/login")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole(Role.ADMIN_ROLE);
@@ -69,12 +69,10 @@ public class SecurityConfig {
 
                     ).securityMatcher("/admin", "/admin/**")
 
-                    // .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/admin/login").loginProcessingUrl("/admin/login").failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin/"))
                     .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/admin/logout").logoutSuccessUrl("/admin/login").deleteCookies("JSESSIONID"))
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
 
                             {
-                                //    httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403");
                                 httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
 
                                     response.sendRedirect("/admin/login");
@@ -123,7 +121,7 @@ public class SecurityConfig {
 
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/public/**", "/express/**","/","/login","/register","/order-quote").authorizeHttpRequests(
+            http.securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
@@ -132,12 +130,16 @@ public class SecurityConfig {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/test/**")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/register*")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login*")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/logout*")).hasRole(Role.CUSTOMER_ROLE);
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/verify*")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/public/**")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/order-quote")).permitAll();
+
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
                             }
-                    ).securityMatcher("/public/**", "/express/**","/","/login","/register","/order-quote","/verify","/test/**")
+                    ).securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote","/verify","/test/**")
+                    .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
+
 
                     .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                             {
@@ -159,7 +161,6 @@ public class SecurityConfig {
 
 
         @Bean
-
         public AuthenticationManager authenticationManagerUser() {
 
             DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -173,13 +174,14 @@ public class SecurityConfig {
 
     @Configuration
     @Order(3)
-    public static class ApiSecurityConfig {
+    public static class ApiSecurityConfigDelivery {
 
         private final AuthTokenFilter authFilter;
         private final VehicleOperatorEmployeeRepo vehicleOperatorEmployeeRepo;
 
-        public ApiSecurityConfig(AuthTokenFilter authFilter, EmployeeRepo employeeRepo, UserServiceImpl userService, VehicleOperatorEmployeeRepo vehicleOperatorEmployeeRepo) {
+        public ApiSecurityConfigDelivery(AuthTokenFilter authFilter, VehicleOperatorEmployeeRepo vehicleOperatorEmployeeRepo) {
             this.authFilter = authFilter;
+
 
             this.vehicleOperatorEmployeeRepo = vehicleOperatorEmployeeRepo;
         }
@@ -190,18 +192,17 @@ public class SecurityConfig {
 
 
         @Bean
-        public SecurityFilterChain filterChainAppApi(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-
+        public SecurityFilterChain filterChainApp3(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/api/**").authorizeHttpRequests(
+            http.securityMatcher("/api/delivery/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
-                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/login")).permitAll();
-                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/deliveryman/**").hasRole("DELIVERY");
-                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/transporter/**").hasRole("TRANSPORTER");
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/delivery/login")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/delivery/**").hasRole("DELIVERY");
+
                             }
-                    ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProviderApi()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/**");
+                    ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProviderApi()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/delivery/**");
 
             return http.build();
 
@@ -211,6 +212,7 @@ public class SecurityConfig {
 
 
         @Bean
+
         public AuthenticationProvider authenticationProviderApi() {
             DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
             authenticationProvider.setUserDetailsService(userDetailsServiceApi());
@@ -219,11 +221,15 @@ public class SecurityConfig {
         }
 
         @Bean
+        @Qualifier("authenticationManagerApiDelivery")
         public AuthenticationManager authenticationManagerApi(AuthenticationConfiguration config) throws Exception {
             return config.getAuthenticationManager();
         }
 
     }
+
+
+
 
 
 }
