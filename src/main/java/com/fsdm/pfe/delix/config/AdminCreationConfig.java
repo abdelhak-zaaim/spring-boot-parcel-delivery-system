@@ -43,7 +43,7 @@ public class AdminCreationConfig {
 public ApplicationRunner createAdminRunner() {
     return args -> {
         String adminEmail = "admin@admin.com";
-        String adminPassword = "admin1234";
+        String adminPassword = "12345678";
 
         // Check if the admin user already exists
         if (adminService.loadUserByEmail(adminEmail)== null) {
