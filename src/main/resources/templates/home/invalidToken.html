@@ -1,0 +1,51 @@
+<!--
+  ~
+  ~  * @project : DeliX
+  ~  * @created : 18/05/2024, 20:58
+  ~  * @modified : 18/05/2024, 20:58
+  ~  * @description : This file is part of the DeliX project.
+  ~  * @license : MIT License
+  ~
+  -->
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="home/partials/head :: head">
+
+</head>
+
+<body class="body-scroll">
+
+<div id="wrapper" class="wrapper clearfix">
+
+    <header th:replace="home/partials/header :: header"></header>
+
+
+    <section id="verify" class="section feature feature-1 bg-white text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                    <div class="heading text--center">
+                        <p class=" text--center alert alert-danger">
+                            Votre lien de réinitialisation de mot de passe est
+                            invalide ou a expiré. Veuillez réessayer.
+                        </p>
+
+                        <a id="btn-inscribe" class="text--center" href="/login">Se connecter</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+
+<footer th:replace="home/partials/footer :: footer"></footer>
+<script src="/home/assets/toaster/toast.js"></script>
+
+</body>
+
+</html>

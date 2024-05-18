@@ -121,7 +121,7 @@ public class SecurityConfig {
 
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote").authorizeHttpRequests(
+            http.securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote","/reset-password","/reset-password-request").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
@@ -134,10 +134,12 @@ public class SecurityConfig {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/verify*")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/public/**")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/order-quote")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/reset-password")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/reset-password-request")).permitAll();
 
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
                             }
-                    ).securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote","/verify","/test/**")
+                    ).securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote","/reset-password","/reset-password-request","/verify","/test/**")
                     .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
 
 

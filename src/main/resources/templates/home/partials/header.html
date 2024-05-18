@@ -45,8 +45,17 @@
                         </ul>
                     </li>
 
+                    <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))"  ><a data-scroll="scrollTo" href="/order-quote">Devis</a>
+                    </li>
+
                     <li><a data-scroll="scrollTo" href="/#feature">services</a>
                     </li>
+
+
+
+
+
+
                     <li><a data-scroll="scrollTo" href="/#pointsservice">Points De Service</a></li>
                     <li data-scroll="scrollTo"  class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -60,20 +69,7 @@
                     </li>
 
                     <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))">
-                        <a id="btn-inscribe">S'inscrire / Se connecter</a>
-
-
-                        <div class="login-container">
-                            <form method="post" action="/login" class="login-form">
-                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-
-                                <input  type="email" name="username" placeholder="Email" required>
-                                <input type="password" name="password" placeholder="Password" required>
-                                <button data-v-5e9121d4="" type="submit" class="el-button unify-btn submit-btn el-button--default"><span>Log in</span>
-                                </button>
-                            </form>
-                        </div>
-
+                        <a href="/login" id="btn-inscribe">S'inscrire / Se connecter</a>
 
                     </li>
 
@@ -90,7 +86,7 @@
                             >
 
                             <span class="dropdown-toggle"
-                                  th:text="${userDetails.firstName} + ' ' + ${userDetailslastName}"></span> <span class="caret"></span>
+                                  th:text="${userDetails.firstName} + ' ' + ${userDetails.lastName}"></span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li style="cursor: pointer !important;"><a data-scroll="scrollTo" href="/express/profile"  >Center Personnel</a></li>

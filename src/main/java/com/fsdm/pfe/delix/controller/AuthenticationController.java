@@ -11,65 +11,67 @@
 package com.fsdm.pfe.delix.controller;
 
 import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
+import com.fsdm.pfe.delix.dto.request.ResetPasswordEmailRequestDto;
+import com.fsdm.pfe.delix.dto.request.ResetPasswordRequestDto;
 import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.dto.response.MessageDto;
+import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Customer;
+import com.fsdm.pfe.delix.service.Impl.PasswordResetTokenServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.UserServiceImpl;
 import com.fsdm.pfe.delix.util.Constants;
 import com.fsdm.pfe.delix.util.helpers.HttpUtils;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
-import com.fsdm.pfe.delix.model.enums.Role;
-import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.LoginLogServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import com.fsdm.pfe.delix.entity.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.Map;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class AuthenticationController {
     private final CustomerServiceImpl customerService;
     private final LoginLogServiceImpl loginLogService;
 
+    private final Validator validator;
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository =
             new HttpSessionSecurityContextRepository();
+    private final PasswordResetTokenServiceImpl passwordResetTokenService;
+    private final UserServiceImpl userServiceImpl;
 
-    public AuthenticationController(CustomerServiceImpl customerService, LoginLogServiceImpl loginLogService,  @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager) {
+    public AuthenticationController(CustomerServiceImpl customerService, LoginLogServiceImpl loginLogService, Validator validator, @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager, PasswordResetTokenServiceImpl passwordResetTokenService, UserServiceImpl userServiceImpl) {
         this.customerService = customerService;
         this.loginLogService = loginLogService;
+        this.validator = validator;
 
         this.authenticationManager = authenticationManager;
+        this.passwordResetTokenService = passwordResetTokenService;
+        this.userServiceImpl = userServiceImpl;
     }
 
 
@@ -181,5 +183,79 @@ public class AuthenticationController {
     @GetMapping("/forbidden-page")
     public String forbiddenPage() {
         return "home/forbiddenPage";  // This should be the name of your forbidden page view
+    }
+
+
+    @GetMapping("/reset-password")
+    public String resetPasswordPage(Model model, @RequestParam(required = false) String token) {
+        if (token == null || token.isEmpty()) {
+            return "home/resetPassword";
+        }
+
+        if (!userServiceImpl.existsUserByResetToken(token) ) {
+
+            return "home/invalidToken";
+        }else if(passwordResetTokenService.isExpiredByToken(token)){
+            passwordResetTokenService.deletePasswordResetToken(token);
+            return "home/invalidToken";
+        }
+
+
+        model.addAttribute("token", token);
+        return "home/resetPassword";
+    }
+
+
+    @PostMapping("/reset-password-request")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordEmailRequestDto resetPasswordRequestDto, HttpServletRequest request) {
+        DataBinder binder = new DataBinder(resetPasswordRequestDto);
+        binder.setValidator(validator);
+        binder.validate();
+        BindingResult result = binder.getBindingResult();
+        if (result.hasErrors()) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("please verify the inputs").build());
+        }
+
+        try {
+            String baseUrl;
+            try {
+                baseUrl = HttpUtils.getServerUrl(request);
+            } catch (Exception e) {
+                baseUrl = Constants.BASE_URL;
+            }
+            userServiceImpl.resetPassword(resetPasswordRequestDto.getEmail(), baseUrl);
+            return ResponseEntity.ok( ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset link sent to your email").build());
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
+        }
+
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPasswordPost(@RequestBody ResetPasswordRequestDto resetPasswordRequestDto) {
+
+        System.out.println("resetPasswordRequestDto = " + resetPasswordRequestDto);
+
+        DataBinder binder = new DataBinder(resetPasswordRequestDto);
+        binder.setValidator(validator);
+        binder.validate();
+        BindingResult result = binder.getBindingResult();
+        if (result.hasErrors()) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("please verify the inputs").build());
+        }
+
+        try {
+            userServiceImpl.resetPasswordByToken(resetPasswordRequestDto.getToken(), resetPasswordRequestDto.getPassword(), resetPasswordRequestDto.getConfirmPassword());
+            return ResponseEntity.ok( ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset successfully").build());
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getReason()).build());
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
+        }
+
     }
 }

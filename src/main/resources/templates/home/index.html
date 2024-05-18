@@ -72,7 +72,8 @@
                                 <li><a data-scroll="scrollTo" href="/order-quote">Devis</a></li>
                             </ul>
                         </li>
-
+                        <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))"  ><a data-scroll="scrollTo" href="/order-quote">Devis</a>
+                        </li>
 
 
                         <li><a data-scroll="scrollTo" href="#feature">services</a>

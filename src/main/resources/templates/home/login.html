@@ -38,8 +38,9 @@
                     <div class="card mb-3 center-form">
                         <div class="card-body">
 
-                            <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Se connecter</span>
-
+                            <div style="justify-content: space-between; display: flex;     align-items: center;" class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Se connecter</span>
+                                <a  href="/register" data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
+                                   >Créer un compte</a>
                             </div>
 
 
@@ -48,23 +49,27 @@
                                        th:value="${_csrf.token}"/>
 
                                 <div class="form-group">
-                                    <label class="el-form-item__label" for="userName">E-mail:</label>
+                                    <label class="el-form-item__label" for="userName">E-mail</label>
                                     <input type="email" class="form-control" id="userName" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="el-form-item__label" for="password">Mot de passe:</label>
+                                    <label class="el-form-item__label" for="password">Mot de passe</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
 
 
-                                <div data-v-5e9121d4="" class="opt-wrap">
-                                    <div data-v-5e9121d4="" class="opt">
+                                <div>
+                                    <div   style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                                         <button data-v-5e9121d4 type="submit"
                                                 class="el-button unify-btn submit-btn el-button--default"><span>Connexion</span>
                                         </button>
 
-                                        <a href="/register" data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
-                                           style="margin-left: 20px">Créer un compte</a>
+                                        <a href="/reset-password" data-v-5e9121d4 class="font-blue cur-pointer pwd-btn "
+                                           style="margin-left: 20px">Vous avez oublié votre mot de passe ?</a>
+
+                                        <div class="row " style="display: block; margin-top: 17px">
+
+                                        </div>
                                     </div>
 
                                 </div>

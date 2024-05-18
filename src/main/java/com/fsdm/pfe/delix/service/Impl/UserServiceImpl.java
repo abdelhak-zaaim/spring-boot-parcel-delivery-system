@@ -21,9 +21,14 @@ import com.fsdm.pfe.delix.repository.UserRepo;
 
 import com.fsdm.pfe.delix.repository.notification.NotificationRepo;
 import com.fsdm.pfe.delix.service.UserService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -147,12 +152,57 @@ public class UserServiceImpl implements UserService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
+
     public PasswordResetToken createPasswordResetTokenForUser(User user) {
         String token = UUID.randomUUID().toString();
+
+        passwordResetTokenRepository.deleteAllByUser(user);
 
         PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
 
         return passwordResetTokenRepository.save(passwordResetToken);
+    }
+
+    @Transactional
+    public void resetPassword(String email, String baseUrl) {
+
+        System.out.println("email = " + email);
+
+        Optional<User> user = userRepository.findByEmail(email);
+        System.out.println("user = " + user);
+        if (user.isPresent()) {
+            PasswordResetToken passwordResetToken = createPasswordResetTokenForUser(user.get());
+            sendPasswordResetEmail(email, passwordResetToken.getToken(), baseUrl);
+        } else {
+            throw new UserNotFoundException("User with this email does not exist");
+        }
+
+
+    }
+
+    public boolean existsUserByResetToken(String token) {
+        return passwordResetTokenRepository.existsByToken(token);
+    }
+
+    @Transactional
+    public User resetPasswordByToken(String token, String password, @NotNull @NotEmpty String confirmPassword) {
+        if (!password.equals(confirmPassword)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
+        }
+        PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByToken(token)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Token not found"));
+
+
+        if (passwordResetToken.getExpiryDate().before(new Date())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Token expired");
+        }
+
+        User user = passwordResetToken.getUser();
+
+        user.setPassword(encodePassword(password));
+        userRepository.save(user);
+        passwordResetTokenRepository.delete(passwordResetToken);
+        return user;
     }
 
 }
