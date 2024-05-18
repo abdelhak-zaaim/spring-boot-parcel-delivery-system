@@ -21,6 +21,6 @@ import java.util.Collection;
 @Builder
 public class AuthenticationResponseDto {
      String token;
-     Collection<? extends GrantedAuthority> role;
+
 
 }
