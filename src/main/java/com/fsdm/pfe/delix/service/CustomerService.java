@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.service;
 
 import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
+import com.fsdm.pfe.delix.dto.request.UpdatePasswordRequestDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import io.netty.util.internal.ObjectPool;
 import org.springframework.security.core.Authentication;
@@ -31,4 +32,5 @@ public interface CustomerService {
     Optional<Customer> loadByEmail(String email);
 
     void logoutCustomer(Authentication auth);
+    Optional<Customer> updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto);
 }
