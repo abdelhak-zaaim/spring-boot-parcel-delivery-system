@@ -13,12 +13,15 @@ package com.fsdm.pfe.delix.service.Impl;
 import com.fsdm.pfe.delix.entity.DeliveryMan;
 import com.fsdm.pfe.delix.repository.DeliveryManRepo;
 import com.fsdm.pfe.delix.service.DeliveryManService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 @Service
-public class DeliveryManServiceImpl implements DeliveryManService {
+public class DeliveryManServiceImpl implements DeliveryManService  {
    private final DeliveryManRepo deliveryManRepo;
    private final UserServiceImpl userService;
 
@@ -87,4 +90,6 @@ public class DeliveryManServiceImpl implements DeliveryManService {
    public Collection<DeliveryMan> getDeliveryManByAssociatedAgency(String associatedAgency) {
       return List.of();
    }
+
+
 }

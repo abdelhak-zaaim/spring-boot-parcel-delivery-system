@@ -90,11 +90,11 @@
                             >
 
                             <span class="dropdown-toggle"
-                                  th:text="${#authentication.principal.firstName} + ' ' + ${#authentication.principal.lastName}"></span> <span class="caret"></span>
+                                  th:text="${userDetails.firstName} + ' ' + ${userDetailslastName}"></span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li style="cursor: pointer !important;"><a  >Profile</a></li>
-                            <li style="cursor: pointer !important;" ><a th:onclick="logout()" >Log ont</a></li>
+                            <li style="cursor: pointer !important;"><a data-scroll="scrollTo" href="/express/profile"  >Center Personnel</a></li>
+                            <li style="cursor: pointer !important;" ><a data-scroll="scrollTo" th:onclick="logout()" >Log ont</a></li>
 
                         </ul>
                     </li>

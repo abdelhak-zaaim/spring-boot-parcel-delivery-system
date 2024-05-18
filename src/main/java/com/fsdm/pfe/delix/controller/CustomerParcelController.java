@@ -17,7 +17,9 @@ import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.location.Province;
 import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.location.ProvinceServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,11 +33,14 @@ import java.util.List;
 @Controller
 public class CustomerParcelController {
     private final Validator validator;
+    private final AuthenticationManager authenticationManager;
+
     private final ProvinceServiceImpl provinceService;
     private final ParcelServiceImpl parcelService;
 
-    public CustomerParcelController(Validator validator, ProvinceServiceImpl provinceService, ParcelServiceImpl parcelService) {
+    public CustomerParcelController(Validator validator, @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager, ProvinceServiceImpl provinceService, ParcelServiceImpl parcelService) {
         this.validator = validator;
+        this.authenticationManager = authenticationManager;
         this.provinceService = provinceService;
         this.parcelService = parcelService;
     }

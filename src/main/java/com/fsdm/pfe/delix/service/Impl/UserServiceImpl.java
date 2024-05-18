@@ -11,16 +11,16 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.entity.PasswordResetToken;
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.entity.notification.Notification;
 import com.fsdm.pfe.delix.exception.UserNotFoundException;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.NotificationNotFoundException;
+import com.fsdm.pfe.delix.repository.PasswordResetTokenRepo;
 import com.fsdm.pfe.delix.repository.UserRepo;
 
-import com.fsdm.pfe.delix.config.SecurityConfig;
 import com.fsdm.pfe.delix.repository.notification.NotificationRepo;
 import com.fsdm.pfe.delix.service.UserService;
-import com.fsdm.pfe.delix.util.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,13 +34,15 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepository;
     private final NotificationRepo notificationRepository;
+    private final PasswordResetTokenRepo passwordResetTokenRepository;
 
     private final EmailServiceImpl emailService;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, NotificationRepo notificationRepository, EmailServiceImpl emailService) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, NotificationRepo notificationRepository, PasswordResetTokenRepo passwordResetTokenRepository, EmailServiceImpl emailService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
+        this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.emailService = emailService;
     }
 
@@ -53,8 +55,6 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
-
-
 
 
     @Override
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-public Collection<User> loadAllUsers() {
+    public Collection<User> loadAllUsers() {
         return userRepository.findAll();
     }
 
@@ -138,6 +138,23 @@ public Collection<User> loadAllUsers() {
         notificationRepository.delete(notification);
         userRepository.save(user);
     }
+
+    public User loadUserByUsername(String username) {
+        return userRepository.findByEmail(username).orElse(null);
+    }
+
+    public boolean passwordMatch(CharSequence rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
+
+    public PasswordResetToken createPasswordResetTokenForUser(User user) {
+        String token = UUID.randomUUID().toString();
+
+        PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
+
+        return passwordResetTokenRepository.save(passwordResetToken);
+    }
+
 }
 
 

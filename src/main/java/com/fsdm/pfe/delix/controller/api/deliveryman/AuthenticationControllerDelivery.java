@@ -1,3 +1,4 @@
+
 /*
  *
  *  * @project : DeliX
@@ -8,19 +9,19 @@
  *
  */
 
-package com.fsdm.pfe.delix.controller.api;
+package com.fsdm.pfe.delix.controller.api.deliveryman;
 
 import com.fsdm.pfe.delix.dto.api.ApiResponseDto;
-
 import com.fsdm.pfe.delix.dto.api.authentication.AuthenticationRequestDto;
 import com.fsdm.pfe.delix.dto.api.authentication.AuthenticationResponseDto;
-import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
+import com.fsdm.pfe.delix.entity.VehicleOperatorEmployee;
+import com.fsdm.pfe.delix.model.enums.Role;
+import com.fsdm.pfe.delix.service.Impl.VehicleOperatorEmployeeServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.jwt.JwtServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -31,28 +32,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-public class ApiAuthenticationController {
+public class AuthenticationControllerDelivery {
     private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
+    private final VehicleOperatorEmployeeServiceImpl vehicleOperatorEmployeeService;
 
-    public ApiAuthenticationController(JwtServiceImpl jwtService, @Qualifier("authenticationManagerApi") AuthenticationManager authenticationManager) {
+
+    public AuthenticationControllerDelivery(JwtServiceImpl jwtService, @Qualifier("authenticationManagerApi") AuthenticationManager authenticationManager, @Qualifier("vehicleOperatorEmployeeServiceImpl") VehicleOperatorEmployeeServiceImpl vehicleOperatorEmployeeService) {
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+        this.vehicleOperatorEmployeeService = vehicleOperatorEmployeeService;
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/delivery/login")
     public ResponseEntity<ApiResponseDto> authenticateAndGetToken(@RequestBody AuthenticationRequestDto authRequest) {
-        System.out.println("////////////////////////////////////////" + authRequest.toString());
 
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
-
             if (authentication.isAuthenticated()) {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+             VehicleOperatorEmployee vehicleOperatorEmployee= vehicleOperatorEmployeeService.loadByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                if (!vehicleOperatorEmployee.getRole().equals(Role.DELIVERY_MAN_ROLE)) {
+                    throw new UsernameNotFoundException("Invalid credentials");
+                }
 
                 String token = jwtService.generateToken(userDetails);
-                return ResponseEntity.ok(ApiResponseDto.builder().success(true).data(AuthenticationResponseDto.builder().token(token).role(userDetails.getAuthorities()).build()).message("Login successful").build());
+                return ResponseEntity.ok(ApiResponseDto.builder().success(true).data(AuthenticationResponseDto.builder().token(token).build()).message("Login successful").build());
             } else {
                 throw new UsernameNotFoundException("Invalid credentials");
             }

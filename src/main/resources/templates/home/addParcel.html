@@ -55,7 +55,7 @@
                                         <label class="el-form-item__label"
                                                for="pickupRequestAddress.firstName">Prénom</label> <br>
                                         <input
-                                                th:value="${#authentication.principal.firstName}" type="text"
+                                                th:value="${userDetails.firstName}" type="text"
                                                 class="form-control " id="pickupRequestAddress.firstName"
                                                 name="pickupRequestAddress.contactFirstName" required>
 
@@ -64,7 +64,7 @@
                                     <div class=" col-lg-4">
                                         <label class="el-form-item__label"
                                                for="pickupRequestAddress.lastName">Nom</label>
-                                        <input th:value="${#authentication.principal.lastName}" type="text"
+                                        <input th:value="${userDetails.lastName}" type="text"
                                                class="form-control" id="pickupRequestAddress.lastName"
                                                name="pickupRequestAddress.contactLastName" required>
                                     </div>
@@ -115,7 +115,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label class="el-form-item__label" for="pickupRequestAddress.contactNumber">Téléphone</label>
-                                        <input th:value="${#authentication.principal.phoneNumber}" type="tel"
+                                        <input th:value="${userDetails.phoneNumber}" type="tel"
                                                pattern="(\+212|0)[567][0-9]{8}" class="form-control"
                                                id="pickupRequestAddress.contactNumber"
                                                name="pickupRequestAddress.contactNumber" required>

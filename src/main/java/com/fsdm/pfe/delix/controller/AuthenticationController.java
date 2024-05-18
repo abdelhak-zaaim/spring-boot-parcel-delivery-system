@@ -60,15 +60,15 @@ import java.util.Map;
 public class AuthenticationController {
     private final CustomerServiceImpl customerService;
     private final LoginLogServiceImpl loginLogService;
-    private final PasswordEncoder passwordEncoder;
+
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository =
             new HttpSessionSecurityContextRepository();
 
-    public AuthenticationController(CustomerServiceImpl customerService, LoginLogServiceImpl loginLogService, PasswordEncoder passwordEncoder, @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager) {
+    public AuthenticationController(CustomerServiceImpl customerService, LoginLogServiceImpl loginLogService,  @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager) {
         this.customerService = customerService;
         this.loginLogService = loginLogService;
-        this.passwordEncoder = passwordEncoder;
+
         this.authenticationManager = authenticationManager;
     }
 
@@ -128,16 +128,6 @@ public class AuthenticationController {
         return "home/login";
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        try {
-            customerService.logoutCustomer(auth);
-            return ResponseEntity.ok(new MessageDto(200, "Logout successful"));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageDto(403, "Operation not allowed"));
-        }
-    }
 
     @GetMapping("/register")
     public String registerPage() {

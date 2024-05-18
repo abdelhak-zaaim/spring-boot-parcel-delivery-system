@@ -12,8 +12,8 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.Admin;
-import com.fsdm.pfe.delix.repository.AdminEmployeeRepo;
 
+import com.fsdm.pfe.delix.repository.AdminRepo;
 import com.fsdm.pfe.delix.service.AdminService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,28 +26,28 @@ import java.util.Optional;
 @Service
 public class AdminServiceImpl implements AdminService , UserDetailsService {
 
-    private final AdminEmployeeRepo adminEmployeeRepo;
+    private final AdminRepo adminRepo;
     private final UserServiceImpl userService;
 
-    public AdminServiceImpl(AdminEmployeeRepo adminRepo, UserServiceImpl userService) {
-        this.adminEmployeeRepo = adminRepo;
+    public AdminServiceImpl(AdminRepo adminRepo, UserServiceImpl userService) {
+        this.adminRepo = adminRepo;
         this.userService = userService;
     }
 
 
     @Override
     public void deleteAdmin(Long id) {
-        adminEmployeeRepo.deleteById(id);
+        adminRepo.deleteById(id);
     }
 
     @Override
     public Admin loadAdminById(Long id) {
-        return adminEmployeeRepo.findById(id).orElse(null);
+        return adminRepo.findById(id).orElse(null);
     }
 
     public Admin saveAdmin(Admin admin) {
         admin.setPassword(userService.encodePassword(admin.getPassword()));
-        return adminEmployeeRepo.save(admin);
+        return adminRepo.save(admin);
     }
 
     /**
@@ -59,12 +59,12 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
      */
     @Override
     public Admin updateAdmin(Admin admin) {
-        return adminEmployeeRepo.save(admin);
+        return adminRepo.save(admin);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Admin> admin = adminEmployeeRepo.findByEmail(email);
+        Optional<Admin> admin = adminRepo.findByEmail(email);
         admin.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
         return admin.get();
     }
@@ -72,7 +72,7 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
 
 
     public Admin loadUserByEmail(String email) {
-        Optional<Admin> admin = adminEmployeeRepo.findByEmail(email);
+        Optional<Admin> admin = adminRepo.findByEmail(email);
         return admin.orElse(null);
     }
 }

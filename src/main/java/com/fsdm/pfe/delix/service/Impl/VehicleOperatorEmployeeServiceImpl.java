@@ -70,9 +70,10 @@ public class VehicleOperatorEmployeeServiceImpl implements VehicleOperatorEmploy
       return vehicleOperatorEmployeeRepo.findById(id);
    }
 
+
    @Override
    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
       return vehicleOperatorEmployeeRepo.findByEmail(username)
-              .orElseThrow(() -> new UsernameNotFoundException("Employee with email " + username + " not found"));
+              .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
    }
 }

@@ -11,9 +11,10 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
-import com.fsdm.pfe.delix.controller.AuthenticationController;
 import com.fsdm.pfe.delix.dto.request.LoginRequestDto;
 import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
+import com.fsdm.pfe.delix.dto.request.UpdatePasswordRequestDto;
+import com.fsdm.pfe.delix.dto.request.UpdateProfileRequestDto;
 import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import com.fsdm.pfe.delix.entity.User;
@@ -24,13 +25,10 @@ import com.fsdm.pfe.delix.repository.CustomerRepo;
 import com.fsdm.pfe.delix.service.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,6 +40,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
@@ -59,7 +58,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository =
             new HttpSessionSecurityContextRepository();
-
 
 
     public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, LoginLogServiceImpl loginLogService, AuthenticationManager authenticationManager) {
@@ -105,7 +103,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         }
 
 
-
         Customer customer = new Customer(registerRequestDto);
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer = customerRepository.save(customer);
@@ -113,7 +110,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         if (customer == null) {
             throw new UserRegistrationException("User Registration Failed");
         } else {
-            userService.sendEmailVerification(customer.getEmail(), verificationTokenService.createVerification(customer).getToken() , baseUrl);
+            userService.sendEmailVerification(customer.getEmail(), verificationTokenService.createVerification(customer).getToken(), baseUrl);
         }
         return customer;
     }
@@ -129,8 +126,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
         Optional<Customer> customer = customerRepository.findByEmail(email);
         customer.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
-
-
 
 
         return customer.get();
@@ -157,6 +152,26 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         }
     }
 
+    @Override
+
+    @Transactional
+    public Optional<Customer> updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto) {
+            if (!updatePasswordRequestDto.getNewPassword().equals(updatePasswordRequestDto.getConfirmPassword())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
+            }
+
+            Optional<Customer> customer = customerRepository.findByEmail(email);
+
+            if (customer.isPresent()) {
+                if (!userService.passwordMatch(updatePasswordRequestDto.getPassword(), customer.get().getPassword())) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect Password");
+                }
+                customer.get().setPassword(userService.encodePassword(updatePasswordRequestDto.getNewPassword()));
+                return Optional.of(customerRepository.save(customer.get()));
+
+            } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+
+    }
 
 
     public LoginResponseDto loginCustomer(LoginRequestDto loginRequest, HttpServletRequest request, HttpServletResponse response) {
@@ -198,5 +213,14 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
             // Handle other authentication failures
             return new LoginResponseDto(false, false, e.getMessage(), e.getMessage());
         }
+    }
+
+
+    public Customer updateCustomerProfile(String userName, UpdateProfileRequestDto customerProfile) {
+        Customer customer = customerRepository.findByEmail(userName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        customer.setFirstName(customerProfile.getFirstName());
+        customer.setLastName(customerProfile.getLastName());
+        customer.setPhoneNumber(customerProfile.getPhoneNumber());
+        return customerRepository.save(customer);
     }
 }
