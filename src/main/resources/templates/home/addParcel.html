@@ -430,34 +430,17 @@
         </div>
 
     </div>
-
+    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+        <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}"/>
+    </form>
+    <script>
+        function logout() {
+            document.getElementById('logout-form').submit();
+        }
+    </script>
 </footer>
-<script>
 
-    let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-    let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-
-    function logout() {
-        fetch('/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                [header]: token
-            },
-            body: '' // No body for this request
-        })
-            .then(response => {
-                if (response.ok) {
-                    // Redirect to login page or show a success message
-                    window.location.href = '/login';
-                } else {
-                    // Handle errors
-                    console.error('Logout failed');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>
 
 <script>
     $('#btn-inscribe').click(function () {

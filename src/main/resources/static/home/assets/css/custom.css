@@ -7,6 +7,35 @@
  *  * @license : MIT License
  *
  */
+.box-title {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.box-title .strong-title {
+    text-align: left;
+}
+
+.box-title .font-blue {
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    .box-title {
+        flex-direction: column;
+        align-items: center;
+    }
+    .box-title .strong-title,
+    .box-title .font-blue {
+        text-align: center;
+    }
+}
+
+
+
+
 
 .subtitle-style{
 

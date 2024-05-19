@@ -1,0 +1,414 @@
+/*
+ *
+ *  * @project : DeliX
+ *  * @created : 19/05/2024, 12:30
+ *  * @modified : 19/05/2024, 12:30
+ *  * @description : This file is part of the DeliX project.
+ *  * @license : MIT License
+ *
+ */
+
+.suivi-result-div{
+    display: none;
+
+    overflow-y: scroll;
+    width: 0; height: 0;
+    background-color: rgba(128, 128, 128, 0.87);
+    border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;
+}
+
+@keyframes expand-suivi-result-div {
+    0% {height: 0; width: 0;}
+    100% {height: 50vh; width: 80%}
+}
+
+.suivi-result-div.expended{
+    display: initial;
+    width: 80%;
+    height: 50vh;
+    animation: expand-suivi-result-div 1s ease-in-out;
+}
+
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    @keyframes expand-suivi-result-div {
+        0% {height: 0; width: 0;}
+        100% {height: 50vh; width: 90%}
+    }
+    .suivi-result-div.expended{
+        width: 90%;
+        height: 50vh;
+        display: initial;
+        animation: expand-suivi-result-div 1s ease-in-out;
+    }
+}
+
+
+
+@keyframes expand {
+    0% {width: 0;}
+    100% {width: 80%;}
+}
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    @keyframes expand {
+        0% {width: 0;}
+        100% {width: 90%;}
+    }
+}
+
+/*.expend-suivi-box {*/
+/*    width: 100%;*/
+/*    animation: expand 2s ease-in-out;*/
+/*}*/
+#track-div.expended #suivi-input {
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+#track-div.expended #suivi-btn {
+    width: 80%;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 0;
+    animation: expand 1s ease-in-out;
+}
+
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    #track-div.expended #suivi-btn {
+        width: 90%;
+        border-radius: 5px 5px 0 0;
+        border-bottom: 0;
+        animation: expand 1s ease-in-out;
+    }
+}
+
+#header-suivi.hiddentitle {
+    display: none;
+    animation: hide-header 1s ease-in-out;
+}
+
+@keyframes hide-header {
+    0% {height: 100%;}
+    100% {height: 0;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cd__intro{
+    padding: 60px 30px;
+    margin-bottom: 15px;
+    flex-direction: column;
+
+}
+.cd__intro,
+.cd__credit{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #333;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.cd__intro h1 {
+    font-size: 18pt;
+    padding-bottom: 15px;
+
+}
+.cd__intro p{
+    font-size: 14px;
+}
+
+.cd__action{
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.cd__action a.cd__btn {
+    text-decoration: none;
+    color: #666;
+    border: 2px solid #666;
+    padding: 10px 15px;
+    display: inline-block;
+    margin-left: 5px;
+}
+.cd__action a.cd__btn:hover{
+    background: #666;
+    color: #fff;
+    transition: .3s;
+    -webkit-transition: .3s;
+}
+.cd__action .cd__btn:before{
+    font-family: FontAwesome;
+    font-weight: normal;
+    margin-right: 10px;
+}
+.down:before{content: "\f019"}
+.back:before{content:"\f112"}
+
+.cd__credit{
+    padding: 12px;
+    font-size: 9pt;
+    margin-top: 40px;
+
+}
+.cd__credit span:before{
+    font-family: FontAwesome;
+    color: #e41b17;
+    content: "\f004";
+
+
+}
+.cd__credit a{
+    color: #333;
+    text-decoration: none;
+}
+.cd__credit a:hover{
+    color: #F5AF00;
+}
+.cd__credit a:hover:after{
+    font-family: FontAwesome;
+    content: "\f08e";
+    font-size: 9pt;
+    position: absolute;
+    margin: 3px;
+}
+.cd__main{
+    background: #fff;
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.cd__main{
+    display: flex;
+    width: 100%;
+}
+
+@media only screen and (min-width: 1360px){
+    .cd__main{
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 24px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.cd__main{
+    background: linear-gradient(to right, #8e9eab, #eef2f3) !important;
+}
+#tracking{
+    background: #fff
+}
+.tracking-detail {
+    padding: 3rem 0;
+}
+#tracking {
+    margin-bottom: 1rem;
+}
+[class*="tracking-status-"] p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+[class*="tracking-status-"] {
+    padding: 1.6rem 0;
+}
+.tracking-list {
+    border: 1px solid #e5e5e5;
+}
+.tracking-item {
+    border-left: 4px solid #F5AF00;
+    position: relative;
+    padding: 2rem 1.5rem 0.5rem 2.5rem;
+    font-size: 0.9rem;
+    margin-left: 3rem;
+    min-height: 5rem;
+}
+.tracking-item:last-child {
+    padding-bottom: 4rem;
+}
+.tracking-item .tracking-date {
+    margin-bottom: 0.5rem;
+text-align: right!important;
+    display: block;
+}
+
+
+
+
+.tracking-item .tracking-date span {
+    color: #575757;
+    font-size: 85%;
+    padding-left: 0.4rem;
+}
+.tracking-item .tracking-content {
+    padding: 0.5rem 0.8rem;
+    background-color: #f4f4f4;
+    border-radius: 0.5rem;
+    color: #F5AF00;
+}
+.tracking-item .tracking-content span {
+    display: block;
+    color: #575757;
+    font-size: 13px;
+}
+.tracking-item .tracking-icon {
+    position: absolute;
+    left: -0.7rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    background-color: #fff;
+    color: #fff;
+}
+
+.tracking-item-pending {
+    border-left: 4px solid #d6d6d6;
+    position: relative;
+    padding: 2rem 1.5rem 0.5rem 2.5rem;
+    font-size: 0.9rem;
+    margin-left: 3rem;
+    min-height: 5rem;
+}
+.tracking-item-pending:last-child {
+    padding-bottom: 4rem;
+}
+.tracking-item-pending .tracking-date {
+    margin-bottom: 0.5rem;
+}
+.tracking-item-pending .tracking-date span {
+    color: #575757;
+    font-size: 85%;
+    padding-left: 0.4rem;
+}
+.tracking-item-pending .tracking-content {
+    padding: 0.5rem 0.8rem;
+    background-color: rgba(251, 251, 251, 0.77);
+    border-radius: 0.5rem;
+    color: #F5AF00;
+    text-align: left;
+}
+
+.tracking-item-pending .tracking-content span {
+    display: block;
+    color: #575757;
+    font-size: 13px;
+}
+
+
+.tracking-item-pending .tracking-icon {
+    line-height: 2.6rem;
+    position: absolute;
+    left: -0.7rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    color: #d6d6d6;
+}
+.tracking-item-pending .tracking-content {
+    font-weight: 600;
+    background-color: rgba(251, 251, 251, 0.77);
+    font-size: 17px;
+}
+
+.tracking-item .tracking-icon.status-current {
+    width: 1.9rem;
+    height: 1.9rem;
+    left: -1.1rem;
+}
+.tracking-item .tracking-icon.status-intransit {
+    color: #F5AF00;
+    font-size: 0.6rem;
+}
+.tracking-item .tracking-icon.status-current {
+    color: #F5AF00;
+    font-size: 0.6rem;
+}
+@media (min-width: 992px) {
+    .tracking-item {
+        margin-left: 10rem;
+    }
+    .tracking-item .tracking-date {
+        position: absolute;
+        left: -4rem;
+        width: 7.5rem;
+        text-align: right;
+    }
+    .tracking-item .tracking-date span {
+        display: block;
+    }
+    .tracking-item .tracking-content {
+
+padding: 0.5rem 0.8rem;
+
+        background-color: rgba(251, 251, 251, 0.74);
+        text-align: left;
+    }
+
+    .tracking-item-pending {
+        margin-left: 10rem;
+    }
+    .tracking-item-pending .tracking-date {
+        position: absolute;
+        left: -4rem;
+        width: 7.5rem;
+        text-align: right;
+    }
+    .tracking-item-pending .tracking-date span {
+        display: block;
+    }
+    .tracking-item-pending .tracking-content {
+        background-color: rgba(251, 251, 251, 0.77);
+
+    }
+}
+
+.tracking-item .tracking-content {
+    padding: 0.5rem 0.8rem;
+    font-size: 17px;
+    background-color: rgba(251, 251, 251, 0.7);
+
+    text-align: left;
+}
+
+.blinker {
+    border: 7px solid #e9f8ea;
+    animation: blink 1s;
+    animation-iteration-count: infinite;
+}
+@keyframes blink { 50% { border-color:#fff ; }  }

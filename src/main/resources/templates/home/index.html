@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html dir="ltr" lang="en-US" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <!-- Document Meta
@@ -23,7 +24,7 @@
     <link href="/home/assets/css/cons.css" rel="stylesheet">
     <link href="/home/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/home/assets/css/style.css" rel="stylesheet">
-
+    <link href="/home/assets/css/timelign.css" rel="stylesheet">
     <script src="/home/assets/js/html5shiv.js"></script>
     <script src="/home/assets/js/respond.min.js"></script>
     <script src="/home/assets/js/maps.js"></script>
@@ -41,7 +42,7 @@
 
     <header id="navbar-spy" class="header header-1 header-transparent header-fixed">
         <nav id="primary-menu" class="navbar navbar-fixed-top">
-            <div class="container" style="padding-right: 0!important; padding-left: 0!important;">
+            <div class="container" style="padding-right: 0!important; padding-left: 0!important; max-lines: 1">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#navbar-collapse-1" aria-expanded="false">
@@ -62,17 +63,18 @@
                         </li>
 
 
-                        <li sec:authorize="isAuthenticated() && hasRole('ROLE_CUSTOMER')"  class="dropdown">
+                        <li sec:authorize="isAuthenticated() && hasRole('ROLE_CUSTOMER')" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Expédition<span class="caret"></span></a>
-                            <ul class="dropdown-menu"  >
+                            <ul class="dropdown-menu">
                                 <li><a data-scroll="scrollTo" href="/express/add-parcel">Envoyer un colis</a></li>
                                 <li><a data-scroll="scrollTo" href="">Mes envois</a></li>
 
                                 <li><a data-scroll="scrollTo" href="/order-quote">Devis</a></li>
                             </ul>
                         </li>
-                        <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))"  ><a data-scroll="scrollTo" href="/order-quote">Devis</a>
+                        <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))"><a data-scroll="scrollTo"
+                                                                                                href="/order-quote">Devis</a>
                         </li>
 
 
@@ -82,7 +84,7 @@
                         <li data-scroll="scrollTo" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">À propos de DeliX <span class="caret"></span></a>
-                            <ul class="dropdown-menu"  >
+                            <ul class="dropdown-menu">
                                 <li><a data-scroll="scrollTo" href="#portfolio">Galerie</a></li>
                                 <li><a data-scroll="scrollTo" href="#skills">Performance</a></li>
 
@@ -90,13 +92,13 @@
                             </ul>
                         </li>
 
-                        <li   sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))">
+                        <li sec:authorize="!(isAuthenticated() && hasRole('ROLE_CUSTOMER'))">
                             <a href="/login" id="btn-inscribe">S'inscrire / Se connecter</a>
                         </li>
 
                         <li sec:authorize="isAuthenticated() && hasRole('ROLE_CUSTOMER')" class="dropdown el-popper"
                             style="display: flex; align-items: center; justify-content: center;">
-                            <a  class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false" style="margin-top: 31px!important;">
                                 <img style="width: 38px; height:38px; border-radius: 50px"
                                      src="/home/assets/images/profile/profile.png"
@@ -104,16 +106,18 @@
                                 >
 
                                 <span class="dropdown-toggle"
-                                      th:text="${userDetails.firstName} + ' ' + ${userDetails.lastName}"></span> <span class="caret"></span>
+                                      th:text="${userDetails.firstName} + ' ' + ${userDetails.lastName}"></span> <span
+                                    class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li  style="cursor: pointer !important;"><a data-scroll="scrollTo" href="/express/profile"  >Center Personnel</a></li>
-                                <li style="cursor: pointer !important;" ><a data-scroll="scrollTo" th:onclick="logout()" >Log ont</a></li>
+                                <li style="cursor: pointer !important;"><a data-scroll="scrollTo"
+                                                                           href="/express/profile">Center Personnel</a>
+                                </li>
+                                <li style="cursor: pointer !important;"><a data-scroll="scrollTo" th:onclick="logout()">Déconnexion</a>
+                                </li>
 
                             </ul>
                         </li>
-
-
 
 
                     </ul>
@@ -131,19 +135,110 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
                         <div class="hero--content">
+                            <div id="header-suivi">
                             <h5 class=" my-title">FAST SAFE RELIABLE</h5>
 
 
-                            <p class="hero--bio ">Un prestataire de services logistiques à guichet unique spécialisé
+                            <p  class="hero--bio ">Un prestataire de services logistiques à guichet
+                                unique spécialisé
                                 dans le transport et la livraison de colis au Maroc </p>
+
+
+                            </div>
                             <div class="hero--action">
-                                <form class="form-inline">
-                                    <input type="text" class="form-control" id="your-address" name="email" style="border-radius: 5px 0 0 5px !important;"
+
+                                <div id="track-div" class="form-inline " >
+                                    <input id="suivi-input" type="text" class="form-control" name="email"
+                                           style="border-radius: 5px 0 0 5px !important; margin-bottom: 0!important; "
                                            placeholder="Veuillez entrer le numéro de suivi">
-                                    <button id="suivi-btn" type="submit"
+                                    <button id="suivi-btn" type="submit" style="margin-bottom: 0!important;"
                                             class="btn btn--primary btn--rounded btn--inverse mb-30">Suivi
                                     </button>
-                                </form>
+
+                                    <script>
+                                        document.getElementById('suivi-btn').addEventListener('click', function () {
+                                            expend_timeligh_result();
+                                        });
+                                    </script>
+                                </div>
+                                <div  class="form-inline " style="display: flex">
+                                    <div class="suivi-result-div mb-30" >
+                                        <div id="">
+                                            <div class="">
+                                                <div class="tracking-item">
+                                                    <div class="tracking-icon status-intransit">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Order Placed<span>09 Aug 2025, 10:00am</span></div>
+                                                </div>
+                                                <div class="tracking-item">
+                                                    <div class="tracking-icon status-intransit">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Order Confirmed<span>09 Aug 2025, 10:30am</span></div>
+                                                </div>
+                                                <div class="tracking-item">
+                                                    <div class="tracking-icon status-intransit">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Packed the product<span>09 Aug 2025, 12:00pm</span></div>
+                                                </div>
+                                                <div class="tracking-item">
+                                                    <div class="tracking-icon status-intransit">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Arrived in the warehouse<span>10 Aug 2025, 02:00pm</span></div>
+                                                </div>
+                                                <div class="tracking-item">
+                                                    <div class="tracking-icon status-current blinker">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Near by Courier facility<span>10 Aug 2025, 03:00pm</span></div>
+                                                </div>
+
+                                                <div class="tracking-item-pending">
+                                                    <div class="tracking-icon status-intransit">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Out for Delivery<span>12 Aug 2025, 05:00pm</span></div>
+                                                </div>
+                                                <div class="tracking-item-pending">
+                                                    <div class="tracking-icon status-intransit">
+                                                        <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tracking-date"><img src="/home/assets/images/timelign/delivery.svg" class="img-responsive" alt="order-placed"></div>
+                                                    <div class="tracking-content">Delivered<span>12 Aug 2025, 09:00pm</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+
                             </div>
                         </div>
                     </div>
@@ -154,7 +249,7 @@
     </section>
 
     <section id="feature" class="section feature feature-1 bg-white text-center">
-        <div class="container" >
+        <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                     <div class="heading mb-70">
@@ -214,124 +309,124 @@
         </div>
     </section>
 
-<section id="portfolio" class="section portfolio portfolio-grid portfolio-2 pb-70">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
-                <div class="heading text-center mb-70">
-                    <h2 class="heading--title">Galerie</h2>
-                    <div data-v-625624fc="" class="under-line">
-                        <div data-v-625624fc="" class="dot"></div>
+    <section id="portfolio" class="section portfolio portfolio-grid portfolio-2 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                    <div class="heading text-center mb-70">
+                        <h2 class="heading--title">Galerie</h2>
+                        <div data-v-625624fc="" class="under-line">
+                            <div data-v-625624fc="" class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 portfolio-filter">
+                    <ul class="list-inline">
+                        <li><a class="active-filter" href="#" data-filter="*">Tout</a></li>
+                        <li><a href="#" data-filter=".filter-building">Transport</a></li>
+                        <li><a href="#" data-filter=".filter-construction">Emballage</a></li>
+                        <li><a href="#" data-filter=".filter-planning">Design réactif</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div id="portfolio-all" class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-building">
+                    <div class="portfolio--img">
+                        <img loading="lazy" src="/home/assets/images/gallery/logistic/1.jpg"
+                             alt="image de portfolio"/>
+                        <div class="portfolio--hover">
+                            <div class="portfolio--meta">
+                                <div class="portfolio--zoom"><a class="img-gallery-item"
+                                                                href="/home/assets/images/gallery/logistic/1.jpg"></a>
+                                </div>
+                                <h6><a href="#">Flotte d'expédition</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-construction">
+                    <div class="portfolio--img">
+                        <img loading="lazy" src="/home/assets/images/gallery/constructions/2.png"
+                             alt="image de portfolio"/>
+                        <div class="portfolio--hover">
+                            <div class="portfolio--meta">
+                                <div class="portfolio--zoom"><a class="img-gallery-item"
+                                                                href="/home/assets/images/gallery/constructions/full/2.png"></a>
+                                </div>
+                                <h6><a href="#">Emballage pour articles fragiles</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-planning">
+                    <div class="portfolio--img">
+                        <img loading="lazy" src="/home/assets/images/gallery/constructions/3.png"
+                             alt="image de portfolio"/>
+                        <div class="portfolio--hover">
+                            <div class="portfolio--meta">
+                                <div class="portfolio--zoom"><a class="img-gallery-item"
+                                                                href="/home/assets/images/gallery/constructions/full/3.png"></a>
+                                </div>
+                                <h6><a href="#">sur ordinateur portable</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-construction">
+                    <div class="portfolio--img">
+                        <img loading="lazy" src="/home/assets/images/gallery/constructions/4.png"
+                             alt="image de portfolio"/>
+                        <div class="portfolio--hover">
+                            <div class="portfolio--meta">
+                                <div class="portfolio--zoom"><a class="img-gallery-item"
+                                                                href="/home/assets/images/gallery/constructions/full/4.png"></a>
+                                </div>
+                                <h6>Emballage</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-building">
+                    <div class="portfolio--img">
+                        <img loading="lazy" src="/home/assets/images/gallery/constructions/5.jpg"
+                             alt="image de portfolio"/>
+                        <div class="portfolio--hover">
+                            <div class="portfolio--meta">
+                                <div class="portfolio--zoom"><a class="img-gallery-item"
+                                                                href="/home/assets/images/gallery/constructions/5.jpg"></a>
+                                </div>
+                                <h6><a href="#">Ramassage des colis</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-planning">
+                    <div class="portfolio--img">
+                        <img loading="lazy" src="/home/assets/images/gallery/constructions/6.png"
+                             alt="image de portfolio"/>
+                        <div class="portfolio--hover">
+                            <div class="portfolio--meta">
+                                <div class="portfolio--zoom"><a class="img-gallery-item"
+                                                                href="/home/assets/images/gallery/constructions/full/6.png"></a>
+                                </div>
+                                <h6><a href="#">sur téléphone</a></h6>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-
-            <div class="col-xs-12 col-sm-12 col-md-12 portfolio-filter">
-                <ul class="list-inline">
-                    <li><a class="active-filter" href="#" data-filter="*">Tout</a></li>
-                    <li><a href="#" data-filter=".filter-building">Transport</a></li>
-                    <li><a href="#" data-filter=".filter-construction">Emballage</a></li>
-                    <li><a href="#" data-filter=".filter-planning">Design réactif</a></li>
-
-                </ul>
-            </div>
-        </div>
-        <div id="portfolio-all" class="row">
-            <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-building">
-                <div class="portfolio--img">
-                    <img loading="lazy" src="/home/assets/images/gallery/logistic/1.jpg"
-                         alt="image de portfolio"/>
-                    <div class="portfolio--hover">
-                        <div class="portfolio--meta">
-                            <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                            href="/home/assets/images/gallery/logistic/1.jpg"></a>
-                            </div>
-                            <h6><a href="#">Flotte d'expédition</a></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-construction">
-                <div class="portfolio--img">
-                    <img loading="lazy" src="/home/assets/images/gallery/constructions/2.png"
-                         alt="image de portfolio"/>
-                    <div class="portfolio--hover">
-                        <div class="portfolio--meta">
-                            <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                            href="/home/assets/images/gallery/constructions/full/2.png"></a>
-                            </div>
-                            <h6><a href="#">Emballage pour articles fragiles</a></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-planning">
-                <div class="portfolio--img">
-                    <img loading="lazy" src="/home/assets/images/gallery/constructions/3.png"
-                         alt="image de portfolio"/>
-                    <div class="portfolio--hover">
-                        <div class="portfolio--meta">
-                            <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                            href="/home/assets/images/gallery/constructions/full/3.png"></a>
-                            </div>
-                            <h6><a href="#">sur ordinateur portable</a></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-construction">
-                <div class="portfolio--img">
-                    <img loading="lazy" src="/home/assets/images/gallery/constructions/4.png"
-                         alt="image de portfolio"/>
-                    <div class="portfolio--hover">
-                        <div class="portfolio--meta">
-                            <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                            href="/home/assets/images/gallery/constructions/full/4.png"></a>
-                            </div>
-                            <h6>Emballage</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-building">
-                <div class="portfolio--img">
-                    <img loading="lazy" src="/home/assets/images/gallery/constructions/5.jpg"
-                         alt="image de portfolio"/>
-                    <div class="portfolio--hover">
-                        <div class="portfolio--meta">
-                            <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                            href="/home/assets/images/gallery/constructions/5.jpg"></a>
-                            </div>
-                            <h6><a href="#">Ramassage des colis</a></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4 col-md-4 portfolio-item filter-planning">
-                <div class="portfolio--img">
-                    <img loading="lazy" src="/home/assets/images/gallery/constructions/6.png"
-                         alt="image de portfolio"/>
-                    <div class="portfolio--hover">
-                        <div class="portfolio--meta">
-                            <div class="portfolio--zoom"><a class="img-gallery-item"
-                                                            href="/home/assets/images/gallery/constructions/full/6.png"></a>
-                            </div>
-                            <h6><a href="#">sur téléphone</a></h6>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
     <section id="skills" class="section skills skills-1 bg-white">
         <div class="container">
             <div class="row">
@@ -546,6 +641,7 @@
 <script src="/home/assets/js/jquery-2.2.4.min.js"></script>
 <script src="/home/assets/js/plugins.js"></script>
 <script src="/home/assets/js/functions.js"></script>
+<script src="/home/assets/js/timelign.js"></script>
 </body>
 
 </html>
