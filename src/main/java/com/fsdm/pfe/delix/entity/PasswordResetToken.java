@@ -25,7 +25,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class PasswordResetToken {
-   private static final int EXPIRATION = 60 * 24;
+   private static final int EXPIRATION = 60 * 24; // 24 sa3a
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,13 +42,13 @@ public class PasswordResetToken {
       super();
       this.token = token;
       this.user = user;
-      this.expiryDate = calculateExpiryDate(EXPIRATION);
+      this.expiryDate = calculateExpiryDate();
    }
 
-   private Date calculateExpiryDate(final int expiryTimeInMinutes) {
+   private Date calculateExpiryDate() {
       final Calendar cal = Calendar.getInstance();
       cal.setTimeInMillis(new Date().getTime());
-      cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+      cal.add(Calendar.MINUTE, EXPIRATION);
       return new Date(cal.getTime().getTime());
    }
 }

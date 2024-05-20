@@ -16,7 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +23,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransporterJourney {
+public class Journey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +33,7 @@ public class TransporterJourney {
     private Transporter transporter;
 
     @OneToMany
-    private List<Parcel> parcels;
+    private List<JourneyPath> jumpPaths;
 
     private Date startTime;
     private Date endTime;

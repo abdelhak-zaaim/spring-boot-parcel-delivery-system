@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,18 +29,18 @@ public class JourneyPlanPath {
     private Long id;
 
     @OneToMany
-    private List<Agency> plannedAgencies;
+    private List<JourneyStep> steps;
 
-   private Date creationDate;
-   private Date lastUpdateDate;
+    private Date creationDate;
+    private Date lastUpdateDate;
 
-   @PrePersist
-   protected void onCreated() {
+    @PrePersist
+    protected void onCreated() {
 
 
-      Date date = new Date();
-      this.creationDate = date;
-      this.lastUpdateDate = date;
-   }
+        Date date = new Date();
+        this.creationDate = date;
+        this.lastUpdateDate = date;
+    }
 
 }

@@ -28,9 +28,12 @@ public class JourneyPath {
     private Long id;
 
     @OneToMany
-    private List<Agency> agencies;
+    private List<JourneyStep> steps;
     private Date creationDate;
     private Date lastUpdateDate;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Parcel> parcels;
 
     @PrePersist
     protected void onCreated() {
