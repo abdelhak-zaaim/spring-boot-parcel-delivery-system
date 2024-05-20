@@ -23,8 +23,9 @@ public interface EmailService {
     * @see org.apache.naming.factory.SendMailFactory
     *
     * */
-   void sendSimpleMessage(String toEmail, String subject, String text);
-   void sendSimpleMessageUsingTemplate(String toEmail, String subject, String ...templateModel);
+
+   void sendMessage(String toEmail, String subject, String text);
+
    void sendEmailWithAttachment(String toEmail, String subject, String text, String pathToAttachment);
 
 }
