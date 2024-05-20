@@ -101,9 +101,9 @@ public class CustomerParcelController {
         if (result.hasErrors()) {
             return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("please verify the inputs").build());
         }
-        int quote = parcelService.generateQuote(getQuoteRequestDto);
+        int totalCost = parcelService.generateQuoteFromRequestDto(getQuoteRequestDto).getTotalCost();
 
-        return ResponseEntity.ok(ResponseDataDto.builder().data(quote).success(true).error(null).message("votre devis est : " + quote).build());
+        return ResponseEntity.ok(ResponseDataDto.builder().data(totalCost).success(true).error(null).message("votre devis est : " + totalCost).build());
 
     }
 

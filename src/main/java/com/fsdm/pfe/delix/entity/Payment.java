@@ -21,7 +21,7 @@ import lombok.*;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class Payment {
 
     @Id

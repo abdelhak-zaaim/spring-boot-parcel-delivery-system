@@ -14,13 +14,18 @@ package com.fsdm.pfe.delix.service.Impl;
 import com.fsdm.pfe.delix.dto.request.GetQuoteRequestDto;
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
 import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
-import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.DeliveryAddress;
 import com.fsdm.pfe.delix.entity.Parcel;
+import com.fsdm.pfe.delix.entity.Payment;
+import com.fsdm.pfe.delix.entity.Pricing;
+import com.fsdm.pfe.delix.entity.location.Area;
+import com.fsdm.pfe.delix.model.ParcelVolume;
+import com.fsdm.pfe.delix.model.PaymentModel;
 import com.fsdm.pfe.delix.model.enums.ParcelStatus;
 import com.fsdm.pfe.delix.model.enums.ParcelType;
 import com.fsdm.pfe.delix.repository.ParcelRepo;
 
+import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;
 import com.fsdm.pfe.delix.service.ParcelService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,10 +46,16 @@ public class ParcelServiceImpl implements ParcelService {
 
     private final ParcelRepo parcelRepository;
     private final DeliveryAddressServiceImpl deliveryAddressService;
+    private final AreaServiceImpl areaService;
+    private final PaymentServiceImpl paymentService;
+    private final PricingServiceImpl pricingService;
 
-    public ParcelServiceImpl(ParcelRepo parcelRepository, DeliveryAddressServiceImpl deliveryAddressService) {
+    public ParcelServiceImpl(ParcelRepo parcelRepository, DeliveryAddressServiceImpl deliveryAddressService, AreaServiceImpl areaService, PaymentServiceImpl paymentService, PricingServiceImpl pricingService) {
         this.parcelRepository = parcelRepository;
         this.deliveryAddressService = deliveryAddressService;
+        this.areaService = areaService;
+        this.paymentService = paymentService;
+        this.pricingService = pricingService;
     }
 
     @Override
@@ -100,7 +111,6 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
 
-
     public ParcelResponseDto convertEntityToResponseDto(Parcel parcel) {
         return new ParcelResponseDto(parcel);
     }
@@ -122,11 +132,10 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
     @Transactional
-    public Parcel saveParcelFromDto(ParcelRequestDto parcelRequestDto) {
+    public void saveParcelFromDto(ParcelRequestDto parcelRequestDto) {
 
         DeliveryAddress pickupAddress = deliveryAddressService.convertRequestToEntity(parcelRequestDto.getPickupRequestAddress());
         DeliveryAddress receiverAddress = deliveryAddressService.convertRequestToEntity(parcelRequestDto.getReceiverAddress());
-
 
         Parcel parcel = new Parcel();
         parcel.setHeight(parcelRequestDto.getHeight());
@@ -140,38 +149,89 @@ public class ParcelServiceImpl implements ParcelService {
         parcel.setPickupAddress(deliveryAddressService.saveDeliveryAddress(pickupAddress));
         parcel.setReceiverAddress(deliveryAddressService.saveDeliveryAddress(receiverAddress));
         parcel.setStatus(ParcelStatus.PENDING);
-        return parcelRepository.save(parcel);
 
+        Parcel savedParcel = parcelRepository.save(parcel);
+
+        Payment payment = generatePaymentForParcel(savedParcel);
+        savedParcel.setPayment(payment);
+        parcelRepository.save(savedParcel);
 
     }
 
+    Payment generatePaymentForParcel(Parcel parcel) {
 
-    public int generateQuote(GetQuoteRequestDto requestDto) {
-        double basePrice;
-
-        if (requestDto.getParcelType() == ParcelType.DOCUMENT) {
-            basePrice = BASE_PRICE_REGULAR;
-        } else {
-            basePrice = BASE_PRICE_EXPRESS;
+        if (parcel == null) {
+            throw new IllegalArgumentException("Parcel is null");
         }
 
-        double volume = requestDto.getLength() * requestDto.getWidth() * requestDto.getHeight();
+        PaymentModel paymentModel = generateQuoteForParcel(parcel);
+        Payment payment = Payment.builder()
+                .totalCost(paymentModel.getTotalCost())
+                .insuranceCost(paymentModel.getInsuranceCost())
+                .deliveryFees(paymentModel.getDeliveryFees())
+                .build();
+        if (payment == null) {
+            throw new IllegalArgumentException("Payment is null");
+        }
 
-        double density = requestDto.getWeight() / volume;
-
-        double distance = calculateDistance(requestDto.getPickUpArea(), requestDto.getDeliveryArea());
-
-        double quote = basePrice + (density * DENSITY_FACTOR) + (distance * DISTANCE_FACTOR);
-
-        return (int)quote;
+        return paymentService.savePayment(payment);
     }
 
-    private double calculateDistance(String pickUpArea, String deliveryArea) {
+
+    public PaymentModel generateQuoteForParcel(Parcel parcel) {
+
+        return generateQuote(parcel.getPickupAddress().getArea(), parcel.getReceiverAddress().getArea(), parcel.getType(), ParcelVolume.builder()
+                .length(parcel.getLength())
+                .width(parcel.getWidth())
+                .height(parcel.getHeight())
+                .build(), parcel.getWeight());
+    }
 
 
+    public PaymentModel generateQuoteFromRequestDto(GetQuoteRequestDto requestDto) {
+        ParcelVolume parcelVolume = ParcelVolume.builder()
+                .length(requestDto.getLength())
+                .width(requestDto.getWidth())
+                .height(requestDto.getHeight())
+                .build();
+
+        Area pickUpArea = areaService.loadByCode(requestDto.getPickUpArea());
+        Area deliveryArea = areaService.loadByCode(requestDto.getDeliveryArea());
+        if (pickUpArea == null || deliveryArea == null) {
+            throw new IllegalArgumentException("Invalid area code");
+        }
+
+        return generateQuote(pickUpArea, deliveryArea, requestDto.getParcelType(), parcelVolume, requestDto.getWeight());
+    }
+
+    public Pricing getPricing() {
+        return pricingService.loadCurrentPricing().orElse(new Pricing());
+    }
+
+    public PaymentModel generateQuote(Area pickUpArea, Area deliveryArea, ParcelType parcelType, ParcelVolume parcelVolume, double weight) {
 
 
+        Pricing pricing = getPricing();
 
+        double volume = parcelVolume.getLength() * parcelVolume.getWidth() * parcelVolume.getHeight();
+        double density = weight / volume;
+        double distance = calculateDistance(pickUpArea, deliveryArea);
+
+        double quote = pricing.getBasePrice() + (density * pricing.getDensityFactor()) + (distance * pricing.getDistanceFactor());
+
+        int insuranceCost = (int) (quote * pricing.getInsuranceCostFactor());
+        int deliveryFees = (int) (quote * 0.2);
+        int totalCost = insuranceCost + deliveryFees + (int) quote;
+
+        return PaymentModel.builder()
+                .totalCost(totalCost)
+                .insuranceCost(insuranceCost)
+                .deliveryFees(deliveryFees)
+                .build();
+    }
+
+
+    private double calculateDistance(Area pickUpArea, Area deliveryArea) {
 
         return 100;
     }

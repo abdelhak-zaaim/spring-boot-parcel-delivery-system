@@ -29,16 +29,16 @@ public class GetQuoteRequestDto {
     String deliveryArea;
     @NotNull
     @Min(1)
-    double weight;
+    float weight;
     @NotNull
     @Min(1)
-    double length;
+    float length;
     @NotNull
     @Min(1)
-    double width;
+    float width;
     @NotNull
     @Min(1)
-    double height;
+    float height;
     @NotNull
     ParcelType parcelType;
 

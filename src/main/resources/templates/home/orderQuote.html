@@ -1,4 +1,3 @@
-
 <!--
   ~
   ~  * @project : DeliX
@@ -20,299 +19,298 @@
 
 <div id="wrapper" class="wrapper clearfix">
 
-  <header th:replace="home/partials/header :: header"></header>
+    <header th:replace="home/partials/header :: header"></header>
 
 
-  <section style="padding-top: 80px !important;"
-           class=" bg-white text-center ">
+    <section style="padding-top: 80px !important;"
+             class=" bg-white text-center ">
 
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12  ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12  ">
 
-          <div class="card mb-0 center-form" style="max-width: 90%">
-            <div class="card-body">
+                    <div class="card mb-0 center-form" style="max-width: 90%">
+                        <div class="card-body">
 
-              <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Obtenir un devis</span>
-              </div>
-
-
-              <form id="get_quote_form" th:action="@{/order-quote}" method="post"
-                    style="margin-top: 30px;">
-                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
-                       th:value="${_csrf.token}"/>
-
-                <div class="sub-title-new flex-center row bx-vertical-center">
-                  <span style="color: #F5AF00; font-weight: bolder!important; font-size: 20px ">|</span>
-
-                  <span class="subtitle-style">Address du d'expédition</span>
+                            <div class="box-title" data-v-5e9121d4=""><span class="strong-title" data-v-5e9121d4="">Obtenir un devis</span>
+                            </div>
 
 
-                </div>
+                            <form id="get_quote_form" th:action="@{/order-quote}" method="post"
+                                  style="margin-top: 30px;">
+                                <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+                                       th:value="${_csrf.token}"/>
+
+                                <div class="sub-title-new flex-center row bx-vertical-center">
+                                    <span style="color: #F5AF00; font-weight: bolder!important; font-size: 20px ">|</span>
+
+                                    <span class="subtitle-style">Address du d'expédition</span>
 
 
+                                </div>
 
 
-                <div class="row">
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="pickUpProvince">Province</label>
-                    <select class="form-control" id="pickUpProvince" name="pickUpProvince"
-                            required>
-                      <option disabled selected value>Sélectionnez la province</option>
-                      <option th:each="province:${provinces}" th:value="${province.code}"
-                              th:text="${province.name}"></option>
-                    </select>
-                  </div>
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="pickUpCity">Ville</label>
-                    <select class="form-control" id="pickUpCity" name="pickUpCity"
-                            required>
-                      <option disabled selected value>Sélectionnez la Province dabord</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-4 custom-select">
-                    <label class="el-form-item__label" for="pickUpArea">Quartier</label>
-                    <select class="form-control select-hidden" id="pickUpArea"
-                            name="pickUpArea" required>
-                      <option disabled selected value>Sélectionnez la Ville dabord</option>
-                    </select>
-                  </div>
-                </div>
+                                <div class="row">
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="pickUpProvince">Province</label>
+                                        <select class="form-control" id="pickUpProvince" name="pickUpProvince"
+                                                required>
+                                            <option disabled selected value>Sélectionnez la province</option>
+                                            <option th:each="province:${provinces}" th:value="${province.code}"
+                                                    th:text="${province.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="pickUpCity">Ville</label>
+                                        <select class="form-control" id="pickUpCity" name="pickUpCity"
+                                                required>
+                                            <option disabled selected value>Sélectionnez la Province dabord</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 custom-select">
+                                        <label class="el-form-item__label" for="pickUpArea">Quartier</label>
+                                        <select class="form-control select-hidden" id="pickUpArea"
+                                                name="pickUpArea" required>
+                                            <option disabled selected value>Sélectionnez la Ville dabord</option>
+                                        </select>
+                                    </div>
+                                </div>
 
 
+                                <div class="sub-title-new flex-center row bx-vertical-center">
+                                    <span style="color: #F5AF00; font-weight: bolder!important; font-size: 20px ">|</span>
+
+                                    <span class="subtitle-style">Address du destinataire</span>
+                                </div>
 
 
+                                <div class="row">
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="receiverProvince">Province</label>
+                                        <select class="form-control" id="receiverProvince" name="receiverProvince"
+                                                required>
+                                            <option disabled selected value>Sélectionnez la province</option>
+                                            <option th:each="province:${provinces}" th:value="${province.code}"
+                                                    th:text="${province.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="receiverCity">Ville</label>
+                                        <select class="form-control" id="receiverCity" name="receiverCity"
+                                                required>
 
-                <div class="sub-title-new flex-center row bx-vertical-center">
-                  <span style="color: #F5AF00; font-weight: bolder!important; font-size: 20px ">|</span>
-
-                  <span class="subtitle-style">Address du destinataire</span>
-                </div>
-
-
-
-                <div class="row">
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="receiverProvince">Province</label>
-                    <select class="form-control" id="receiverProvince" name="receiverProvince"
-                            required>
-                      <option disabled selected value>Sélectionnez la province</option>
-                      <option th:each="province:${provinces}" th:value="${province.code}"
-                              th:text="${province.name}"></option>
-                    </select>
-                  </div>
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="receiverCity">Ville</label>
-                    <select class="form-control" id="receiverCity" name="receiverCity"
-                            required>
-
-                      <option disabled selected value="">Sélectionnez la Province dabord</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-4 custom-select">
-                    <label class="el-form-item__label" for="receiverArea">Quartier</label>
-                    <select class="form-control select-hidden" id="receiverArea"
-                            name="deliveryArea" required>
-                      <option disabled selected value>Sélectionnez la Ville dabord</option>
-                    </select>
-                  </div>
-                </div>
+                                            <option disabled selected value="">Sélectionnez la Province dabord</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 custom-select">
+                                        <label class="el-form-item__label" for="receiverArea">Quartier</label>
+                                        <select class="form-control select-hidden" id="receiverArea"
+                                                name="deliveryArea" required>
+                                            <option disabled selected value>Sélectionnez la Ville dabord</option>
+                                        </select>
+                                    </div>
+                                </div>
 
 
+                                <div class="sub-title-new flex-center row bx-vertical-center">
+                                    <span style="color: #F5AF00; font-weight: bolder!important; font-size: 20px ">|</span>
+
+                                    <span class="subtitle-style">Informations du colis</span>
+                                </div>
+
+                                <div class="row">
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="length">Longueur en Cm</label>
+                                        <input type="number" class="form-control" id="length" min="1" name="length"
+                                               required>
+                                    </div>
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="width">Largeur en Cm</label>
+                                        <input type="number" class="form-control" min="1" id="width" name="width"
+                                               required>
+                                    </div>
+                                    <div class=" col-lg-4">
+                                        <label class="el-form-item__label" for="height">Hauteur en Cm</label>
+                                        <input type="number" class="form-control" min="1" id="height" name="height"
+                                               required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class=" col-lg-6">
+                                        <label class="el-form-item__label" for="weight">Poids en kg</label>
+                                        <input type="number" class="form-control" min="1" id="weight" name="weight"
+                                               required>
+                                    </div>
+                                    <div class="col-lg-6 custom-select">
+                                        <label class="el-form-item__label" for="parcelType">Type de colis</label>
+                                        <select class="form-control select-hidden" id="parcelType" name="parcelType"
+                                                required>
+                                            <option disabled selected value>Sélectionnez le type de colis</option>
+                                            <option th:each="parcelType:${parcelTypes}" th:value="${parcelType.name}"
+                                                    th:text="${parcelType.message}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div data-v-5e9121d4="" class="opt-wrap">
+                                    <button data-v-5e9121d4 type="submit"
+                                            class="el-button unify-btn submit-btn el-button--default">
+                                        <span>Devis</span>
+                                    </button>
+                                    <div id="quote_div" style="display: flex; " class="align-center hide">
+                                        <h4 class="tarrif"
+                                            style="display: inline; margin-right: 15px; margin-bottom: 0 !important;">
+                                            Tarif : </h4>
+                                        <h4 class="tarrif" id="quote_txt"
+                                            style="display: inline-block; color: #F5AF00; margin-bottom: 0 !important;">
+                                            MAD</h4>
+
+                                    </div>
 
 
+                                </div>
+
+                            </form>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('#receiverProvince').change(function () {
+                                        // Get the selected province code
+                                        var provinceCode = $(this).val();
+
+                                        // Send a GET request to the server
+                                        $.get('/express/location/city?code=' + provinceCode, function (data) {
+                                            // Clear the city select element
+                                            $('#receiverCity').empty();
+                                            $('#receiverArea').empty();
+                                            $('#receiverArea').append('<option disabled selected value>Sélectionnez la Ville dabord</option>');
+                                            // Populate the city select element with the received data
+                                            $('#receiverCity').append('<option disabled selected>Sélectionnez la ville</option>');
+                                            $.each(data.data, function (index, city) {
+                                                $('#receiverCity').append('<option value="' + city.code + '">' + city.name + '</option>');
+                                            });
+                                        });
+                                    });
 
 
-                <div class="sub-title-new flex-center row bx-vertical-center">
-                  <span style="color: #F5AF00; font-weight: bolder!important; font-size: 20px ">|</span>
+                                    $('#receiverCity').change(function () {
+                                        // Get the selected city code
+                                        var cityCode = $(this).val();
 
-                  <span class="subtitle-style">Informations du colis</span>
-                </div>
+                                        // Send a GET request to the server
+                                        $.get('/express/location/area?code=' + cityCode, function (data) {
+                                            // Clear the area select element
+                                            $('#receiverArea').empty();
 
-                <div class="row">
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="length">Longueur en Cm</label>
-                    <input type="number" class="form-control" id="length" min="1" name="length" required>
-                  </div>
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="width">Largeur en Cm</label>
-                    <input type="number" class="form-control" min="1" id="width" name="width" required>
-                  </div>
-                  <div class=" col-lg-4">
-                    <label class="el-form-item__label" for="height">Hauteur en Cm</label>
-                    <input type="number" class="form-control" min="1" id="height" name="height" required>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class=" col-lg-6">
-                    <label class="el-form-item__label" for="weight">Poids en kg</label>
-                    <input type="number" class="form-control" min="1" id="weight" name="weight" required>
-                  </div>
-                  <div class="col-lg-6 custom-select">
-                    <label class="el-form-item__label" for="parcelType">Type de colis</label>
-                    <select class="form-control select-hidden" id="parcelType" name="parcelType" required>
-                      <option disabled selected  value>Sélectionnez le type de colis</option>
-                      <option th:each="parcelType:${parcelTypes}" th:value="${parcelType.name}"
-                              th:text="${parcelType.message}"></option>
-                    </select>
-                  </div>
-                </div>
-                <div data-v-5e9121d4="" class="opt-wrap">
-                  <button data-v-5e9121d4 type="submit"
-                          class="el-button unify-btn submit-btn el-button--default">
-                    <span>Devis</span>
-                  </button>
-                  <div id="quote_div" style="display: flex; " class="align-center hide">
-                    <h3 style="display: inline; margin-right: 15px; margin-bottom: 0 !important;">Tarif : </h3>
-                    <h3 id="quote_txt" style="display: inline-block; color: #F5AF00; margin-bottom: 0 !important;"> MAD</h3>
-
-                  </div>
-
-
-                </div>
-
-              </form>
-
-              <script>
-                $(document).ready(function () {
-                  $('#receiverProvince').change(function () {
-                    // Get the selected province code
-                    var provinceCode = $(this).val();
-
-                    // Send a GET request to the server
-                    $.get('/express/location/city?code=' + provinceCode, function (data) {
-                      // Clear the city select element
-                      $('#receiverCity').empty();
-                      $('#receiverArea').empty();
-                      $('#receiverArea').append('<option disabled selected value>Sélectionnez la Ville dabord</option>');
-                      // Populate the city select element with the received data
-                      $('#receiverCity').append('<option disabled selected>Sélectionnez la ville</option>');
-                      $.each(data.data, function (index, city) {
-                        $('#receiverCity').append('<option value="' + city.code + '">' + city.name + '</option>');
-                      });
-                    });
-                  });
-
-
-                  $('#receiverCity').change(function () {
-                    // Get the selected city code
-                    var cityCode = $(this).val();
-
-                    // Send a GET request to the server
-                    $.get('/express/location/area?code=' + cityCode, function (data) {
-                      // Clear the area select element
-                      $('#receiverArea').empty();
-
-                      // Populate the area select element with the received data
-                      $('#receiverArea').append('<option disabled selected value>Sélectionnez la Quartier</option>');
-                      $.each(data.data, function (index, area) {
-                        $('#receiverArea').append('<option value="' + area.code + '">' + area.name + '</option>');
-                      });
-                    });
-                  });
-                });
-
-
-                $(document).ready(function () {
-                  $('#pickUpProvince').change(function () {
-                    // Get the selected province code
-                    var provinceCode = $(this).val();
-
-                    // Send a GET request to the server
-                    $.get('/express/location/city?code=' + provinceCode, function (data) {
-                      // Clear the city select element
-                      $('#pickUpCity').empty();
-                      $('#pickUpArea').empty();
-                      $('#pickUpArea').append('<option disabled selected value>Sélectionnez la Ville dabord</option>');
-                      // Populate the city select element with the received data
-                      $('#pickUpCity').append('<option disabled selected value>Sélectionnez la ville</option>');
-                      $.each(data.data, function (index, city) {
-                        $('#pickUpCity').append('<option value="' + city.code + '">' + city.name + '</option>');
-                      });
-                    });
-                  });
-
-
-                  $('#pickUpCity').change(function () {
-                    // Get the selected city code
-                    var cityCode = $(this).val();
-
-                    // Send a GET request to the server
-                    $.get('/express/location/area?code=' + cityCode, function (data) {
-                      // Clear the area select element
-                      $('#pickUpArea').empty();
-
-
-                      $('#pickUpArea').append('<option disabled selected value>Sélectionnez la Quartier</option>');
-                      $.each(data.data, function (index, area) {
-                        $('#pickUpArea').append('<option value="' + area.code + '">' + area.name + '</option>');
-                      });
-                    });
-                  });
-                });
-
-
-              </script>
-
-              <script>
-                document.getElementById('get_quote_form').addEventListener('submit', function (event) {
-
-
-                  event.preventDefault(); // Prevent the form from submitting normally
-                  startLoading()
-                  let url = this.action; // The URL to send the request to
-                  let formData = new FormData(this); // Create a FormData object from the form
-                  $('#loader-wrapper').show();
-                  fetch(url, {
-                    method: 'POST',
-                    body: formData
-                  })
-                          .then(response => response.json())
-                          .then(data => {
-                            console.log(data)
-                            if (data.success) {
-                              closeLoading();
-
-                             $('#quote_txt').text(data.data + " MAD");
-                                $('#quote_div').removeClass('hide');
-                                toast(data.message);
-
-
-                            } else {
-                              closeLoading();
-                              toast(data.message, "error");
-
-                              if (data.error != null) {
-                                data.error.forEach(function (error) {
-                                  $('#' + error.field).addClass('not-valid-item');
-
-
+                                            // Populate the area select element with the received data
+                                            $('#receiverArea').append('<option disabled selected value>Sélectionnez la Quartier</option>');
+                                            $.each(data.data, function (index, area) {
+                                                $('#receiverArea').append('<option value="' + area.code + '">' + area.name + '</option>');
+                                            });
+                                        });
+                                    });
                                 });
 
-                              }
+
+                                $(document).ready(function () {
+                                    $('#pickUpProvince').change(function () {
+                                        // Get the selected province code
+                                        var provinceCode = $(this).val();
+
+                                        // Send a GET request to the server
+                                        $.get('/express/location/city?code=' + provinceCode, function (data) {
+                                            // Clear the city select element
+                                            $('#pickUpCity').empty();
+                                            $('#pickUpArea').empty();
+                                            $('#pickUpArea').append('<option disabled selected value>Sélectionnez la Ville dabord</option>');
+                                            // Populate the city select element with the received data
+                                            $('#pickUpCity').append('<option disabled selected value>Sélectionnez la ville</option>');
+                                            $.each(data.data, function (index, city) {
+                                                $('#pickUpCity').append('<option value="' + city.code + '">' + city.name + '</option>');
+                                            });
+                                        });
+                                    });
 
 
-                            }
+                                    $('#pickUpCity').change(function () {
+                                        // Get the selected city code
+                                        var cityCode = $(this).val();
 
-                          })
-                          .catch(error => {
-                            toast("error , please try again", "error");
-                            closeLoading();
-                          });
-                });
-              </script>
+                                        // Send a GET request to the server
+                                        $.get('/express/location/area?code=' + cityCode, function (data) {
+                                            // Clear the area select element
+                                            $('#pickUpArea').empty();
 
 
-              <br> <br> <br>
+                                            $('#pickUpArea').append('<option disabled selected value>Sélectionnez la Quartier</option>');
+                                            $.each(data.data, function (index, area) {
+                                                $('#pickUpArea').append('<option value="' + area.code + '">' + area.name + '</option>');
+                                            });
+                                        });
+                                    });
+                                });
+
+
+                            </script>
+
+                            <script>
+                                document.getElementById('get_quote_form').addEventListener('submit', function (event) {
+
+
+                                    event.preventDefault(); // Prevent the form from submitting normally
+                                    startLoading()
+                                    let url = this.action; // The URL to send the request to
+                                    let formData = new FormData(this); // Create a FormData object from the form
+                                    $('#loader-wrapper').show();
+                                    fetch(url, {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data)
+                                            if (data.success) {
+                                                closeLoading();
+
+                                                $('#quote_txt').text(data.data + " MAD");
+                                                $('#quote_div').removeClass('hide');
+                                                toast(data.message);
+
+
+                                            } else {
+                                                closeLoading();
+                                                toast(data.message, "error");
+
+                                                if (data.error != null) {
+                                                    data.error.forEach(function (error) {
+                                                        $('#' + error.field).addClass('not-valid-item');
+
+
+                                                    });
+
+                                                }
+
+
+                                            }
+
+                                        })
+                                        .catch(error => {
+                                            toast("error , please try again", "error");
+                                            closeLoading();
+                                        });
+                                });
+                            </script>
+
+
+                            <br> <br> <br>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
-          </div>
         </div>
-      </div>
-    </div>
 
-  </section>
+    </section>
 
 </div>
 
@@ -320,62 +318,62 @@
 <footer id="footer9" style="position: relative !important;"
         class="footer footer-5 footer-8 footer-9 bg-white text-center-xs pt-0 pb-0">
 
-  <div class="footer-bar">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <div class="widget--copyright">
-            <span>Copyright &copy; DeliX 2024 / All Rights Reserved.</span>
-          </div>
-        </div>
+    <div class="footer-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="widget--copyright">
+                        <span>Copyright &copy; DeliX 2024 / All Rights Reserved.</span>
+                    </div>
+                </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <div class="widget--social text-right text-center-xs">
-            <a class="facebook" href="#">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="twitter" href="#">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="dribbble" href="#">
-              <i class="fa fa-linkedin"></i>
-            </a>
-            <a class="instagram" href="#">
-              <i class="fa fa-instagram"></i>
-            </a>
-          </div>
-        </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="widget--social text-right text-center-xs">
+                        <a class="facebook" href="#">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="twitter" href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a class="dribbble" href="#">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                        <a class="instagram" href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
 
-      </div>
+            </div>
+
+        </div>
 
     </div>
-
-  </div>
-  <form id="logout-form" action="/logout" method="POST" style="display: none;">
-    <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
-           th:value="${_csrf.token}"/>
-  </form>
-  <script>
-    function logout() {
-      document.getElementById('logout-form').submit();
-    }
-  </script>
+    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+        <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}"/>
+    </form>
+    <script>
+        function logout() {
+            document.getElementById('logout-form').submit();
+        }
+    </script>
 </footer>
 
 
 <script>
-  $('#btn-inscribe').click(function () {
-    $('.login-form').toggleClass('open');
-  })
-  $(document).ready(function () {
+    $('#btn-inscribe').click(function () {
+        $('.login-form').toggleClass('open');
+    })
+    $(document).ready(function () {
 
-    $('.dropdown-menu li a').click(function (e) {
-      $('.dropdown-menu li.active').removeClass('active');
-      var $parentt = $(this).parent();
-      $parentt.addClass('active');
-      e.preventDefault();
+        $('.dropdown-menu li a').click(function (e) {
+            $('.dropdown-menu li.active').removeClass('active');
+            var $parentt = $(this).parent();
+            $parentt.addClass('active');
+            e.preventDefault();
+        });
     });
-  });
 </script>
 <script src="/home/assets/toaster/toast.js"></script>
 <script src="/home/assets/toaster/loading.js"></script>
