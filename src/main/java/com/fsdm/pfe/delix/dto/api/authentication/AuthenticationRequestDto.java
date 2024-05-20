@@ -18,8 +18,4 @@ public class AuthenticationRequestDto {
      String email;
      String password;
      boolean rememberMe;
-
-
-
-
 }

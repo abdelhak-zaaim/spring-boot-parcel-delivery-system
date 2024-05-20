@@ -32,7 +32,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
-@Table(name = "users", indexes = {
+@Table(name = "user", indexes = {
         @Index(name = "index_email", columnList = "email"),
         @Index(name = "index_id", columnList = "id")
 })

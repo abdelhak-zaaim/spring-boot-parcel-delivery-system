@@ -40,8 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminAuthenticationController {
 
     private final AuthenticationManager authenticationManager;
-    private SecurityContextRepository securityContextRepository =
-            new HttpSessionSecurityContextRepository();
+    private SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
     private SessionRegistry sessionRegistry = new SessionRegistryImpl();
 
     public AdminAuthenticationController(@Qualifier("authenticationManagerAdmin") AuthenticationManager authenticationManager) {
@@ -74,11 +73,11 @@ public class AdminAuthenticationController {
             return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
 
 
-        }catch (UsernameNotFoundException e) {
+        } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         } catch (BadCredentialsException e) {
             // Handle incorrect password
-return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Email ou mot de passe incorrect"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Email ou mot de passe incorrect"));
         } catch (AuthenticationException e) {
             // Handle other authentication failures
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
@@ -91,6 +90,7 @@ return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(
     public String accessDenied() {
         return "error/404";
     }
+
     @GetMapping("/404")
     public String notFound() {
         return "error/404";

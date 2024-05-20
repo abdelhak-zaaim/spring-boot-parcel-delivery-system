@@ -13,9 +13,6 @@ package com.fsdm.pfe.delix.dto.api.authentication;
 import com.fsdm.pfe.delix.model.enums.Role;
 import lombok.Builder;
 import lombok.Value;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 
 @Value
 @Builder
