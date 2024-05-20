@@ -33,10 +33,7 @@ package com.fsdm.pfe.delix.entity;
 import com.fsdm.pfe.delix.dto.request.RegisterRequestDto;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,6 +53,9 @@ public class Customer extends User implements UserDetails {
 
     @Column( unique = true )
     private String customerNumber;
+
+    @OneToMany
+    private List<Parcel> parcels;
 
 
 

@@ -10,10 +10,12 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.dto.email.ResetPasswordEmailTemplateDTO;
 import com.fsdm.pfe.delix.service.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
+import org.thymeleaf.context.Context;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,25 +23,55 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.core.io.FileSystemResource;
+import org.thymeleaf.TemplateEngine;
 
 import java.io.File;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
 public class EmailServiceImpl implements EmailService {
     private static final Logger log = LoggerFactory.getLogger(EmailServiceImpl.class);
     private final JavaMailSender emailSender;
+    private final TemplateEngine templateEngine;
 
-    public EmailServiceImpl(JavaMailSender emailSender) {
+    public EmailServiceImpl(JavaMailSender emailSender, TemplateEngine templateEngine) {
         this.emailSender = emailSender;
+        this.templateEngine = templateEngine;
     }
 
+
+    public void sendEmailWithTemplate(String toEmail, String subject, String templateName, Map<String, Object> variables) {
+
+
+        Context context = new Context();
+        context.setVariables(variables);
+        try {
+            String body = templateEngine.process(templateName, context);
+
+            MimeMessage message = emailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setTo(toEmail);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+
+            emailSender.send(message);
+        } catch (Exception e) {
+            System.out.println("Error occurred while sending email with template " + e.getMessage());
+        }
+
+
+    }
+
+
     @Override
-    public void sendSimpleMessage(String toEmail, String subject, String text) {
+    public void sendMessage(String toEmail, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(text);
+
 
         try {
             emailSender.send(message);
@@ -50,14 +82,29 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
-    @Override
-    public void sendSimpleMessageUsingTemplate(String toEmail, String subject, String... templateModel) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(String.format(templateModel[0], templateModel[1]));
-        emailSender.send(message);
+    public void sendEmailWithTemplate(String toEmail, String subject, String templateName, ResetPasswordEmailTemplateDTO resetPasswordEmailTemplateDTO) {
+        System.out.println("Sending email with template to " + resetPasswordEmailTemplateDTO.toString());
+        // resetPasswordEmailTemplateDTO to map
+        Map<String, Object> variables = Map.of(
+                "name", resetPasswordEmailTemplateDTO.getName(),
+                "actionUrl", resetPasswordEmailTemplateDTO.getActionUrl(),
+                "operatingSystem", resetPasswordEmailTemplateDTO.getOperatingSystem(),
+                "browserName", resetPasswordEmailTemplateDTO.getBrowserName()
+        );
+
+        Context context = new Context();
+        context.setVariables(variables);
+        try {
+            String body = templateEngine.process(templateName, context);
+            System.out.println(body);
+            sendMessage(toEmail, subject, body);
+        } catch (Exception e) {
+            System.out.println("Error occurred while sending email with template " + e.getMessage());
+        }
+
+
     }
+
 
     @Override
     public void sendEmailWithAttachment(String toEmail, String subject, String text, String pathToAttachment) {

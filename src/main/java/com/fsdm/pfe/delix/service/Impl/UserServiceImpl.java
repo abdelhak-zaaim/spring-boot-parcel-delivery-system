@@ -11,6 +11,8 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
+import com.fsdm.pfe.delix.dto.email.ResetPasswordEmailTemplateDTO;
+import com.fsdm.pfe.delix.dto.email.VerifyEmailTemplateDTO;
 import com.fsdm.pfe.delix.entity.PasswordResetToken;
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.entity.notification.Notification;
@@ -36,6 +38,8 @@ import java.util.*;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
+    private static final String RESET_PASSWORD_TEMPLATE_NAME = "/home/email/reset-password";
+    private static final String VERIFY_EMAIL_TEMPLATE_NAME = "/home/email/verify-email";
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepository;
     private final NotificationRepo notificationRepository;
@@ -99,23 +103,56 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public void sendEmailVerification(String email, String verificationToken, String baseUrl) {
+    public void sendEmailVerification(String email, String verificationToken, String baseUrl, String lastName) {
 
         String verificationLink = baseUrl + "/verify?token=" + verificationToken;
+        VerifyEmailTemplateDTO verifyEmailTemplateDTO = VerifyEmailTemplateDTO.builder()
+                .actionUrl(verificationLink)
+                .name(lastName)
+                .build();
 
-        emailService.sendSimpleMessage(email, "Please verify your email",
-                "Click the following link to verify your email: " + verificationLink);
+        sendEmailVerificationWithTemplate(email, "Vérifiez votre email", VERIFY_EMAIL_TEMPLATE_NAME, verifyEmailTemplateDTO);
+
+    }
+
+    private void sendEmailVerificationWithTemplate(String email, String verifyYourEmail, String verifyEmailTemplateName, VerifyEmailTemplateDTO verifyEmailTemplateDTO) {
+        Map<String, Object> variables = Map.of(
+                "name", verifyEmailTemplateDTO.getName(),
+                "actionUrl", verifyEmailTemplateDTO.getActionUrl()
+        );
+
+        emailService.sendEmailWithTemplate(email, verifyYourEmail, verifyEmailTemplateName, variables);
+    }
+
+    public void sendPasswordResetEmail(String email, String resetToken, String baseUrl, String operatingSystemName, String browserName, String name, String timeLeft) {
+
+
+        ResetPasswordEmailTemplateDTO resetPasswordEmailTemplateDTO = ResetPasswordEmailTemplateDTO.builder()
+                .actionUrl(baseUrl + "/reset-password?token=" + resetToken)
+                .browserName(browserName)
+                .name(name)
+                .timeLeft(timeLeft)
+                .operatingSystem(operatingSystemName)
+                .build();
+
+        sendPasswordResetEmailWithTemplate(email, "Réinitialisez votre mot de passe", RESET_PASSWORD_TEMPLATE_NAME, resetPasswordEmailTemplateDTO);
 
     }
 
-    public void sendPasswordResetEmail(String email, String resetToken, String baseUrl) {
+    public void sendPasswordResetEmailWithTemplate(String toEmail, String subject, String templateName, ResetPasswordEmailTemplateDTO resetPasswordEmailTemplateDTO) {
 
-        String resetLink = baseUrl + "/reset-password?token=" + resetToken;
+        Map<String, Object> variables = Map.of(
+                "name", resetPasswordEmailTemplateDTO.getName(),
+                "actionUrl", resetPasswordEmailTemplateDTO.getActionUrl(),
+                "operatingSystem", resetPasswordEmailTemplateDTO.getOperatingSystem(),
+                "browserName", resetPasswordEmailTemplateDTO.getBrowserName(),
+                "timeLeft", resetPasswordEmailTemplateDTO.getTimeLeft()
+        );
 
-        emailService.sendSimpleMessage(email, "Password reset",
-                "Click the following link to reset your password: " + resetLink);
 
+        emailService.sendEmailWithTemplate(toEmail, subject, templateName, variables);
     }
+
 
     public void addNotificationToUser(Long userId, Notification notification) {
         User user = userRepository.findById(userId)
@@ -152,27 +189,40 @@ public class UserServiceImpl implements UserService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-
     public PasswordResetToken createPasswordResetTokenForUser(User user) {
+        PasswordResetToken existingToken = passwordResetTokenRepository.findByUser_Id(user.getId());
+
+        if (existingToken != null) {
+            passwordResetTokenRepository.delete(existingToken);
+        }
         String token = UUID.randomUUID().toString();
-
-        passwordResetTokenRepository.deleteAllByUser(user);
-
         PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
-
         return passwordResetTokenRepository.save(passwordResetToken);
     }
 
     @Transactional
-    public void resetPassword(String email, String baseUrl) {
+    public void resetPassword(String email, String baseUrl, String operatingSystemName, String browserName) {
+
 
         System.out.println("email = " + email);
 
         Optional<User> user = userRepository.findByEmail(email);
         System.out.println("user = " + user);
         if (user.isPresent()) {
+
             PasswordResetToken passwordResetToken = createPasswordResetTokenForUser(user.get());
-            sendPasswordResetEmail(email, passwordResetToken.getToken(), baseUrl);
+
+            Date expiryDate = passwordResetToken.getExpiryDate();
+            // get ow many minutes left
+            long minutesLeft = (expiryDate.getTime() - new Date().getTime()) / 60000;
+            String timeLeft = minutesLeft + " minutes";
+            // if thr time left is granther than 60 minutes convert it to hours
+            if (minutesLeft > 60) {
+                long hoursLeft = minutesLeft / 60;
+                timeLeft = hoursLeft + " hours";
+            }
+
+            sendPasswordResetEmail(email, passwordResetToken.getToken(), baseUrl, operatingSystemName, browserName, user.get().getLastName(), timeLeft);
         } else {
             throw new UserNotFoundException("User with this email does not exist");
         }
@@ -186,6 +236,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public User resetPasswordByToken(String token, String password, @NotNull @NotEmpty String confirmPassword) {
+
+
         if (!password.equals(confirmPassword)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
         }

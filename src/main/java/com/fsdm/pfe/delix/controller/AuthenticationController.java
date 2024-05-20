@@ -24,6 +24,9 @@ import com.fsdm.pfe.delix.util.helpers.HttpUtils;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.LoginLogServiceImpl;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -192,10 +195,10 @@ public class AuthenticationController {
             return "home/resetPassword";
         }
 
-        if (!userServiceImpl.existsUserByResetToken(token) ) {
+        if (!userServiceImpl.existsUserByResetToken(token)) {
 
             return "home/invalidToken";
-        }else if(passwordResetTokenService.isExpiredByToken(token)){
+        } else if (passwordResetTokenService.isExpiredByToken(token)) {
             passwordResetTokenService.deletePasswordResetToken(token);
             return "home/invalidToken";
         }
@@ -223,13 +226,28 @@ public class AuthenticationController {
             } catch (Exception e) {
                 baseUrl = Constants.BASE_URL;
             }
-            userServiceImpl.resetPassword(resetPasswordRequestDto.getEmail(), baseUrl);
-            return ResponseEntity.ok( ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset link sent to your email").build());
+            String operatingSystemName= ""; String browserName = "";
+            try {
+                String userAgentHeader = request.getHeader("User-Agent");
+                UserAgent userAgent = UserAgent.parseUserAgentString(userAgentHeader);
+                OperatingSystem operatingSystem = userAgent.getOperatingSystem();
+                Browser browser = userAgent.getBrowser();
+
+                 operatingSystemName = operatingSystem.getName();
+                 browserName = browser.getName();
+
+            }catch (Exception ignored){
+
+            }
+
+
+            userServiceImpl.resetPassword(resetPasswordRequestDto.getEmail(), baseUrl, operatingSystemName, browserName);
+
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset link sent to your email").build());
         } catch (UsernameNotFoundException e) {
-            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
+            return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
         }
 
     }
@@ -249,12 +267,11 @@ public class AuthenticationController {
 
         try {
             userServiceImpl.resetPasswordByToken(resetPasswordRequestDto.getToken(), resetPasswordRequestDto.getPassword(), resetPasswordRequestDto.getConfirmPassword());
-            return ResponseEntity.ok( ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset successfully").build());
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset successfully").build());
         } catch (ResponseStatusException e) {
-            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getReason()).build());
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body( ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
+            return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getReason()).build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
         }
 
     }
