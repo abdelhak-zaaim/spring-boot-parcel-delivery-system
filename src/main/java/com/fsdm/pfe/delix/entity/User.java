@@ -116,8 +116,6 @@ public class User implements Serializable {
     @URL(message = "not valid image url")
     private String image;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-    private PasswordResetToken passwordResetToken;
 
     @OneToMany(fetch = FetchType.LAZY)
     @ToString.Exclude

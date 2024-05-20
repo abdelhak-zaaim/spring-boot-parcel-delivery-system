@@ -34,10 +34,11 @@ public class PasswordResetToken {
    private String token;
 
    @OneToOne( fetch = FetchType.EAGER)
-   @JoinColumn(nullable = false)
    private User user;
 
    private Date expiryDate;
+   private Date createdDate;
+
    public PasswordResetToken(final String token, final User user) {
       super();
       this.token = token;
@@ -45,10 +46,16 @@ public class PasswordResetToken {
       this.expiryDate = calculateExpiryDate();
    }
 
-   private Date calculateExpiryDate() {
+   public static Date calculateExpiryDate() {
       final Calendar cal = Calendar.getInstance();
       cal.setTimeInMillis(new Date().getTime());
       cal.add(Calendar.MINUTE, EXPIRATION);
       return new Date(cal.getTime().getTime());
    }
+   @PrePersist
+    protected void onCreate() {
+        createdDate = new Date();
+    }
+
+
 }

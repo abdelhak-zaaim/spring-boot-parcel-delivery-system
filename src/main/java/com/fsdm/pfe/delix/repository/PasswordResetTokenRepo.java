@@ -21,13 +21,18 @@ public interface PasswordResetTokenRepo extends JpaRepository<PasswordResetToken
     Optional<PasswordResetToken> findByToken(String token);
 
     void deleteAllByExpiryDateBefore(Date now);
-   boolean existsByToken(String token);
+
+    boolean existsByToken(String token);
+
     void deleteByToken(String token);
+
+    boolean existsByUser(User user);
 
     void deleteAllByUser(User user);
 
     PasswordResetToken findByUser(User user);
 
     PasswordResetToken findByUser_Id(Long id);
+
 
 }

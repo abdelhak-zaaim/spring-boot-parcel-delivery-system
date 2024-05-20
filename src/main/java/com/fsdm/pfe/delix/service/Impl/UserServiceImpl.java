@@ -46,13 +46,15 @@ public class UserServiceImpl implements UserService {
     private final PasswordResetTokenRepo passwordResetTokenRepository;
 
     private final EmailServiceImpl emailService;
+    private final PasswordResetTokenRepo passwordResetTokenRepo;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, NotificationRepo notificationRepository, PasswordResetTokenRepo passwordResetTokenRepository, EmailServiceImpl emailService) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepository, NotificationRepo notificationRepository, PasswordResetTokenRepo passwordResetTokenRepository, EmailServiceImpl emailService, PasswordResetTokenRepo passwordResetTokenRepo) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.emailService = emailService;
+        this.passwordResetTokenRepo = passwordResetTokenRepo;
     }
 
     @Override
@@ -189,43 +191,69 @@ public class UserServiceImpl implements UserService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-    public PasswordResetToken createPasswordResetTokenForUser(User user) {
-        PasswordResetToken existingToken = passwordResetTokenRepository.findByUser_Id(user.getId());
+    public void deleteOldPasswordResetTokens() {
+        List<PasswordResetToken> passwordResetTokens = passwordResetTokenRepository.findAll();
+        passwordResetTokens.forEach(passwordResetToken -> {
+            if (passwordResetToken.getExpiryDate().before(new Date())) {
+                passwordResetTokenRepository.delete(passwordResetToken);
+            }
+        });
+    }
 
-        if (existingToken != null) {
-            passwordResetTokenRepository.delete(existingToken);
-        }
+
+    public PasswordResetToken createPasswordResetTokenForUser(User user) {
+
         String token = UUID.randomUUID().toString();
-        PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
-        return passwordResetTokenRepository.save(passwordResetToken);
+
+        PasswordResetToken existingToken = passwordResetTokenRepository.findByUser(user);
+        if (existingToken != null) {
+            existingToken.setToken(token);
+            existingToken.setExpiryDate(PasswordResetToken.calculateExpiryDate());
+            return passwordResetTokenRepository.save(existingToken);
+        } else {
+            PasswordResetToken newPasswordResetToken = new PasswordResetToken(token, user);
+            return passwordResetTokenRepository.save(newPasswordResetToken);
+        }
+
+
+    }
+
+
+    public void deleteOldPasswordResetTokens(User user) {
+        passwordResetTokenRepository.deleteAllByUser(user);
     }
 
     @Transactional
     public void resetPassword(String email, String baseUrl, String operatingSystemName, String browserName) {
 
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User with this email does not exist"));
 
-        System.out.println("email = " + email);
 
-        Optional<User> user = userRepository.findByEmail(email);
-        System.out.println("user = " + user);
-        if (user.isPresent()) {
 
-            PasswordResetToken passwordResetToken = createPasswordResetTokenForUser(user.get());
+        PasswordResetToken passwordResetToken = createPasswordResetTokenForUser(user);
 
-            Date expiryDate = passwordResetToken.getExpiryDate();
-            // get ow many minutes left
-            long minutesLeft = (expiryDate.getTime() - new Date().getTime()) / 60000;
-            String timeLeft = minutesLeft + " minutes";
-            // if thr time left is granther than 60 minutes convert it to hours
-            if (minutesLeft > 60) {
-                long hoursLeft = minutesLeft / 60;
-                timeLeft = hoursLeft + " hours";
-            }
 
-            sendPasswordResetEmail(email, passwordResetToken.getToken(), baseUrl, operatingSystemName, browserName, user.get().getLastName(), timeLeft);
+        Date expiryDate = passwordResetToken.getExpiryDate();
+
+        long minutesLeft = (expiryDate.getTime() - new Date().getTime()) / 60000;
+        String timeLeft;
+
+        if (minutesLeft > 60) {
+            long hoursLeft = minutesLeft / 60;
+            timeLeft = hoursLeft + " hours";
         } else {
-            throw new UserNotFoundException("User with this email does not exist");
+            timeLeft = minutesLeft + " minutes";
         }
+
+        new Thread(() -> {
+            try {
+                sendPasswordResetEmail(email, passwordResetToken.getToken(), baseUrl, operatingSystemName, browserName, user.getLastName(), timeLeft);
+
+            } catch (Exception ignored) {
+
+            }
+        }).start();
 
 
     }
