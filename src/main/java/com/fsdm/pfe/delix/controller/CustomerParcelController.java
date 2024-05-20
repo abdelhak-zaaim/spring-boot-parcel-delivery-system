@@ -12,11 +12,14 @@ package com.fsdm.pfe.delix.controller;
 
 import com.fsdm.pfe.delix.dto.request.GetQuoteRequestDto;
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
+import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.location.Province;
+import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.location.ProvinceServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +31,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -37,12 +41,14 @@ public class CustomerParcelController {
 
     private final ProvinceServiceImpl provinceService;
     private final ParcelServiceImpl parcelService;
+    private final CustomerServiceImpl customerService;
 
-    public CustomerParcelController(Validator validator, @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager, ProvinceServiceImpl provinceService, ParcelServiceImpl parcelService) {
+    public CustomerParcelController(Validator validator, @Qualifier("authenticationManagerUser") AuthenticationManager authenticationManager, ProvinceServiceImpl provinceService, ParcelServiceImpl parcelService, CustomerServiceImpl customerService) {
         this.validator = validator;
         this.authenticationManager = authenticationManager;
         this.provinceService = provinceService;
         this.parcelService = parcelService;
+        this.customerService = customerService;
     }
 
     @GetMapping("/express/add-parcel")
@@ -99,5 +105,19 @@ public class CustomerParcelController {
 
         return ResponseEntity.ok(ResponseDataDto.builder().data(quote).success(true).error(null).message("votre devis est : " + quote).build());
 
+    }
+
+
+    @GetMapping("/express/my-orders")
+    public String getMyOrders(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+
+        List<Parcel> parcels = customerService.getParcelsForCustomerByUserName(principal.getName());
+        //convert parcels to list ParcelResponseDto
+
+
+
+        model.addAttribute("parcels", parcelService.convertEntityListToResponseDtoList(parcels));
+        return "home/myOrders";
     }
 }
