@@ -17,6 +17,7 @@ import com.fsdm.pfe.delix.dto.request.UpdatePasswordRequestDto;
 import com.fsdm.pfe.delix.dto.request.UpdateProfileRequestDto;
 import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.entity.Customer;
+import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
 import com.fsdm.pfe.delix.model.enums.Role;
@@ -25,6 +26,7 @@ import com.fsdm.pfe.delix.repository.CustomerRepo;
 import com.fsdm.pfe.delix.service.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.Email;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -44,6 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -56,8 +59,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     private final LoginLogServiceImpl loginLogService;
     private final AuthenticationManager authenticationManager;
-    private final SecurityContextRepository securityContextRepository =
-            new HttpSessionSecurityContextRepository();
+    private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
 
     public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, LoginLogServiceImpl loginLogService, AuthenticationManager authenticationManager) {
@@ -110,7 +112,16 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         if (customer == null) {
             throw new UserRegistrationException("User Registration Failed");
         } else {
-            userService.sendEmailVerification(customer.getEmail(), verificationTokenService.createVerification(customer).getToken(), baseUrl);
+            Customer finalCustomer = customer;
+            String token = verificationTokenService.createVerification(finalCustomer).getToken();
+            new Thread(() -> {
+                try {
+                    userService.sendEmailVerification(finalCustomer.getEmail(), token, baseUrl, finalCustomer.getLastName());
+                } catch (Exception ignored) {
+                    // todo : handle exception properly , maybe save the token in the database and send it later
+
+                }
+            }).start();
         }
         return customer;
     }
@@ -142,8 +153,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     public void logoutCustomer(Authentication auth) {
         if (auth != null) {
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-            boolean isCustomer = authorities.stream()
-                    .anyMatch(role -> role.getAuthority().equals(Role.getCustomerRoleName()));
+            boolean isCustomer = authorities.stream().anyMatch(role -> role.getAuthority().equals(Role.getCustomerRoleName()));
             if (isCustomer) {
                 SecurityContextHolder.clearContext();
             } else {
@@ -156,31 +166,29 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     @Transactional
     public Optional<Customer> updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto) {
-            if (!updatePasswordRequestDto.getNewPassword().equals(updatePasswordRequestDto.getConfirmPassword())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
+        if (!updatePasswordRequestDto.getNewPassword().equals(updatePasswordRequestDto.getConfirmPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
+        }
+
+        Optional<Customer> customer = customerRepository.findByEmail(email);
+
+        if (customer.isPresent()) {
+            if (!userService.passwordMatch(updatePasswordRequestDto.getPassword(), customer.get().getPassword())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect Password");
             }
+            customer.get().setPassword(userService.encodePassword(updatePasswordRequestDto.getNewPassword()));
+            return Optional.of(customerRepository.save(customer.get()));
 
-            Optional<Customer> customer = customerRepository.findByEmail(email);
-
-            if (customer.isPresent()) {
-                if (!userService.passwordMatch(updatePasswordRequestDto.getPassword(), customer.get().getPassword())) {
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect Password");
-                }
-                customer.get().setPassword(userService.encodePassword(updatePasswordRequestDto.getNewPassword()));
-                return Optional.of(customerRepository.save(customer.get()));
-
-            } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
 
     }
 
 
     public LoginResponseDto loginCustomer(LoginRequestDto loginRequest, HttpServletRequest request, HttpServletResponse response) {
         try {
-            Authentication authenticationRequest =
-                    new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
+            Authentication authenticationRequest = new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
 
-            Authentication authenticationResponse =
-                    this.authenticationManager.authenticate(authenticationRequest);
+            Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(authenticationResponse);
@@ -225,4 +233,8 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     }
 
 
+    public List<Parcel> getParcelsForCustomerByUserName(@Email String email) {
+        Customer customer = customerRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        return customer.getParcels();
+    }
 }
