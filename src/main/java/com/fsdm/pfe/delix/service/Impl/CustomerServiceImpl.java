@@ -118,7 +118,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
                 try {
                     userService.sendEmailVerification(finalCustomer.getEmail(), token, baseUrl, finalCustomer.getLastName());
                 } catch (Exception ignored) {
-                    // todo : handle exception properly , maybe save the token in the database and send it later
+
 
                 }
             }).start();
