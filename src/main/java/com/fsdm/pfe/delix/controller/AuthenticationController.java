@@ -147,7 +147,7 @@ public class AuthenticationController {
             try {
                 baseUrl = HttpUtils.getServerUrl(request);
             } catch (Exception e) {
-                baseUrl = Constants.BASE_URL; // todo change this to your base url
+                baseUrl = Constants.BASE_URL;
             }
 
 
