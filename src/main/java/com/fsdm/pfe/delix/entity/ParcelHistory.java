@@ -11,7 +11,7 @@
 
 package com.fsdm.pfe.delix.entity;
 
-import com.fsdm.pfe.delix.entity.converters.ParcelLocationConverter;
+import com.fsdm.pfe.delix.converters.ParcelLocationConverter;
 import com.fsdm.pfe.delix.model.ParcelLocation;
 import jakarta.persistence.*;
 import lombok.*;

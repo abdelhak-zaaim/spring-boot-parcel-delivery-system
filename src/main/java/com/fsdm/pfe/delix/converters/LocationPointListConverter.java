@@ -9,7 +9,7 @@
  * **
  */
 
-package com.fsdm.pfe.delix.entity.converters;
+package com.fsdm.pfe.delix.converters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

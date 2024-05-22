@@ -9,7 +9,7 @@
  * **
  */
 
-package com.fsdm.pfe.delix.entity.converters;
+package com.fsdm.pfe.delix.converters;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import com.fasterxml.jackson.core.JsonProcessingException;

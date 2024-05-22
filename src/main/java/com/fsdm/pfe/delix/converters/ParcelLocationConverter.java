@@ -1,3 +1,4 @@
+
 /*
  * **
  *  * @project : DeliX
@@ -8,7 +9,7 @@
  * **
  */
 
-package com.fsdm.pfe.delix.entity.converters;
+package com.fsdm.pfe.delix.converters;
 
 import com.fsdm.pfe.delix.model.ParcelLocation;
 import jakarta.persistence.AttributeConverter;

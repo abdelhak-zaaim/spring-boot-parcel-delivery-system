@@ -9,7 +9,7 @@
  *  **
  */
 
-package com.fsdm.pfe.delix.entity.converters;
+package com.fsdm.pfe.delix.converters;
 
 import com.fsdm.pfe.delix.model.enums.Privilege;
 import jakarta.persistence.AttributeConverter;

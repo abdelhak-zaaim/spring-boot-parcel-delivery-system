@@ -13,7 +13,7 @@ package com.fsdm.pfe.delix.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fsdm.pfe.delix.entity.converters.PrivilegeListConverter;
+import com.fsdm.pfe.delix.converters.PrivilegeListConverter;
 import com.fsdm.pfe.delix.model.enums.Privilege;
 import com.fsdm.pfe.delix.validation.admin.privilegesgroupvalidate.PrivilegeValidation;
 import jakarta.persistence.*;
