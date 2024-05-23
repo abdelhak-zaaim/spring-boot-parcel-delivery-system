@@ -30,13 +30,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class AuthenticationControllerDelivery {
     private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
     private final VehicleOperatorEmployeeServiceImpl vehicleOperatorEmployeeService;
-
 
     public AuthenticationControllerDelivery(JwtServiceImpl jwtService, @Qualifier("authenticationManagerApi") AuthenticationManager authenticationManager, @Qualifier("vehicleOperatorEmployeeServiceImpl") VehicleOperatorEmployeeServiceImpl vehicleOperatorEmployeeService) {
         this.jwtService = jwtService;
@@ -52,7 +52,7 @@ public class AuthenticationControllerDelivery {
 
             if (authentication.isAuthenticated()) {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-             VehicleOperatorEmployee vehicleOperatorEmployee= vehicleOperatorEmployeeService.loadByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                VehicleOperatorEmployee vehicleOperatorEmployee= vehicleOperatorEmployeeService.loadByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
                 if (!vehicleOperatorEmployee.getRole().equals(Role.DELIVERY_MAN_ROLE)) {
                     throw new UsernameNotFoundException("Invalid credentials");
                 }
@@ -63,12 +63,10 @@ public class AuthenticationControllerDelivery {
                 throw new UsernameNotFoundException("Invalid credentials");
             }
 
-
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).body(ApiResponseDto.builder().success(false).data(null).message("Invalid credentials").build());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponseDto.builder().success(false).data(null).message("An error occurred").build());
-
         }
     }
 }
