@@ -164,7 +164,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     @Override
 
     @Transactional
-    public Optional<Customer> updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto) {
+    public void updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto) {
         if (!updatePasswordRequestDto.getNewPassword().equals(updatePasswordRequestDto.getConfirmPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
         }
@@ -176,7 +176,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect Password");
             }
             customer.get().setPassword(userService.encodePassword(updatePasswordRequestDto.getNewPassword()));
-            return Optional.of(customerRepository.save(customer.get()));
+            customerRepository.save(customer.get());
 
         } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
 

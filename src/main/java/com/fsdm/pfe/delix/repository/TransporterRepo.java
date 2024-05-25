@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.repository;
 
 import com.fsdm.pfe.delix.entity.Transporter;
+import com.fsdm.pfe.delix.model.enums.VehicleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public interface TransporterRepo extends JpaRepository<Transporter, Long> {
     Optional<Transporter> findByEmail(String email);
 
-    Optional<Transporter> findByVehicleType(String vehicleType);
+    Optional<Transporter> findByVehicleType(VehicleType vehicleType);
 
     Optional<Transporter> findByCin(String cin);
 

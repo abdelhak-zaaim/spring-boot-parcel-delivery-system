@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.service;
 
 import com.fsdm.pfe.delix.entity.VehicleOperatorEmployee;
+import com.fsdm.pfe.delix.model.enums.VehicleType;
 
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public interface VehicleOperatorEmployeeService {
 
     Optional<VehicleOperatorEmployee> loadByCin(String cin);
 
-    Optional<VehicleOperatorEmployee> loadByVehicleType(String vehicleType);
+    Optional<VehicleOperatorEmployee> loadByVehicleType(VehicleType vehicleType);
 
     Optional<VehicleOperatorEmployee> loadByRole(String role);
 

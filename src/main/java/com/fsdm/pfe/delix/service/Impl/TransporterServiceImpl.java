@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.Transporter;
+import com.fsdm.pfe.delix.model.enums.VehicleType;
 import com.fsdm.pfe.delix.repository.TransporterRepo;
 import com.fsdm.pfe.delix.service.TransporterService;
 
@@ -49,7 +50,7 @@ public class TransporterServiceImpl implements TransporterService {
     }
 
     @Override
-    public Optional<Transporter> loadByVehicleType(String vehicleType) {
+    public Optional<Transporter> loadByVehicleType(VehicleType vehicleType) {
         return transporterRepo.findByVehicleType(vehicleType);
     }
 

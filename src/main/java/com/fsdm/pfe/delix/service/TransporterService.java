@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.service;
 
 import com.fsdm.pfe.delix.entity.Transporter;
+import com.fsdm.pfe.delix.model.enums.VehicleType;
 
 import java.util.Optional;
 
@@ -25,5 +26,5 @@ public interface TransporterService {
 
     Optional<Transporter> loadByCin(String cin);
 
-    Optional<Transporter> loadByVehicleType(String vehicleType);
+    Optional<Transporter> loadByVehicleType(VehicleType vehicleType);
 }

@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.repository;
 
 import com.fsdm.pfe.delix.entity.VehicleOperatorEmployee;
+import com.fsdm.pfe.delix.model.enums.VehicleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -23,7 +24,7 @@ public interface VehicleOperatorEmployeeRepo extends JpaRepository<VehicleOperat
     Optional<VehicleOperatorEmployee> findByCin(String cin);
 
 
-    Optional<VehicleOperatorEmployee> findByVehicleType(String vehicleType);
+    Optional<VehicleOperatorEmployee> findByVehicleType(VehicleType vehicleType);
 
     Optional<VehicleOperatorEmployee> findByRole(String role);
 }

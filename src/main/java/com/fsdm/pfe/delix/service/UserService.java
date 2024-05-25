@@ -19,7 +19,7 @@ public interface UserService {
 
     User saveUser(User user);
 
-    User updateUser(User user);
+    void updateUser(User user);
 
     boolean existsUserByEmail(String email);
 

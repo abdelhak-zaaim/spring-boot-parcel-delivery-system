@@ -32,5 +32,5 @@ public interface CustomerService {
 
     void logoutCustomer(Authentication auth);
 
-    Optional<Customer> updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto);
+    void updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto);
 }

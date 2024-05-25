@@ -11,6 +11,7 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.VehicleOperatorEmployee;
+import com.fsdm.pfe.delix.model.enums.VehicleType;
 import com.fsdm.pfe.delix.repository.VehicleOperatorEmployeeRepo;
 import com.fsdm.pfe.delix.service.VehicleOperatorEmployeeService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,7 +56,7 @@ public class VehicleOperatorEmployeeServiceImpl implements VehicleOperatorEmploy
 
 
     @Override
-    public Optional<VehicleOperatorEmployee> loadByVehicleType(String vehicleType) {
+    public Optional<VehicleOperatorEmployee> loadByVehicleType(VehicleType vehicleType) {
         return vehicleOperatorEmployeeRepo.findByVehicleType(vehicleType);
     }
 
