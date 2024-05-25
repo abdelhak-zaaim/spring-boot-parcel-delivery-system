@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.service.location;
 
-import com.fsdm.pfe.delix.entity.location.Province;
+import com.fsdm.pfe.delix.entity.Province;
 
 import java.util.List;
 

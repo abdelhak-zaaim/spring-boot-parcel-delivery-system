@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import com.fsdm.pfe.delix.entity.Area;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
@@ -17,7 +18,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * DTO for {@link com.fsdm.pfe.delix.entity.location.Area}
+ * DTO for {@link Area}
  */
 @Value
 public class AreaRequestDto implements Serializable {

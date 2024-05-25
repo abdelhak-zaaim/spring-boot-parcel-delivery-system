@@ -30,9 +30,7 @@
 
 package com.fsdm.pfe.delix.entity;
 
-import com.fsdm.pfe.delix.dto.request.AddressRequestDto;
 import com.fsdm.pfe.delix.dto.response.AddressResponseDto;
-import com.fsdm.pfe.delix.entity.location.Area;
 import jakarta.persistence.*;
 import lombok.*;
 

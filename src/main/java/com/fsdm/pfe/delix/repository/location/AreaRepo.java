@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.repository.location;
 
-import com.fsdm.pfe.delix.entity.location.Area;
+import com.fsdm.pfe.delix.entity.Area;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

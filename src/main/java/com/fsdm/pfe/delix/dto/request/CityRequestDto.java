@@ -10,13 +10,14 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import com.fsdm.pfe.delix.entity.City;
 import lombok.Value;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * DTO for {@link com.fsdm.pfe.delix.entity.location.City}
+ * DTO for {@link City}
  */
 @Value
 public class CityRequestDto implements Serializable {

@@ -10,9 +10,6 @@
 
 package com.fsdm.pfe.delix.entity;
 
-import com.fsdm.pfe.delix.entity.location.Area;
-import com.fsdm.pfe.delix.entity.location.City;
-import com.fsdm.pfe.delix.entity.location.Province;
 import com.fsdm.pfe.delix.model.enums.StepStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

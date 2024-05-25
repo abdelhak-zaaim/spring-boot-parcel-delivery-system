@@ -1,6 +1,16 @@
 /*
  *
  *  * @project : DeliX
+ *  * @created : 25/05/2024, 18:57
+ *  * @modified : 16/05/2024, 17:40
+ *  * @description : This file is part of the DeliX project.
+ *  * @license : MIT License
+ *
+ */
+
+/*
+ *
+ *  * @project : DeliX
  *  * @created : 16/05/2024, 17:33
  *  * @modified : 16/05/2024, 17:33
  *  * @description : This file is part of the DeliX project.
@@ -8,12 +18,10 @@
  *
  */
 
-package com.fsdm.pfe.delix.entity.notification;
+package com.fsdm.pfe.delix.entity;
 
-import com.fsdm.pfe.delix.entity.User;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 
 @Entity
 @Data

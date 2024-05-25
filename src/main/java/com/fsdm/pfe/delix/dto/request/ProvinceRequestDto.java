@@ -10,14 +10,14 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import com.fsdm.pfe.delix.entity.Province;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * DTO for {@link com.fsdm.pfe.delix.entity.location.Province}
+ * DTO for {@link Province}
  */
 @Value
 @Setter

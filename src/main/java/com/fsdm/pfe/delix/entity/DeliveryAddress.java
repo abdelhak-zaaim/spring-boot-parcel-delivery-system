@@ -13,9 +13,6 @@ package com.fsdm.pfe.delix.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fsdm.pfe.delix.dto.request.DeliveryAddressRequestDto;
-import com.fsdm.pfe.delix.entity.location.Area;
-import com.fsdm.pfe.delix.entity.location.Province;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -10,15 +10,13 @@
 
 package com.fsdm.pfe.delix.dto.response;
 
-import com.fsdm.pfe.delix.entity.location.City;
+import com.fsdm.pfe.delix.entity.City;
 import lombok.Value;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 /**
- * DTO for {@link com.fsdm.pfe.delix.entity.location.City}
+ * DTO for {@link City}
  */
 
 @Value

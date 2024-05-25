@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.repository.location;
 
-import com.fsdm.pfe.delix.entity.location.Province;
+import com.fsdm.pfe.delix.entity.Province;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

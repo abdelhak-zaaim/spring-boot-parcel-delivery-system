@@ -11,9 +11,7 @@
 
 package com.fsdm.pfe.delix.service.Impl;
 
-import com.fsdm.pfe.delix.dto.request.AddressRequestDto;
 import com.fsdm.pfe.delix.entity.Address;
-import com.fsdm.pfe.delix.entity.location.Area;
 import com.fsdm.pfe.delix.service.AddressService;
 import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;
 import org.springframework.stereotype.Service;

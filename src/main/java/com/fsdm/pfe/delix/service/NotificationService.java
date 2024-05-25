@@ -11,7 +11,7 @@
 
 package com.fsdm.pfe.delix.service;
 
-import com.fsdm.pfe.delix.entity.notification.Notification;
+import com.fsdm.pfe.delix.entity.Notification;
 
 public interface NotificationService {
 

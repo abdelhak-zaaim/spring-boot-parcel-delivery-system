@@ -51,6 +51,7 @@ public class AuthenticationControllerDelivery {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
             if (authentication.isAuthenticated()) {
+
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 VehicleOperatorEmployee vehicleOperatorEmployee= vehicleOperatorEmployeeService.loadByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
                 if (!vehicleOperatorEmployee.getRole().equals(Role.DELIVERY_MAN_ROLE)) {

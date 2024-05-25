@@ -18,7 +18,7 @@ import com.fsdm.pfe.delix.entity.DeliveryAddress;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.Payment;
 import com.fsdm.pfe.delix.entity.Pricing;
-import com.fsdm.pfe.delix.entity.location.Area;
+import com.fsdm.pfe.delix.entity.Area;
 import com.fsdm.pfe.delix.model.ParcelVolume;
 import com.fsdm.pfe.delix.model.PaymentModel;
 import com.fsdm.pfe.delix.model.enums.ParcelStatus;

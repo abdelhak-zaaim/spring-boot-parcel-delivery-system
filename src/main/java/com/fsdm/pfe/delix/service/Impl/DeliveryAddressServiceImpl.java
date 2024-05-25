@@ -13,7 +13,7 @@ package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.dto.request.DeliveryAddressRequestDto;
 import com.fsdm.pfe.delix.entity.DeliveryAddress;
-import com.fsdm.pfe.delix.entity.location.Area;
+import com.fsdm.pfe.delix.entity.Area;
 import com.fsdm.pfe.delix.repository.DeliveryAddressRepo;
 import com.fsdm.pfe.delix.service.DeliveryAddressService;
 import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;

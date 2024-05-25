@@ -1,6 +1,16 @@
 /*
  *
  *  * @project : DeliX
+ *  * @created : 25/05/2024, 18:57
+ *  * @modified : 11/05/2024, 14:31
+ *  * @description : This file is part of the DeliX project.
+ *  * @license : MIT License
+ *
+ */
+
+/*
+ *
+ *  * @project : DeliX
  *  * @created : 11/05/2024, 13:09
  *  * @modified : 11/05/2024, 13:09
  *  * @description : This file is part of the DeliX project.
@@ -8,7 +18,7 @@
  *
  */
 
-package com.fsdm.pfe.delix.entity.location;
+package com.fsdm.pfe.delix.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

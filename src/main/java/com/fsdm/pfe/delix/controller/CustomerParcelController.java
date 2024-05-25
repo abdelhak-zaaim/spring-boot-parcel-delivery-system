@@ -12,10 +12,9 @@ package com.fsdm.pfe.delix.controller;
 
 import com.fsdm.pfe.delix.dto.request.GetQuoteRequestDto;
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
-import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Parcel;
-import com.fsdm.pfe.delix.entity.location.Province;
+import com.fsdm.pfe.delix.entity.Province;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.location.ProvinceServiceImpl;

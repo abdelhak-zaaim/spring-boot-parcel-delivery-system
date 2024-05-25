@@ -11,9 +11,7 @@
 package com.fsdm.pfe.delix.service.Impl.location;
 
 import com.fsdm.pfe.delix.dto.response.CityResponseDto;
-import com.fsdm.pfe.delix.dto.response.ProvinceResponseDto;
-import com.fsdm.pfe.delix.entity.location.City;
-import com.fsdm.pfe.delix.entity.location.Province;
+import com.fsdm.pfe.delix.entity.City;
 import com.fsdm.pfe.delix.repository.location.CityRepo;
 import com.fsdm.pfe.delix.service.location.CityService;
 import org.springframework.stereotype.Service;

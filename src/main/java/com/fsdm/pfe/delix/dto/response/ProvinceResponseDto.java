@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.dto.response;
 
-import com.fsdm.pfe.delix.entity.location.Province;
+import com.fsdm.pfe.delix.entity.Province;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * DTO for {@link com.fsdm.pfe.delix.entity.location.Province}
+ * DTO for {@link Province}
  */
 @Value
 public class ProvinceResponseDto implements Serializable {

@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.repository.notification;
 
-import com.fsdm.pfe.delix.entity.notification.Notification;
+import com.fsdm.pfe.delix.entity.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NotificationRepo extends JpaRepository<Notification, Long> {

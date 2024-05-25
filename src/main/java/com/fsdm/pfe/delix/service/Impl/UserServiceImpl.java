@@ -15,7 +15,7 @@ import com.fsdm.pfe.delix.dto.email.ResetPasswordEmailTemplateDTO;
 import com.fsdm.pfe.delix.dto.email.VerifyEmailTemplateDTO;
 import com.fsdm.pfe.delix.entity.PasswordResetToken;
 import com.fsdm.pfe.delix.entity.User;
-import com.fsdm.pfe.delix.entity.notification.Notification;
+import com.fsdm.pfe.delix.entity.Notification;
 import com.fsdm.pfe.delix.exception.UserNotFoundException;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.NotificationNotFoundException;
 import com.fsdm.pfe.delix.repository.PasswordResetTokenRepo;

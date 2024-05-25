@@ -13,7 +13,6 @@ package com.fsdm.pfe.delix.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fsdm.pfe.delix.converters.ListLocationPointListConverter;
-import com.fsdm.pfe.delix.entity.location.Area;
 import com.fsdm.pfe.delix.model.MapsLocationPoint;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
