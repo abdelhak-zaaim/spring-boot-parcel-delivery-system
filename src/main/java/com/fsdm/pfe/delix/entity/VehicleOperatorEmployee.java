@@ -29,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@DiscriminatorValue(Role.VIHICLE_OPERATOR_ROLE)
+@DiscriminatorValue(Role.VEHICLE_OPERATOR_ROLE)
 public class VehicleOperatorEmployee extends Employee implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

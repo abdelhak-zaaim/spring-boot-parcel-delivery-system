@@ -29,7 +29,6 @@ public class Pricing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private double basePrice = 25.0;
     private double densityFactor = 0.5;
     private double distanceFactor = 1.0;

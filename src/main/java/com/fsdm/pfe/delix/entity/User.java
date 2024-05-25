@@ -49,6 +49,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @OneToOne(fetch = FetchType.LAZY)
     FirebaseUser firebaseUser;
+
     @OneToMany(fetch = FetchType.LAZY)
     Collection<Notification> notifications;
     @Id

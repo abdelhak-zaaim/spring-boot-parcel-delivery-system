@@ -33,5 +33,4 @@ public class Payment {
     private float insuranceCost;
     private float deliveryFees;
 
-
 }

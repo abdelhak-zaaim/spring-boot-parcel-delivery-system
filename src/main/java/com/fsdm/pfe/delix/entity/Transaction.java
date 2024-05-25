@@ -40,17 +40,17 @@ public class Transaction {
     private String idempotencyKey;
 
     @Column(updatable = false)
-    @NotNull(message = "Amount cannot be null")
-    @Min(value = 0, message = "Amount must be greater than or equal to 0")
+    @NotNull
+    @Min(0)
     private double amount;
 
     @Enumerated(EnumType.STRING)
     @Column(updatable = false, nullable = false)
-    @NotNull(message = "Transaction type cannot be null")
-    @Pattern(regexp = "^(DEBIT|CREDIT)$", message = "Transaction type must be either DEBIT or CREDIT")
+    @NotNull
+    @Pattern(regexp = "^(DEBIT|CREDIT)$")
     private TransactionType transactionType;
 
-    @NotNull(message = "Description cannot be null")
+    @NotNull
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -61,7 +61,6 @@ public class Transaction {
     protected void onCreated() {
         this.transactionDate = new Date();
         this.idempotencyKey = UUID.randomUUID().toString();
-
     }
 
 

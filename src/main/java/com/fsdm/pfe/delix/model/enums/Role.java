@@ -36,7 +36,7 @@ public enum Role {
     public static final String DELIVERY_MAN_ROLE = "DELIVERY";
     public static final String AGENCY_EMPLOYEE_ROLE = "AGENCY_EMPLOYEE";
     public static final String TRANSPORTER_ROLE = "TRANSPORTER";
-    public static final String VIHICLE_OPERATOR_ROLE = "VIHICLE_OPERATOR";
+    public static final String VEHICLE_OPERATOR_ROLE = "VIHICLE_OPERATOR";
     public static final String EMPLOYEE_ROLE = "EMPLOYEE";
     public static final String ADMIN_ROLE = "ADMIN";
 

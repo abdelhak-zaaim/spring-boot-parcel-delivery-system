@@ -16,7 +16,6 @@ import lombok.Getter;
 public enum ParcelType {
 
     DOCUMENT("Ceci est un document"),
-    CONTAINS_BATTER("Ce colis contient de la pâte"),
     CONTAINS_LIQUID("Ce colis contient du liquide"),
     CONTAINS_FRAGILE("Ce colis contient des articles fragiles"),
     CONTAINS_DANGEROUS("Ce colis contient des articles dangereux");

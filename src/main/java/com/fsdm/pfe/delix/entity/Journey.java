@@ -54,8 +54,6 @@ public class Journey {
 
     @PrePersist
     protected void onCreated() {
-
-
         Date date = new Date();
         this.creationDate = date;
         this.lastUpdateDate = date;
