@@ -20,7 +20,7 @@ import com.fsdm.pfe.delix.exception.UserNotFoundException;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.NotificationNotFoundException;
 import com.fsdm.pfe.delix.repository.PasswordResetTokenRepo;
 import com.fsdm.pfe.delix.repository.UserRepo;
-import com.fsdm.pfe.delix.repository.notification.NotificationRepo;
+import com.fsdm.pfe.delix.repository.NotificationRepo;
 import com.fsdm.pfe.delix.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotEmpty;

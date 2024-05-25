@@ -1,3 +1,4 @@
+
 /*
  *
  *  * @project : DeliX
@@ -8,7 +9,7 @@
  *
  */
 
-package com.fsdm.pfe.delix.repository.notification;
+package com.fsdm.pfe.delix.repository;
 
 import com.fsdm.pfe.delix.entity.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;

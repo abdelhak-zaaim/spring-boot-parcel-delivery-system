@@ -13,7 +13,7 @@ package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.Notification;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.NotificationNotFoundException;
-import com.fsdm.pfe.delix.repository.notification.NotificationRepo;
+import com.fsdm.pfe.delix.repository.NotificationRepo;
 import com.fsdm.pfe.delix.service.NotificationService;
 import org.springframework.stereotype.Service;
 

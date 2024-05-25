@@ -1,3 +1,4 @@
+
 /*
  *
  *  * @project : DeliX
@@ -8,18 +9,17 @@
  *
  */
 
-package com.fsdm.pfe.delix.repository.location;
+package com.fsdm.pfe.delix.repository;
 
-import com.fsdm.pfe.delix.entity.City;
+import com.fsdm.pfe.delix.entity.Area;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface CityRepo extends JpaRepository<City, Long> {
-    Optional<City> findByCode(String code);
-
-    List<City> findByProvinceCode_Code(String provinceCode);
+public interface AreaRepo extends JpaRepository<Area, Long> {
+    Area findByCode(String code);
 
     void deleteByCode(String code);
+
+    List<Area> findByCityCode_Code(String cityCode);
 }

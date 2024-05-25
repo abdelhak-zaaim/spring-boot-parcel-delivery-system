@@ -12,7 +12,7 @@ package com.fsdm.pfe.delix.service.Impl.location;
 
 import com.fsdm.pfe.delix.dto.response.AreaResponseDto;
 import com.fsdm.pfe.delix.entity.Area;
-import com.fsdm.pfe.delix.repository.location.AreaRepo;
+import com.fsdm.pfe.delix.repository.AreaRepo;
 import com.fsdm.pfe.delix.service.location.AreaService;
 import org.springframework.stereotype.Service;
 
