@@ -31,11 +31,6 @@ public class JourneyStep {
     @Column(nullable = false)
     private StepStatus stepStatus;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Province province;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private City city;
-    @ManyToOne(fetch = FetchType.LAZY)
     private Area area;
-
 
 }
