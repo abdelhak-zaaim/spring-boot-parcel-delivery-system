@@ -11,7 +11,9 @@
 package com.fsdm.pfe.delix.dto.response;
 
 import com.fsdm.pfe.delix.model.enums.UserStatus;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Value;
 import org.hibernate.validator.constraints.URL;
 
 import java.io.Serializable;

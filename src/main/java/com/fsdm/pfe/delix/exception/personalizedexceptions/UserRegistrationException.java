@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.exception.personalizedexceptions;
 
-public class UserRegistrationException extends RuntimeException{
+public class UserRegistrationException extends RuntimeException {
     public UserRegistrationException(String message) {
         super(message);
     }

@@ -10,7 +10,10 @@
 
 package com.fsdm.pfe.delix.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Value;
 
 @Value
 @Getter
@@ -18,9 +21,9 @@ import lombok.*;
 @Builder
 public class PaymentModel {
 
-   int totalCost;
-   int insuranceCost;
-   int deliveryFees;
+    int totalCost;
+    int insuranceCost;
+    int deliveryFees;
 
     public PaymentModel(int totalCost, int insuranceCost, int deliveryFees) {
         this.totalCost = totalCost;

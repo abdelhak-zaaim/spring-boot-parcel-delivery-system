@@ -30,18 +30,15 @@ import java.util.List;
 @Entity
 public class DeliveryArea {
 
+    @ManyToMany
+    @NotNull
+    Collection<Area> areas;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String areaName;
-
     @Column(nullable = false, unique = true)
     private String areaCode;
-
-    @ManyToMany
-    @NotNull
-    Collection<Area> areas;
-
     @Convert(converter = ListLocationPointListConverter.class)
     private List<MapsLocationPoint> areaVertices;
 

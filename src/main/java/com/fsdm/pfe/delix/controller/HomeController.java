@@ -29,13 +29,11 @@ import java.util.stream.Collectors;
 public class HomeController {
 
 
-
-
     private final AgencyServiceImpl agencyService;
     private final ProvinceServiceImpl provinceServiceImpl;
     private final ProjectInfoAutoConfiguration projectInfoAutoConfiguration;
 
-    public HomeController( AgencyServiceImpl agencyService, ProvinceServiceImpl provinceServiceImpl, ProjectInfoAutoConfiguration projectInfoAutoConfiguration) {
+    public HomeController(AgencyServiceImpl agencyService, ProvinceServiceImpl provinceServiceImpl, ProjectInfoAutoConfiguration projectInfoAutoConfiguration) {
 
         this.agencyService = agencyService;
         this.provinceServiceImpl = provinceServiceImpl;
@@ -48,8 +46,6 @@ public class HomeController {
     }
 
 
-
-
     @GetMapping("/home/get_location_agencys")
     public ResponseEntity<List<AgencyResponseDto>> getLocationAgency() {
         log.debug("Getting all agencies");
@@ -58,7 +54,6 @@ public class HomeController {
                 .map(AgencyResponseDto::new)
                 .collect(Collectors.toList()));
     }
-
 
 
 }

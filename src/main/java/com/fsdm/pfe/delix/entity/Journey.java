@@ -43,21 +43,21 @@ public class Journey {
     @ManyToOne
     private Agency arrivalAgency;
 
-   @ManyToOne
-   private JourneyPath journeyPath;
+    @ManyToOne
+    private JourneyPath journeyPath;
 
-   @OneToOne
-   private JourneyPlanPath journeyPlanPath;
+    @OneToOne
+    private JourneyPlanPath journeyPlanPath;
 
-   private Date creationDate;
-   private Date lastUpdateDate;
+    private Date creationDate;
+    private Date lastUpdateDate;
 
-   @PrePersist
-   protected void onCreated() {
+    @PrePersist
+    protected void onCreated() {
 
 
-      Date date = new Date();
-      this.creationDate = date;
-      this.lastUpdateDate = date;
-   }
+        Date date = new Date();
+        this.creationDate = date;
+        this.lastUpdateDate = date;
+    }
 }

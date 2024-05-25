@@ -40,7 +40,7 @@ public class AdminTest {
         privileges.add(Privilege.PARCELS_DELETE);
         privileges.add(Privilege.PARCELS_ADD);
         PrivilegesGroup privilegesGroup = new PrivilegesGroup("manager_admin", privileges);
-        privilegesGroup=privilegesGroupService.savePrivilegesGroup(privilegesGroup);
+        privilegesGroup = privilegesGroupService.savePrivilegesGroup(privilegesGroup);
 
         Admin admin = new Admin();
         admin.setId(1L);

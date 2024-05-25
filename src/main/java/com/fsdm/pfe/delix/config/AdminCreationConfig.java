@@ -39,33 +39,33 @@ public class AdminCreationConfig {
         this.passwordEncoder = passwordEncoder;
     }
 
-@Bean
-public ApplicationRunner createAdminRunner() {
-    return args -> {
-        String adminEmail = "admin@admin.com";
-        String adminPassword = "12345678";
+    @Bean
+    public ApplicationRunner createAdminRunner() {
+        return args -> {
+            String adminEmail = "admin@admin.com";
+            String adminPassword = "12345678";
 
-        // Check if the admin user already exists
-        if (adminService.loadUserByEmail(adminEmail)== null) {
-            List<Privilege> privileges = new ArrayList<>();
-            privileges.add(Privilege.PARCELS_DELETE);
-            privileges.add(Privilege.PARCELS_ADD);
-            PrivilegesGroup privilegesGroup = new PrivilegesGroup("initial_admin", privileges);
-            privilegesGroup = privilegesGroupService.savePrivilegesGroup(privilegesGroup);
+            // Check if the admin user already exists
+            if (adminService.loadUserByEmail(adminEmail) == null) {
+                List<Privilege> privileges = new ArrayList<>();
+                privileges.add(Privilege.PARCELS_DELETE);
+                privileges.add(Privilege.PARCELS_ADD);
+                PrivilegesGroup privilegesGroup = new PrivilegesGroup("initial_admin", privileges);
+                privilegesGroup = privilegesGroupService.savePrivilegesGroup(privilegesGroup);
 
-            Admin admin = new Admin();
-            admin.setId(1L);
-            admin.setFirstName("Admin");
-            admin.setLastName("Admino");
-            admin.setEmail(adminEmail);
-            admin.setPassword(adminPassword);
-            admin.setPrivilegesGroup(privilegesGroup);
-            admin.setRole("Admin");
-            admin.setStatus(UserStatus.ACTIVE);
-            admin.setPhoneNumber("1234567890");
-            admin.setDateOfBirth(new Date("12/12/2000"));
-            adminService.saveAdmin(admin);
-        }
-    };
-}
+                Admin admin = new Admin();
+                admin.setId(1L);
+                admin.setFirstName("Admin");
+                admin.setLastName("Admino");
+                admin.setEmail(adminEmail);
+                admin.setPassword(adminPassword);
+                admin.setPrivilegesGroup(privilegesGroup);
+                admin.setRole("Admin");
+                admin.setStatus(UserStatus.ACTIVE);
+                admin.setPhoneNumber("1234567890");
+                admin.setDateOfBirth(new Date("12/12/2000"));
+                adminService.saveAdmin(admin);
+            }
+        };
+    }
 }

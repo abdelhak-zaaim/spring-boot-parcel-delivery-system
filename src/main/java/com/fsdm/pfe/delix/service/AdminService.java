@@ -9,6 +9,7 @@
  */
 
 package com.fsdm.pfe.delix.service;
+
 import com.fsdm.pfe.delix.entity.Admin;
 
 public interface AdminService {

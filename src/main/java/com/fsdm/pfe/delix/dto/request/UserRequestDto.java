@@ -12,7 +12,10 @@
 package com.fsdm.pfe.delix.dto.request;
 
 import com.fsdm.pfe.delix.model.enums.UserStatus;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Value;
 import org.hibernate.validator.constraints.URL;
 

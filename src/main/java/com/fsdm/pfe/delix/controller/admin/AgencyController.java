@@ -13,7 +13,6 @@ package com.fsdm.pfe.delix.controller.admin;
 
 import com.fsdm.pfe.delix.dto.request.AgencyRequestDto;
 import com.fsdm.pfe.delix.dto.response.AlertMessageDto;
-
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Province;
 import com.fsdm.pfe.delix.service.Impl.AgencyServiceImpl;
@@ -39,6 +38,7 @@ public class AgencyController {
     private final ProvinceServiceImpl provinceService;
     private final AgencyServiceImpl agencyService;
     private final Validator validator;
+
     public AgencyController(ProvinceServiceImpl provinceService, AgencyServiceImpl agencyService, Validator validator) {
         this.provinceService = provinceService;
         this.agencyService = agencyService;
@@ -71,7 +71,7 @@ public class AgencyController {
         }
         try {
             agencyService.saveNewAgency(agencyRequestDto);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error while saving agency : {}", e.getMessage());
             return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message(e.getMessage()).error(null).build());
         }
@@ -91,7 +91,7 @@ public class AgencyController {
         log.debug("RequestEntity : {}", id);
         try {
             agencyService.deleteAgency(id);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error while deleting agency : {}", e.getMessage());
             return ResponseEntity.ok(new AlertMessageDto(AlertMessageDto.AlertType.ERROR.name().toLowerCase(), e.getMessage()));
         }

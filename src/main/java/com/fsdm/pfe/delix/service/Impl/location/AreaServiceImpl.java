@@ -21,63 +21,61 @@ import java.util.stream.Collectors;
 
 @Service
 public class AreaServiceImpl implements AreaService {
-   private final AreaRepo areaRepo;
+    private final AreaRepo areaRepo;
 
     public AreaServiceImpl(AreaRepo areaRepo) {
         this.areaRepo = areaRepo;
     }
 
+    public static List<AreaResponseDto> convertListToDto(List<Area> areas) {
+        return areas.stream()
+                .map(AreaResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Override
-   public Area create(Area area) {
-      return areaRepo.save(area);
-   }
+    public Area create(Area area) {
+        return areaRepo.save(area);
+    }
 
-   @Override
-   public Area update(Area area) {
-      return areaRepo.save(area);
-   }
+    @Override
+    public Area update(Area area) {
+        return areaRepo.save(area);
+    }
 
-   @Override
-   public Area loadById(Long id) {
-      return areaRepo.findById(id).orElse(null);
-   }
+    @Override
+    public Area loadById(Long id) {
+        return areaRepo.findById(id).orElse(null);
+    }
 
+    @Override
+    public Area loadByCode(String code) {
+        return areaRepo.findByCode(code);
+    }
 
+    @Override
+    public List<Area> loadAll() {
+        return areaRepo.findAll();
+    }
 
-   @Override
-   public Area loadByCode(String code) {
-      return areaRepo.findByCode(code);
-   }
-
-   @Override
-   public List<Area> loadAll() {
-      return areaRepo.findAll();
-   }
-
-   @Override
-   public void delete(Long id) {
+    @Override
+    public void delete(Long id) {
         areaRepo.deleteById(id);
-   }
+    }
 
-   @Override
-   public void deleteByCode(String code) {
+    @Override
+    public void deleteByCode(String code) {
         areaRepo.deleteByCode(code);
-   }
+    }
 
-   @Override
-   public List<Area> saveAll(List<Area> areas) {
-      return areaRepo.saveAll(areas);
-   }
+    @Override
+    public List<Area> saveAll(List<Area> areas) {
+        return areaRepo.saveAll(areas);
+    }
 
-   @Override
-   public List<Area> loadByCityCode(String cityCode) {
-      return areaRepo.findByCityCode_Code(cityCode);
-   }
-
-   public static List<AreaResponseDto> convertListToDto(List<Area> areas) {
-      return areas.stream()
-              .map(AreaResponseDto::new)
-              .collect(Collectors.toList());
-   }
+    @Override
+    public List<Area> loadByCityCode(String cityCode) {
+        return areaRepo.findByCityCode_Code(cityCode);
+    }
 
 }

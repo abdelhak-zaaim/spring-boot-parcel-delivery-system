@@ -40,7 +40,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UserValidate {
-   String message() default "Invalid User";
-   Class<?>[] groups() default {};
-   Class<? extends Payload>[] payload() default {};
+    String message() default "Invalid User";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

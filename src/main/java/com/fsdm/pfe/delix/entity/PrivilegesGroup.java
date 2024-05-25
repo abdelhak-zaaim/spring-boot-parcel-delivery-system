@@ -54,6 +54,11 @@ public class PrivilegesGroup {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
 
+    public PrivilegesGroup(String name, List<Privilege> privileges) {
+        this.name = name;
+        this.privileges = privileges;
+    }
+
     @PrePersist
     protected void onCreated() {
         Date date = new Date();
@@ -64,11 +69,6 @@ public class PrivilegesGroup {
     @PreUpdate
     protected void onUpdate() {
         this.lastUpdateDate = new Date();
-    }
-
-    public PrivilegesGroup(String name, List<Privilege> privileges) {
-        this.name = name;
-        this.privileges = privileges;
     }
 
 

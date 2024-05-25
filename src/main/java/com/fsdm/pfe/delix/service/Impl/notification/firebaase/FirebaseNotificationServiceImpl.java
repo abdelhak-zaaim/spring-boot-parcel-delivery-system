@@ -39,7 +39,7 @@ public class FirebaseNotificationServiceImpl extends UserNotificationServiceImpl
             } catch (InterruptedException | ExecutionException e) {
                 log.error("An error occurred while sending a message to a token. Device token: " + user.getFirebaseUser().getMessagingKey(), e);
             }
-        }else {
+        } else {
             throw new FirebaseUserNotFoundException("User with id: " + user.getId() + " has no firebase messaging key");
         }
 

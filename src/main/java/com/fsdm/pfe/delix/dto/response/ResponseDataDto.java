@@ -11,13 +11,11 @@
 package com.fsdm.pfe.delix.dto.response;
 
 
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
+
 @Value
 @Builder
 

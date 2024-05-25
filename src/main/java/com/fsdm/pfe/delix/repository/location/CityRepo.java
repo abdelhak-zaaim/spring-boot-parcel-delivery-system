@@ -18,6 +18,8 @@ import java.util.Optional;
 
 public interface CityRepo extends JpaRepository<City, Long> {
     Optional<City> findByCode(String code);
+
     List<City> findByProvinceCode_Code(String provinceCode);
+
     void deleteByCode(String code);
 }

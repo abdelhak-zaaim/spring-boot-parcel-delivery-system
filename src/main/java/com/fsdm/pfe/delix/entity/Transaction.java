@@ -33,11 +33,10 @@ public class Transaction {
     private Long id;
 
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @Column(unique = true,updatable = false)
+    @Column(unique = true, updatable = false)
     private String idempotencyKey;
 
     @Column(updatable = false)
@@ -46,7 +45,7 @@ public class Transaction {
     private double amount;
 
     @Enumerated(EnumType.STRING)
-    @Column(updatable = false,nullable = false)
+    @Column(updatable = false, nullable = false)
     @NotNull(message = "Transaction type cannot be null")
     @Pattern(regexp = "^(DEBIT|CREDIT)$", message = "Transaction type must be either DEBIT or CREDIT")
     private TransactionType transactionType;
@@ -56,7 +55,7 @@ public class Transaction {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
-    private Date transactionDate ;
+    private Date transactionDate;
 
     @PrePersist
     protected void onCreated() {

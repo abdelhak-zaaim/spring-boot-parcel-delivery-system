@@ -44,7 +44,6 @@ public class VehicleOperatorEmployee extends Employee implements UserDetails {
     private VehicleType vehicleType;
 
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

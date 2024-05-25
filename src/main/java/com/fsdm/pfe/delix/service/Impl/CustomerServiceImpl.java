@@ -22,7 +22,6 @@ import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.repository.CustomerRepo;
-
 import com.fsdm.pfe.delix.service.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

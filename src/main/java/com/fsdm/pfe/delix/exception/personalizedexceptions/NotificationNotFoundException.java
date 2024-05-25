@@ -11,7 +11,6 @@
 package com.fsdm.pfe.delix.exception.personalizedexceptions;
 
 
-
 public class NotificationNotFoundException extends RuntimeException {
     public NotificationNotFoundException(String message) {
         super(message);

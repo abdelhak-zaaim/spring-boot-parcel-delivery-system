@@ -17,11 +17,17 @@ import java.util.Optional;
 public interface VehicleOperatorEmployeeService {
 
     void updateVehicleOperatorEmployee(VehicleOperatorEmployee vehicleOperatorEmployee);
+
     void deleteVehicleOperatorEmployee(VehicleOperatorEmployee vehicleOperatorEmployee);
+
     Optional<VehicleOperatorEmployee> loadByEmail(String email);
+
     Optional<VehicleOperatorEmployee> loadByPhoneNumber(String phoneNumber);
+
     Optional<VehicleOperatorEmployee> loadByCin(String cin);
+
     Optional<VehicleOperatorEmployee> loadByVehicleType(String vehicleType);
+
     Optional<VehicleOperatorEmployee> loadByRole(String role);
 
     Optional<VehicleOperatorEmployee> loadById(Long id);

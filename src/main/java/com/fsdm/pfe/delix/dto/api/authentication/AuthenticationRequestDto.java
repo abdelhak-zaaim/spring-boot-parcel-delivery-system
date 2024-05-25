@@ -15,7 +15,7 @@ import lombok.Value;
 @Value
 
 public class AuthenticationRequestDto {
-     String email;
-     String password;
-     boolean rememberMe;
+    String email;
+    String password;
+    boolean rememberMe;
 }

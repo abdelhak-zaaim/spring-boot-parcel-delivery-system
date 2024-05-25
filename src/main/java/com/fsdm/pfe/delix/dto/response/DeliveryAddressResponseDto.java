@@ -27,7 +27,7 @@ public class DeliveryAddressResponseDto implements Serializable {
     String contactNumber;
     String contactEmail;
 
-    public DeliveryAddressResponseDto( DeliveryAddress deliveryAddress) {
+    public DeliveryAddressResponseDto(DeliveryAddress deliveryAddress) {
         this.area = new AreaResponseDto(deliveryAddress.getArea());
         this.contactEmail = deliveryAddress.getContactEmail();
         this.contactNumber = deliveryAddress.getContactNumber();

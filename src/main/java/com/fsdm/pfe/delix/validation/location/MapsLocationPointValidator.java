@@ -9,7 +9,6 @@
  */
 
 
-
 package com.fsdm.pfe.delix.validation.location;
 
 import com.fsdm.pfe.delix.model.MapsLocationPoint;

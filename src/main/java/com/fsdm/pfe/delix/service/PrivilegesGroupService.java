@@ -14,7 +14,10 @@ import com.fsdm.pfe.delix.entity.PrivilegesGroup;
 
 public interface PrivilegesGroupService {
     void deletePrivilegesGroup(Long id);
+
     PrivilegesGroup loadPrivilegesGroupById(Long id);
+
     PrivilegesGroup savePrivilegesGroup(PrivilegesGroup privilegesGroup);
+
     PrivilegesGroup updatePrivilegesGroup(PrivilegesGroup privilegesGroup);
 }

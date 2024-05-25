@@ -19,17 +19,17 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class parcelTest {
 
-   AddressServiceImpl addressService;
-   DeliveryAddressServiceImpl deliveryAddressService;
-   CustomerServiceImpl customerService;
-   ParcelServiceImpl parcelService;
+    AddressServiceImpl addressService;
+    DeliveryAddressServiceImpl deliveryAddressService;
+    CustomerServiceImpl customerService;
+    ParcelServiceImpl parcelService;
 
-   public parcelTest(AddressServiceImpl addressService, DeliveryAddressServiceImpl deliveryAddressService, CustomerServiceImpl customerService, ParcelServiceImpl parcelService) {
-      this.addressService = addressService;
-      this.deliveryAddressService = deliveryAddressService;
-      this.customerService = customerService;
-      this.parcelService = parcelService;
-   }
+    public parcelTest(AddressServiceImpl addressService, DeliveryAddressServiceImpl deliveryAddressService, CustomerServiceImpl customerService, ParcelServiceImpl parcelService) {
+        this.addressService = addressService;
+        this.deliveryAddressService = deliveryAddressService;
+        this.customerService = customerService;
+        this.parcelService = parcelService;
+    }
 
 
 }

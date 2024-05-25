@@ -12,16 +12,17 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.Address;
+import com.fsdm.pfe.delix.repository.AddressRepo;
 import com.fsdm.pfe.delix.service.AddressService;
 import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;
 import org.springframework.stereotype.Service;
-import com.fsdm.pfe.delix.repository.AddressRepo;
 
 @Service
 public class AddressServiceImpl implements AddressService {
     private final AddressRepo addressRepo;
 
     private final AreaServiceImpl areaService;
+
     public AddressServiceImpl(AddressRepo addressRepo, AreaServiceImpl areaService) {
         this.addressRepo = addressRepo;
         this.areaService = areaService;
@@ -46,7 +47,6 @@ public class AddressServiceImpl implements AddressService {
     public Address saveAddress(Address address) {
         return addressRepo.save(address);
     }
-
 
 
 }

@@ -16,14 +16,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface VehicleOperatorEmployeeRepo extends JpaRepository<VehicleOperatorEmployee, Long> {
-   Optional<VehicleOperatorEmployee> findByEmail(String email);
+    Optional<VehicleOperatorEmployee> findByEmail(String email);
 
-   Optional<VehicleOperatorEmployee> findByPhoneNumber(String phoneNumber);
+    Optional<VehicleOperatorEmployee> findByPhoneNumber(String phoneNumber);
 
-   Optional<VehicleOperatorEmployee> findByCin(String cin);
+    Optional<VehicleOperatorEmployee> findByCin(String cin);
 
 
-   Optional<VehicleOperatorEmployee> findByVehicleType(String vehicleType);
+    Optional<VehicleOperatorEmployee> findByVehicleType(String vehicleType);
 
-   Optional<VehicleOperatorEmployee> findByRole(String role);
+    Optional<VehicleOperatorEmployee> findByRole(String role);
 }

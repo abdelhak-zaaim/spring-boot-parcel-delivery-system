@@ -12,7 +12,8 @@
 package com.fsdm.pfe.delix.dto.response;
 
 import com.fsdm.pfe.delix.model.enums.PaymentMethod;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Value;
 
 import java.io.Serializable;

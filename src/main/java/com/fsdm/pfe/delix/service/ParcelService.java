@@ -17,9 +17,14 @@ import java.util.List;
 
 public interface ParcelService {
     void deleteParcel(Long id);
+
     Parcel loadParcelById(Long id);
+
     Parcel saveParcel(Parcel parcel);
+
     Parcel updateParcel(Parcel parcel);
+
     Parcel markAsDeleted(Long id);
+
     List<Parcel> loadAllByCreationDateBetween(Date startDate, Date endDate);
 }

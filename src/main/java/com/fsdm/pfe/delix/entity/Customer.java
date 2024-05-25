@@ -39,7 +39,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -51,13 +54,11 @@ import java.util.*;
 
 public class Customer extends User implements UserDetails {
 
-    @Column( unique = true )
+    @Column(unique = true)
     private String customerNumber;
 
     @OneToMany
     private List<Parcel> parcels;
-
-
 
 
     public Customer(RegisterRequestDto registerRequestDto) {
@@ -67,7 +68,6 @@ public class Customer extends User implements UserDetails {
         super.setPassword(registerRequestDto.getPassword());
         super.setPhoneNumber(registerRequestDto.getPhoneNumber());
     }
-
 
 
     @PrePersist
@@ -112,10 +112,8 @@ public class Customer extends User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE)|| this.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED));
+        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE) || this.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED));
     }
-
-
 
 
 }

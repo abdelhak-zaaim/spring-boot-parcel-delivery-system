@@ -15,15 +15,11 @@ import com.fsdm.pfe.delix.util.Constants;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
-import java.io.File;
 import java.nio.file.Paths;
 
 @Service
@@ -52,8 +48,6 @@ public class S3ServiceImpl {
     public void deleteDocument(String bucketName, String key) {
         s3Client.deleteObject(builder -> builder.bucket(bucketName).key(key));
     }
-
-
 
 
 }

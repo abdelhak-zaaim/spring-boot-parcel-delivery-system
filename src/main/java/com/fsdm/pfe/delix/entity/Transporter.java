@@ -12,13 +12,9 @@
 package com.fsdm.pfe.delix.entity;
 
 import com.fsdm.pfe.delix.model.enums.Role;
-import com.fsdm.pfe.delix.model.enums.VehicleType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.springframework.security.core.userdetails.UserDetails;
 
 
 @AllArgsConstructor

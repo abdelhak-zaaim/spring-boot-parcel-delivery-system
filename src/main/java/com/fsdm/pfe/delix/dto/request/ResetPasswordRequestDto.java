@@ -10,7 +10,6 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +28,7 @@ public class ResetPasswordRequestDto implements Serializable {
     String token;
     @NotNull
     @NotEmpty
-            @Min(8)
+    @Min(8)
     String password;
     @NotNull
     @NotEmpty

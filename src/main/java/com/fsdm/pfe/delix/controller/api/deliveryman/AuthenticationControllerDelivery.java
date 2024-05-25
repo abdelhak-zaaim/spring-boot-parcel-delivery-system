@@ -27,7 +27,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +52,7 @@ public class AuthenticationControllerDelivery {
             if (authentication.isAuthenticated()) {
 
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                VehicleOperatorEmployee vehicleOperatorEmployee= vehicleOperatorEmployeeService.loadByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                VehicleOperatorEmployee vehicleOperatorEmployee = vehicleOperatorEmployeeService.loadByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
                 if (!vehicleOperatorEmployee.getRole().equals(Role.DELIVERY_MAN_ROLE)) {
                     throw new UsernameNotFoundException("Invalid credentials");
                 }

@@ -13,21 +13,12 @@ package com.fsdm.pfe.delix.controller;
 import com.fsdm.pfe.delix.dto.request.UpdatePasswordRequestDto;
 import com.fsdm.pfe.delix.dto.request.UpdateProfileRequestDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
-import com.fsdm.pfe.delix.entity.Customer;
-import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
@@ -40,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.Collection;
 
 @Controller
 public class CustomerProfileController {
@@ -113,8 +103,6 @@ public class CustomerProfileController {
                 return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message("An error occurred").build());
             }
         }
-
-
 
 
     }

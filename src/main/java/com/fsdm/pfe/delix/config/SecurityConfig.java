@@ -11,17 +11,15 @@
 package com.fsdm.pfe.delix.config;
 
 import com.fsdm.pfe.delix.config.jwt.AuthTokenFilter;
-import com.fsdm.pfe.delix.repository.DeliveryManRepo;
-import com.fsdm.pfe.delix.repository.EmployeeRepo;
-import com.fsdm.pfe.delix.repository.TransporterRepo;
-import com.fsdm.pfe.delix.repository.VehicleOperatorEmployeeRepo;
-import com.fsdm.pfe.delix.service.DeliveryManService;
-import com.fsdm.pfe.delix.service.Impl.*;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import com.fsdm.pfe.delix.model.enums.Role;
+import com.fsdm.pfe.delix.repository.VehicleOperatorEmployeeRepo;
+import com.fsdm.pfe.delix.service.Impl.AdminServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.VehicleOperatorEmployeeServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -32,14 +30,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
 
 
 @EnableWebSecurity
@@ -57,7 +53,7 @@ public class SecurityConfig {
     public static class AdminSecurityConfig {
 
         @Bean
-        public SecurityFilterChain securityFilterChainAdmin( HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+        public SecurityFilterChain securityFilterChainAdmin(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/admin", "/admin/**").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
@@ -121,7 +117,7 @@ public class SecurityConfig {
 
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote","/reset-password","/reset-password-request").authorizeHttpRequests(
+            http.securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
@@ -139,7 +135,7 @@ public class SecurityConfig {
 
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
                             }
-                    ).securityMatcher("/public/**", "/express/**","/","/login","/logout","/register","/order-quote","/reset-password","/reset-password-request","/verify","/test/**")
+                    ).securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request", "/verify", "/test/**")
                     .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
 
 
@@ -187,6 +183,7 @@ public class SecurityConfig {
 
             this.vehicleOperatorEmployeeRepo = vehicleOperatorEmployeeRepo;
         }
+
         @Bean
         public UserDetailsService userDetailsServiceApi() {
             return new VehicleOperatorEmployeeServiceImpl(vehicleOperatorEmployeeRepo);
@@ -198,19 +195,18 @@ public class SecurityConfig {
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/api/delivery/**").authorizeHttpRequests(
-                            authorizationManagerRequestMatcherRegistry ->
-                            {
-                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/delivery/login")).permitAll();
-                                authorizationManagerRequestMatcherRegistry.requestMatchers("/api/delivery/**").hasRole("DELIVERY");
+                    authorizationManagerRequestMatcherRegistry ->
+                    {
+                        authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/delivery/login")).permitAll();
+                        authorizationManagerRequestMatcherRegistry.requestMatchers("/api/delivery/**").hasRole("DELIVERY");
 
-                            }
-                    ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProviderApi()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/delivery/**");
+                    }
+            ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProviderApi()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/delivery/**");
 
             return http.build();
 
 
         }
-
 
 
         @Bean
@@ -229,9 +225,6 @@ public class SecurityConfig {
         }
 
     }
-
-
-
 
 
 }

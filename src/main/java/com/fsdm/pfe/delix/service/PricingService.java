@@ -11,15 +11,19 @@
 package com.fsdm.pfe.delix.service;
 
 import com.fsdm.pfe.delix.entity.Pricing;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 public interface PricingService {
-   Optional<Pricing> loadPricingById(Long id);
-   Optional<Pricing> loadPricingByBasePrice(double basePrice);
-   void deletePricing(Long id);
+    Optional<Pricing> loadPricingById(Long id);
+
+    Optional<Pricing> loadPricingByBasePrice(double basePrice);
+
+    void deletePricing(Long id);
+
     Pricing updatePricing(Pricing pricing);
+
     Pricing savePricing(Pricing pricing);
+
     Optional<Pricing> loadCurrentPricing();
 }

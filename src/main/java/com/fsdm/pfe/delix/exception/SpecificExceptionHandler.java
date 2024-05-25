@@ -11,8 +11,6 @@
 package com.fsdm.pfe.delix.exception;
 
 
-
-import com.fsdm.pfe.delix.dto.response.ArgumentNotValidDto;
 import com.fsdm.pfe.delix.dto.response.ErrorResponseDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.DataValidationException;
@@ -35,7 +33,6 @@ import java.util.Map;
 public class SpecificExceptionHandler {
 
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ResponseDataDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -48,8 +45,6 @@ public class SpecificExceptionHandler {
 
         return new ResponseEntity<>(ResponseDataDto.builder().data(errors).success(true).error(null).message("please verify the inputs").build(), HttpStatus.BAD_REQUEST);
     }
-
-
 
 
     @ExceptionHandler(DataValidationException.class)

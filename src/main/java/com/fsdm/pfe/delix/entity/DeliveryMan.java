@@ -14,13 +14,14 @@ package com.fsdm.pfe.delix.entity;
 import com.fsdm.pfe.delix.model.MapsLocationPoint;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
-import com.fsdm.pfe.delix.model.enums.VehicleType;
 import com.fsdm.pfe.delix.validation.location.ValidMapsLocationPoint;
-import jakarta.persistence.*;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,8 +36,7 @@ import java.util.List;
 @Entity
 @Builder
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)
-public class DeliveryMan extends VehicleOperatorEmployee{
-
+public class DeliveryMan extends VehicleOperatorEmployee {
 
 
     @ValidMapsLocationPoint
@@ -77,6 +77,6 @@ public class DeliveryMan extends VehicleOperatorEmployee{
 
     @Override
     public boolean isEnabled() {
-        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE)|| this.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED));
+        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE) || this.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED));
     }
 }

@@ -58,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void transfer(@NotNull User fromUser,@NotNull User toUser,@NotNull double amount,@NotNull String description) {
+    public void transfer(@NotNull User fromUser, @NotNull User toUser, @NotNull double amount, @NotNull String description) {
 
         fromUser.setBalance(fromUser.getBalance() - amount);
         userRepository.save(fromUser);

@@ -25,7 +25,8 @@ public enum Role {
     TRANSPORTER(new SimpleGrantedAuthority("TRANSPORTER")),
     AGENCY_EMPLOYEE(new SimpleGrantedAuthority("AGENCY_EMPLOYEE")),
     SUPER_ADMIN(new SimpleGrantedAuthority("SUPER_ADMIN")),
-    ADMIN_EMPLOYEE(new SimpleGrantedAuthority("ADMIN_EMPLOYEE")),;
+    ADMIN_EMPLOYEE(new SimpleGrantedAuthority("ADMIN_EMPLOYEE")),
+    ;
 
     public static final String USER_ROLE_NAME = "ROLE";
 
@@ -47,7 +48,7 @@ public enum Role {
     }
 
 
- public static String getCustomerRoleName() {
+    public static String getCustomerRoleName() {
         return "ROLE_CUSTOMER";
     }
 

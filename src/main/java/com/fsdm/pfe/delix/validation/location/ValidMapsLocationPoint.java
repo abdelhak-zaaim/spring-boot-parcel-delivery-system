@@ -22,7 +22,9 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidMapsLocationPoint {
-   String message() default "Invalid MapsLocationPoint";
-   Class<?>[] groups() default {};
-   Class<? extends Payload>[] payload() default {};
+    String message() default "Invalid MapsLocationPoint";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

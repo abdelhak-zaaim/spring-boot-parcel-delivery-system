@@ -15,16 +15,13 @@ import com.fsdm.pfe.delix.entity.Employee;
 import com.fsdm.pfe.delix.repository.EmployeeRepo;
 import com.fsdm.pfe.delix.service.EmployeeService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Service
-public class EmployeeServiceImpl  implements EmployeeService  {
+public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepo employeeRepository;
     private final UserServiceImpl userService;

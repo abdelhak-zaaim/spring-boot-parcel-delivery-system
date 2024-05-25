@@ -34,24 +34,20 @@ import java.util.Date;
 @Entity
 public class Area {
 
+    Date createdAt;
+    Date updatedAt;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @Column(name = "code", nullable = false)
     private String code;
     private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_code", referencedColumnName = "code")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private City cityCode;
-
     private String postCode;
-
-    Date createdAt;
-    Date updatedAt;
 
     @PrePersist
     public void prePersist() {

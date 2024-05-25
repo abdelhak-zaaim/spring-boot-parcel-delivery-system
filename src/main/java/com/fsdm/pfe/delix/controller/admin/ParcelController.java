@@ -12,7 +12,6 @@ package com.fsdm.pfe.delix.controller.admin;
 
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.service.Impl.ParcelServiceImpl;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

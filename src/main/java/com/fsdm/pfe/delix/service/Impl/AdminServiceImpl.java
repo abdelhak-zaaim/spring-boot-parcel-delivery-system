@@ -12,7 +12,6 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.Admin;
-
 import com.fsdm.pfe.delix.repository.AdminRepo;
 import com.fsdm.pfe.delix.service.AdminService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +23,7 @@ import java.util.Optional;
 
 
 @Service
-public class AdminServiceImpl implements AdminService , UserDetailsService {
+public class AdminServiceImpl implements AdminService, UserDetailsService {
 
     private final AdminRepo adminRepo;
     private final UserServiceImpl userService;
@@ -52,10 +51,11 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
 
     /**
      * this function used for updating the admin user
-     * @since  do not use this function for updating the password !!!!
-     * @deprecated
+     *
      * @param admin : Admin entity
      * @return Admin entity if the updating successfully , else : this function throw an exception
+     * @since do not use this function for updating the password !!!!
+     * @deprecated
      */
     @Override
     public Admin updateAdmin(Admin admin) {
@@ -68,7 +68,6 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
         admin.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
         return admin.get();
     }
-
 
 
     public Admin loadUserByEmail(String email) {

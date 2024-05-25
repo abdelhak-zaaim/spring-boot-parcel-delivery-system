@@ -17,13 +17,14 @@ import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.dto.response.MessageDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Customer;
+import com.fsdm.pfe.delix.entity.User;
+import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
+import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
+import com.fsdm.pfe.delix.service.Impl.LoginLogServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.PasswordResetTokenServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.UserServiceImpl;
 import com.fsdm.pfe.delix.util.Constants;
 import com.fsdm.pfe.delix.util.helpers.HttpUtils;
-import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
-import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
-import com.fsdm.pfe.delix.service.Impl.LoginLogServiceImpl;
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -40,7 +41,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.fsdm.pfe.delix.entity.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
@@ -125,14 +125,10 @@ public class AuthenticationController {
         }
     }
 
-    public record LoginRequest(String username, String password) {
-    }
-
     @GetMapping("/login")
     public String loginPage() {
         return "home/login";
     }
-
 
     @GetMapping("/register")
     public String registerPage() {
@@ -163,7 +159,6 @@ public class AuthenticationController {
         }
     }
 
-
     @GetMapping("/verify")
     public String verifyEmail(@RequestParam String token) {
         if (token == null || token.isEmpty()) {
@@ -176,18 +171,15 @@ public class AuthenticationController {
         return "home/index";
     }
 
-
     @GetMapping("/test/index")
     public String index() {
         return "home/index_if_login";
     }
 
-
     @GetMapping("/forbidden-page")
     public String forbiddenPage() {
         return "home/forbiddenPage";  // This should be the name of your forbidden page view
     }
-
 
     @GetMapping("/reset-password")
     public String resetPasswordPage(Model model, @RequestParam(required = false) String token) {
@@ -208,7 +200,6 @@ public class AuthenticationController {
         return "home/resetPassword";
     }
 
-
     @PostMapping("/reset-password-request")
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordEmailRequestDto resetPasswordRequestDto, HttpServletRequest request) {
         DataBinder binder = new DataBinder(resetPasswordRequestDto);
@@ -226,17 +217,18 @@ public class AuthenticationController {
             } catch (Exception e) {
                 baseUrl = Constants.BASE_URL;
             }
-            String operatingSystemName= ""; String browserName = "";
+            String operatingSystemName = "";
+            String browserName = "";
             try {
                 String userAgentHeader = request.getHeader("User-Agent");
                 UserAgent userAgent = UserAgent.parseUserAgentString(userAgentHeader);
                 OperatingSystem operatingSystem = userAgent.getOperatingSystem();
                 Browser browser = userAgent.getBrowser();
 
-                 operatingSystemName = operatingSystem.getName();
-                 browserName = browser.getName();
+                operatingSystemName = operatingSystem.getName();
+                browserName = browser.getName();
 
-            }catch (Exception ignored){
+            } catch (Exception ignored) {
 
             }
 
@@ -274,5 +266,8 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
         }
 
+    }
+
+    public record LoginRequest(String username, String password) {
     }
 }

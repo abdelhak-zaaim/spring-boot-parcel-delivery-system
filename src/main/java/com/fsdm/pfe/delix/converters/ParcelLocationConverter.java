@@ -11,10 +11,10 @@
 
 package com.fsdm.pfe.delix.converters;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fsdm.pfe.delix.model.ParcelLocation;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Converter(autoApply = true)
 public class ParcelLocationConverter implements AttributeConverter<ParcelLocation, String> {

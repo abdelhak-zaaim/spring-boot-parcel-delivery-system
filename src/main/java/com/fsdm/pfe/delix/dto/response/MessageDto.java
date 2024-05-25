@@ -14,15 +14,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+
 @Getter
 @Setter
 public class MessageDto implements Serializable {
 
     private final int code;
-    private  Object data ;
     private final String message;
+    private Object data;
 
-    public MessageDto(int code,  String message) {
+    public MessageDto(int code, String message) {
         this.code = code;
 
         this.message = message;

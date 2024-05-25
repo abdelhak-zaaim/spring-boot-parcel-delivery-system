@@ -35,8 +35,8 @@ public class GlobalControllerAdvice {
     public void addUserDetails(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getPrincipal() instanceof UserDetails) {
-            User userDetails = userService.loadUserByUsername( ((UserDetails) auth.getPrincipal()).getUsername());
-            model.addAttribute("userDetails",new MyUserResponseDto(userDetails));
+            User userDetails = userService.loadUserByUsername(((UserDetails) auth.getPrincipal()).getUsername());
+            model.addAttribute("userDetails", new MyUserResponseDto(userDetails));
         }
     }
 }

@@ -38,15 +38,15 @@ import javax.validation.ConstraintValidatorContext;
 
 public class UserValidator implements ConstraintValidator<UserValidate, User> {
 
-   @Override
-   public void initialize(UserValidate constraintAnnotation) {
-   }
+    @Override
+    public void initialize(UserValidate constraintAnnotation) {
+    }
 
-   @Override
-   public boolean isValid(User user, ConstraintValidatorContext context) {
-      // todo : add more validation , hadxi makafix , for now its okay
+    @Override
+    public boolean isValid(User user, ConstraintValidatorContext context) {
+        // todo : add more validation , hadxi makafix , for now its okay
 
-      return user.getFirstName() != null && !user.getFirstName().isEmpty() &&
-              user.getEmail() != null && !user.getEmail().isEmpty() && ValidationUtils.isValidEmail(user.getEmail());
-   }
+        return user.getFirstName() != null && !user.getFirstName().isEmpty() &&
+                user.getEmail() != null && !user.getEmail().isEmpty() && ValidationUtils.isValidEmail(user.getEmail());
+    }
 }

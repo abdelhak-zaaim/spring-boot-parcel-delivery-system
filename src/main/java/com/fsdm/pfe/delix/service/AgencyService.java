@@ -22,5 +22,6 @@ public interface AgencyService {
     Agency saveAgency(Agency agency);
 
     Agency updateAgency(Agency agency);
+
     List<Agency> getAllAgencies();
 }

@@ -18,11 +18,12 @@ import lombok.Value;
 
 @Value
 public class ResetPasswordEmailRequestDto {
-   @Email
-           @NotNull
-   String email;
-   @JsonCreator
-   public ResetPasswordEmailRequestDto(@JsonProperty("email") String email) {
-      this.email = email;
-   }
+    @Email
+    @NotNull
+    String email;
+
+    @JsonCreator
+    public ResetPasswordEmailRequestDto(@JsonProperty("email") String email) {
+        this.email = email;
+    }
 }

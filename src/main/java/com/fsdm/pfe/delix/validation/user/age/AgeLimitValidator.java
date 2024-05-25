@@ -41,27 +41,27 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class AgeLimitValidator implements ConstraintValidator<AgeLimit, Date> {
-   int minimumAge;
+    int minimumAge;
 
-   @Override
-   public void initialize(AgeLimit constraintAnnotation) {
-      this.minimumAge = constraintAnnotation.minimumAge();
-   }
+    @Override
+    public void initialize(AgeLimit constraintAnnotation) {
+        this.minimumAge = constraintAnnotation.minimumAge();
+    }
 
-   @Override
-   public boolean isValid(Date birthDate, ConstraintValidatorContext constraintValidatorContext) {
-      if(birthDate == null){
-         throw new DataValidationException("Date of birth cannot be null");
-      }
-      LocalDate today = LocalDate.now();
-      LocalDate minimumAgeYearsAgo = today.minusYears(this.minimumAge);
+    @Override
+    public boolean isValid(Date birthDate, ConstraintValidatorContext constraintValidatorContext) {
+        if (birthDate == null) {
+            throw new DataValidationException("Date of birth cannot be null");
+        }
+        LocalDate today = LocalDate.now();
+        LocalDate minimumAgeYearsAgo = today.minusYears(this.minimumAge);
 
-      Instant instant = birthDate.toInstant();
-      ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
-      LocalDate birthDateLocal = zdt.toLocalDate();
-      if(minimumAgeYearsAgo.isBefore(birthDateLocal)) {
-         throw new DataValidationException("User must be at least " + this.minimumAge + " years old");
-      }
-      return true;
-   }
+        Instant instant = birthDate.toInstant();
+        ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
+        LocalDate birthDateLocal = zdt.toLocalDate();
+        if (minimumAgeYearsAgo.isBefore(birthDateLocal)) {
+            throw new DataValidationException("User must be at least " + this.minimumAge + " years old");
+        }
+        return true;
+    }
 }

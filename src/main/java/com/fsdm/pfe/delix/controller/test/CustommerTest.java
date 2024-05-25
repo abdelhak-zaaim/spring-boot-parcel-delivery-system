@@ -10,17 +10,12 @@
 
 package com.fsdm.pfe.delix.controller.test;
 
-import com.fsdm.pfe.delix.entity.Address;
 import com.fsdm.pfe.delix.entity.Customer;
-import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.service.AddressService;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
-import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.Date;
 
 @Controller
 public class CustommerTest {
@@ -31,7 +26,6 @@ public class CustommerTest {
         this.customerService = customerService;
         this.addressService = addressService;
     }
-
 
 
     @GetMapping("/test/customer/update")

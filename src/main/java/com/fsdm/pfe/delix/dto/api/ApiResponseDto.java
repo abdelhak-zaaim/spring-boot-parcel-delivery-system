@@ -18,7 +18,7 @@ import lombok.Value;
 @Value
 @AllArgsConstructor
 public class ApiResponseDto {
-   boolean success;
+    boolean success;
     String message;
     Object data;
 

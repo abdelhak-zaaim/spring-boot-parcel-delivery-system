@@ -15,7 +15,10 @@ package com.fsdm.pfe.delix.entity;
 
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,6 +56,7 @@ public class Admin extends Employee implements UserDetails {
         }
         return authorities;
     }
+
     @PrePersist
     protected void onCreated() {
         super.setStatus(UserStatus.ACTIVE);
@@ -60,6 +64,7 @@ public class Admin extends Employee implements UserDetails {
         this.setRegisteredAt(date);
         this.setLastUpdateDate(date);
     }
+
     @Override
     public String getPassword() {
         return super.getPassword();

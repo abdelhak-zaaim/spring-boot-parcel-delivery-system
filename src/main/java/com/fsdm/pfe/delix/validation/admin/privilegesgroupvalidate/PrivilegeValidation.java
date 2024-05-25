@@ -27,10 +27,12 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = PrivilegesGroupValidator.class)
-@Target( { ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PrivilegeValidation {
     String message() default "Invalid PrivilegesGroup";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

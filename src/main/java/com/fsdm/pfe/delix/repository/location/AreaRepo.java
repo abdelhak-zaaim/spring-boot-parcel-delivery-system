@@ -17,6 +17,8 @@ import java.util.List;
 
 public interface AreaRepo extends JpaRepository<Area, Long> {
     Area findByCode(String code);
+
     void deleteByCode(String code);
+
     List<Area> findByCityCode_Code(String cityCode);
 }

@@ -27,6 +27,12 @@ public class CityServiceImpl implements CityService {
         this.cityRepo = cityRepo;
     }
 
+    public static List<CityResponseDto> convertListToDto(List<City> cities) {
+        return cities.stream()
+                .map(CityResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public City create(City city) {
         return cityRepo.save(city);
@@ -70,12 +76,5 @@ public class CityServiceImpl implements CityService {
     @Override
     public List<City> loadByProvinceCode(String provinceCode) {
         return cityRepo.findByProvinceCode_Code(provinceCode);
-    }
-
-
-    public static List<CityResponseDto> convertListToDto(List<City> cities) {
-        return cities.stream()
-                .map(CityResponseDto::new)
-                .collect(Collectors.toList());
     }
 }

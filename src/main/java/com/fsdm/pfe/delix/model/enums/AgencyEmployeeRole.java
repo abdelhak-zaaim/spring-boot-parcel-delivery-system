@@ -16,8 +16,7 @@ import lombok.Getter;
 public enum AgencyEmployeeRole {
 
 
+    MANAGER,
 
-   MANAGER,
-
-   MEMBER
+    MEMBER
 }

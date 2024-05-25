@@ -35,7 +35,7 @@ public class CityResponseDto implements Serializable {
         this.name = city.getName();
         this.countryCode = city.getCountryCode();
         this.postalCode = city.getPostalCode();
-        this.provinceCode =  city.getProvinceCode().getCode();
+        this.provinceCode = city.getProvinceCode().getCode();
 
     }
 

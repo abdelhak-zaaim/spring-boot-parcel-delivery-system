@@ -20,7 +20,10 @@ import java.util.List;
 @Repository
 public interface ParcelRepo extends JpaRepository<Parcel, Long> {
     boolean existsByCodeBar(String agencyCode);
+
     List<Parcel> findAllBySenderCustomerId(Long customerId);
+
     Parcel findByCodeBar(String codeBar);
+
     List<Parcel> findAllByCreationDateBetween(Date startDate, Date endDate);
 }

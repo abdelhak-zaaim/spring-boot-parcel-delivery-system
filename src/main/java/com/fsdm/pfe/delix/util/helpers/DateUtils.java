@@ -20,7 +20,7 @@ import java.util.Date;
 @Slf4j
 public class DateUtils {
 
-    public static Date getCurrentDateWithSpecifiedTimeZone(@NotNull  String timeZone) {
+    public static Date getCurrentDateWithSpecifiedTimeZone(@NotNull String timeZone) {
         try {
             ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of(timeZone));
             return Date.from(zonedDateTime.toInstant());

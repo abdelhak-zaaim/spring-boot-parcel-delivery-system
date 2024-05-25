@@ -12,7 +12,9 @@ package com.fsdm.pfe.delix.dto.request;
 
 import com.fsdm.pfe.delix.entity.Province;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Value;
 
 import java.io.Serializable;
 

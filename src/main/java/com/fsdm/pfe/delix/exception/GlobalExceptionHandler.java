@@ -9,7 +9,6 @@
  */
 
 
-
 package com.fsdm.pfe.delix.exception;
 
 import org.springframework.core.annotation.Order;
@@ -22,9 +21,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-
-
 
 
 @Order(2)
@@ -46,7 +42,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<List<String>> handleRuntimeException(RuntimeException ex) {
         List<String> errors = List.of(ex.getMessage());
 
-        return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR );
+        return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

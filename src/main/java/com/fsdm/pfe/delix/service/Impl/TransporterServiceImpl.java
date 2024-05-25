@@ -13,9 +13,6 @@ package com.fsdm.pfe.delix.service.Impl;
 import com.fsdm.pfe.delix.entity.Transporter;
 import com.fsdm.pfe.delix.repository.TransporterRepo;
 import com.fsdm.pfe.delix.service.TransporterService;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 

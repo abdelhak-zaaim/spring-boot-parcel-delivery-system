@@ -30,6 +30,6 @@ public class AddressRequestDto implements Serializable {
     String address;
     @NotNull
     @NotEmpty
-   @NotBlank
+    @NotBlank
     String areaCode;
 }

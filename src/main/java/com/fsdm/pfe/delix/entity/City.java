@@ -36,26 +36,22 @@ import java.util.List;
 @Table(name = "city", indexes = {@Index(name = "index_city_code", columnList = "code")})
 
 public class City {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     String code;
     String name;
     String countryCode;
     String postalCode;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_code", referencedColumnName = "code")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     Province provinceCode;
-
     @OneToMany(mappedBy = "cityCode", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Area> areas;
-
-
     Date createdAt;
     Date updatedAt;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @PrePersist
     public void prePersist() {

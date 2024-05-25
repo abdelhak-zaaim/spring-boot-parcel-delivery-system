@@ -16,12 +16,20 @@ import java.util.List;
 
 public interface CityService {
     City create(City city);
+
     City update(City city);
+
     City loadById(Long id);
+
     City loadByCode(String code);
+
     List<City> loadAll();
+
     void delete(Long id);
+
     void deleteByCode(String code);
+
     List<City> saveAll(List<City> cities);
+
     List<City> loadByProvinceCode(String provinceCode);
 }

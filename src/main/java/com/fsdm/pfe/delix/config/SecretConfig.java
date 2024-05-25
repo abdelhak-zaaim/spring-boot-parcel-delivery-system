@@ -14,7 +14,8 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
-import com.amazonaws.services.secretsmanager.model.*;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -25,22 +26,18 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SecretConfig {
+    Gson gson = new Gson();
     @Value("${cloud.aws.credentials.access-key}")
     private String accessKey;
     @Value("${cloud.aws.credentials.secret-key}")
     private String secretkey;
 
-
-
-
-
-    Gson gson = new Gson();
     @Bean
     public DataSource getSecrets() {
         AwsSecrets.AwsSecretsDatabase secrets = getSecret();
         return DataSourceBuilder
                 .create()
-               .driverClassName("com.mysql.cj.jdbc.driver")
+                .driverClassName("com.mysql.cj.jdbc.driver")
                 .url("jdbc:" + secrets.getEngine() + "://" + secrets.getHost() + ":" + secrets.getPort() + "/delix2?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC")
                 .username(secrets.getUsername())
                 .password(secrets.getPassword())

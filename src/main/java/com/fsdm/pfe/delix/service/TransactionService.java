@@ -16,6 +16,8 @@ import java.util.List;
 
 public interface TransactionService {
     Transaction loadTransactionById(Long id);
+
     Transaction saveTransaction(Transaction transaction);
+
     List<Transaction> makeMultipleTransactions(List<Transaction> transactions);
 }

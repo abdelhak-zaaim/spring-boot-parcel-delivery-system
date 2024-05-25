@@ -10,14 +10,13 @@
 
 package com.fsdm.pfe.delix.dto.api.authentication;
 
-import com.fsdm.pfe.delix.model.enums.Role;
 import lombok.Builder;
 import lombok.Value;
 
 @Value
 @Builder
 public class AuthenticationResponseDto {
-     String token;
+    String token;
 
 
 }

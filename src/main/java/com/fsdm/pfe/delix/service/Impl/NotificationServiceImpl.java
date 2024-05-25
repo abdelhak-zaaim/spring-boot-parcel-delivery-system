@@ -44,7 +44,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public Notification updateNotification(Notification notification) {
-        if(notification.getId() == null || notification.getId() == 0 )
+        if (notification.getId() == null || notification.getId() == 0)
             throw new NotificationNotFoundException("Notification id is required");
         if (notificationRepo.findById(notification.getId()).isEmpty())
             throw new NotificationNotFoundException("Notification with id " + notification.getId() + " not found");

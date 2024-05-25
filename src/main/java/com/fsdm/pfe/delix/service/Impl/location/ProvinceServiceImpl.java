@@ -27,6 +27,12 @@ public class ProvinceServiceImpl implements ProvinceService {
         this.provinceRepo = provinceRepo;
     }
 
+    public static List<ProvinceResponseDto> convertListToDto(List<Province> provinces) {
+        return provinces.stream()
+                .map(ProvinceResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public Province create(Province province) {
         return provinceRepo.save(province);
@@ -65,10 +71,5 @@ public class ProvinceServiceImpl implements ProvinceService {
     @Override
     public List<Province> saveAll(List<Province> provinces) {
         return provinceRepo.saveAll(provinces);
-    }
-    public static List<ProvinceResponseDto> convertListToDto(List<Province> provinces) {
-        return provinces.stream()
-                .map(ProvinceResponseDto::new)
-                .collect(Collectors.toList());
     }
 }

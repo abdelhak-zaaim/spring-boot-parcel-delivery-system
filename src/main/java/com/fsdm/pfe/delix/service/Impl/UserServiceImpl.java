@@ -13,14 +13,13 @@ package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.dto.email.ResetPasswordEmailTemplateDTO;
 import com.fsdm.pfe.delix.dto.email.VerifyEmailTemplateDTO;
+import com.fsdm.pfe.delix.entity.Notification;
 import com.fsdm.pfe.delix.entity.PasswordResetToken;
 import com.fsdm.pfe.delix.entity.User;
-import com.fsdm.pfe.delix.entity.Notification;
 import com.fsdm.pfe.delix.exception.UserNotFoundException;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.NotificationNotFoundException;
 import com.fsdm.pfe.delix.repository.PasswordResetTokenRepo;
 import com.fsdm.pfe.delix.repository.UserRepo;
-
 import com.fsdm.pfe.delix.repository.notification.NotificationRepo;
 import com.fsdm.pfe.delix.service.UserService;
 import jakarta.transaction.Transactional;
@@ -228,7 +227,6 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User with this email does not exist"));
-
 
 
         PasswordResetToken passwordResetToken = createPasswordResetTokenForUser(user);

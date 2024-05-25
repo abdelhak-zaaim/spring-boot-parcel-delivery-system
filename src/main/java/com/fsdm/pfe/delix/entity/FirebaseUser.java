@@ -33,7 +33,6 @@ public class FirebaseUser {
     private Long id;
 
 
-
     @Column(name = "messaging_key", nullable = false)
     private String messagingKey;
 

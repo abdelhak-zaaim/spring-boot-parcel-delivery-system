@@ -10,8 +10,9 @@
 
 package com.fsdm.pfe.delix.dto.response;
 
-import lombok.Value;
 import com.fsdm.pfe.delix.model.MapsLocationPoint;
+import lombok.Value;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +22,7 @@ import java.io.Serializable;
 public class MapsLocationPointDto implements Serializable {
     Double latitude;
     Double longitude;
+
     public MapsLocationPointDto(MapsLocationPoint point) {
         this.latitude = point.getLatitude();
         this.longitude = point.getLongitude();

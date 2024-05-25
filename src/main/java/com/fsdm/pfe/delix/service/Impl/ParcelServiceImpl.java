@@ -14,17 +14,12 @@ package com.fsdm.pfe.delix.service.Impl;
 import com.fsdm.pfe.delix.dto.request.GetQuoteRequestDto;
 import com.fsdm.pfe.delix.dto.request.ParcelRequestDto;
 import com.fsdm.pfe.delix.dto.response.ParcelResponseDto;
-import com.fsdm.pfe.delix.entity.DeliveryAddress;
-import com.fsdm.pfe.delix.entity.Parcel;
-import com.fsdm.pfe.delix.entity.Payment;
-import com.fsdm.pfe.delix.entity.Pricing;
-import com.fsdm.pfe.delix.entity.Area;
+import com.fsdm.pfe.delix.entity.*;
 import com.fsdm.pfe.delix.model.ParcelVolume;
 import com.fsdm.pfe.delix.model.PaymentModel;
 import com.fsdm.pfe.delix.model.enums.ParcelStatus;
 import com.fsdm.pfe.delix.model.enums.ParcelType;
 import com.fsdm.pfe.delix.repository.ParcelRepo;
-
 import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;
 import com.fsdm.pfe.delix.service.ParcelService;
 import org.springframework.stereotype.Service;
@@ -56,6 +51,17 @@ public class ParcelServiceImpl implements ParcelService {
         this.areaService = areaService;
         this.paymentService = paymentService;
         this.pricingService = pricingService;
+    }
+
+    public static List<Map<String, String>> getParcelTypesAsArrayOfMaps() {
+        List<Map<String, String>> list = new ArrayList<>();
+        for (ParcelType parcelType : ParcelType.values()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("name", parcelType.name());
+            map.put("message", parcelType.getMessage());
+            list.add(map);
+        }
+        return list;
     }
 
     @Override
@@ -110,25 +116,12 @@ public class ParcelServiceImpl implements ParcelService {
         return parcelRepository.findAllBySenderCustomerId(customerId);
     }
 
-
     public ParcelResponseDto convertEntityToResponseDto(Parcel parcel) {
         return new ParcelResponseDto(parcel);
     }
 
     public List<ParcelResponseDto> convertEntityListToResponseDtoList(List<Parcel> parcels) {
         return parcels.stream().map(this::convertEntityToResponseDto).toList();
-    }
-
-
-    public static List<Map<String, String>> getParcelTypesAsArrayOfMaps() {
-        List<Map<String, String>> list = new ArrayList<>();
-        for (ParcelType parcelType : ParcelType.values()) {
-            Map<String, String> map = new HashMap<>();
-            map.put("name", parcelType.name());
-            map.put("message", parcelType.getMessage());
-            list.add(map);
-        }
-        return list;
     }
 
     @Transactional

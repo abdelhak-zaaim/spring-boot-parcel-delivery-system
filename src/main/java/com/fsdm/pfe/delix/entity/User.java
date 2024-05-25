@@ -17,10 +17,11 @@ import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.util.Constants;
 import com.fsdm.pfe.delix.validation.user.UserValidate;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.*;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
@@ -28,7 +29,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "user", indexes = {
         @Index(name = "index_email", columnList = "email"),
@@ -43,17 +47,13 @@ public class User implements Serializable {
     protected final static String ROLE_PREFIX = "ROLE_";
     @Serial
     private static final long serialVersionUID = 1L;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    FirebaseUser firebaseUser;
+    @OneToMany(fetch = FetchType.LAZY)
+    Collection<Notification> notifications;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    FirebaseUser firebaseUser;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    Collection<Notification> notifications;
-
     @NotNull
     @Column(nullable = false)
     private String firstName;
@@ -146,6 +146,7 @@ public class User implements Serializable {
                 this.getImage()
         );
     }
+
     public void addNotification(Notification notification) {
         if (notifications == null) {
             notifications = new ArrayList<>();

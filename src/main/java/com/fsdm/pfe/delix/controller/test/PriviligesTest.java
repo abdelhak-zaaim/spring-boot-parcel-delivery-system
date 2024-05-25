@@ -21,26 +21,27 @@ import java.util.List;
 
 @Controller
 public class PriviligesTest {
-   PrivilegesGroupServiceImpl privilegesGroupService;
-   public PriviligesTest(PrivilegesGroupServiceImpl privilegesGroupService) {
-      this.privilegesGroupService = privilegesGroupService;
-   }
-   @GetMapping("/test/add/privilige")
+    PrivilegesGroupServiceImpl privilegesGroupService;
+
+    public PriviligesTest(PrivilegesGroupServiceImpl privilegesGroupService) {
+        this.privilegesGroupService = privilegesGroupService;
+    }
+
+    @GetMapping("/test/add/privilige")
     public ResponseEntity<PrivilegesGroup> addPriviliges() {
-      PrivilegesGroup privilegesGroup = new PrivilegesGroup();
-      List<Privilege> privileges = List.of(Privilege.PARCELS_ADD, Privilege.PARCELS_EDIT, Privilege.PARCELS_READ, Privilege.PARCELS_DELETE);
-      privilegesGroup.setName("AGNTMAANAGER");
+        PrivilegesGroup privilegesGroup = new PrivilegesGroup();
+        List<Privilege> privileges = List.of(Privilege.PARCELS_ADD, Privilege.PARCELS_EDIT, Privilege.PARCELS_READ, Privilege.PARCELS_DELETE);
+        privilegesGroup.setName("AGNTMAANAGER");
         privilegesGroup.setPrivileges(privileges);
-     return ResponseEntity.ok(privilegesGroupService.savePrivilegesGroup(privilegesGroup));
+        return ResponseEntity.ok(privilegesGroupService.savePrivilegesGroup(privilegesGroup));
 
 
     }
+
     @GetMapping("/test/get/privilige")
     public ResponseEntity<PrivilegesGroup> getPriviliges() {
         return ResponseEntity.ok(privilegesGroupService.loadPrivilegesGroupById(1L));
     }
-
-
 
 
 }

@@ -44,17 +44,14 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 public class Address {
+    @ManyToOne
+    Area area;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     @NotNull
     private String address;
-
-    @ManyToOne
-    Area area;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
     private Date creationDate;

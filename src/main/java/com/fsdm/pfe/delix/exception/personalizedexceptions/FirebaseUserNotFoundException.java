@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.exception.personalizedexceptions;
 
-public class FirebaseUserNotFoundException extends RuntimeException{
+public class FirebaseUserNotFoundException extends RuntimeException {
     public FirebaseUserNotFoundException(String message) {
         super(message);
     }

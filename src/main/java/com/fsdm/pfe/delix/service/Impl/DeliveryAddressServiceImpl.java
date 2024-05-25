@@ -12,8 +12,8 @@
 package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.dto.request.DeliveryAddressRequestDto;
-import com.fsdm.pfe.delix.entity.DeliveryAddress;
 import com.fsdm.pfe.delix.entity.Area;
+import com.fsdm.pfe.delix.entity.DeliveryAddress;
 import com.fsdm.pfe.delix.repository.DeliveryAddressRepo;
 import com.fsdm.pfe.delix.service.DeliveryAddressService;
 import com.fsdm.pfe.delix.service.Impl.location.AreaServiceImpl;
@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DeliveryAddressServiceImpl implements DeliveryAddressService {
-    DeliveryAddressRepo deliveryAddressRepo;
     private final AreaServiceImpl areaService;
+    DeliveryAddressRepo deliveryAddressRepo;
 
     public DeliveryAddressServiceImpl(DeliveryAddressRepo deliveryAddressRepo, AreaServiceImpl areaService) {
         this.deliveryAddressRepo = deliveryAddressRepo;

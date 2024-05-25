@@ -12,11 +12,9 @@ package com.fsdm.pfe.delix.service.Impl;
 
 import com.fsdm.pfe.delix.entity.User;
 import com.fsdm.pfe.delix.entity.VerificationToken;
-
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.repository.VerificationTokenRepo;
 import com.fsdm.pfe.delix.service.VerificationTokenService;
-import com.fsdm.pfe.delix.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

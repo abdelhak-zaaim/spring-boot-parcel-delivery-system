@@ -18,52 +18,55 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
+
 @Service
 public class PasswordResetTokenServiceImpl implements PasswordResetTokenService {
-   private final PasswordResetTokenRepo passwordResetTokenRepo;
+    private final PasswordResetTokenRepo passwordResetTokenRepo;
 
     public PasswordResetTokenServiceImpl(PasswordResetTokenRepo passwordResetTokenRepo) {
         this.passwordResetTokenRepo = passwordResetTokenRepo;
     }
 
     @Override
-   public void createPasswordResetTokenForUser(User user, String token) {
-       passwordResetTokenRepo.save(new PasswordResetToken(token, user));
-   }
+    public void createPasswordResetTokenForUser(User user, String token) {
+        passwordResetTokenRepo.save(new PasswordResetToken(token, user));
+    }
 
-   @Override
-   public void deletePasswordResetToken(String token) {
-      passwordResetTokenRepo.deleteByToken(token);
-   }
+    @Override
+    public void deletePasswordResetToken(String token) {
+        passwordResetTokenRepo.deleteByToken(token);
+    }
 
-   @Override
-   public void deleteAllExpiredSince(Date now) {
-      passwordResetTokenRepo.deleteAllByExpiryDateBefore(now);
-   }
+    @Override
+    public void deleteAllExpiredSince(Date now) {
+        passwordResetTokenRepo.deleteAllByExpiryDateBefore(now);
+    }
 
-   @Override
-   public Optional<PasswordResetToken> findByToken(String token) {
-      return passwordResetTokenRepo.findByToken(token);
-   }
+    @Override
+    public Optional<PasswordResetToken> findByToken(String token) {
+        return passwordResetTokenRepo.findByToken(token);
+    }
 
-   boolean isTokenExpired(PasswordResetToken passwordResetToken) {
-      return passwordResetToken.getExpiryDate().before(new Date());
-   }
-   boolean isTokenValid(PasswordResetToken passwordResetToken) {
-      return passwordResetTokenRepo.existsByToken(passwordResetToken.getToken());
-   }
-   void validateToken(PasswordResetToken passwordResetToken) {
-      if (!isTokenValid(passwordResetToken)) {
-         throw new IllegalArgumentException("Invalid token");
-      }
-      if (isTokenExpired(passwordResetToken)) {
-         throw new IllegalArgumentException("Token expired");
-      }
-   }
+    boolean isTokenExpired(PasswordResetToken passwordResetToken) {
+        return passwordResetToken.getExpiryDate().before(new Date());
+    }
+
+    boolean isTokenValid(PasswordResetToken passwordResetToken) {
+        return passwordResetTokenRepo.existsByToken(passwordResetToken.getToken());
+    }
+
+    void validateToken(PasswordResetToken passwordResetToken) {
+        if (!isTokenValid(passwordResetToken)) {
+            throw new IllegalArgumentException("Invalid token");
+        }
+        if (isTokenExpired(passwordResetToken)) {
+            throw new IllegalArgumentException("Token expired");
+        }
+    }
 
 
-  public  boolean isExpiredByToken(String token) {
-      Optional<PasswordResetToken> passwordResetToken = findByToken(token);
-       return passwordResetToken.filter(this::isTokenExpired).isPresent();
-   }
+    public boolean isExpiredByToken(String token) {
+        Optional<PasswordResetToken> passwordResetToken = findByToken(token);
+        return passwordResetToken.filter(this::isTokenExpired).isPresent();
+    }
 }

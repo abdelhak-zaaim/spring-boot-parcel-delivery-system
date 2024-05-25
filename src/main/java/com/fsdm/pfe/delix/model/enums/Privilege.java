@@ -25,9 +25,7 @@ public enum Privilege {
     DELIVERY_EDIT(PrivilegeType.DELIVERY, PrivilegeAction.EDIT),
     DELIVERY_READ(PrivilegeType.DELIVERY, PrivilegeAction.READ),
     TRANSPORT_READ(PrivilegeType.TRANSPORT, PrivilegeAction.READ),
-    TRANSPORT_EDIT(PrivilegeType.TRANSPORT, PrivilegeAction.EDIT)
-
-    ;
+    TRANSPORT_EDIT(PrivilegeType.TRANSPORT, PrivilegeAction.EDIT);
 
     private final PrivilegeType type;
     private final PrivilegeAction action;

@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public abstract class BaseExceptionHandler {
 
     protected static ResponseEntity<?> createErrorResponse(Object errorBody, HttpStatus status, String acceptHeader) {
-        if ((acceptHeader != null && acceptHeader.contains("application/json")||true)) {
+        if ((acceptHeader != null && acceptHeader.contains("application/json") || true)) {
             return new ResponseEntity<>(errorBody, status);
         } else {
             ModelAndView modelAndView = new ModelAndView("error");

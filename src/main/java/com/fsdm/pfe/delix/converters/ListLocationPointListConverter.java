@@ -10,12 +10,13 @@
  */
 
 package com.fsdm.pfe.delix.converters;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fsdm.pfe.delix.model.MapsLocationPoint;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fsdm.pfe.delix.model.MapsLocationPoint;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +38,8 @@ public class ListLocationPointListConverter implements AttributeConverter<List<M
     @Override
     public List<MapsLocationPoint> convertToEntityAttribute(String dbData) {
         try {
-            return objectMapper.readValue(dbData, new TypeReference<List<MapsLocationPoint>>() {});
+            return objectMapper.readValue(dbData, new TypeReference<List<MapsLocationPoint>>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException("Failed to convert JSON to list of location points", e);
         }

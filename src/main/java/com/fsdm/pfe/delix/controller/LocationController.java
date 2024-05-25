@@ -64,6 +64,7 @@ public class LocationController {
         }
 
     }
+
     @GetMapping("/express/location/area")
 
     public ResponseEntity<ResponseDataDto> locationArea(@RequestParam String code) {
@@ -136,7 +137,7 @@ public class LocationController {
         provinces.stream().map(province -> {
 
 
-            WebClient webClient = WebClient.create("https://speedaf.com/oms/city/"+province.getCode()+"/queryList?provinceCode=" + province.getCode());
+            WebClient webClient = WebClient.create("https://speedaf.com/oms/city/" + province.getCode() + "/queryList?provinceCode=" + province.getCode());
             List<City> cityDtoList = new ArrayList<>();
             Mono<Map<String, Object>> result = webClient.get()
                     .retrieve()
@@ -171,7 +172,6 @@ public class LocationController {
             }
 
             cityList.add(cityDtoList);
-
 
 
             return cityService.saveAll(cityDtoList);

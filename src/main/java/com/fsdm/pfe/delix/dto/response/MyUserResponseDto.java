@@ -21,33 +21,32 @@ import java.util.Date;
 @Builder
 public class MyUserResponseDto {
 
-     String firstName;
+    String firstName;
 
 
-     String lastName;
+    String lastName;
 
 
-     String email;
+    String email;
 
 
-     String role;
+    String role;
 
 
-   
-     String phoneNumber;
+    String phoneNumber;
 
 
-     Address address;
+    Address address;
 
 
-     Date registeredAt;
-
-   
-     Date lastUpdateDate;
+    Date registeredAt;
 
 
+    Date lastUpdateDate;
 
-     String cin;
+
+    String cin;
+
     public MyUserResponseDto(String firstName, String lastName, String email, String role, String phoneNumber, Address address, Date registeredAt, Date lastUpdateDate, String cin) {
         this.firstName = firstName;
         this.lastName = lastName;

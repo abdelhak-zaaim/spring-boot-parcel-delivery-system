@@ -14,7 +14,10 @@ import com.fsdm.pfe.delix.entity.Address;
 
 public interface AddressService {
     void deleteAddress(Long id);
+
     Address loadAddressById(Long id);
+
     Address saveAddress(Address address);
+
     Address updateAddress(Address address);
 }
