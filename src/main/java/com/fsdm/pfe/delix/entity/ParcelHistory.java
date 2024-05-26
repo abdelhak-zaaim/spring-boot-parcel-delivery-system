@@ -30,11 +30,6 @@ public class ParcelHistory {
     @Id
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Parcel idParcel;
-
-    // the status of the parcel as a string
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
