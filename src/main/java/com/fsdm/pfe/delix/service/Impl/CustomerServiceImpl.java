@@ -19,6 +19,7 @@ import com.fsdm.pfe.delix.dto.response.LoginResponseDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import com.fsdm.pfe.delix.entity.Parcel;
 import com.fsdm.pfe.delix.entity.User;
+import com.fsdm.pfe.delix.exception.personalizedexceptions.CustomerLoginException;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
 import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.repository.CustomerRepo;
@@ -59,15 +60,18 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     private final LoginLogServiceImpl loginLogService;
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
+    private final LoginAttemptServiceImpl loginAttemptService;
 
 
-    public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, LoginLogServiceImpl loginLogService, AuthenticationManager authenticationManager) {
+    public CustomerServiceImpl(PasswordEncoder passwordEncoder, CustomerRepo customerRepository, UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, HttpServletRequest request, LoginLogServiceImpl loginLogService, AuthenticationManager authenticationManager, LoginAttemptServiceImpl loginAttemptService) {
         this.passwordEncoder = passwordEncoder;
         this.customerRepository = customerRepository;
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
+
         this.loginLogService = loginLogService;
         this.authenticationManager = authenticationManager;
+        this.loginAttemptService = loginAttemptService;
     }
 
     @Override
@@ -133,7 +137,9 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     @Override
     public Customer loadUserByUsername(String email) throws UsernameNotFoundException {
-
+        if (loginAttemptService.isBlocked()) {
+            throw new CustomerLoginException("You are blocked for 5 minutes, try again later");
+        }
         Optional<Customer> customer = customerRepository.findByEmail(email);
         customer.orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
 
@@ -236,4 +242,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         Customer customer = customerRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         return customer.getParcels();
     }
+
+
 }

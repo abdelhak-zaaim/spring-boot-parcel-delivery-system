@@ -18,6 +18,7 @@ import com.fsdm.pfe.delix.dto.response.MessageDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import com.fsdm.pfe.delix.entity.User;
+import com.fsdm.pfe.delix.exception.personalizedexceptions.CustomerLoginException;
 import com.fsdm.pfe.delix.exception.personalizedexceptions.UserRegistrationException;
 import com.fsdm.pfe.delix.service.Impl.CustomerServiceImpl;
 import com.fsdm.pfe.delix.service.Impl.LoginLogServiceImpl;
@@ -114,13 +115,15 @@ public class AuthenticationController {
             return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
 
 
-        } catch (UsernameNotFoundException e) {
+        }catch (CustomerLoginException | UsernameNotFoundException e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         } catch (BadCredentialsException e) {
             // Handle incorrect password
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), "Incorrect Email or Password"));
         } catch (AuthenticationException e) {
             // Handle other authentication failures
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
+        }catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         }
     }
