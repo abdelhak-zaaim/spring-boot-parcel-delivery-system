@@ -31,12 +31,7 @@ function initMap() {
         .then(response => response.json())
         .then(data => {
 
-            // convert data to a array list like this
-            // const locations = [
-            //     { lat: -33.8688, lng: 151.2093, content: "Sydney, Australia",  },
-            //     { lat: -37.8136, lng: 144.9631, content: "Melbourne, Australia",},
-            //     { lat: -41.2905, lng: 174.7792, content: "Wellington, New Zealand", }
-            // ];
+
             const locations = []
             for (const location of data) {
                 locations.push({ lat: location.locationPoint.latitude, lng: location.locationPoint.longitude, content: location.agencyName })
@@ -46,8 +41,6 @@ function initMap() {
                     position: location,
                     map: map,
                     icon: "/home/assets/images/icons/flag.png",
-
-
                 });
 
                 // Optional: Add info window content
