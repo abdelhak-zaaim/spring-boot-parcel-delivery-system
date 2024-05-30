@@ -202,13 +202,11 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
     public PaymentModel generateQuote(Area pickUpArea, Area deliveryArea, ParcelType parcelType, ParcelVolume parcelVolume, double weight) {
-
-
         Pricing pricing = getPricing();
 
         double volume = parcelVolume.getLength() * parcelVolume.getWidth() * parcelVolume.getHeight();
         double density = weight / volume;
-        double distance = calculateDistance(pickUpArea, deliveryArea);
+        double distance = calculateDistance(pickUpArea, deliveryArea, parcelType, parcelVolume);
 
         double quote = pricing.getBasePrice() + (density * pricing.getDensityFactor()) + (distance * pricing.getDistanceFactor());
 
@@ -223,12 +221,17 @@ public class ParcelServiceImpl implements ParcelService {
                 .build();
     }
 
+    private double calculateDistance(Area pickUpArea, Area deliveryArea, ParcelType parcelType, ParcelVolume parcelVolume) {
+        double baseDistance = 12;
 
-    private double calculateDistance(Area pickUpArea, Area deliveryArea) {
 
-        return 100;
+        double volume = parcelVolume.getLength() * parcelVolume.getWidth() * parcelVolume.getHeight();
+        double volumeFactor = volume / 1000;
+
+        double typeFactor = parcelType == ParcelType.CONTAINS_DANGEROUS ? 1.5 : 1.0; // Adjust this as needed
+
+        return baseDistance * volumeFactor * typeFactor;
     }
-
 
 }
 

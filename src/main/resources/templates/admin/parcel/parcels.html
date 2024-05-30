@@ -4,7 +4,7 @@
 <head th:replace="admin/partials/head.html :: head(titlePage='Delix | Agencies')"></head>
 
 
-<title>list de Agences</title>
+<title>List des colis</title>
 </head>
 <body>
 
@@ -15,12 +15,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Data Tables</h1>
+        <h1>List des colis</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/admin/}">Home</a></li>
-                <li class="breadcrumb-item">Parcels</li>
-                <li class="breadcrumb-item active">List</li>
+                <li class="breadcrumb-item"><a th:href="@{/admin/}">home</a></li>
+                <li class="breadcrumb-item">colis</li>
+                <li class="breadcrumb-item active">list</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -37,41 +37,41 @@
                         <!--   <p th:text=" ${listDtoAgencies}"></p> &lt;!&ndash; display listAgenciesDTO &ndash;&gt -->
 
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                            <tr>
-                                <th>
-                                   Code Bare
-                                </th>
-                                <th>Status</th>
-                                <th>Type</th>
-                                <th>Creation Date</th>
-                                <th>Weight</th>
-                                <th>Receiver City</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+     <table class="table datatable">
+    <thead>
+    <tr>
+        <th>
+           Code Barre
+        </th>
+        <th>Statut</th>
+        <th>Type</th>
+        <th>Date de Création</th>
+        <th>Poids</th>
+        <th>Ville du Destinataire</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
 
-                            <tr th:each="parcel :${parcels}" th:id="@{row-+${parcel.id}}">
-                                <td th:text="${parcel.getCodeBar()}">NULL</td>
-                                <td th:text="${parcel.getStatus()}">NULL</td>
-                                <td th:text="${parcel.getType()}">NULL</td>
-                                <td th:text="${parcel.getCreationDate()}">NULL</td>
-                                <td th:text="${parcel.getWeight()}">NULL</td>
-                                <td th:text="${parcel.getReceiverAddress().getAddress()}">NULL</td>
-                                <td>
-                                    <div class="row">
-                                        <a style="cursor: pointer;" th:onclick="@{}" th:href="@{'/admin/agency/edit/' + ${parcel.id}}"
-                                           class=" col-lg-6"><i class="bi bi-pencil-square"></i> </a>
-                                        <a style="color: red;cursor: pointer; " th:onclick="@{|deleteAgency(${parcel.id})|}"
-                                           class="col-lg-6 "><i class="bi bi-trash"></i> </a>
-                                    </div>
-                            </tr>
+    <tr th:each="parcel :${parcels}" th:id="@{row-+${parcel.id}}">
+        <td th:text="${parcel.getCodeBar()}">NULL</td>
+        <td th:text="${parcel.getStatus()}">NULL</td>
+        <td th:text="${parcel.getType()}">NULL</td>
+        <td th:text="${parcel.getCreationDate()}">NULL</td>
+        <td th:text="${parcel.getWeight()} +'KG'">NULL</td>
+        <td th:text="${parcel.getReceiverAddress().getAddress()}">NULL</td>
+        <td>
+            <div class="row">
+                <a style="cursor: pointer;" th:onclick="@{}" th:href="@{'/admin/agency/edit/' + ${parcel.id}}"
+                   class=" col-lg-6"><i class="bi bi-pencil-square"></i> </a>
+                <a style="color: red;cursor: pointer; " th:onclick="@{|deleteAgency(${parcel.id})|}"
+                   class="col-lg-6 "><i class="bi bi-trash"></i> </a>
+            </div>
+    </tr>
 
 
-                            </tbody>
-                        </table>
+    </tbody>
+</table>
                         <!-- End Table with stripped rows -->
 
                     </div>

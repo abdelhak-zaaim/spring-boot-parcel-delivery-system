@@ -10,7 +10,7 @@
                 <i class="bi bi-grid"></i>
                 <span>Tableau de bord</span>
             </a>
-        </li><!-- Fin de la navigation du tableau de bord -->
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" data-bs-target="#agency-nav" data-bs-toggle="collapse"
@@ -119,6 +119,37 @@
             </ul>
         </li>
 
+        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-original-title="Under Development">
+            <a class="nav-link collapsed" data-bs-target="#data-migration" data-bs-toggle="collapse"
+               th:classappend="${currentPage == '/admin/migration/import' || currentPage == '/admin/migration/export' ? '' : 'collapsed'}"
+            >
+                <i class="bi bi-database"></i>
+
+                <span>Data Migrationn</span>
+
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="data-migration" class="nav-content collapse " data-bs-parent="#data-migration"
+                th:classappend="${currentPage == '/admin/migration/import' || currentPage == '/admin/migration/export' ? 'show' : ''}"
+            >
+                <li>
+                    <a href="./data/migration/import"
+                       th:classappend="${currentPage == '/admin/migration/import' ? 'active' : ''}"
+                    >
+                        <i class="bi bi-circle"></i><span>Import Data</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./data/migration/export"
+                       th:classappend="${currentPage == '/admin/migration/export' ? 'active' : ''}"
+                    >
+                        <i class="bi bi-circle"></i><span>Export Data</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
 
     </ul>
 
