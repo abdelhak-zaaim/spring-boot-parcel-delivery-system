@@ -42,7 +42,9 @@
                         <h5 class="card-title">import Data</h5>
 
                         <!-- General Form Elements -->
-                        <form>
+                        <form action="./data/migration/import" method="post" >
+                            <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}"/>
                             <div class="row mb-3">
                                 <label for="inputFile" class="col-sm-2 col-form-label">File Upload</label>
                                 <div class="col-sm-10">
@@ -57,14 +59,13 @@
                                 <label class="col-sm-2 col-form-label">Select</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" aria-label="Default select example">
-                                        <option selected="">choice the Object</option>
-                                        <option value="PARCEL">Parcel</option>
-                                        <option value="USER">User</option>
-                                        <option value="DELIVERY_MAN">DeliveryMan</option>
-                                        <option value="2">transporter</option>
-                                        <option value="3">Agency</option>
-                                        <option value="4">Province</option>
-                                        <option value="5">City</option>
+                                        <option selected value disabled>choice the Object</option>
+                                        <option th:each="impurtType : ${importTypes}" th:value="${impurtType}" th:text="#{${'importType.'+impurtType}}"></option>
+
+
+
+
+
 
 
                                     </select>
@@ -77,7 +78,7 @@
 
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Submit Button</label>
+                                <label class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10">
                                     <button type="submit" class="btn btn-primary">Start Migration</button>
                                 </div>
