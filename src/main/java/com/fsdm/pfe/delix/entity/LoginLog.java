@@ -30,6 +30,9 @@ public class LoginLog {
     @Temporal(TemporalType.TIMESTAMP)
     private Date loginDate;
 
+    @ManyToOne
+    private User user;
+
     private String userAgent;
     private String ipAddress;
     private boolean loginStatus;

@@ -14,18 +14,19 @@ import com.fsdm.pfe.delix.service.datamegration.DataMigrationService;
 import com.fsdm.pfe.delix.service.datamegration.DataProcessor;
 import com.fsdm.pfe.delix.service.datamegration.DataReader;
 import com.fsdm.pfe.delix.service.datamegration.DataWriter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.List;
 @Service
-public class DataMigrationServiceImpl implements DataMigrationService {
+public class CsvDataMigrationServiceImpl implements DataMigrationService {
 
    private final DataReader dataReader;
    private final DataProcessor dataProcessor;
    private final DataWriter dataWriter;
 
-   public DataMigrationServiceImpl(DataReader dataReader, DataProcessor dataProcessor, DataWriter dataWriter) {
+   public CsvDataMigrationServiceImpl(@Qualifier("csvDataReader") DataReader dataReader, DataProcessor dataProcessor, DataWriter dataWriter) {
       this.dataReader = dataReader;
       this.dataProcessor = dataProcessor;
       this.dataWriter = dataWriter;
