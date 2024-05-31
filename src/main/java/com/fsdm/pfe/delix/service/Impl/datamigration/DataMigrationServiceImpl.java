@@ -21,8 +21,6 @@ import java.util.List;
 @Service
 public class DataMigrationServiceImpl implements DataMigrationService {
 
-
-
    private final DataReader dataReader;
    private final DataProcessor dataProcessor;
    private final DataWriter dataWriter;

@@ -27,9 +27,6 @@ public class LoginLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User user;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date loginDate;
 

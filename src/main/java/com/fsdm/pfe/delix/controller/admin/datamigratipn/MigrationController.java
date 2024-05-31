@@ -30,9 +30,6 @@ public class MigrationController {
 
     @GetMapping("/admin/data/migration/import")
     public String migration(Model model) {
-
-
-
        ImportObjectType[] importObjectTypes = ImportObjectType.values();
 
        model.addAttribute("importTypes",importObjectTypes);

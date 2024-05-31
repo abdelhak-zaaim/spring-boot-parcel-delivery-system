@@ -29,7 +29,6 @@ public class LoginLogServiceImpl implements LoginLogService {
 
     public void saveLoginLog(User user, String userAgent, String ipAddress, boolean loginStatus, String loginMethod) {
         LoginLog loginLog = new LoginLog();
-        loginLog.setUser(user);
         loginLog.setLoginDate(new Date());
         loginLog.setUserAgent(userAgent);
         loginLog.setIpAddress(ipAddress);

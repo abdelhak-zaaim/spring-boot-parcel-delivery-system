@@ -55,7 +55,6 @@ public class AgencyEmployeeDto implements Serializable {
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String phoneNumber;
 
-
     @Enumerated(EnumType.STRING)
     UserStatus status;
     String cin;

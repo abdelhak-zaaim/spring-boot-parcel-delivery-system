@@ -122,7 +122,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
                     userService.sendEmailVerification(finalCustomer.getEmail(), token, baseUrl, finalCustomer.getLastName());
                 } catch (Exception ignored) {
 
-
                 }
             }).start();
         }

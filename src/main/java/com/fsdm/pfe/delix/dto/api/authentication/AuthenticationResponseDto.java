@@ -17,6 +17,4 @@ import lombok.Value;
 @Builder
 public class AuthenticationResponseDto {
     String token;
-
-
 }
