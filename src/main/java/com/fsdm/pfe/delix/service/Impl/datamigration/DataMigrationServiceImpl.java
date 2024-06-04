@@ -53,8 +53,6 @@ public class DataMigrationServiceImpl implements DataMigrationService {
             dataWriter.writeDataToDatabase(processedData);
         } catch (IOException e) {
             LOGGER.error("Failed to read data from file. Error: {}", e.getMessage());
-        } catch (CsvException e) {
-            throw new RuntimeException(e);
         }
     }
 }

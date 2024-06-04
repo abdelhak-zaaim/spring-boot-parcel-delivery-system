@@ -21,6 +21,6 @@ import java.util.List;
 
 public interface DataReader
 {
-   List<String[]> readDataFromFile(MultipartFile file) throws IOException, CsvException;
+   List<String[]> readDataFromFile(MultipartFile file) throws IOException;
 
 }
