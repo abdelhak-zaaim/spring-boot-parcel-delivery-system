@@ -20,32 +20,16 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.HashSet;
 import java.util.Set;
 
-@Slf4j
 public class PrivilegesGroupValidator implements ConstraintValidator<PrivilegeValidation, PrivilegesGroup> {
-    private PrivilegesGroup privilegesGroup;
-
-    @Override
-    public void initialize(PrivilegeValidation constraintAnnotation) {
-    }
 
     @Override
     public boolean isValid(PrivilegesGroup privilegesGroup, ConstraintValidatorContext context) {
-        log.debug("Validating PrivilegesGroup: " + privilegesGroup);
-
         if (privilegesGroup.getName() == null || privilegesGroup.getName().isEmpty()) {
             return false;
         }
         if (privilegesGroup.getPrivileges() == null || privilegesGroup.getPrivileges().isEmpty()) {
             return false;
         }
-        Set<Privilege> uniquePrivileges = new HashSet<>();
-        for (Privilege privilege : privilegesGroup.getPrivileges()) {
-            if (!Privilege.contains(privilege) || !uniquePrivileges.add(privilege)) {
-                return false;
-            }
-        }
-        return true;
+        return privilegesGroup.getPrivileges().stream().allMatch(Privilege::contains);
     }
-
-
 }
