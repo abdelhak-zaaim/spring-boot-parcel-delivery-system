@@ -10,9 +10,18 @@
 
 package com.fsdm.pfe.delix.service.datamegration;
 
-import java.io.File;
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+/**
+ * this interface is used to migrate data from a file to the database
+ * contain base function to migrate data
+ */
 public interface DataMigrationService {
-   void migrateData(File file);
+   void migrateData(MultipartFile file);
+   void saveLog(String log);
+   LinkedList<String> getDataLogs();
+   MultipartFile getLogsAsFile();
 }
