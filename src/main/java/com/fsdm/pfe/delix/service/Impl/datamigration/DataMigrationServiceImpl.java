@@ -14,6 +14,7 @@ import com.fsdm.pfe.delix.service.datamegration.DataMigrationService;
 import com.fsdm.pfe.delix.service.datamegration.DataProcessor;
 import com.fsdm.pfe.delix.service.datamegration.DataReader;
 import com.fsdm.pfe.delix.service.datamegration.DataWriter;
+import com.opencsv.exceptions.CsvException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,6 +53,8 @@ public class DataMigrationServiceImpl implements DataMigrationService {
             dataWriter.writeDataToDatabase(processedData);
         } catch (IOException e) {
             LOGGER.error("Failed to read data from file. Error: {}", e.getMessage());
+        } catch (CsvException e) {
+            throw new RuntimeException(e);
         }
     }
 }
