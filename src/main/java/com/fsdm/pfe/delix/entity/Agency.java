@@ -123,6 +123,11 @@ public class Agency {
     /**
      * The last update date of the agency.
      * @Temporal annotation specifies the type of a temporal field.
+     * @JsonProperty annotation is used to indicate that the property should be serialized only.
+     * @see com.fasterxml.jackson.annotation.JsonProperty
+     * @see jakarta.persistence.Temporal
+     *
+     * JsonProperty.Access.WRITE_ONLY is used to indicate that the property should be serialized only.
      */
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -130,6 +135,9 @@ public class Agency {
 
     /**
      * The location point of the agency.
+     * @see com.fsdm.pfe.delix.model.MapsLocationPoint
+     * @see com.fsdm.pfe.delix.validation.location.ValidMapsLocationPoint
+     * validation annotation to validate the location point.
      */
     @ValidMapsLocationPoint
     private MapsLocationPoint locationPoint;
@@ -145,6 +153,9 @@ public class Agency {
 
     /**
      * Method executed before the entity is persisted. Sets the creation and last update dates.
+     * Sets the creation date and last update date.
+     * @see jakarta.persistence.PrePersist
+     * @see java.util.Date
      */
     @PrePersist
     protected void onCreated() {

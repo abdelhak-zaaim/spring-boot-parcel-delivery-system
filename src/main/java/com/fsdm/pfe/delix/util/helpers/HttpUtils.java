@@ -14,6 +14,13 @@ package com.fsdm.pfe.delix.util.helpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class HttpUtils {
+    /**
+     * <p> this function is used to get the server URL
+     * <p> it takes the request as a parameter
+     * <p> it returns the server URL
+     * @param request
+     * @return
+     */
     public static String getServerUrl(HttpServletRequest request) {
         String scheme = request.getScheme(); // http or https
         String serverName = request.getServerName(); // hostname
