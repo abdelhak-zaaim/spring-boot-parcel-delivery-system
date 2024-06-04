@@ -13,5 +13,5 @@ package com.fsdm.pfe.delix.service.datamegration;
 import java.util.List;
 
 public interface DataWriter<T> {
-    void writeDataToDatabase(List<T> data);
+    void writeDataToDatabase(T data);
 }

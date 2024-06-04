@@ -14,19 +14,18 @@ import com.fsdm.pfe.delix.service.datamegration.DataMigrationService;
 import com.fsdm.pfe.delix.service.datamegration.DataProcessor;
 import com.fsdm.pfe.delix.service.datamegration.DataReader;
 import com.fsdm.pfe.delix.service.datamegration.DataWriter;
-import com.opencsv.exceptions.CsvException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class DataMigrationServiceImpl implements DataMigrationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataMigrationServiceImpl.class);
+    private List<String> errorLog = new LinkedList<>();
 
     private DataReader dataReader;
     private DataWriter dataWriter;
@@ -42,17 +41,27 @@ public class DataMigrationServiceImpl implements DataMigrationService {
     public void migrateData(MultipartFile file) {
         try {
             List<String[]> rawData = dataReader.readDataFromFile(file);
-            List<Object> processedData = rawData.stream().map(row -> {
-                try {
-                    return dataProcessor.processRowData(row);
-                } catch (Exception e) {
-                    LOGGER.error("Failed to process row: {}. Error: {}", Arrays.toString(row), e.getMessage());
-                    return null;
-                }
-            }).filter(Objects::nonNull).collect(Collectors.toList());
-            dataWriter.writeDataToDatabase(processedData);
+            for (String[] row : rawData) {
+                processAndWriteRow(row);
+            }
         } catch (IOException e) {
-            LOGGER.error("Failed to read data from file. Error: {}", e.getMessage());
+            logError("Failed to read data from file. Error: ", e);
         }
     }
+
+    private void processAndWriteRow(String[] row) {
+        try {
+            Object processedData = dataProcessor.processRowData(row);
+            dataWriter.writeDataToDatabase(processedData);
+        } catch (Exception e) {
+            logError("Failed to process row: " + Arrays.toString(row) + ". Error: ", e);
+        }
+    }
+
+    private void logError(String message, Exception e) {
+        errorLog.add(message + e.getMessage());
+        LOGGER.error(message + "{}", e.getMessage());
+    }
+
+
 }
