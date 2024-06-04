@@ -21,14 +21,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Component
 public class CsvDataReaderImpl implements DataReader {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CsvDataReaderImpl.class);
     @Override
-    public List<String[]> readDataFromFile(MultipartFile file) throws IOException, CsvException {
+    public List<String[]> readDataFromFile(MultipartFile file) throws IOException {
         try (Reader reader = new InputStreamReader(file.getInputStream());
              CSVReader csvReader = new CSVReaderBuilder(reader).build()) {
             return csvReader.readAll();
+        } catch (CsvException e) {
+            LOGGER.error("Failed to parse CSV file: {}. Error: {}", file.getOriginalFilename(), e.getMessage());
+            throw new RuntimeException("Failed to parse CSV file: " + file.getOriginalFilename(), e);
         }
     }
 }
