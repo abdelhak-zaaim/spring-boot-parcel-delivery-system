@@ -130,68 +130,7 @@ public class DataMigrationServiceImpl implements DataMigrationService {
     }
 
     // FIXME: this technic not good for this project , we need to use the spring batch
-    public List<String> migrateCityExel(XSSFSheet sheet) {
-        List<String> logs = new LinkedList<>();
-        int rowNumber = 0;
 
-        for (Row row : sheet) {
-            if (rowNumber == 0) {
-                rowNumber++;
-                continue;
-            }
-
-            Iterator<Cell> cells = row.iterator();
-
-            int cid = 0;
-
-            City city = new City();
-            while (cells.hasNext()) {
-                Cell cell = cells.next();
-                switch (cid) {
-                    case 0:
-                        try {
-                            city.setCode(cell.getStringCellValue());
-                        } catch (Exception e) {
-                            logs.add("Error while parsing code for city" + city.getName());
-                        }
-                        break;
-                    case 1:
-                        try {
-                            city.setName(cell.getStringCellValue());
-                        } catch (Exception e) {
-                            logs.add("Error while parsing name for city code: " + city.getCode());
-                        }
-                        break;
-                    case 2:
-                        try {
-                            city.setPostalCode(cell.getStringCellValue());
-                        } catch (Exception e) {
-                            logs.add("Error while parsing postal code for city code: " + city.getCode());
-                        }
-                        break;
-                    case 3:
-                        Province province = provinceRepo.findByCode(cell.getStringCellValue()).orElse(null);
-                        if (province == null) {
-                            logs.add("Province not found for city code: " + city.getCode());
-                            break;
-                        }
-                        city.setProvinceCode(province);
-                        break;
-                    default:
-                        break;
-                }
-
-                cid++;
-            }
-            try {
-                cityRepo.save(city);
-            } catch (Exception e) {
-                logs.add("Error while saving city: " + city.getCode());
-            }
-        }
-
-        return logs;
-    }
 
     public List<String> migrateProvinceExel(XSSFSheet sheet) {
         List<String> logs = new LinkedList<>();
@@ -219,25 +158,19 @@ public class DataMigrationServiceImpl implements DataMigrationService {
                         break;
                     case 1:
                         try {
+                            province.setCountryCode(cell.getStringCellValue());
+                        } catch (Exception e) {
+                            logs.add("Error while parsing Country Code for province code: " + province.getCode());
+                        }
+
+                        break;
+                    case 2:
+                        try {
                             province.setName(cell.getStringCellValue());
                         } catch (Exception e) {
                             logs.add("Error while parsing name for province code: " + province.getCode());
                         }
                         break;
-                    case 2:
-                        try {
-                            province.setCountryCode(cell.getStringCellValue());
-                        } catch (Exception e) {
-                            logs.add("Error while parsing Country Code for province code: " + province.getCode());
-                        }
-                        break;
-
-                    case 3:
-                        try {
-                            province.setPostalCode(cell.getStringCellValue());
-                        } catch (Exception e) {
-                            logs.add("Error while parsing Postal Code for province code: " + province.getCode());
-                        }
                     default:
                         break;
                 }
@@ -251,6 +184,76 @@ public class DataMigrationServiceImpl implements DataMigrationService {
                 logs.add("Error while saving province: " + province.getCode());
             }
         }
+        return logs;
+    }
+
+    public List<String> migrateCityExel(XSSFSheet sheet) {
+        List<String> logs = new LinkedList<>();
+        int rowNumber = 0;
+
+        for (Row row : sheet) {
+            if (rowNumber == 0) {
+                rowNumber++;
+                continue;
+            }
+
+            Iterator<Cell> cells = row.iterator();
+
+            int cid = 0;
+
+            City city = new City();
+            while (cells.hasNext()) {
+                Cell cell = cells.next();
+                switch (cid) {
+                    case 0:
+                        try {
+                            city.setCode(cell.getStringCellValue());
+                        } catch (Exception e) {
+                            logs.add("Error while parsing code for city" + city.getName());
+                        }
+                        break;
+                    case 1:
+                        try {
+                            city.setCountryCode(cell.getStringCellValue());
+                        } catch (Exception e) {
+                            logs.add("Error while parsing name for city code: " + city.getCode());
+                        }
+                        break;
+                    case 2:
+                        try {
+                            city.setName(cell.getStringCellValue());
+                        } catch (Exception e) {
+                            logs.add("Error while parsing name for city code: " + city.getCode());
+                        }
+                        break;
+                    case 3:
+                        try {
+                            city.setPostalCode(cell.getStringCellValue());
+                        } catch (Exception e) {
+                            logs.add("Error while parsing postal code for city code: " + city.getCode());
+                        }
+                        break;
+                    case 4:
+                        Province province = provinceRepo.findByCode(cell.getStringCellValue()).orElse(null);
+                        if (province == null) {
+                            logs.add("Province not found for city code: " + city.getCode());
+                            break;
+                        }
+                        city.setProvinceCode(province);
+                        break;
+                    default:
+                        break;
+                }
+
+                cid++;
+            }
+            try {
+                cityRepo.save(city);
+            } catch (Exception e) {
+                logs.add("Error while saving city: " + city.getCode());
+            }
+        }
+
         return logs;
     }
 
