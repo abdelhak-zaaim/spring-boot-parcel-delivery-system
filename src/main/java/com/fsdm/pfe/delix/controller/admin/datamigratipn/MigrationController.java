@@ -73,6 +73,14 @@ public class MigrationController {
      */
     @PostMapping("/admin/data/migration/import")
     public ResponseEntity<?> importData(@RequestParam("file") MultipartFile fileForUpload, @RequestParam("importType") ImportObjectType importType) {
+        // check te importType is not null or empty
+        if (importType == null) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("import type is empty").build());
+        }
+        if(!importType.equals(ImportObjectType.LOCATION)){
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("import type is not supported ,currently we only support locations ").build());
+        }
+
      // check the file is not empty
         if (fileForUpload.isEmpty()) {
             return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("file is empty").build());

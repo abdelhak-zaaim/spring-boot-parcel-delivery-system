@@ -14,6 +14,7 @@ import lombok.Value;
 
 
 public enum ImportObjectType {
+    LOCATION,
     PARCEL,
     DELIVERY_MAN,
     AGENCY,
