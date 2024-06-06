@@ -10,13 +10,17 @@
 
 package com.fsdm.pfe.delix.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 
 @Value
 @Builder
 public class UpdatePasswordRequestDto {
+    @NotNull
     String password;
+    @NotNull
     String newPassword;
+    @NotNull
     String confirmPassword;
 }
