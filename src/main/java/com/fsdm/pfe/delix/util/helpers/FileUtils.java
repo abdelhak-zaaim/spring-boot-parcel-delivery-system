@@ -10,6 +10,8 @@
 
 package com.fsdm.pfe.delix.util.helpers;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,5 +31,9 @@ public class FileUtils {
             e.printStackTrace();
         }
         return file;
+    }
+
+    public static boolean checkExcelFormat(MultipartFile fileForUpload) {
+        return fileForUpload.getContentType().equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     }
 }
