@@ -27,7 +27,9 @@ import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -67,21 +69,21 @@ public class MigrationController {
     /**
      * this function is called when the user post data (file and type of object)
      *
-     * @param dataMigrationRequestDto : from the request body
      * @return ResponseEntity<?> : include the status of the request , logs fil in cas Exeption
      */
     @PostMapping("/admin/data/migration/import")
-    public ResponseEntity<?> importData(@RequestParam DataMigrationRequestDto dataMigrationRequestDto) {
-        // validate the request
-        DataBinder binder = new DataBinder(dataMigrationRequestDto);
-        binder.setValidator(validator);
-        binder.validate();
-        BindingResult result = binder.getBindingResult();
-        if (result.hasErrors()) {
-            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("you have invalid " + result.getAllErrors().size() + " invalid input").build());
+    public ResponseEntity<?> importData(@RequestParam("file") MultipartFile fileForUpload, @RequestParam("importType") ImportObjectType importType) {
+     // check the file is not empty
+        if (fileForUpload.isEmpty()) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("file is empty").build());
+        }
+
+        // check the file is of Excel format
+        if (!FileUtils.checkExcelFormat(fileForUpload)) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("file is not of Excel format").build());
         }
         try {
-            List<String> logs = dataMigrationService.migrateExel(dataMigrationRequestDto.getFile());
+            List<String> logs = dataMigrationService.migrateExel(fileForUpload);
             if (logs.size() > 0) {
 
                 File file = FileUtils.convertListToFile(logs, "logs.txt");
