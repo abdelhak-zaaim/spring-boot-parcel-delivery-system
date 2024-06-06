@@ -42,39 +42,30 @@
                         <h5 class="card-title">import Data</h5>
 
                         <!-- General Form Elements -->
-                        <form action="./data/migration/import" method="post" >
+                        <form action="/admin/data/migration/import" method="post" enctype="multipart/form-data">
                             <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}"
                                    th:value="${_csrf.token}"/>
                             <div class="row mb-3">
                                 <label for="inputFile" class="col-sm-2 col-form-label">File Upload</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="inputFile">
+                                    <input class="form-control" type="file" name="file" id="inputFile"
+                                           accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                 </div>
                             </div>
-
-
 
 
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Select</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" name="importType" aria-label="Default select example">
                                         <option selected value disabled>choice the Object</option>
-                                        <option th:each="impurtType : ${importTypes}" th:value="${impurtType}" th:text="#{${'importType.'+impurtType}}"></option>
-
-
-
-
-
-
+                                        <option value="">Locations</option>
+                                        <option th:each="impurtType : ${importTypes}" th:value="${impurtType}"
+                                                th:text="#{${'importType.'+impurtType}}"></option>
 
                                     </select>
                                 </div>
                             </div>
-
-
-
-
 
 
                             <div class="row mb-3">
@@ -122,6 +113,7 @@
 <script>
 
     let agencyIdForDelete = null;
+
     function deleteAgency(id) {
         agencyIdForDelete = id;
         $('#deleteModule').modal('show');
@@ -140,7 +132,7 @@
             .then(response => response.json())
             .then(data => {
                 $('#loader-wrapper').hide();
-                if (data.type=== 'success') {
+                if (data.type === 'success') {
                     $(`#row-${agencyIdForDelete}`).remove();
                 }
                 showAlert({type: data.type, message: data.message})

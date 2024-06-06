@@ -13,10 +13,12 @@ package com.fsdm.pfe.delix.controller.admin.datamigratipn;
 import com.fsdm.pfe.delix.dto.request.DataMigrationRequestDto;
 import com.fsdm.pfe.delix.dto.response.ResponseDataDto;
 import com.fsdm.pfe.delix.model.datamigration.ImportObjectType;
-
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import com.fsdm.pfe.delix.service.Impl.datamigration.DataMigrationServiceImpl;
+import com.fsdm.pfe.delix.util.helpers.FileUtils;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,16 +27,24 @@ import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class MigrationController {
     private final MessageSource messageSource;
-
+    private final DataMigrationServiceImpl dataMigrationService;
     private final Validator validator;
-    public MigrationController(MessageSource messageSource, Validator validator) {
+
+    public MigrationController(MessageSource messageSource, DataMigrationServiceImpl dataMigrationService, Validator validator) {
         this.messageSource = messageSource;
+        this.dataMigrationService = dataMigrationService;
         this.validator = validator;
     }
 
@@ -59,25 +69,43 @@ public class MigrationController {
     /**
      * this function is called when the user post data (file and type of object)
      *
-     * @param dataMigrationRequestDto : from the request body
      * @return ResponseEntity<?> : include the status of the request , logs fil in cas Exeption
      */
     @PostMapping("/admin/data/migration/import")
-    public ResponseEntity<?> importData(@RequestParam DataMigrationRequestDto dataMigrationRequestDto) {
-        // validate the request
-        DataBinder binder = new DataBinder(dataMigrationRequestDto);
-        binder.setValidator(validator);
-        binder.validate();
-        BindingResult result = binder.getBindingResult();
-        if (result.hasErrors()) {
-            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).error(result.getAllErrors()).message("you have invalid "+ result.getAllErrors().size()+" invalid input").build());
+    public ResponseEntity<?> importData(@RequestParam("file") MultipartFile fileForUpload, @RequestParam("importType") ImportObjectType importType) {
+     // check the file is not empty
+        if (fileForUpload.isEmpty()) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("file is empty").build());
+        }
+
+        // check the file is of Excel format
+        if (!FileUtils.checkExcelFormat(fileForUpload)) {
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("file is not of Excel format").build());
+        }
+        try {
+            List<String> logs = dataMigrationService.migrateExel(fileForUpload);
+            if (logs.size() > 0) {
+
+                File file = FileUtils.convertListToFile(logs, "logs.txt");
+                InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=importLogs.txt");
+                return ResponseEntity.ok()
+                        .headers(headers)
+                        .contentLength(file.length())
+                        .contentType(MediaType.parseMediaType("application/octet-stream"))
+                        .body(resource);
+                //   return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(false).message("data imported with some errors").error(logs).build());
+
+            }
+            return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(true).message("data imported successfully").build());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 
-
-
-
-        return null;
     }
 
 }
