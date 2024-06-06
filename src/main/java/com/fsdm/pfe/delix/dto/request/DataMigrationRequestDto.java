@@ -12,9 +12,11 @@ package com.fsdm.pfe.delix.dto.request;
 
 import com.fsdm.pfe.delix.model.datamigration.ImportObjectType;
 import jakarta.validation.constraints.NotNull;
+import lombok.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
+@Value
 
 public class DataMigrationRequestDto implements Serializable {
     @NotNull
