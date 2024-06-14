@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Optional;
 
 public interface PasswordResetTokenService {
+
     void createPasswordResetTokenForUser(User user, String token);
 
     void deletePasswordResetToken(String token);

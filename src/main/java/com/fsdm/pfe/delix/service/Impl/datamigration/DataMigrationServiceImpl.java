@@ -129,9 +129,6 @@ public class DataMigrationServiceImpl implements DataMigrationService {
         return logs;
     }
 
-    // FIXME: this technic not good for this project , we need to use the spring batch
-
-
     public List<String> migrateProvinceExel(XSSFSheet sheet) {
         List<String> logs = new LinkedList<>();
         int rowNumber = 0;

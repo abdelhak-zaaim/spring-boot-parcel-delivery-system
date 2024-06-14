@@ -48,8 +48,6 @@ public class FirebaseNotificationServiceImpl extends UserNotificationServiceImpl
     @Override
     public void sendNotificationToAll(String title, String message) {
         super.sendNotificationToAll(title, message);
-        // todo : we need to implement this method
-
     }
 
     public void sendMessageToToken(NotificationRequest request)
