@@ -94,7 +94,6 @@ public class AuthenticationController {
             context.setAuthentication(authenticationResponse);
             securityContextRepository.saveContext(context, request, response);
 
-
             if (authenticationResponse.isAuthenticated()) {
                 User user = (User) authenticationResponse.getPrincipal();
 
@@ -103,12 +102,8 @@ public class AuthenticationController {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, "Email non vérifié", "Email non vérifié, veuillez vérifier votre email"));
                 }
 
-                String ipAddress = request.getHeader("X-Forwarded-For");
-                if (ipAddress == null) {
-                    ipAddress = request.getRemoteAddr();
-                }
+                String ipAddress = HttpUtils.getIpAddress(request);
 
-                // Save login log
                 loginLogService.saveLoginLog((User) authenticationResponse.getPrincipal(), request.getHeader("User-Agent"), ipAddress, true, "login");
             }
 
