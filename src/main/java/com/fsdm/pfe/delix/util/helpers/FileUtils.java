@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileUtils {
-    // convert list of string to file
+
     public static File convertListToFile(List<String> list, String fileName) {
         File file = new File(fileName);
         try {
