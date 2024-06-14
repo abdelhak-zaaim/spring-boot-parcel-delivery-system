@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
-@Repository
 public interface ParcelRepo extends JpaRepository<Parcel, Long> {
     boolean existsByCodeBar(String agencyCode);
 

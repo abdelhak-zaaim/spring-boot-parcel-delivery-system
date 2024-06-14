@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface DeliveryManRepo extends JpaRepository<DeliveryMan, Long> {
     Optional<DeliveryMan> findByEmail(String email);
 }

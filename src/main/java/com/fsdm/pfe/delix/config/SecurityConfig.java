@@ -47,7 +47,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();  // BCryptPasswordEncoder();
     }
 
-
     @Configuration
     @Order(1)
     public static class AdminSecurityConfig {
@@ -73,15 +72,12 @@ public class SecurityConfig {
 
                                     response.sendRedirect("/admin/login");
                                 });
-
-
                             }
                     );
 
 
             return http.build();
         }
-
 
         @Bean
         @Primary
@@ -94,10 +90,7 @@ public class SecurityConfig {
             authenticationProvider.setPasswordEncoder(passwordEncoder);
             return new ProviderManager(authenticationProvider);
         }
-
-
     }
-
 
     @Configuration
     @Order(2)
@@ -114,7 +107,6 @@ public class SecurityConfig {
 
         @Bean
         public SecurityFilterChain filterChainApp2(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http.securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request").authorizeHttpRequests(
@@ -148,15 +140,12 @@ public class SecurityConfig {
                                     response.sendRedirect("/login");
                                 });
 
-
                             }
                     );
 
             return http.build();
 
-
         }
-
 
         @Bean
         public AuthenticationManager authenticationManagerUser() {
@@ -166,7 +155,6 @@ public class SecurityConfig {
             authenticationProvider.setPasswordEncoder(passwordEncoder);
             return new ProviderManager(authenticationProvider);
         }
-
 
     }
 
@@ -189,7 +177,6 @@ public class SecurityConfig {
             return new VehicleOperatorEmployeeServiceImpl(vehicleOperatorEmployeeRepo);
         }
 
-
         @Bean
         public SecurityFilterChain filterChainApp3(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
 
@@ -199,15 +186,12 @@ public class SecurityConfig {
                     {
                         authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/api/delivery/login")).permitAll();
                         authorizationManagerRequestMatcherRegistry.requestMatchers("/api/delivery/**").hasRole("DELIVERY");
-
                     }
             ).csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProviderApi()).addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).securityMatcher("/api/delivery/**");
 
             return http.build();
 
-
         }
-
 
         @Bean
 

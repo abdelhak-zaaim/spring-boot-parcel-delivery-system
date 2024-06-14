@@ -10,6 +10,7 @@
 
 package com.fsdm.pfe.delix.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Value;
@@ -17,6 +18,7 @@ import lombok.Value;
 @Data
 @Value
 @Builder
+@AllArgsConstructor
 public class ParcelVolume {
     float height;
     float width;

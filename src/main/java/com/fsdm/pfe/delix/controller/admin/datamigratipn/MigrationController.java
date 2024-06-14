@@ -68,7 +68,8 @@ public class MigrationController {
 
     /**
      * this function is called when the user post data (file and type of object)
-     *
+     *param fileForUpload : the file to upload
+     * param importType : the type of object to import
      * @return ResponseEntity<?> : include the status of the request , logs fil in cas Exeption
      */
     @PostMapping("/admin/data/migration/import")
