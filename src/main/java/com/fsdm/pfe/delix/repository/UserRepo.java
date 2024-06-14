@@ -12,7 +12,6 @@ package com.fsdm.pfe.delix.repository;
 
 import com.fsdm.pfe.delix.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
