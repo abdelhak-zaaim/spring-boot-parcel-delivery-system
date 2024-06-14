@@ -43,10 +43,9 @@ import java.util.List;
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
-public class User implements Serializable {
+public class User {
     protected final static String ROLE_PREFIX = "ROLE_";
-    @Serial
-    private static final long serialVersionUID = 1L;
+
     @OneToOne(fetch = FetchType.LAZY)
     FirebaseUser firebaseUser;
 
