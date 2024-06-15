@@ -21,5 +21,5 @@ public enum UserStatus {
     EXPIRED,
     LOCKED,
     EMAIL_NOT_VERIFIED,
-    DISABLED;
+    DISABLED
 }

@@ -19,15 +19,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class FileUtils {
-public static String EXCEL_MME_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    public static File convertListToFile(List<String> list, String fileName) throws IOException{
+    public static String EXCEL_MME_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+    public static File convertListToFile(List<String> list, String fileName) throws IOException {
         File file = new File(fileName);
 
-            FileWriter writer = new FileWriter(file);
-            for (String str : list) {
-                writer.write(str + System.lineSeparator());
-            }
-            writer.close();
+        FileWriter writer = new FileWriter(file);
+        for (String str : list) {
+            writer.write(str + System.lineSeparator());
+        }
+        writer.close();
         return file;
     }
 

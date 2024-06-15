@@ -9,6 +9,7 @@
  */
 
 package com.fsdm.pfe.delix.service.datamegration;
-   public interface DataProcessor<T> {
-      T processRowData(String[] row);
+
+public interface DataProcessor<T> {
+    T processRowData(String[] row);
 }

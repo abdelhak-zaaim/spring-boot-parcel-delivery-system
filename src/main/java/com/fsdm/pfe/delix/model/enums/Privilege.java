@@ -50,13 +50,13 @@ public enum Privilege {
         DELIVERY,
         EMPLOYEE,
         TRANSPORT,
-        AGENCY;
+        AGENCY
     }
 
     public enum PrivilegeAction {
         ADD,
         EDIT,
         READ,
-        DELETE;
+        DELETE
     }
 }

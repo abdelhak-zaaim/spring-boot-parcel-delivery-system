@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CustommerTest {
-    private CustomerServiceImpl customerService;
-    private AddressService addressService;
+    private final CustomerServiceImpl customerService;
+    private final AddressService addressService;
 
     public CustommerTest(CustomerServiceImpl customerService, AddressService addressService) {
         this.customerService = customerService;

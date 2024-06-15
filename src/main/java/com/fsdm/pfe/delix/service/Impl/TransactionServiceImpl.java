@@ -28,7 +28,7 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
     UserServiceImpl userService;
     TransactionRepo transactionRepo;
-    private UserRepo userRepository;
+    private final UserRepo userRepository;
 
     public TransactionServiceImpl(TransactionRepo transactionRepo, UserServiceImpl userService, UserRepo userRepository) {
         this.transactionRepo = transactionRepo;

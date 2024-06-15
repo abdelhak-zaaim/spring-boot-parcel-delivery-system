@@ -33,7 +33,7 @@ public class HttpUtils {
         return url;
     }
 
-    public static String getIpAddress(HttpServletRequest request){
+    public static String getIpAddress(HttpServletRequest request) {
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();

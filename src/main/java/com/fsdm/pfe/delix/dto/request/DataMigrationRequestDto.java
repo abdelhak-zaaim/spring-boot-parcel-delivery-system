@@ -16,6 +16,7 @@ import lombok.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
+
 @Value
 
 public class DataMigrationRequestDto implements Serializable {

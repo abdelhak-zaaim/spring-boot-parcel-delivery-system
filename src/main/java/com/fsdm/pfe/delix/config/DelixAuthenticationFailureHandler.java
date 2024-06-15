@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
 @Component
 public class DelixAuthenticationFailureHandler implements AuthenticationFailureHandler {
     private final LoginAttemptServiceImpl loginAttemptService;

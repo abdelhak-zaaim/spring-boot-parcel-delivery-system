@@ -14,6 +14,8 @@ import com.fsdm.pfe.delix.service.datamegration.DataReader;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,11 +23,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 @Component
 public class CsvDataReaderImpl implements DataReader {
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvDataReaderImpl.class);
+
     @Override
     public List<String[]> readDataFromFile(MultipartFile file) throws IOException {
         try (Reader reader = new InputStreamReader(file.getInputStream());

@@ -19,8 +19,8 @@ import java.io.Serializable;
 @Builder
 @Data
 public class DataMigrationResponseDto implements Serializable {
+    File logsFile;
     private String message;
     private String status;
-    File logsFile;
 }
 

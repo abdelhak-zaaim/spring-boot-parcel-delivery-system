@@ -26,8 +26,8 @@ import java.util.List;
 
 @Controller
 public class AdminTest {
-    private AdminServiceImpl adminService;
-    private PrivilegesGroupServiceImpl privilegesGroupService;
+    private final AdminServiceImpl adminService;
+    private final PrivilegesGroupServiceImpl privilegesGroupService;
 
     public AdminTest(AdminServiceImpl adminService, PrivilegesGroupServiceImpl privilegesGroupService) {
         this.adminService = adminService;
@@ -68,7 +68,7 @@ public class AdminTest {
             Admin admin = adminService.loadAdminById(5L);
             return ResponseEntity.ok(admin);
         } catch (Exception e) {
-            throw new IllegalStateException("Error while getting the admin" + e.toString());
+            throw new IllegalStateException("Error while getting the admin" + e);
 
         }
     }

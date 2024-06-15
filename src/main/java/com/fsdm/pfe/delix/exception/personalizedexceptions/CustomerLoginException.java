@@ -10,7 +10,7 @@
 
 package com.fsdm.pfe.delix.exception.personalizedexceptions;
 
-public class CustomerLoginException extends RuntimeException{
+public class CustomerLoginException extends RuntimeException {
     public CustomerLoginException(String message) {
         super(message);
     }

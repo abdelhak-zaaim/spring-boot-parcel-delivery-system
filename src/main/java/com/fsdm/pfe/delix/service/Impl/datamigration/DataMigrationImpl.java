@@ -10,7 +10,10 @@
 
 package com.fsdm.pfe.delix.service.Impl.datamigration;
 
-import com.fsdm.pfe.delix.service.datamegration.*;
+import com.fsdm.pfe.delix.service.datamegration.DataMigration;
+import com.fsdm.pfe.delix.service.datamegration.DataProcessor;
+import com.fsdm.pfe.delix.service.datamegration.DataReader;
+import com.fsdm.pfe.delix.service.datamegration.DataWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,11 +27,10 @@ import java.util.List;
 
 public class DataMigrationImpl implements DataMigration {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataMigrationImpl.class);
-    private List<String> errorLog = new LinkedList<>();
-
     private final DataReader dataReader;
     private final DataWriter dataWriter;
     private final DataProcessor dataProcessor;
+    private final List<String> errorLog = new LinkedList<>();
 
 
     public DataMigrationImpl(DataReader dataReader, DataWriter dataWriter, DataProcessor dataProcessor) {
@@ -37,7 +39,6 @@ public class DataMigrationImpl implements DataMigration {
         this.dataProcessor = dataProcessor;
 
     }
-
 
 
     @Override

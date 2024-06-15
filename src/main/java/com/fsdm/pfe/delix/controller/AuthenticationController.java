@@ -110,7 +110,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(new LoginResponseDto(true, authenticationResponse.isAuthenticated(), null, "Login successful"));
 
 
-        }catch (CustomerLoginException | UsernameNotFoundException e){
+        } catch (CustomerLoginException | UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         } catch (BadCredentialsException e) {
             // Handle incorrect password
@@ -118,7 +118,7 @@ public class AuthenticationController {
         } catch (AuthenticationException e) {
             // Handle other authentication failures
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(false, false, e.getMessage(), e.getMessage()));
         }
     }

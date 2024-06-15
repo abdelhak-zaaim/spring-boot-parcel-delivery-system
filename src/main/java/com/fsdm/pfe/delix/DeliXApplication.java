@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-import java.util.Locale;
-
 @SpringBootApplication
 @EnableCaching
 public class DeliXApplication {

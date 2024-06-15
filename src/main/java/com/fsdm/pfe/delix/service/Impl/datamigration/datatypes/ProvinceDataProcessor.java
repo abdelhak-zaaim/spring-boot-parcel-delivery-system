@@ -14,8 +14,8 @@ import com.fsdm.pfe.delix.entity.Province;
 import com.fsdm.pfe.delix.service.datamegration.DataProcessor;
 
 public class ProvinceDataProcessor implements DataProcessor<Province> {
-   @Override
-   public Province processRowData(String[] row) {
-      return null;
-   }
+    @Override
+    public Province processRowData(String[] row) {
+        return null;
+    }
 }

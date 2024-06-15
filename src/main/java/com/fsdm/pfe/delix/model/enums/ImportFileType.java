@@ -12,5 +12,5 @@
 package com.fsdm.pfe.delix.model.enums;
 
 public enum ImportFileType {
-   CSV, EXCEL, JSON, XML, PDF, DOC, DOCX, TXT, HTML
+    CSV, EXCEL, JSON, XML, PDF, DOC, DOCX, TXT, HTML
 }

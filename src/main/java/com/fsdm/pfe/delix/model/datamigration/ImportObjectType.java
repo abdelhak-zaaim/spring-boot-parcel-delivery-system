@@ -10,9 +10,6 @@
 
 package com.fsdm.pfe.delix.model.datamigration;
 
-import lombok.Value;
-
-
 public enum ImportObjectType {
     LOCATION,
     PARCEL,

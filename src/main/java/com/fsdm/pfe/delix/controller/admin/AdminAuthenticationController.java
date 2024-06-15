@@ -38,8 +38,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class AdminAuthenticationController {
 
     private final AuthenticationManager authenticationManager;
-    private SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
-    private SessionRegistry sessionRegistry = new SessionRegistryImpl();
+    private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
+    private final SessionRegistry sessionRegistry = new SessionRegistryImpl();
 
     public AdminAuthenticationController(@Qualifier("authenticationManagerAdmin") AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;

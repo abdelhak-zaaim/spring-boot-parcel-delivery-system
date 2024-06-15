@@ -13,12 +13,9 @@ package com.fsdm.pfe.delix.validation.admin.privilegesgroupvalidate;
 
 import com.fsdm.pfe.delix.entity.PrivilegesGroup;
 import com.fsdm.pfe.delix.model.enums.Privilege;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.HashSet;
-import java.util.Set;
 
 public class PrivilegesGroupValidator implements ConstraintValidator<PrivilegeValidation, PrivilegesGroup> {
 

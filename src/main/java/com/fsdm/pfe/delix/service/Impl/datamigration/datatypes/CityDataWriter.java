@@ -17,8 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CityDataWriter implements DataWriter<City> {
-    private final CityRepo cityRepo;
     private static final Logger LOGGER = LoggerFactory.getLogger(CityDataWriter.class);
+    private final CityRepo cityRepo;
 
     public CityDataWriter(CityRepo cityRepo) {
         this.cityRepo = cityRepo;
