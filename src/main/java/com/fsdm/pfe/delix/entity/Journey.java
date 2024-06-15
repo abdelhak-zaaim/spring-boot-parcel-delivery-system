@@ -40,6 +40,7 @@ public class Journey {
 
     @ManyToOne
     private Agency departureAgency;
+
     @ManyToOne
     private Agency arrivalAgency;
 

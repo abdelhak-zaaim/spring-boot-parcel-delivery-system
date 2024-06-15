@@ -1,4 +1,3 @@
-
 /*
  * **
  *  * @project : DeliX
@@ -37,7 +36,6 @@ import java.util.List;
 @Builder
 @DiscriminatorValue(Role.DELIVERY_MAN_ROLE)
 public class DeliveryMan extends VehicleOperatorEmployee {
-
 
     @ValidMapsLocationPoint
     private MapsLocationPoint locationPoint;

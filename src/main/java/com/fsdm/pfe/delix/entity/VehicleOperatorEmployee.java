@@ -31,11 +31,6 @@ import java.util.List;
 @Entity
 @DiscriminatorValue(Role.VEHICLE_OPERATOR_ROLE)
 public class VehicleOperatorEmployee extends Employee implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
     private String licenseNumber;
 
     private String vihiculeMtricule;

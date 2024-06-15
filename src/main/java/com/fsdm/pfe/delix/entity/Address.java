@@ -26,12 +26,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class Address {
 
-    @ManyToOne
-    Area area;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    Area area;
 
     @Column(nullable = false)
     @NotNull

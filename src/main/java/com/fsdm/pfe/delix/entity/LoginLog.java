@@ -23,6 +23,7 @@ import java.util.Date;
 @Entity
 
 public class LoginLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

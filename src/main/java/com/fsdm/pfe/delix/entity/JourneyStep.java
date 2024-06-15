@@ -21,15 +21,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JourneyStep {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private String address;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StepStatus stepStatus;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Area area;
 

@@ -1,4 +1,3 @@
-
 /*
  * **
  *  * @project : DeliX
@@ -24,10 +23,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @Entity
 @DiscriminatorValue(Role.TRANSPORTER_ROLE)
-
 public class Transporter extends VehicleOperatorEmployee {
-
     private String registrationNumber;
-
 
 }

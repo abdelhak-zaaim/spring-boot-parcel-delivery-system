@@ -1,16 +1,6 @@
 /*
  *
  *  * @project : DeliX
- *  * @created : 25/05/2024, 18:57
- *  * @modified : 16/05/2024, 20:56
- *  * @description : This file is part of the DeliX project.
- *  * @license : MIT License
- *
- */
-
-/*
- *
- *  * @project : DeliX
  *  * @created : 11/05/2024, 13:48
  *  * @modified : 11/05/2024, 13:48
  *  * @description : This file is part of the DeliX project.
@@ -34,19 +24,24 @@ import java.util.Date;
 @Entity
 public class Area {
 
-    Date createdAt;
-    Date updatedAt;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    Date createdAt;
+    Date updatedAt;
+
     @Column(name = "code", nullable = false)
     private String code;
+
     private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_code", referencedColumnName = "code")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private City cityCode;
+
     private String postCode;
 
     @PrePersist

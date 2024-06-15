@@ -1,4 +1,3 @@
-
 /*
  * **
  *  * @project : DeliX
@@ -11,7 +10,6 @@
 
 package com.fsdm.pfe.delix.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fsdm.pfe.delix.converters.PrivilegeListConverter;
 import com.fsdm.pfe.delix.model.enums.Privilege;
@@ -23,7 +21,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
-
 
 @AllArgsConstructor
 @Getter
@@ -70,6 +67,5 @@ public class PrivilegesGroup {
     protected void onUpdate() {
         this.lastUpdateDate = new Date();
     }
-
 
 }

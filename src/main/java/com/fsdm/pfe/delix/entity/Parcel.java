@@ -28,6 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class Parcel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

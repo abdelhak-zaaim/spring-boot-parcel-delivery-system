@@ -49,9 +49,11 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY)
     Collection<Notification> notifications;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     @Column(nullable = false)
     private String firstName;

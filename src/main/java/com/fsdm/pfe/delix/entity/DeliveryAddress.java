@@ -1,4 +1,3 @@
-
 /*
  * **
  *  * @project : DeliX
@@ -26,6 +25,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class DeliveryAddress {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,6 +41,7 @@ public class DeliveryAddress {
     @NotNull
     @Column(nullable = false)
     private String contactFirstName;
+
     @NotNull
     @Column(nullable = false)
     private String contactLastName;

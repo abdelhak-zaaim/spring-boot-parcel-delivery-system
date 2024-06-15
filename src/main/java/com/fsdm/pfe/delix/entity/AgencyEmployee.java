@@ -1,26 +1,6 @@
 /*
  * **
  *  * @project : DeliX
- *  * @created : 27/04/2024, 13:47
- *  * @modified : 26/04/2024, 01:53
- *  * @description : This file is part of the DeliX project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : DeliX
- *  * @created : 26/04/2024, 01:50
- *  * @modified : 25/04/2024, 15:45
- *  * @description : This file is part of the DeliX project.
- *  * @license : MIT License
- * **
- */
-
-/*
- * **
- *  * @project : DeliX
  *  * @created : 24/04/2024, 21:29
  *  * @modified : 24/04/2024, 21:29
  *  * @description : This file is part of the DeliX project.
