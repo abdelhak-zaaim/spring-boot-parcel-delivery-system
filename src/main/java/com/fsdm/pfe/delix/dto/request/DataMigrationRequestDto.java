@@ -22,6 +22,7 @@ import java.io.Serializable;
 public class DataMigrationRequestDto implements Serializable {
     @NotNull
     MultipartFile file;
+
     @NotNull
     ImportObjectType importType;
 }

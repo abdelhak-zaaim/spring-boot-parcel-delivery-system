@@ -51,6 +51,7 @@ public class ParcelRequestDto implements Serializable {
 
     @Valid
     DeliveryAddressRequestDto pickupRequestAddress;
+
     @Valid
     DeliveryAddressRequestDto receiverAddress;
 

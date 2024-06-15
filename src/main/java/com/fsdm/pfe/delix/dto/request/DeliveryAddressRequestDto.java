@@ -28,12 +28,15 @@ public class DeliveryAddressRequestDto implements Serializable {
     @NotBlank
     @NotEmpty
     String area;
+
     @NotNull
     @NotEmpty
     String address;
+
     @NotNull
     @NotEmpty
     String contactFirstName;
+
     @NotEmpty
     @NotNull
     String contactLastName;
@@ -43,6 +46,7 @@ public class DeliveryAddressRequestDto implements Serializable {
     @NotBlank
     @NotEmpty
     String contactNumber;
+
     @NotNull
     @NotEmpty
     @Email

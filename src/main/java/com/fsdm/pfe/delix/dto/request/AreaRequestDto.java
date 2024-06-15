@@ -24,11 +24,15 @@ import java.util.Date;
 public class AreaRequestDto implements Serializable {
     @NotNull
     Long id;
+
     @NotNull
     String code;
+
     String name;
+
     @NotNull
     CityRequestDto cityCode;
+
     String postcode;
     Date createdAt;
     Date updatedAt;

@@ -27,6 +27,7 @@ public class MapsLocationPointRequestDto implements Serializable {
     @Min(-99)
     @Max(99)
     Double latitude;
+
     @NotNull
     @Min(-99)
     @Max(99)

@@ -25,9 +25,11 @@ import java.io.Serializable;
 @Value
 public class AddressRequestDto implements Serializable {
     Long id;
+
     @NotNull
     @NotEmpty
     String address;
+
     @NotNull
     @NotEmpty
     @NotBlank

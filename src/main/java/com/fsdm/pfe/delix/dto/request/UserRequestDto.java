@@ -31,18 +31,25 @@ public class UserRequestDto implements Serializable {
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]+$")
     String name;
+
     @NotNull
     @Email(message = "email not valid")
     String email;
+
     @Pattern(message = "not valid moroccan number", regexp = "^\\+212[5-7]\\d{8}$")
     String phoneNumber;
+
     @NotNull
     AddressRequestDto address;
+
     UserStatus status;
+
     @Pattern(message = "CIN not valid", regexp = "^[A-Z0-9]{1,20}$")
     String cin;
+
     @Future(message = "Date of perth not vaalid")
     Date dateOfBirth;
+
     @URL(message = "not valid image url")
     String image;
 }

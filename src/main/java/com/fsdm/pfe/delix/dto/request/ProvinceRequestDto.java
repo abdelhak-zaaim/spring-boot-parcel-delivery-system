@@ -29,6 +29,7 @@ public class ProvinceRequestDto implements Serializable {
     Long id;
     @NotNull
     String code;
+
     String name;
     String countryCode;
     String postalCode;

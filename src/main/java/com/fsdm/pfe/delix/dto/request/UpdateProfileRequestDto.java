@@ -25,9 +25,11 @@ public class UpdateProfileRequestDto implements Serializable {
     @NotNull
     @NotEmpty
     String firstName;
+
     @NotNull
     @NotEmpty
     String lastName;
+
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String phoneNumber;
 

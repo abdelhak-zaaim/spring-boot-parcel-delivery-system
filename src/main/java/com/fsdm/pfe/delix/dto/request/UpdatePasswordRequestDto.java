@@ -19,8 +19,10 @@ import lombok.Value;
 public class UpdatePasswordRequestDto {
     @NotNull
     String password;
+
     @NotNull
     String newPassword;
+
     @NotNull
     String confirmPassword;
 }

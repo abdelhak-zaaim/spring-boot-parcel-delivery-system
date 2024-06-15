@@ -31,9 +31,12 @@ public class TransactionRequestDto implements Serializable {
     UserRequestDto user;
     @Positive
     double amount;
+
     @NotNull
     TransactionType transactionType;
+
     String description;
+
     @PastOrPresent
     Date transactionDate;
 }

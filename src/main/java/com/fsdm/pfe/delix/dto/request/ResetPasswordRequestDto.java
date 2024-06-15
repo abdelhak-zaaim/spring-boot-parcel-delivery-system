@@ -26,10 +26,12 @@ public class ResetPasswordRequestDto implements Serializable {
     @NotNull
     @NotEmpty
     String token;
+
     @NotNull
     @NotEmpty
     @Min(8)
     String password;
+
     @NotNull
     @NotEmpty
     @Min(8)

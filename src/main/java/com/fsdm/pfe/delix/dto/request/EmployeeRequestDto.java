@@ -33,21 +33,28 @@ public class EmployeeRequestDto implements Serializable {
     @Size
     @NotEmpty
     String name;
+
     @NotNull
     @Email
     @NotEmpty
     String email;
+
     String role;
 
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String phoneNumber;
+
     AddressRequestDto address;
     UserStatus status;
     String cin;
+
     @Past
     Date dateOfBirth;
+
     double balance;
+
     @URL
     String image;
+
     String employeeNumber;
 }

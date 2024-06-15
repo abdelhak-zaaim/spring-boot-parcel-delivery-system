@@ -23,22 +23,28 @@ public class GetQuoteRequestDto {
     @NotBlank
     @NotEmpty
     String pickUpArea;
+
     @NotNull
     @NotBlank
     @NotEmpty
     String deliveryArea;
+
     @NotNull
     @Min(1)
     float weight;
+
     @NotNull
     @Min(1)
     float length;
+
     @NotNull
     @Min(1)
     float width;
+
     @NotNull
     @Min(1)
     float height;
+
     @NotNull
     ParcelType parcelType;
 

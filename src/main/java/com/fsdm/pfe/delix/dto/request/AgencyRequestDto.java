@@ -26,6 +26,7 @@ import java.io.Serializable;
 @Value
 public class AgencyRequestDto implements Serializable {
     Long id;
+
     @NotBlank
     @NotNull
     String agencyName;
@@ -35,8 +36,10 @@ public class AgencyRequestDto implements Serializable {
 
     @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
     String agencyContactNumber;
+
     @NotNull
     String agencyEmail;
+
     @Valid
     MapsLocationPointRequestDto locationPoint;
 }
