@@ -20,9 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class AdminTest {
@@ -36,7 +34,7 @@ public class AdminTest {
 
     @GetMapping("/test/admin/add")
     public ResponseEntity<Admin> testAdmin() {
-        List<Privilege> privileges = new ArrayList<>();
+        Set<Privilege> privileges = new HashSet<>();
         privileges.add(Privilege.PARCELS_DELETE);
         privileges.add(Privilege.PARCELS_ADD);
         PrivilegesGroup privilegesGroup = new PrivilegesGroup("manager_admin", privileges);

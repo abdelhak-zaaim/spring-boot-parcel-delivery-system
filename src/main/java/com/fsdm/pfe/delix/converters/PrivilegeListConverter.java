@@ -17,23 +17,24 @@ import jakarta.persistence.Converter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Converter
-public class PrivilegeListConverter implements AttributeConverter<List<Privilege>, String> {
+public class PrivilegeListConverter implements AttributeConverter<Set<Privilege>, String> {
 
     @Override
-    public String convertToDatabaseColumn(List<Privilege> privileges) {
+    public String convertToDatabaseColumn(Set<Privilege> privileges) {
         return privileges.stream()
                 .map(privilege -> privilege.getType() + "_" + privilege.getAction())
                 .collect(Collectors.joining(","));
     }
 
     @Override
-    public List<Privilege> convertToEntityAttribute(String privilegesString) {
+    public Set<Privilege> convertToEntityAttribute(String privilegesString) {
         return Arrays.stream(privilegesString.split(","))
                 .map(this::stringToPrivilege)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private Privilege stringToPrivilege(String privilegeString) {

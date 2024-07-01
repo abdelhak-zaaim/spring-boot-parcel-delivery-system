@@ -21,6 +21,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Getter
@@ -41,7 +42,7 @@ public class PrivilegesGroup {
     private String name;
 
     @Convert(converter = PrivilegeListConverter.class)
-    private List<Privilege> privileges;
+    private Set<Privilege> privileges;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -51,7 +52,7 @@ public class PrivilegesGroup {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date lastUpdateDate;
 
-    public PrivilegesGroup(String name, List<Privilege> privileges) {
+    public PrivilegesGroup(String name, Set<Privilege> privileges) {
         this.name = name;
         this.privileges = privileges;
     }

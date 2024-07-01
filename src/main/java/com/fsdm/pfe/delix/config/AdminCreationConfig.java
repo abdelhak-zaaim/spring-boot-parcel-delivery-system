@@ -21,9 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Configuration
 public class AdminCreationConfig {
@@ -47,7 +45,7 @@ public class AdminCreationConfig {
 
             // Check if the admin user already exists
             if (adminService.loadUserByEmail(adminEmail) == null) {
-                List<Privilege> privileges = new ArrayList<>();
+                Set<Privilege> privileges = new HashSet<>();
                 privileges.add(Privilege.PARCELS_DELETE);
                 privileges.add(Privilege.PARCELS_ADD);
                 PrivilegesGroup privilegesGroup = new PrivilegesGroup("initial_admin", privileges);
