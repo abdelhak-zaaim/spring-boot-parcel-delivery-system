@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PriviligesTest {
@@ -30,7 +31,7 @@ public class PriviligesTest {
     @GetMapping("/test/add/privilige")
     public ResponseEntity<PrivilegesGroup> addPriviliges() {
         PrivilegesGroup privilegesGroup = new PrivilegesGroup();
-        List<Privilege> privileges = List.of(Privilege.PARCELS_ADD, Privilege.PARCELS_EDIT, Privilege.PARCELS_READ, Privilege.PARCELS_DELETE);
+        Set<Privilege> privileges = Set.of(Privilege.PARCELS_ADD, Privilege.PARCELS_EDIT, Privilege.PARCELS_READ, Privilege.PARCELS_DELETE);
         privilegesGroup.setName("AGNTMAANAGER");
         privilegesGroup.setPrivileges(privileges);
         return ResponseEntity.ok(privilegesGroupService.savePrivilegesGroup(privilegesGroup));
