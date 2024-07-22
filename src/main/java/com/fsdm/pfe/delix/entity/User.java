@@ -27,6 +27,8 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -86,11 +88,11 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(updatable = false)
-    private Date registeredAt;
+    private LocalDateTime registeredAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Date lastUpdateDate;
+    private LocalDateTime lastUpdateDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -123,9 +125,15 @@ public class User {
 
     private Date verifiedAt;
 
+
+    @PrePersist
+    protected void onCreate() {
+        this.registeredAt = new LocalDateTime.now(ZoneId.systemDefault());
+        this.lastUpdateDate = new LocalDateTime.now(ZoneId.systemDefault());
+    }
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = new Date();
+        this.lastUpdateDate = new LocalDateTime.now(ZoneId.systemDefault());
     }
 
     public boolean isEmailVerified() {
