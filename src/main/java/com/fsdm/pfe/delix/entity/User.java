@@ -29,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -88,11 +89,11 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(updatable = false)
-    private LocalDateTime registeredAt;
+    private ZonedDateTime registeredAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private LocalDateTime lastUpdateDate;
+    private ZonedDateTime lastUpdateDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -128,12 +129,12 @@ public class User {
 
     @PrePersist
     protected void onCreate() {
-        this.registeredAt = new LocalDateTime.now(ZoneId.systemDefault());
-        this.lastUpdateDate = new LocalDateTime.now(ZoneId.systemDefault());
+        this.registeredAt = new ZonedDateTime.now(ZoneId.systemDefault());
+        this.lastUpdateDate = new ZonedDateTime.now(ZoneId.systemDefault());
     }
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = new LocalDateTime.now(ZoneId.systemDefault());
+        this.lastUpdateDate = new ZonedDateTime.now(ZoneId.systemDefault());
     }
 
     public boolean isEmailVerified() {
