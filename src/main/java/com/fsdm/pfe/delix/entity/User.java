@@ -129,12 +129,12 @@ public class User {
 
     @PrePersist
     protected void onCreate() {
-        this.registeredAt = new ZonedDateTime.now(ZoneId.systemDefault());
-        this.lastUpdateDate = new ZonedDateTime.now(ZoneId.systemDefault());
+        this.registeredAt = ZonedDateTime.now(ZoneId.systemDefault());
+        this.lastUpdateDate = ZonedDateTime.now(ZoneId.systemDefault());
     }
     @PreUpdate
     protected void onUpdate() {
-        this.lastUpdateDate = new ZonedDateTime.now(ZoneId.systemDefault());
+        this.lastUpdateDate = ZonedDateTime.now(ZoneId.systemDefault());
     }
 
     public boolean isEmailVerified() {
