@@ -36,6 +36,7 @@ public class Transaction {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private User user;
 
     @Column(unique = true, updatable = false)
