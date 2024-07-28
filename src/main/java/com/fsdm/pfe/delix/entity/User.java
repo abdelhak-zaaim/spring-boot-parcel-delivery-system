@@ -19,27 +19,24 @@ import com.fsdm.pfe.delix.util.Constants;
 import com.fsdm.pfe.delix.validation.user.UserValidate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Table(name = "user", indexes = {
         @Index(name = "index_email", columnList = "email"),
         @Index(name = "index_id", columnList = "id")
 })
-@Data
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
@@ -48,9 +45,11 @@ public class User {
     protected final static String ROLE_PREFIX = "ROLE_";
 
     @OneToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     FirebaseUser firebaseUser;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @ToString.Exclude
     Collection<Notification> notifications;
 
     @Id
@@ -84,6 +83,7 @@ public class User {
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Address address;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -163,4 +163,19 @@ public class User {
         notifications.add(notification);
     }
 
+    @Override
+    public final boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null) return false;
+        Class<?> oEffectiveClass = object instanceof HibernateProxy ? ((HibernateProxy) object).getHibernateLazyInitializer().getPersistentClass() : object.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        User user = (User) object;
+        return getId() != null && Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
 }
