@@ -114,7 +114,7 @@ public class User {
     private Date dateOfBirth;
     private double balance = 0;
 
-    @URL(message = "not valid image url")
+    @URL
     private String image;
 
 
