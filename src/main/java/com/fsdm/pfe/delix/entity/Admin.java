@@ -24,6 +24,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -53,14 +55,6 @@ public class Admin extends Employee implements UserDetails {
             });
         }
         return authorities;
-    }
-
-    @PrePersist
-    protected void onCreated() {
-        super.setStatus(UserStatus.ACTIVE);
-        Date date = new Date();
-        this.setRegisteredAt(date);
-        this.setLastUpdateDate(date);
     }
 
     @Override
