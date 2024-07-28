@@ -108,7 +108,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String refreshToken;
 
-    @Pattern(message = "CIN not valid", regexp = "^[A-Z0-9]{1,20}$")
+    @Pattern(regexp = "^[A-Z0-9]{1,20}$")
     private String cin;
 
     private Date dateOfBirth;
