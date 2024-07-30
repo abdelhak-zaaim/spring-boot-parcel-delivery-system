@@ -15,6 +15,7 @@ import com.fsdm.pfe.delix.entity.User;
 import lombok.Builder;
 import lombok.Value;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Value
@@ -39,15 +40,15 @@ public class MyUserResponseDto {
     Address address;
 
 
-    Date registeredAt;
+    ZonedDateTime registeredAt;
 
 
-    Date lastUpdateDate;
+    ZonedDateTime lastUpdateDate;
 
 
     String cin;
 
-    public MyUserResponseDto(String firstName, String lastName, String email, String role, String phoneNumber, Address address, Date registeredAt, Date lastUpdateDate, String cin) {
+    public MyUserResponseDto(String firstName, String lastName, String email, String role, String phoneNumber, Address address, ZonedDateTime registeredAt, ZonedDateTime lastUpdateDate, String cin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

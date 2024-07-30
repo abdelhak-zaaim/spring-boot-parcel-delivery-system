@@ -19,6 +19,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -49,14 +51,6 @@ public class Customer extends User implements UserDetails {
         super.setPhoneNumber(registerRequestDto.getPhoneNumber());
     }
 
-
-    @PrePersist
-    protected void onCreated() {
-        super.setStatus(UserStatus.EMAIL_NOT_VERIFIED);
-        Date date = new Date();
-        this.setRegisteredAt(date);
-        this.setLastUpdateDate(date);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
