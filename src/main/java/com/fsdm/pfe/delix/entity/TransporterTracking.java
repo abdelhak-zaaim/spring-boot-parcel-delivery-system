@@ -39,6 +39,7 @@ public class TransporterTracking {
     private double longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Transporter asigned_transporter;
 
 }
