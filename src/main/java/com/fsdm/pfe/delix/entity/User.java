@@ -43,7 +43,7 @@ import java.util.*;
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
-public class User implements Serializable {
+public class User implements Cloneable, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -183,5 +183,10 @@ public class User implements Serializable {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
