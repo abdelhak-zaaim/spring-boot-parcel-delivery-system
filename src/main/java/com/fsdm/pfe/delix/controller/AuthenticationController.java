@@ -234,8 +234,6 @@ public class AuthenticationController {
             userServiceImpl.resetPassword(resetPasswordRequestDto.getEmail(), baseUrl, operatingSystemName, browserName);
 
             return ResponseEntity.ok(ResponseDataDto.builder().data(null).success(true).error(null).message("Password reset link sent to your email").build());
-        } catch (UsernameNotFoundException e) {
-            return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDataDto.builder().data(null).success(false).error(e.getMessage()).message(e.getMessage()).build());
         }
