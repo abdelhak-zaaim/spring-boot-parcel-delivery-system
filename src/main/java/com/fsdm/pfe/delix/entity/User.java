@@ -26,6 +26,8 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -41,7 +43,11 @@ import java.util.*;
 @Entity
 @DiscriminatorColumn(name = Role.USER_ROLE_NAME, discriminatorType = DiscriminatorType.STRING)
 @UserValidate
-public class User {
+public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     protected final static String ROLE_PREFIX = "ROLE_";
 
     @OneToOne(fetch = FetchType.LAZY)
