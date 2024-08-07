@@ -14,11 +14,14 @@ import com.fsdm.pfe.delix.model.enums.Role;
 import com.fsdm.pfe.delix.model.enums.UserStatus;
 import com.fsdm.pfe.delix.model.enums.VehicleType;
 import jakarta.persistence.*;
+import javassist.SerialVersionUID;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,7 +33,11 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @DiscriminatorValue(Role.VEHICLE_OPERATOR_ROLE)
-public class VehicleOperatorEmployee extends Employee implements UserDetails {
+public class VehicleOperatorEmployee extends Employee implements UserDetails, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String licenseNumber;
 
     private String vihiculeMtricule;
