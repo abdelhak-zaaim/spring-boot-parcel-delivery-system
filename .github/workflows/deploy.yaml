@@ -29,7 +29,7 @@ jobs:
         MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t ci-cd:latest .
+      run: docker build -t delix:latest .
       env:
         DB_URL: ${{ secrets.DB_URL }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
@@ -38,7 +38,7 @@ jobs:
         MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
 
     - name: Save Docker image to file
-      run: docker save ci-cd:latest -o ci-cd-latest.tar
+      run: docker save delix:latest -o delix-latest.tar
 
     - name: Copy Docker image to server
       uses: appleboy/scp-action@v0.1.3
@@ -46,7 +46,7 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "ci-cd-latest.tar"
+        source: "delix-latest.tar"
         target: "~/"
 
     - name: Deploy to server
@@ -56,7 +56,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          sudo docker load -i ~/ci-cd-latest.tar
-          sudo docker stop ci-cd-container || true
-          sudo docker rm ci-cd-container || true
-          sudo docker run -d --name ci-cd-container -p 80:80 ci-cd:latest
+          sudo docker load -i ~/delix-latest.tar
+          sudo docker stop delix-container || true
+          sudo docker rm delix-container || true
+          sudo docker run -d --name delix-container -p 80:80 delix:latest
